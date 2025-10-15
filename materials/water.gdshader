@@ -73,4 +73,7 @@ void fragment() {
 		RADIANCE = vec4(vec3(0.0), mask);
 		IRRADIANCE = vec4(vec3(1.0), mask);
 	}
+	
+	ROUGHNESS = 0.1;
+	METALLIC = 0.3;
 }

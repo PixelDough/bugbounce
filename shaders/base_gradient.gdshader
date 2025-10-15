@@ -1,5 +1,6 @@
 shader_type spatial;
 render_mode cull_disabled;
+render_mode depth_draw_opaque;
 
 uniform sampler2D albedo : hint_default_white, source_color;
 uniform sampler2D main_light_gradient : hint_default_white, repeat_disable;

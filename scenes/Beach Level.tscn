@@ -41,6 +41,7 @@ ambient_light_energy = 0.0
 tonemap_mode = 1
 tonemap_white = 7.0
 ssao_enabled = true
+ssao_light_affect = 1.0
 glow_enabled = true
 glow_intensity = 0.05
 glow_bloom = 1.0
@@ -140,7 +141,7 @@ transform = Transform3D(0.8700108, -3.2664767e-07, 0.4930326, -0.34279105, 0.718
 transform = Transform3D(0.96417046, -0.12411507, 0.23445772, -0.26516274, -0.47748184, 0.83767503, 0.007981244, -0.86983114, -0.4932849, -0.77999794, -2.26, -23.29)
 
 [node name="Water" parent="Level Geometry/Geo" instance=ExtResource("13_1xb5j")]
-transform = Transform3D(25, 0, 0, 0, 10, 0, 0, 0, 25, 212, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 212, 0, -5)
 
 [node name="Coconuts" type="Node3D" parent="Level Geometry/Geo"]
 
@@ -1679,3 +1680,6 @@ transform = Transform3D(1.8287721, 0.06633763, -0.80696464, -1.1175871e-08, 1.99
 transform = Transform3D(-0.06522608, 1.8460523, -0.76670533, -1.8670701, 0.21774137, 0.68310934, 0.71399945, 0.73802453, 1.716253, 277.41, 19.12, 0.55)
 
 [node name="Draw XXL Lines Manager" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.21777898, 0.6358223, -0.74047434, 0.17940189, 0.77183545, 0.6099877, 0.95936817, 0, -0.28215727, 0, 29.541782, 24.527164)

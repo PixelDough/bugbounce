@@ -9,13 +9,13 @@ data = PackedVector3Array(-0.396, 0.059899997, -0.2776, -0.3321, 0.066199996, -0
 
 [node name="Coconut_LOD1" parent="." index="0"]
 visibility_range_begin = 15.0
-visibility_range_begin_margin = 2.0
+visibility_range_begin_margin = 5.0
 visibility_range_end = 500.0
-visibility_range_end_margin = 2.0
+visibility_range_end_margin = 5.0
 
 [node name="Coconut_LOD0" parent="." index="1"]
 visibility_range_end = 15.0
-visibility_range_end_margin = 2.0
+visibility_range_end_margin = 5.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
 
