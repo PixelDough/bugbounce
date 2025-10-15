@@ -1,0 +1,27 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://doxchyjmmw782"
+path="res://.godot/imported/Sky_Anime_15_Day_a.png-eccb5b9916fdaad2d534f49432e18cc5.ccube"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Assets/Free Stylized Skybox/CubeMap/Textures/Sky_Anime_15_Day_a.png"
+dest_files=["res://.godot/imported/Sky_Anime_15_Day_a.png-eccb5b9916fdaad2d534f49432e18cc5.ccube"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.5
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/arrangement=1

@@ -1,0 +1,27 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://7vk4b5n0wdc4"
+path="res://.godot/imported/Sky_Anime_11_morning_a.png-5fda62aac701e12f9dfc2fe5919fb4d0.ccube"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Assets/Free Stylized Skybox/CubeMap/Textures/Sky_Anime_11_morning_a.png"
+dest_files=["res://.godot/imported/Sky_Anime_11_morning_a.png-5fda62aac701e12f9dfc2fe5919fb4d0.ccube"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.5
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/arrangement=1

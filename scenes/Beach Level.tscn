@@ -1,0 +1,1575 @@
+[gd_scene load_steps=30 format=3 uid="uid://cssgvlk0hc8v8"]
+
+[ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://Assets/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
+[ext_resource type="PackedScene" uid="uid://bnb5u37e5gwi1" path="res://Assets/_Game/Content/Level Features/_Prefabs/Goal Ring.prefab.scn" id="2_y2yyu"]
+[ext_resource type="PackedScene" uid="uid://br2q8ns8c0xk8" path="res://Assets/_Game/Content/Level Features/_Prefabs/Goal Ring (Secret).prefab.scn" id="3_qcu5c"]
+[ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="4_w05b2"]
+[ext_resource type="PackedScene" uid="uid://bk2mp6hg72ywt" path="res://Assets/_Game/Content/Level Features/_Prefabs/Checkpoint.prefab.scn" id="5_oom3e"]
+[ext_resource type="PackedScene" uid="uid://balhbsi173js3" path="res://Assets/_Game/Content/Level Features/_Prefabs/Binocular Stand.prefab.scn" id="6_bwdgy"]
+[ext_resource type="PackedScene" uid="uid://b13f8s3rr4fih" path="res://scenes/props/beach/beach_island_02.tscn" id="7_7w3p2"]
+[ext_resource type="PackedScene" uid="uid://dykke75jbg83v" path="res://scenes/props/beach/beach_island_01.tscn" id="8_nm6a2"]
+[ext_resource type="PackedScene" uid="uid://doqd3aup6xxsl" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank Group.prefab.scn" id="11_afqjr"]
+[ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://Assets/StylizedWater2/Prefabs/StylizedWater2_Ocean.prefab.scn" id="13_1xb5j"]
+[ext_resource type="PackedScene" uid="uid://bqlvp015fk45j" path="res://scenes/props/beach/coconut.tscn" id="14_4dlxh"]
+[ext_resource type="PackedScene" uid="uid://bp2fdpi3r0l3l" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 1.prefab.scn" id="15_lxrer"]
+[ext_resource type="PackedScene" uid="uid://dol1s8jebats8" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 3.prefab.scn" id="16_8j6p8"]
+[ext_resource type="PackedScene" uid="uid://qugoy3od5o7w" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 2.prefab.scn" id="17_x7t32"]
+[ext_resource type="PackedScene" uid="uid://cy0nrxtk8nf67" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 4.prefab.scn" id="18_kpa4w"]
+[ext_resource type="PackedScene" uid="uid://btgsl70o8w7xu" path="res://Assets/_Game/Content/Levels/Beach/_Props/Soda Bottle.prefab.scn" id="19_d6n1m"]
+[ext_resource type="PackedScene" uid="uid://cvsw7r4skj7qq" path="res://Assets/_Game/Content/Levels/Beach/_Props/Soda Bottle (Lid Pop Platform).prefab.scn" id="20_3h5ku"]
+[ext_resource type="PackedScene" uid="uid://db8dhqgrf0ku7" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank.prefab.scn" id="21_bpsff"]
+[ext_resource type="PackedScene" uid="uid://cl4i48qmw17qv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Spear.prefab.scn" id="22_aq8ww"]
+[ext_resource type="PackedScene" uid="uid://dig28exat2evx" path="res://Assets/_Game/Content/Levels/Beach/_Props/Lantern.prefab.scn" id="24_1them"]
+[ext_resource type="PackedScene" uid="uid://68kqepjamfm8" path="res://Assets/_Game/Content/Levels/Beach/_Props/Life Saver.prefab.scn" id="25_o5oh8"]
+[ext_resource type="PackedScene" uid="uid://dc46nnspeewgv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Bubble.prefab.scn" id="26_c57cw"]
+[ext_resource type="PackedScene" uid="uid://dbqi0a7x51wi5" path="res://Assets/_Game/Content/Levels/Beach/_Props/Surf Board.prefab.scn" id="27_7oqrd"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nm6a2"]
+panorama = ExtResource("1_7w3p2")
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_kidpj"]
+sky_material = SubResource("PanoramaSkyMaterial_nm6a2")
+
+[sub_resource type="Environment" id="Environment_nulfp"]
+background_mode = 2
+sky = SubResource("Sky_kidpj")
+ambient_light_color = Color(0.4817894, 0.48178953, 0.48178923, 1)
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 1
+tonemap_exposure = 0.85
+tonemap_white = 7.0
+glow_enabled = true
+glow_intensity = 0.05
+glow_bloom = 1.0
+glow_hdr_threshold = 1.5
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.6313726, 1, 1, 1)
+fog_light_energy = 1.75
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 0.0
+fog_depth_end = 150.0
+volumetric_fog_density = 0.0826
+volumetric_fog_albedo = Color(0.6313726, 1, 1, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.35
+adjustment_saturation = 1.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hgiv3"]
+size = Vector3(1000, 1000, 1003)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w52jn"]
+radius = 1.0
+height = 5.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_emrlx"]
+points = PackedVector3Array(0.5, 0.1, -3.518952, 0.4964761, 0.1, 4.057831, 0.5, -0.1, -3.518952, 0.49931479, 0.1, -4.0253897, 0.3052075, 0.1, 4.035674, 0.4964761, -0.1, 4.057831, 0.49931479, -0.1, -4.0253897, 0.25283867, 0.1, -4.0135202, 0.3052075, -0.1, 4.035674, 0.25137043, 0.1, 4.0293436, 0.25283867, -0.1, -4.0135202, -0.4994127, 0.1, -3.974746, 0.25137043, -0.1, 4.0293436, -0.496574, 0.1, 3.9407172, -0.4994127, -0.1, -3.974746, -0.5, 0.1, -3.518952, -0.496574, -0.1, 3.9407172, -0.5, -0.1, -3.518952)
+
+[node name="RootNode3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nulfp")
+
+[node name="Level Management" type="Node3D" parent="."]
+
+[node name="Goal Ring" parent="Level Management" instance=ExtResource("2_y2yyu")]
+transform = Transform3D(0, 0.25889683, 0.965905, 0, 0.96590495, -0.25889683, -1, 0, 0, 475.4, 47.56, 0.9)
+
+[node name="Secret Ring" parent="Level Management" instance=ExtResource("3_qcu5c")]
+
+[node name="Level Manager" parent="Level Management" instance=ExtResource("4_w05b2")]
+
+[node name="Beach Volume" type="Node3D" parent="Level Management"]
+
+[node name="Directional Light" type="Node3D" parent="Level Management"]
+transform = Transform3D(0.9063079, 0.36599806, 0.21130894, 0, 0.49999976, -0.86602557, -0.4226181, 0.78488576, 0.45315373, 0, 0, 0)
+
+[node name="Light" type="DirectionalLight3D" parent="Level Management/Directional Light"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+light_energy = 2.0
+shadow_bias = 0.05
+shadow_normal_bias = 0.4
+
+[node name="Live Zone" type="Node3D" parent="Level Management"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 322, -0.25, 119)
+
+[node name="BoxCollider" type="Area3D" parent="Level Management/Live Zone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Management/Live Zone/BoxCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+shape = SubResource("BoxShape3D_hgiv3")
+
+[node name="Planar Reflection Renderer" type="Node3D" parent="Level Management"]
+
+[node name="Underwater Renderer" type="Node3D" parent="Level Management"]
+
+[node name="Wind and Waves Audio" type="Node3D" parent="Level Management"]
+
+[node name="Level Geometry" type="Node3D" parent="."]
+
+[node name="Level Features" type="Node3D" parent="Level Geometry"]
+
+[node name="Checkpoint (0)" parent="Level Geometry/Level Features" instance=ExtResource("5_oom3e")]
+transform = Transform3D(-0.00887239, 0, 0.99996066, 0, 1, 0, -0.99996066, 0, -0.00887239, 184.68, 0.49999952, 17.71)
+
+[node name="Checkpoint (1)" parent="Level Geometry/Level Features" instance=ExtResource("5_oom3e")]
+transform = Transform3D(-0.9054694, 0, 0.4244118, 0, 1, 0, -0.4244118, 0, -0.9054694, 292.07, 32.509396, 6.58)
+
+[node name="Checkpoint (2)" parent="Level Geometry/Level Features" instance=ExtResource("5_oom3e")]
+transform = Transform3D(-0.46783996, 0, -0.88381314, 0, 1, 0, 0.88381314, 0, -0.46783996, 210.46, 13.624, -78.56)
+
+[node name="Binocular Stand" parent="Level Geometry/Level Features" instance=ExtResource("6_bwdgy")]
+transform = Transform3D(5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, 5.9604645e-08, 301.0742, 32.38664, 12.716674)
+
+[node name="Geo" type="Node3D" parent="Level Geometry"]
+
+[node name="beach_island_02" parent="Level Geometry/Geo" instance=ExtResource("7_7w3p2")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 250.4, 0.5, 7.9)
+
+[node name="beach_island_01" parent="Level Geometry/Geo" instance=ExtResource("8_nm6a2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.5, 0)
+
+[node name="Plank Group" parent="Level Geometry/Geo/beach_island_01" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.8700108, -3.2664767e-07, 0.4930326, -0.34279105, 0.71874774, 0.6048934, -0.35436624, -0.69527096, 0.6253181, -1.5899982, -1.91, -20.8)
+
+[node name="Plank Group2" parent="Level Geometry/Geo/beach_island_01" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.96417046, -0.12411507, 0.23445772, -0.26516274, -0.47748184, 0.83767503, 0.007981244, -0.86983114, -0.4932849, -0.77999794, -2.26, -23.29)
+
+[node name="Water" parent="Level Geometry/Geo" instance=ExtResource("13_1xb5j")]
+transform = Transform3D(25, 0, 0, 0, 10, 0, 0, 0, 25, 212, 0, -5)
+
+[node name="Coconuts" type="Node3D" parent="Level Geometry/Geo"]
+
+[node name="Coconut New (12)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.110305, 0.8533373, -1.9540799, -2.1090922, 0.43101847, -2.0894864, -0.31359732, 2.843596, 0.9031157, -2.8, 0.67, 1.61)
+
+[node name="Coconut New (1)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.5979056, -1.4902058, -0.1737014, 1.4763288, 2.6010492, -0.23451298, 0.26709282, 0.11760074, 2.9857717, 15.09, 1.62, 24.83)
+
+[node name="Coconut New (17)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.784069, -1.0751219, 0.3050788, -0.4336317, 0.28443497, -2.9548364, 1.0300114, -2.786254, -0.41936442, 3.91, 0.67, 8.88)
+
+[node name="Coconut New (15)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.310533, -1.0192933, -2.4987087, 0.232903, -2.810128, 1.024176, -2.6885424, 0.25341994, 1.3067207, 19.73, 1.52, 24.35)
+
+[node name="Coconut New (28)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-5.638635, 1.6723312, -1.1870561, 0.34494293, -2.650086, -5.3719697, -2.0215855, -5.1166744, 2.3943348, 33.29, -2.78, 15.58)
+
+[node name="Coconut New (29)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.2688994, 1.5650607, -5.3294163, -0.74171764, -5.790709, -1.3847536, -5.5047207, 0.135176, 2.3832283, 24.21, -2.41, 13.33)
+
+[node name="Coconut New (30)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.3288918, 2.4330053, 4.965556, -0.67063916, 5.472497, -2.3668585, -5.488762, 0.36367667, 2.3960867, 30.88, -1.75, 10.07)
+
+[node name="Coconut New (25)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(0.2854026, -1.640984, -2.4951386, 2.0805683, 1.9073743, -1.0164448, 2.1423776, -1.6337367, 1.3195162, 44.02, 1.52, 20.83)
+
+[node name="Coconut New (26)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.7976403, 2.1489606, -1.0725939, 1.1953841, -0.36149997, -2.727705, -2.0831578, -2.0618649, -0.6396622, 188.93001, 0.96, 13.27)
+
+[node name="Coconut New (18)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(0.5774055, -0.23345795, 2.934638, 2.8753827, -0.59676945, -0.6132213, 0.63148797, 2.9307616, 0.10890097, 185.46999, 0.96, 24.12)
+
+[node name="Coconut New (10)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.9765481, 2.2277534, 0.3610716, 1.2226031, 0.6535334, 2.6604767, 1.896971, 1.9000025, -1.3384662, 201.09999, 0.42, 12.8)
+
+[node name="Coconut New (31)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.1897397, 1.5837643, -1.3025863, 1.7361815, -2.4459393, -0.05527911, -1.0911987, -0.7134931, -2.701891, 225.19, 0.53, 4.22)
+
+[node name="Coconut New (32)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.0560559, -2.5012236, 1.2761767, 1.310537, 0.7668034, 2.5873742, -2.4833927, 1.4682963, 0.8227195, 225.94, 1.17, 13.94)
+
+[node name="Coconut New (33)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-6.047567, -7.82418, 4.3310995, 1.2387874, -5.910958, -8.948478, 8.856729, -4.515757, 4.20899, 217.61, 3.03, -7.17)
+
+[node name="Coconut New (34)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-4.479029, -4.53665, 8.712428, 9.816678, -2.405599, 3.7941005, 0.34699598, 9.496377, 5.12325, 204.55, -3.16, -2.14)
+
+[node name="Coconut New (8)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(0.4718499, 4.2972164, 0.69654703, -2.3906884, -0.32973707, 3.6537337, 3.6381114, -0.7740114, 2.3106148, 204.62999, 0.91, 13.89)
+
+[node name="Coconut New (9)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-0.1959351, 1.8438315, 2.3583672, 2.043423, 1.8095444, -1.2449787, -2.1877003, 1.5250688, -1.3740937, 201.9, 0.42, 20.99)
+
+[node name="Coconut New (6)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.7976403, 2.1489606, -1.0725939, 1.1953841, -0.36149997, -2.727705, -2.0831578, -2.0618649, -0.6396622, 192.14, 17.75, 18.78)
+
+[node name="Coconut New (2)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.335928, -1.7050127, -0.7977295, 1.1953845, -0.36149976, -2.7277048, 1.4541309, -2.441772, 0.96086115, 189.90999, 17.75, 20.55)
+
+[node name="Coconut New" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(3.6900551, 1.4874731, 5.828444, 2.5567422, -6.577183, 0.059855256, 5.444851, 2.0803695, -3.9781275, 19.7, 15.12, -0.47)
+
+[node name="Coconut New (4)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(9.5941725, -1.380805, -4.7610273, 4.930891, 1.5907141, 9.475131, -0.5102124, -10.591751, 2.043692, -5.8, 22.4, 49.2)
+
+[node name="Coconut New (11)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(6.1988792, 0.52728325, 8.827119, -8.545026, -2.4169762, 6.145155, 2.2756531, -10.512011, -0.970157, 4.7, 32.5, 60.9)
+
+[node name="Coconut New (7)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(6.364026, -25.970848, 13.601994, 20.900932, -5.7412405, -20.741001, 20.55846, 13.876353, 16.87592, 31, 25.5, 81)
+
+[node name="Coconut New (24)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(11.2506275, -44.96404, 9.099635, 32.27937, 1.1014581, -34.467003, 32.59771, 14.427986, 30.989796, -49.9, 3, 71.6)
+
+[node name="Coconut New (27)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-7.1330132, 3.3003805, -6.3171635, 5.271055, -3.5729754, -7.8184886, -4.797401, -8.832911, 0.8022525, 36.58, 1.12, 65.46)
+
+[node name="Coconut New (13)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-0.22635038, -9.225815, 4.063506, 5.271058, -3.5729735, -7.818491, 8.593236, 1.9486352, 4.902867, 15.83, 0.56, 64.69)
+
+[node name="Coconut New (16)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.310533, -1.0192933, -2.4987087, 0.232903, -2.810128, 1.024176, -2.6885424, 0.25341994, 1.3067207, 18.8, 1.52, 33.09)
+
+[node name="Coconut New (21)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.420695, 0.37116426, 1.7327642, -1.3527997, -2.2818537, -1.4010983, 1.1446257, -1.9119048, 2.0085945, 23.55, 0.44, 30.64)
+
+[node name="Coconut New (23)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.6902605, 2.1795177, 1.1801367, 2.4614806, 1.6433126, 0.49054837, -0.29005828, 1.2446793, -2.7141554, 22.88, -0.01, 33.37)
+
+[node name="Coconut New (3)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.5602434, 2.8828511, -2.6357088, -0.022552986, -3.1404533, -3.456831, -3.9060574, 1.9077103, -1.7076283, 5.18, -0.77, 39.17)
+
+[node name="Coconut New (22)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-0.5084912, 3.231024, -3.33385, -2.1229997, -3.144418, -2.7236269, -4.1287947, 1.2189153, 1.8110592, 5.07, -0.77, 45.33)
+
+[node name="Coconut New (5)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.3307548, 1.6177282, -0.9749546, 0.023894642, 1.5736567, 2.554023, 1.888653, 1.9765017, -1.2354878, 37.24, 0.81, 21.62)
+
+[node name="Coconut New (14)" parent="Level Geometry/Geo/Coconuts" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-0.3703475, 2.1153836, -2.0947542, 2.6049328, 1.2521824, 0.8039682, 1.4412385, -1.7196488, -1.9913914, 34.68, 0.81, 23.04)
+
+[node name="Bananas \'" type="Node3D" parent="Level Geometry/Geo"]
+
+[node name="Palm Trees" type="Node3D" parent="Level Geometry/Geo"]
+
+[node name="Palm Tree 1 (1)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(0.5571686, 7.1054274e-15, -1.9208236, 3.1294186e-07, 2, 9.0774286e-08, 1.9208236, -3.2584137e-07, 0.5571686, -2.3412323, 0.48279905, -1.8134193)
+
+[node name="Palm Tree 3 (1)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(-0.70097804, 0, -1.8731337, 3.051722e-07, 2, -1.14203814e-07, 1.8731337, -3.2584134e-07, -0.70097804, 2.619999, 0.5, 11.130001)
+
+[node name="Palm Tree 2 (1)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-5, -1.2238936e-13, -7.54979e-07, 6.123234e-16, 5, -8.1460337e-07, 7.54979e-07, -8.1460337e-07, -5, -2.1990623, 0.5, 10.777508)
+
+[node name="Palm Tree 4 (1)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(-0.77796865, -4.1084427e-08, -2.897372, 4.5971717e-07, 3, -1.6597758e-07, 2.897372, -4.8703237e-07, -0.77796865, 3.1699982, 0.5, -1.9300003)
+
+[node name="Palm Tree 4" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(1.8264914, -4.1084448e-08, 2.379901, -3.6134946e-07, 3, 3.2911245e-07, -2.379901, -4.8703237e-07, 1.8264914, 22.038485, 0.5, 22.8587)
+
+[node name="Palm Tree 3" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(-2, 2.4492937e-16, -3.9904056e-23, 2.4492937e-16, 2, -3.2584134e-07, -1.5777218e-30, -3.2584134e-07, -2, 13.362953, 0.5, 18.97815)
+
+[node name="Palm Tree 2" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2, -4.8955746e-14, -3.019916e-07, 2.4492937e-16, 2, -3.2584134e-07, 3.019916e-07, -3.2584134e-07, -2, 8.891571, 0.5, 15.622145)
+
+[node name="Palm Tree 1" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-3, -7.343362e-14, -4.5298742e-07, 3.6739406e-16, 3, -4.88762e-07, 4.5298742e-07, -4.88762e-07, -3, 15.28056, 0.5, 10.7586975)
+
+[node name="Palm Tree 2 (2)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-0.47401085, 7.1054274e-15, 1.9430166, -3.1655753e-07, 2, -7.722616e-08, -1.9430166, -3.2584128e-07, -0.47401085, -4.880001, 0.5, 14.67)
+
+[node name="Palm Tree 4 (2)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(1.3438604, -2.7389632e-08, -1.4812291, 2.5887277e-07, 2, 1.978827e-07, 1.4812291, -3.246883e-07, 1.3438604, -0.33000183, 0.5, 28.92)
+
+[node name="Palm Tree 4 (3)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(2.8354816, -4.1084437e-08, -0.9798188, 1.9789921e-07, 3, 4.4690532e-07, 0.9798188, -4.8703237e-07, 2.8354816, 47.6, 0.5, 28.66)
+
+[node name="Palm Tree 3 (2)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(-0.087486744, 2.264855e-14, -2.9987242, 4.885541e-07, 3, -1.4253375e-08, 2.9987242, -4.88762e-07, -0.087486744, 8.299999, 0.5, 38.65)
+
+[node name="Palm Tree 3 (3)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(1.2715833, 5.684342e-14, 1.5437214, -2.5150422e-07, 2, 2.0716722e-07, -1.5437214, -3.2584143e-07, 1.2715833, 15.07, 0.5, 33.33)
+
+[node name="Palm Tree 3 (4)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(1.5304731, 7.1054274e-14, -1.2874984, 2.0976009e-07, 2, 2.4934582e-07, 1.2874984, -3.2584143e-07, 1.5304731, 15.119999, 0.5, 32.6)
+
+[node name="Palm Tree 2 (3)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2, -4.8955746e-14, -3.019916e-07, 2.4492937e-16, 2, -3.2584134e-07, 3.019916e-07, -3.2584134e-07, -2, 4.290001, 0.5, 25.55)
+
+[node name="Palm Tree 2 (4)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2, -4.8955746e-14, -3.019916e-07, 2.4492937e-16, 2, -3.2584134e-07, 3.019916e-07, -3.2584134e-07, -2, 9.239998, 0.5, 39.84)
+
+[node name="Palm Tree 2 (5)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(1.814975, 1.4210855e-14, -0.84015816, 1.3687912e-07, 2, 2.95697e-07, 0.84015816, -3.2584137e-07, 1.814975, 1.0200005, 0.5, 45.4)
+
+[node name="Palm Tree 2 (6)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(1.814975, 1.4210855e-14, -0.84015816, 1.3687912e-07, 2, 2.95697e-07, 0.84015816, -3.2584137e-07, 1.814975, 3.3100014, 0.5, 36.9)
+
+[node name="Palm Tree 2 (7)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(1.814975, 1.4210855e-14, -0.84015816, 1.3687912e-07, 2, 2.95697e-07, 0.84015816, -3.2584137e-07, 1.814975, -1.8499985, 0.5, 37.91)
+
+[node name="Palm Tree 1 (2)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(0.5571686, 7.1054274e-15, -1.9208236, 3.1294186e-07, 2, 9.0774286e-08, 1.9208236, -3.2584137e-07, 0.5571686, 4.290001, 0.48, 17.6)
+
+[node name="Palm Tree 1 (3)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-1.7107226, 0, 1.0360638, -1.687962e-07, 2, -2.7871206e-07, -1.0360638, -3.258413e-07, -1.7107226, 29.25, 0.48, 37.17)
+
+[node name="Palm Tree 1 (4)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(1.9798921, -2.1316282e-14, 0.28289056, -4.6088708e-08, 2, 3.2256543e-07, -0.28289056, -3.258414e-07, 1.9798921, 22.59, 0.48, 41.83)
+
+[node name="Palm Tree 1 (5)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(1.9798921, -2.1316282e-14, 0.28289056, -4.6088708e-08, 2, 3.2256543e-07, -0.28289056, -3.258414e-07, 1.9798921, 47.46, 0.48, 16.94)
+
+[node name="Palm Tree 1 (6)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-1.2203225, 4.2632564e-14, 2.7405863, -4.464984e-07, 3, -1.9881591e-07, -2.7405863, -4.887623e-07, -1.2203225, 48.1, 0.48, 18.3)
+
+[node name="Palm Tree 2 (8)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2, -4.8955746e-14, -3.019916e-07, 2.4492937e-16, 2, -3.2584134e-07, 3.019916e-07, -3.2584134e-07, -2, 48.28, 0.5, 19.2)
+
+[node name="Palm Tree 2 (9)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-0.24541724, -2.842171e-14, 1.9848855, -3.2337888e-07, 2, -3.998351e-08, -1.9848855, -3.2584134e-07, -0.24541724, 39.1, 0.5, 21.8)
+
+[node name="Palm Tree 2 (10)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2.9608095, -3.1974423e-14, -0.4833295, 7.8744335e-08, 3, -4.823771e-07, 0.4833295, -4.8876205e-07, -2.9608095, 52.47, 0.5, 28.88)
+
+[node name="Palm Tree 2 (11)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2.9608095, -3.1974423e-14, -0.4833295, 7.8744335e-08, 3, -4.823771e-07, 0.4833295, -4.8876205e-07, -2.9608095, 185.4, 0.5, 13)
+
+[node name="Palm Tree 2 (12)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-0.9164281, 4.833739e-07, 2.8565993, 7.874437e-08, 3, -4.823771e-07, -2.8565993, -7.2374284e-08, -0.9164281, 211.3, 0.5, 19.7)
+
+[node name="Palm Tree 2 (13)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(2.3882172, -0.86487776, 1.5963724, 0.39420775, 2.8218372, 0.9390607, -1.7722919, -0.5377928, 2.360034, 225.45, 0.5, 3.31)
+
+[node name="Palm Tree 1 (7)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-1.6025462, -4.0658443e-07, -2.5361085, -4.464986e-07, 3, -1.9881588e-07, 2.5361085, 2.712524e-07, -1.6025462, 210.68001, 0.48, 21.3)
+
+[node name="Palm Tree 1 (12)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-2.2150447, -1.907983e-07, -3.6736374, -6.7429664e-07, 4.289759, 1.837738e-07, 3.6736374, 6.7234276e-07, -2.2150447, 256.81, 0.85, -6.72)
+
+[node name="Palm Tree 1 (8)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(2.8336694, 3.5646244e-07, -0.9850471, -4.4649877e-07, 3, -1.9881551e-07, 0.9850471, 3.343999e-07, 2.8336694, 193.7, 0.48, 12.29)
+
+[node name="Palm Tree 4 (4)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(2.9535882, 2.980923e-07, 0.5256582, -3.6134946e-07, 3, 3.2911248e-07, -0.5256582, -3.8733637e-07, 2.9535882, 205.09999, 0.5, 11.7)
+
+[node name="Palm Tree 4 (5)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(1.2082938, -1.5569907e-07, 2.7459106, -3.613497e-07, 3, 3.291126e-07, -2.7459106, -4.6329959e-07, 1.2082938, 186.79, 0.5, 25.55)
+
+[node name="Palm Tree 4 (6)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(1.8587266, -3.2567885e-07, -0.7383324, 3.0647846e-07, 2, -1.10652024e-07, 0.7383324, -1.03055555e-08, 1.8587266, 183.76, 0.5, 24.84)
+
+[node name="Palm Tree 4 (7)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(-0.5471126, 2.4703397e-07, 2.9496894, 4.5971814e-07, 3, -1.6597825e-07, -2.9496894, 4.21739e-07, -0.5471126, 192.06999, 0.5, 12.91)
+
+[node name="Palm Tree 4 (8)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(2.7917376, -3.6704105e-07, 1.0982722, 4.597182e-07, 3, -1.6597829e-07, -1.0982722, 3.2275452e-07, 2.7917376, 199.3, 0.5, 22.2)
+
+[node name="Palm Tree 2 (14)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-1.8328562, 9.667478e-07, 5.7131987, 1.5748874e-07, 6, -9.647542e-07, -5.7131987, -1.4474857e-07, -1.8328562, 191.71, 0.5, 20.13)
+
+[node name="Palm Tree 4 (9)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(0.20046175, -0.0005871076, 5.9966507, 1.165421, 5.885603, -0.03838257, -5.8823133, 1.1660527, 0.19675376, 224.31999, 0.5, 16.68)
+
+[node name="Palm Tree 3 (5)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(1.9963243, -3.5198696e-07, -5.6581526, 9.77108e-07, 6, -2.8507031e-08, 5.6581526, -9.119527e-07, 1.9963243, 19.99, 0.5, 42.56)
+
+[node name="Palm Tree 4 (10)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(-3.9375017, -5.515403e-07, 0.7043304, -4.818002e-07, 4, 4.3881704e-07, -0.7043304, 3.4712406e-07, -3.9375017, 21.58, 0.5, 32.05)
+
+[node name="Palm Tree 1 (9)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(2.9630923, 4.0991534e-07, -0.46913075, -4.464986e-07, 3, -1.9881568e-07, 0.46913075, 2.6619182e-07, 2.9630923, 28.3, 0.48, 23.06)
+
+[node name="Palm Tree 1 (10)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(0.6321997, 3.5584833e-07, 3.9497244, -5.953318e-07, 4, -2.6508803e-07, -3.9497244, -5.4595205e-07, 0.6321997, 37.02, 0.48, 29.74)
+
+[node name="Palm Tree 1 (11)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("15_lxrer")]
+transform = Transform3D(1.495373, -9.363285e-08, -4.7711487, -7.4416533e-07, 5, -3.3136024e-07, 4.7711487, 8.0920614e-07, 1.495373, 35.924, 0.48, 30.102)
+
+[node name="Palm Tree 2 (15)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-2, -4.8955746e-14, -3.019916e-07, 2.4492937e-16, 2, -3.2584134e-07, 3.019916e-07, -3.2584134e-07, -2, 53.64, -0.84, 27.15)
+
+[node name="Soda Bottles" type="Node3D" parent="Level Geometry/Geo"]
+
+[node name="Soda Bottle (1)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.15354225, 2.0037756, -2.2273996, -2.3068466, 1.5022234, 1.1923859, 1.9117751, 1.651729, 1.6176857, 50.216225, -0.3422233, 13.908272)
+
+[node name="Soda Bottle (4)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.94474864, 1.8946958, 2.1254592, -0.29174265, -2.1632028, 2.0580187, 2.8323727, -0.8547991, -0.4969731, 158.25, 0, -1.8500156)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (4)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (4)/MeshCollider2"]
+
+[node name="Soda Bottle (5)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.1406479, 1.8114513, -2.101801, 1.4299016, -2.3312325, -1.2331809, -2.3778782, -0.53291434, -1.7497711, 133.34998, 2.71, -9.450014)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (5)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (5)/MeshCollider2"]
+
+[node name="Soda Bottle (6)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.5947546, 2.3951778, 0.8484577, -1.4090776, 4.423327e-07, 2.6484902, 2.1145349, -1.8064116, 1.1249974, 34.103233, 1.3399967, -55.964035)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (6)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (6)/MeshCollider2"]
+
+[node name="Soda Bottle (7)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.6375391, -1.9834995, 1.5440838, -2.0581217, 8.9142543e-07, 2.18269, -1.4431219, -2.2507176, -1.3607606, 141, 1.34, 42)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (7)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (7)/MeshCollider2"]
+
+[node name="Soda Bottle (13)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.43809447, 7.634453, 1.8238426, -5.497567, -1.0053716, 5.5289392, 5.602501, -1.5835267, 5.282766, 71.95, 3.21, 53.46)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (13)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (13)/MeshCollider2"]
+
+[node name="Soda Bottle (14)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(8.549042, 3.6632826, -4.9765835, -3.5985634, 9.857405, 1.0742688, 5.023581, 0.8270876, 9.238599, 104.5, -2.037, 71.9)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (14)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (14)/MeshCollider2"]
+
+[node name="Soda Bottle (15)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-1.6205146, 3.722568, -9.735942, -7.0899386, -7.616118, -1.7319504, -7.640604, 6.2776885, 3.6720471, 121.27255, 6.049407, 49.777557)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (15)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (15)/MeshCollider2"]
+
+[node name="Soda Bottle (22)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-9.502857, -2.990192, 3.467937, -3.2596784, 10.028217, -0.285462, -3.2159493, -1.3288128, -9.958116, 57.406536, 2, -66.07984)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (22)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (22)/MeshCollider2"]
+
+[node name="Soda Bottle (48)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.914607, 9.803689, 3.3902957, 8.684153, 0.37086052, -5.9766297, -5.6737924, 3.8758595, -8.00362, 110.6, 4.1, -66.5)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (48)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (48)/MeshCollider2"]
+
+[node name="Soda Bottle (49)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-0.21474364, 2.3717186, 10.276234, -2.9577217, 9.852338, -2.335693, -10.1231365, -2.9289124, 0.46443844, 104.380585, -0.28785276, -5.2652225)
+
+[node name="Soda Bottle (8)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-2.6104944, -1.3183352, 0.66881317, 1.0815384, -2.6285157, -0.95978177, 1.0077666, -0.5940526, 2.7625184, 125.55, 0, 30.849989)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (8)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (8)/MeshCollider2"]
+
+[node name="Soda Bottle (9)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-2.0067906, -2.0411177, 0.8981253, 1.6311095, -2.1674533, -1.2812603, 1.520616, -0.36876017, 2.5596373, 71.4, 0, -46.3)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (9)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (9)/MeshCollider2"]
+
+[node name="Soda Bottle (10)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-1.7823826, 1.7851398, 1.6236961, -0.29174274, -2.1631956, 2.058026, 2.395412, 1.0648293, 1.4588146, 60.81, 0, -7.38)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (10)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (10)/MeshCollider2"]
+
+[node name="Soda Bottle (11)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-2.952826, -5.1689754, -5.344391, -7.1667943, 0.4478858, 3.5265362, -1.9793627, 6.089424, -4.795939, 161.8, 33.14, -33.22)
+
+[node name="Soda Bottle (12)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-4.8413343, 0.7077632, 6.3293405, -5.0463233, -5.276582, -3.2699087, 3.8853705, -5.971328, 3.6396623, 72.8, 57, 66.6)
+
+[node name="Soda Bottle (16)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(7.574829, 1.1437673e-06, -2.573318, 1.2079664e-06, -8, 0, -2.573318, -3.885602e-07, -7.574829, 208.48, -3.4599996, -79.44)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (16)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (16)/MeshCollider2"]
+
+[node name="Soda Bottle (21)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.85516053, -1.7982467, -1.7351409, -0.6272313, -1.9296867, 1.6907382, -2.4188812, -0.13536415, -1.0518533, 183.92, 8.67, -90.8)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (21)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (21)/MeshCollider2"]
+
+[node name="Soda Bottle (24)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.9487766, 0.28658876, -1.7595004, 1.1375172, -2.2070434, 0.9003994, -1.3725996, -1.4221574, -1.7518972, 189.4, 1.8, -125.8)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (24)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (24)/MeshCollider2"]
+
+[node name="Soda Bottle (29)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-1.2197926, 1.048064, 2.0950828, -1.2552364, 1.701957, -1.5822228, -1.9779263, -1.726444, -0.28792948, 165.8, 6.69, -94.5)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (29)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (29)/MeshCollider2"]
+
+[node name="Soda Bottle (30)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-0.6090082, 0.10733005, 2.5677412, 0.95123845, 2.46085, 0.12274949, -2.3874588, 0.95310146, -0.6060885, 173.7, -0.8, -157.8)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (30)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (30)/MeshCollider2"]
+
+[node name="Soda Bottle (31)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(5.282312, 0, 0, 0, -5.282312, 7.976069e-07, 0, -7.976069e-07, -5.282312, 172.2, 6.49, -166.07)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (31)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (31)/MeshCollider2"]
+
+[node name="Soda Bottle (17)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-5.125384, 2.686588, -5.5238285, 3.714077, 7.085593, -2.196883e-07, 4.8924503, -2.5644908, -5.786823, 171.5, 21.2, -73.9)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (17)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (17)/MeshCollider2"]
+
+[node name="Soda Bottle (18)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-0.098380804, -7.340515, 3.1791768, -5.6699047, 2.3068054, 5.1508083, -5.6429157, -2.1898613, -5.2308707, 189.4, 38, -54.3)
+
+[node name="Soda Bottle (19)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-4.9391456, 4.2156296, -4.672613, -0.7543755, -6.293624, -4.8806987, -6.247861, -2.572697, 4.283161, 236.8, 42.6, -60)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (19)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (19)/MeshCollider2"]
+
+[node name="Soda Bottle (38)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(13.685397, -2.0134249, 5.9830666, 4.584074, 12.990284, -6.1139073, -4.3401875, 7.3715477, 12.408229, 283.8, 24.1, -76.6)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (38)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (38)/MeshCollider2"]
+
+[node name="Soda Bottle (20)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(2.878972, -0.75193727, -0.38224417, -0.29174203, -2.1631942, 2.0580277, -0.7914587, -1.9378291, -2.149049, 85.24, -1.33, 3.81)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (20)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (20)/MeshCollider2"]
+
+[node name="Soda Bottle (2)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-3.182258, 0.5801797, -5.3921766, -0.6699869, 6.161967, 1.0584073, 5.381756, 1.1101801, -3.0566564, 74.02, -13, 24)
+
+[node name="Soda Bottle (3)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(2.521437, 1.6214261, -0.11546987, -0.13724172, -3.6592974e-07, -2.996859, -1.6197286, 2.5240796, 0.074175455, 45.8, 1.3400005, -30)
+
+[node name="Soda Bottle (23)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-1.6714071, 2.263269, -1.0411582, -1.5861926, -4.475125e-07, 2.5463686, 1.9210391, 1.9691653, 1.1966605, 121.34, 1.34, -3.19)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (23)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (23)/MeshCollider2"]
+
+[node name="Soda Bottle (33)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 110.1, -8.2, 21.7)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (33)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (33)/MeshCollider2"]
+
+[node name="Soda Bottle (34)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 118, -8.669999, 24)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (34)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (34)/MeshCollider2"]
+
+[node name="Soda Bottle (50)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 123, -8.669999, 18)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (50)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (50)/MeshCollider2"]
+
+[node name="Soda Bottle (42)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 159, -8.67, 20)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (42)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (42)/MeshCollider2"]
+
+[node name="Soda Bottle (35)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 116, -8.419999, 16)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (35)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (35)/MeshCollider2"]
+
+[node name="Soda Bottle (36)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 130, -8.2, 15)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (36)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (36)/MeshCollider2"]
+
+[node name="Soda Bottle (44)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 124, -8.2, 11)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (44)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (44)/MeshCollider2"]
+
+[node name="Soda Bottle (Lid Pop Platform) (2)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("20_3h5ku")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 150, -8.2, 17)
+
+[node name="Soda Bottle (Lid Pop Platform) (3)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("20_3h5ku")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 142, -8.2, -1)
+
+[node name="Soda Bottle (Lid Pop Platform) (4)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("20_3h5ku")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 142, -8.2, -1)
+
+[node name="Soda Bottle (Lid Pop Platform) (5)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("20_3h5ku")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 134, -8.2, 29)
+
+[node name="Soda Bottle (39)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 154, -8.2, 25)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (39)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (39)/MeshCollider2"]
+
+[node name="Soda Bottle (Lid Pop Platform) (7)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("20_3h5ku")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 166, -8.2, 16)
+
+[node name="Soda Bottle (40)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 160, -8.2, 12)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (40)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (40)/MeshCollider2"]
+
+[node name="Soda Bottle (41)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3.019916e-07, 0, 4, 0, 4, 0, -4, 0, 3.019916e-07, 172.06, -9.41, 18.74)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (41)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (41)/MeshCollider2"]
+
+[node name="Soda Bottle (37)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(6, 0, 0, 0, -6, 9.0597484e-07, 0, -9.0597484e-07, -6, 140, -10, 16)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (37)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (37)/MeshCollider2"]
+
+[node name="Soda Bottle (25)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.17132962, 2.9906569, 0.16315022, -1.9757012, -0.009971935, 2.257544, 2.2510555, -0.23637342, 1.9689786, 237.84999, 0.4093814, -6.8)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (25)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (25)/MeshCollider2"]
+
+[node name="Soda Bottle (27)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.8091016, 0.15711798, 2.3879836, 0.051027186, 2.9903145, -0.23540595, -2.3926027, 0.18257512, 1.8005884, 226.69, 1.13, -8.75)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (27)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (27)/MeshCollider2"]
+
+[node name="Soda Bottle (28)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(2.6697917, 0.30092657, 1.3347862, -0.49080992, 2.9424083, 0.3183368, -1.27723, -0.5016731, 2.6677718, 230.28, 2.15, 24.09)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (28)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (28)/MeshCollider2"]
+
+[node name="Soda Bottle (32)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-4.2378364, 0.4386428, -4.054674, -0.3057943, -5.8650985, -0.3148902, -4.066851, -0.016076986, 4.248824, 221.4, 4.42, 29.9)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (32)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (32)/MeshCollider2"]
+
+[node name="Soda Bottle (26)" parent="Level Geometry/Geo/Soda Bottles" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-0.02496475, -1.6896608, 2.4787948, -1.5707874, 2.1192589, 1.4287646, -2.5557785, -1.2859972, -0.9023349, 191.52472, 0.44107145, 28.645636)
+
+[node name="MeshCollider2" type="StaticBody3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (26)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Soda Bottles/Soda Bottle (26)/MeshCollider2"]
+
+[node name="Plank Group (1)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.7040732, 0, 1.0802457, 0, 1, 0, -0.7101274, 0, 1.0710361, 8.200181, 0.51, 31.83115)
+
+[node name="Plank Group (2)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.902113, 0.30901706, -4.7446672e-08, 0, -4.371139e-08, -3.5126, -0.6180341, 0.9510565, -1.460258e-07, 240.69955, 10.51, -0.57)
+
+[node name="Plank Group (9)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9982191, 0.042190745, -3.688432e-09, 0, -4.371139e-08, -2, -0.08438149, 0.99910957, -8.734493e-08, 260.38116, 7.5, -4.648284)
+
+[node name="Plank Group (10)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.9519713, 0.21783493, -1.9043735e-08, 0, -4.371139e-08, -2, -0.43566987, -0.97598565, 8.532338e-08, 267.91998, 7.46, -4.45)
+
+[node name="Plank Group (18)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.996886, -0.055766787, -0.002454148, 0.0059615253, -0.03137454, -1.9990065, 0.11140117, -0.9979507, 0.06298384, 276.14, 7.06, -3.65)
+
+[node name="Plank Group (19)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.7579364, 0.47634667, -0.045113284, 0.05130935, 8.918951e-07, -1.9993417, -0.9523797, -0.87925756, -0.024442606, 283.86, 7.55, -2.07)
+
+[node name="Plank Group (20)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.1528934, -0.8169799, -0.03181651, -0.055168457, 1.6692488e-06, -1.999239, 1.6333382, 0.5766662, -0.045069598, 290.05, 7.18, 3.33)
+
+[node name="Plank Group (21)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.6535476, -0.9451026, -3.5522228e-06, 0.12936676, 0.022366466, -1.9953103, 1.885773, 0.32600746, 0.13688241, 293.26, 6.97, 10.67)
+
+[node name="Plank Group (22)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-0.64917976, 0.9454624, -0.05449023, 0.1294735, 0.050943762, 1.9932023, 1.8872738, 0.3217229, -0.15548399, 294.24, 6.62, 16.87)
+
+[node name="Plank Group (48)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.7927531, -0.9176837, -0.05448987, -0.121248744, -0.055773485, 1.9932024, -1.8321685, -0.3933776, -0.1554826, 293.19, 22.03, 18.25)
+
+[node name="Plank Group (52)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.7927531, -0.9176837, -0.05448987, -0.121248744, -0.055773485, 1.9932024, -1.8321685, -0.3933776, -0.1554826, 296.43, 21.53, 10.76)
+
+[node name="Plank Group (53)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.5286008, -0.6404037, -0.15136838, -0.14178601, -0.03321085, 1.9938618, -1.2819035, 0.76732016, -0.040034153, 293.18, 23.31, 6.08)
+
+[node name="Plank Group (54)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.6824621, -0.53814083, -0.10458966, -0.093532376, -0.02393694, 1.997238, -1.0772989, 0.842515, -0.0100605935, 286.16998, 24.16, 1.42)
+
+[node name="Plank Group (56)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.8964293, -0.31343165, -0.102947555, -0.10529246, -0.00472797, 1.9972041, -0.62647367, 0.94959897, -0.024035728, 279.26, 24.02, -2.42)
+
+[node name="Plank Group (57)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.9572237, -0.20047906, -0.09224033, -0.09678318, 0.006441602, 1.9976153, -0.39988583, 0.97967684, -0.032010656, 271.2, 24.13, -4.86)
+
+[node name="Plank Group (58)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.9977906, -0.0072510242, -0.09285671, -0.09312429, 0.019523794, 1.9974492, -0.012670577, 0.9997831, -0.039679695, 262.84998, 23.9, -5.8)
+
+[node name="Plank Group (59)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.992816, 0.07289389, -0.08620112, -0.08267093, 0.025552947, 1.997637, 0.14781821, 0.9970123, -0.04489612, 254.65, 23.84, -5.09)
+
+[node name="Plank Group (11)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-0.22061431, -0.99389756, 8.688929e-08, 0, -4.371139e-08, -2, 1.9877951, -0.11030716, 9.643358e-09, 266.28998, 7.44, 7.86)
+
+[node name="Plank Group (23)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.7836645, -0.4523663, 7.4989245e-08, 0, -4.371139e-08, -3.7924, 0.9047326, 0.89183223, -1.4783997e-07, 248.80138, 3.14, 12.951458)
+
+[node name="Plank Group (14)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-0.33606634, 0.9857029, -0.024874441, 0.08556164, 0.019896427, 1.9977727, 1.9697052, 0.16731398, -0.091024876, 292.02002, 6.36, 24.01)
+
+[node name="Plank Group (27)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(2.1020572, 0.36308733, 0.029730812, 0.06341933, -0.11278473, 1.9864436, 0.817466, -0.9249039, -0.23055975, 287.60004, 7.6, 21.619999)
+
+[node name="Plank Group (49)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(2.1020567, 0.36338627, 0.0039313566, 0.06341922, -0.07745205, 1.9931996, 0.81746614, -0.92841345, -0.16474211, 287.31, 23.17, 20.61)
+
+[node name="Plank Group (37)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9202344, 0.5223188, -0.107570246, 0.10819382, 0.024692534, 1.9970888, 1.1797919, -0.8523927, -0.008062926, 279.13, 7.2799997, 17.73)
+
+[node name="Plank Group (28)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(2.2068605, 0.36338893, 0.0026701135, 0.0056421454, -0.009780197, 1.9998987, 0.86078304, -0.93158627, -0.019954262, 270.93, 7, 13.54)
+
+[node name="Plank Group (36)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.4955972, 0, -0.1685666, 0, 1, 0, 0.27750692, 0, 0.9084737, 269.40088, 8.63, 8.719245)
+
+[node name="Plank Group (38)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.772687, 0, 0.79589254, 0, 1, 0, -1.3102577, 0, 0.4693549, 282.45, 10.56, 1.46)
+
+[node name="Plank Group (12)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9899867, -0.09993594, 0.002106923, 8.35997e-08, -0.010540365, -1.9998889, 0.19988298, 0.9949381, -0.020975178, 254.87999, 7.38, 13.75)
+
+[node name="Plank Group (29)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9781274, 0.0010531719, 0.360808, -0.0010092335, -0.9999445, 0.025747184, 0.29497635, -0.010483843, -2.41951, 257.05, 15.89, 4.56)
+
+[node name="Plank Group (51)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.7980864, 0.001053103, 0.51091945, -0.007287432, -0.9999445, 0.011536186, 0.8756896, -0.010483849, -1.0489941, 252.83, 15.67, 9.36)
+
+[node name="Plank Group (31)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(2.099147, -0.013529006, -0.42695117, -0.020272182, -0.99983025, 0.023031604, -0.650089, -0.012506956, -1.3793498, 249.4, 16.16, 3.02)
+
+[node name="Plank Group (32)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.958725, 0.0010531167, -0.2683978, 0.0063004224, -0.9999445, 0.013352481, -0.4041741, -0.010483864, -1.3005124, 241.53, 16.03, 5.74)
+
+[node name="Plank Group (33)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.946374, 0.0010531668, -0.25440115, 0.0068726013, -0.9999445, 0.011016675, -0.45997906, -0.010483875, -1.0763187, 233.37, 15.95, 7.81)
+
+[node name="Plank Group (30)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9947153, 0.0010530043, 0.17770527, 0.0005772429, -0.99994445, 0.025767095, 0.1452931, -0.010483861, -2.4398012, 266.2, 15.91, 4.42)
+
+[node name="Plank Group (39)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9904134, 0.0010531022, 0.23922893, 4.559899e-05, -0.9999445, 0.025776712, 0.19558764, -0.010483855, -2.4345384, 274.84998, 15.9, 6.05)
+
+[node name="Plank Group (40)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.8088413, 0.00105309, 1.0437332, -0.007040918, -0.9999445, 0.024295432, 0.85325444, -0.010483857, -2.212443, 284.78998, 15.87, 10.56)
+
+[node name="Plank Group (70)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.8088413, 0.00105309, 1.0437332, -0.007040918, -0.9999445, 0.024295432, 0.85325444, -0.010483857, -2.212443, 284.77, 31.900002, 10.7300005)
+
+[node name="Plank Group (74)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.898943, 0.0010531265, 0.7678063, -0.0045810305, -0.9999445, 0.025160315, 0.62768984, -0.010483845, -2.322652, 291.74, 32.36, 13.68)
+
+[node name="Plank Group (75)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-0.11483054, 0.0010530917, 1.0724658, -0.021054178, -0.99994445, 0.00048271884, 1.9965898, -0.010483917, 0.06168618, 299.2, 32.28, 12.48)
+
+[node name="Plank Group (44)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.97021586, 0.0010531018, -2.1392632, 0.019357037, -0.99994445, 0.010189208, -1.7488015, -0.0104838805, -1.186727, 287.52002, 15.57, 7.56)
+
+[node name="Plank Group (41)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.8106784, 0.0010531072, -1.0389566, 0.006998004, -0.99994445, -0.02431396, -0.84934974, -0.01048385, 2.2146897, 280.46002, 16.07, 6.21)
+
+[node name="Plank Group (42)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-1.9865451, 0.0010531584, 0.2832814, -0.004519998, -0.9999445, -0.025176888, 0.23155588, -0.010483866, 2.429813, 262.72, 16.06, 4.25)
+
+[node name="Plank Group (43)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9718359, 0.001053177, 0.40910333, -0.0014297806, -0.9999445, 0.025717366, 0.3344569, -0.010483844, -2.411814, 270.36, 16.21, 4.51)
+
+[node name="Plank Group (26)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.8908895, 0.3191783, -0.13052797, -0.1366535, -0.0016048013, -1.9953234, -0.6370735, 0.9476933, 0.040582333, 262.84, 7.1, 13.36)
+
+[node name="Plank Group (13)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9834712, -0.075966, 0.20678383, -0.23260376, -0.19203518, 1.9489447, -0.10834378, -0.97844356, -0.3985662, 253.05, -2.94, -2.54)
+
+[node name="Plank Group (55)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-0.27921873, 0, 1.9804133, 0, 2, 0, -1.9804133, 0, -0.27921873, 254.95999, 0.05, -11.51)
+
+[node name="Plank Group (45)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9463451, -0.23007317, 0.0055648605, -0.043597903, -0.08673568, 4.386153, -0.45808327, -0.9693004, -0.39380604, 248.43, 8.66, -2.66)
+
+[node name="Plank Group (3)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9082922, 0.29836175, -0.08466195, -1.4004746e-07, -0.080835335, -3.48735, -0.5986827, 0.95102364, -0.2698579, 232.9, 12.23, 2.62)
+
+[node name="Plank Group (6)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.44525856, -0.95718414, 0.37005198, -0.12864065, -0.20379683, -1.953796, 1.9455581, 0.20558512, -0.21387509, 227.95, 6.03, -0.95)
+
+[node name="Plank Group (4)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.9555265, 0.20873392, 0.051827766, 0.012553157, 0.067277156, -2.556544, -0.4192353, 0.97565556, 0.16520052, 236.01, 7.79, 12.89)
+
+[node name="Plank Group (7)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.394014, 0.9801934, 0.04045318, -0.118486986, 0.032495365, -1.995429, -1.9572209, 0.19535843, 0.1289438, 231.03, 6, 16.63)
+
+[node name="Plank Group (5)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(1.902113, 0.30901706, -3.566537e-08, 0, -4.371139e-08, -2.6403997, -0.6180341, 0.9510565, -1.0976669e-07, 244.18956, 7.27, 10.991115)
+
+[node name="Plank Group (8)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.007993734, 0.9910696, -0.17815787, 1.9983137, -0.009404317, -0.05342016, -0.08172401, -0.13301389, -1.3236548, 244.47, 2.19, 4.85)
+
+[node name="Plank" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
+transform = Transform3D(0.20659743, -3.824427, 0.030063286, -0.006512924, -0.12553053, -0.99946344, 0.9784044, 0.8067209, -0.013001197, 243.77, 2.59, -0.41)
+
+[node name="Plank (1)" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
+transform = Transform3D(0.2065978, 3.8261454, 0.0066069462, -0.0065084994, -0.021032063, 0.99996436, 0.97840434, -0.80806065, 0.005256811, 245.3, 2.86, 9.86)
+
+[node name="Spear" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(1, 0, 0, 0, 0.9645705, 0.26382527, 0, -0.26382527, 0.9645705, 257.64178, 4.06, -3.39)
+
+[node name="Spear (1)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(1, 0, 0, 0, 0.9645705, 0.26382527, 0, -0.26382527, 0.9645705, 256.91998, 4.06, -3.39)
+
+[node name="Spear (2)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-0.5490318, -0.5490308, 2.8977802, -2.1213193, 2.1213214, -3.1067805e-07, -2.049041, -2.049039, -0.7764475, 229.2, 4, 11)
+
+[node name="Spear (3)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-0.5490316, 0.21967636, 2.9411404, 2.0490348, 2.1801848, 0.21965966, -2.121325, 2.049033, -0.54903835, 227.41167, 3.9420795, 6.88927)
+
+[node name="Spear (4)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.80505085, -0.63568074, -2.819185, 1.2716695, 2.7058916, -0.24699502, 2.5951397, -1.1287427, 0.9955854, 206.54631, 0.5, 20.73287)
+
+[node name="Spear (5)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-2.95106, 0.48560208, -0.2354457, 0.25420266, 2.4053216, 1.77477, 0.47605157, 1.7258673, -2.40723, 196.13466, 0.49999976, 12.482267)
+
+[node name="Spear (6)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-0.36040637, -0.8305126, -2.8601322, -1.4535235, -2.465543, 0.89909256, -2.5994956, 1.4937692, -0.10619069, 239.73, 10.86, -12.62)
+
+[node name="Spear (9)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(13.796459, 2.2847085, 3.244957, -3.1653328, 13.415407, 4.0124073, -2.3938057, -4.5715265, 13.396371, 245.91, 19.75, 21.04)
+
+[node name="Spear (10)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-8.595624, 5.313595, -34.552586, -13.588243, -33.29168, -1.739347, -32.209877, 12.6266165, 9.954577, 302.90002, 84.5, 13.5)
+
+[node name="Spear (11)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-14.803982, -7.716177, -0.22316168, -7.447938, 14.150533, 4.7997646, -2.0291414, 4.355471, -15.989358, 271.7, -0.8, -20.5)
+
+[node name="Spear (19)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-16.637018, 0.66777104, -1.2291538, 0.20108134, 15.659814, 5.7859154, 1.3843063, 5.750767, -15.612798, 339.5, -8.4, -68.2)
+
+[node name="Spear (34)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-13.693679, -8.675216, 3.9963644, -9.515348, 12.99725, -4.390528, -0.82973176, -5.878709, -15.604467, 340.4, -8.4, -27.2)
+
+[node name="Spear (55)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.25859177, -6.5645475, -15.348842, 6.411425, 14.212449, -5.9705076, 15.41343, -5.801727, 2.7410216, 427.3, 8.8, -7)
+
+[node name="Visual Effect Spray" type="Node3D" parent="Level Geometry/Geo"]
+transform = Transform3D(0.92538625, -0.20004503, 0.32193527, 2.2351742e-08, 0.8493763, 0.52778774, -0.3790255, -0.48840752, 0.78600115, 236.88945, 3.2383819, -7.7224016)
+
+[node name="VisualEffect" type="Node" parent="Level Geometry/Geo/Visual Effect Spray"]
+
+[node name="VFXRenderer" type="Node" parent="Level Geometry/Geo/Visual Effect Spray"]
+
+[node name="Force" type="RigidBody3D" parent="Level Geometry/Geo/Visual Effect Spray"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+angular_damp = 0.05
+
+[node name="CapsuleCollider" type="Area3D" parent="Level Geometry/Geo/Visual Effect Spray/Force"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Visual Effect Spray/Force/CapsuleCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, 0)
+shape = SubResource("CapsuleShape3D_w52jn")
+
+[node name="Spline Spears" type="Node3D" parent="Level Geometry/Geo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 267.57068, 0.63, -4.0638037)
+
+[node name="Plank (6)" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
+transform = Transform3D(0.88706636, 0.31716898, -0.3126429, -2.9802319e-08, 0.72661453, 0.6403606, 0.461642, -0.6094548, 0.6007578, 283.52002, 8.03, 0.74)
+
+[node name="Plank (7)" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
+transform = Transform3D(0.18619253, -0.4913149, 0.7097347, 4.4703484e-08, 0.8659912, 0.41712448, -0.98251325, -0.09310727, 0.13449928, 269.06, 6.85, 8.61)
+
+[node name="Soda Bottle (7)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 287.43005, 0.92999995, 5.325854)
+
+[node name="Soda Bottle (12)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 290.14148, 0.92999613, 10.678249)
+
+[node name="Soda Bottle (1)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-5.889261e-07, 0.9604134, -0.27857882, -1, -6.3975784e-07, -9.1557034e-08, -2.661556e-07, 0.27857882, 0.9604134, 268.99304, 9.740001, 8.8308935)
+
+[node name="Soda Bottle (6)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 286.52618, 0.9300033, 3.5416977)
+
+[node name="Soda Bottle (16)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 289.2376, 0.9299995, 8.8940935)
+
+[node name="Soda Bottle (8)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 286.52625, 4.300005, 3.5417352)
+
+[node name="Soda Bottle (4)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 289.23767, 4.300001, 8.894131)
+
+[node name="Soda Bottle (19)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 288.33386, 4.3000026, 7.1099987)
+
+[node name="Soda Bottle (13)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 287.43005, 4.300004, 5.3258667)
+
+[node name="Soda Bottle (2)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-5.889261e-07, 0.9604134, -0.27857882, -1, -6.3975784e-07, -9.1557034e-08, -2.661556e-07, 0.27857882, 0.9604134, 268.43576, 9.74, 10.751685)
+
+[node name="Soda Bottle (10)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 285.62238, 0.9300051, 1.75753)
+
+[node name="Soda Bottle (14)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 288.3338, 0.93000126, 7.1099253)
+
+[node name="Soda Bottle (3)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-5.889261e-07, 0.9604134, -0.27857882, -1, -6.3975784e-07, -9.1557034e-08, -2.661556e-07, 0.27857882, 0.9604134, 268.71454, 11.420002, 9.791361)
+
+[node name="Soda Bottle" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 286.07422, 2.6100054, 2.6497016)
+
+[node name="Soda Bottle (17)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 288.78564, 2.6100016, 8.002097)
+
+[node name="Soda Bottle (18)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 287.88184, 2.6100028, 6.217965)
+
+[node name="Soda Bottle (11)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 286.9781, 2.6100054, 4.433747)
+
+[node name="Soda Bottle (15)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.8862965e-07, -0.8920659, -0.4519054, -1, 4.3312576e-07, 6.6884115e-07, -4.0091848e-07, 0.4519054, -0.8920659, 289.6895, 2.6100016, 9.786142)
+
+[node name="Spear (8)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.9040756, -0.0633357, -0.42265335, 7.450581e-09, 0.9889577, -0.14819787, 0.4273725, 0.13398208, 0.89409256, 290.19, 4.12, 21.82)
+
+[node name="Spear (12)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.9040756, -0.07544184, -0.42066112, 3.7252903e-09, 0.9842962, -0.17652479, 0.4273725, 0.15959176, 0.8898782, 289.28027, 4.1200566, 21.38969)
+
+[node name="Spear (13)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.9040756, -0.08070091, -0.41968387, 7.450581e-09, 0.9820097, -0.18883039, 0.42737246, 0.17071696, 0.88781106, 288.12024, 4.120079, 20.839579)
+
+[node name="Spear (14)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.9040756, -0.088025674, -0.41820893, 1.1175871e-08, 0.9785584, -0.20596942, 0.4273725, 0.18621194, 0.8846908, 287.02026, 4.1201205, 20.319399)
+
+[node name="Plank (8)" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
+transform = Transform3D(0.7660968, 0, 1.8663673, 0, 2, 0, -1.9891742, 0, 0.71879977, 284.57, 15.49, 18.25)
+
+[node name="Plank Group (46)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(0.7483208, -0.6624516, -0.034261137, 0.12266967, 0.08744198, 0.988588, -0.65189576, -0.74398375, 0.14669734, 218.79, 0.71, 6.95)
+
+[node name="Plank Group (47)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
+transform = Transform3D(-0.9295778, 0.36238313, 0.06755519, -0.087262005, -0.038271666, -0.99544996, -0.3581488, -0.9312431, 0.06719875, 212.45, 1.42, 8.34)
+
+[node name="Spear (15)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.36215127, -0.02620662, 0.9317509, 0.1499959, 0.9882159, -0.030505363, -0.9199716, 0.15080637, 0.3618145, 214.29, 1.05, 10.03)
+
+[node name="Spear (16)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.23214275, 0.022811178, 0.9724142, 0.1291373, 0.99015224, -0.054056007, -0.9640712, 0.13812366, 0.22691089, 215.16, 1.05, 9.91)
+
+[node name="Spear (17)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.39007038, -0.13124353, 0.91138375, 0.068912074, 0.991175, 0.11323963, -0.91820276, 0.01863392, 0.39567226, 216.04, 1.05, 9.47)
+
+[node name="Spear (18)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(0.16971833, -0.007290846, 0.98546565, -0.0076275044, 0.99993294, 0.008711501, -0.98546314, -0.008995145, 0.16965133, 217.01, 1.05, 9.22)
+
+[node name="Coconut" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.025318, 2.047536, 0.8400508, 0.556643, 1.5733807, -2.4929142, -2.142017, -1.527112, -1.4421142, 282.74, 1.46, -0.19)
+
+[node name="Coconut (1)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(0.29050666, 1.6081841, -2.51582, 1.0838466, 2.2984996, 1.5944204, 2.7822442, -1.0633175, -0.35843176, 280.18, 1.35, -1.9)
+
+[node name="Coconut (24)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(5.1417146, -2.3114524, 1.2047582, 0.2405661, -2.2322462, -5.30949, 2.5954542, 4.7859955, -1.8945582, 270.49, 2.64, 8.7338)
+
+[node name="Coconut (22)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.5036507, 2.5698254, 0.36746734, 2.5044425, 1.5477973, -0.57627416, -0.6832296, 0.017928556, -2.9211087, 281.26553, 12.093, -0.6929514)
+
+[node name="Coconut (23)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(1.2132944, -2.698186, -0.49770486, 2.5004437, 1.3114002, -1.0139086, 1.1294681, -0.0047710687, 2.7792587, 283.51938, 12.08717, 3.5648699)
+
+[node name="Lantern" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(0.9617322, 0, 0.2739912, 0, 1, 0, -0.2739912, 0, 0.9617322, 252.4, 14.7, 8.01)
+
+[node name="Lantern (5)" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(0.9617322, 0, 0.2739912, 0, 1, 0, -0.2739912, 0, 0.9617322, 240.39, 14.7, 6.03)
+
+[node name="Lantern (2)" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(0.63562953, 0, 0.7719942, 0, 1, 0, -0.7719942, 0, 0.63562953, 273.66998, 14.7, 10.42)
+
+[node name="Lantern (3)" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(0.63562953, 0, 0.7719942, 0, 1, 0, -0.7719942, 0, 0.63562953, 289.94, 14.242, 9.85)
+
+[node name="Lantern (1)" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(0.20525414, 0, 0.97870874, 0, 1, 0, -0.97870874, 0, 0.20525414, 264.01, 14.87, -1.27)
+
+[node name="Palm Tree 4" parent="Level Geometry/Geo" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(7.314359, 3.3253798, 13.984635, -1.3541917, 15.780598, -3.044158, -14.310639, 0.20635472, 7.435798, 192.21, -3.34, -84.22)
+
+[node name="Coconut (2)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(3.2099805, 8.805724, -6.363138, -10.726105, 3.6231735, -0.39696193, 1.7265536, 6.137273, 9.364143, 146.42, 23.7, -135.24)
+
+[node name="Coconut (9)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.3656404, -9.418264, -5.833894, 4.1880274, -4.7625127, 9.386862, -10.256629, -4.116924, 2.4873219, 146.42, 13.7, -119.3)
+
+[node name="Coconut (4)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(5.138753, 4.9754033, -8.784809, 5.023377, -9.81054, -2.6178718, -8.757463, -2.7079394, -6.6564384, 186.56, 14.92, -156.57)
+
+[node name="Coconut (5)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(2.2253053, 2.0004425, 10.926141, -3.4856048, 10.706152, -1.2502596, -10.5467, -3.116218, 2.7185671, 187.25, 18.74, -169.29)
+
+[node name="Coconut (6)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-1.0004967, 6.9369636, -8.900103, 9.97532, 4.7205935, 2.5579824, 5.2750626, -7.6110983, -6.525272, 178.24, 21.16, -180.94)
+
+[node name="Coconut (7)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-3.7937262, 3.1558886, 10.197171, -9.582656, 3.7607737, -4.7290134, -4.7026196, -10.20937, 1.410115, 164.59999, 24.86, -178.98)
+
+[node name="Coconut (8)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-8.406905, -7.115716, -2.6504378, 4.9728923, -8.147671, 6.100828, -5.7383413, 3.363979, 9.170025, 154.06, 27.5, -168.13)
+
+[node name="Palm Tree 3" parent="Level Geometry/Geo" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(-5.7688346, 0.49968174, -13.62727, 0.5144253, 14.793976, 0.32469016, 13.626721, -0.34695163, -5.7813244, 153.06999, -0.32, -99.95)
+
+[node name="Palm Tree 2" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-15.800759, 0.4731225, -0.016699547, 0.4730298, 15.755452, -1.1958637, -0.019147526, -1.1958271, -15.762541, 215.5, 0, -123.3)
+
+[node name="Palm Tree 1" parent="Level Geometry/Geo" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-24.311071, -1.9989168e-06, -12.269265, 6.772239e-13, 27.231657, -4.4366006e-06, 12.269265, -3.9607776e-06, -24.311071, 144.59999, -2.7, -238.2)
+
+[node name="Soda Bottle (21)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(22.344587, 0, 0, 0, 22.344587, 0, 0, 0, 22.344587, 108.5, -39.2, -207.9)
+
+[node name="Soda Bottle (22)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(21.353706, 2.2856367, -6.1705523, 4.8881774, -19.537134, 9.679184, -4.405175, -10.599846, -19.170765, 115.7, -16.6, -124.4)
+
+[node name="Soda Bottle (5)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-6.593675, -6.9294453, 20.193733, 16.590366, -14.965324, 0.28177625, 13.437401, 15.076554, 9.561087, 181.3, 88, -252.6)
+
+[node name="Soda Bottle (24)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-7.756561, -0.40403232, 10.411728, 2.8724468, 12.394016, 2.6208801, -10.015806, 3.8673923, -7.3115296, 222.2, 36.1, -184)
+
+[node name="Soda Bottle (25)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.7588404, -5.065517, 11.93718, 1.9818333, -11.771825, -5.1213326, 12.81515, 2.1204364, 0.085150324, 231.2, -7.9, -151.7)
+
+[node name="Coconut (13)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(25.706833, -2.805875, -29.242002, -4.2774305, 38.08587, -7.4147916, 29.06323, 8.087188, 24.773676, 135, 48.97, -148.65)
+
+[node name="Coconut (15)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(25.397337, -7.991191, 28.546904, 17.449148, -26.359077, -22.902742, 23.96481, 27.66133, -13.577489, 84.299995, 4.9, -156.1)
+
+[node name="Spear (20)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(3.4186845, 0.9401466, 0, -0.9401466, 3.4186845, 0, 0, 0, 3.5456, 260.88, -2.85, 30.92)
+
+[node name="Spear (21)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-3.4039383, -0.79469585, -0.5940914, -0.41280642, 3.0647616, -1.7343894, 0.90226215, -1.5959243, -3.0348356, 286.45, -1.77, 51.15)
+
+[node name="Spear (22)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(2.9781935, -1.7423123, 0.8160818, 1.3271122, 2.9492104, 1.4533445, -1.3929877, -0.9153061, 3.1293893, 278.74, -4.91, 58.47)
+
+[node name="Spear (23)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-2.6027484, 1.1365706, 2.1225421, 0.3036235, 3.255672, -1.3710183, -2.3884704, -0.8246736, -2.4872472, 253.75, -2.56, 63.5)
+
+[node name="Spear (24)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-3.2587519, -0.6142828, 1.2547789, -0.39474496, 3.4595678, 0.66846603, -1.3401453, 0.47468626, -3.248071, 282.71, -2.62, 27.4)
+
+[node name="Spear (26)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(1.7600123, -2.8374221, 7.334153, -0.49091464, 7.461295, 3.0044162, -7.8485537, -1.1029749, 1.4567384, 260.5, -10.35, 53.58)
+
+[node name="Spear (30)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(7.0597687, -2.5151806, 12.928411, -4.582939, 13.282782, 5.086712, -12.347736, -6.3680315, 5.503803, 206, -5.1, 46.3)
+
+[node name="Spear (32)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(12.180705, -7.3617363, 0.4337105, -0.19881676, 0.50930613, 14.228629, -7.3718214, -12.177775, 0.33289048, 206.05339, 45.147766, 53.367107)
+
+[node name="Spear (33)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(21.230757, -8.798756, 39.699097, -18.172514, -42.11643, 0.38398972, 36.375763, -15.905019, -22.97859, 200.91748, 89.1, 108.64008)
+
+[node name="Spear (27)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(-3.0142214, -0.46055305, 7.459276, 1.185999, 7.911721, 0.9677389, -7.378774, 1.4597958, -2.8915606, 279, -8.2, 61.18)
+
+[node name="Soda Bottle (29)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-2.5497375, 4.2312613, 10.438764, -5.68979, -9.7207985, 2.5504704, 9.72099, -4.579852, 4.2308187, 408.9, -7.3, 140.4)
+
+[node name="Soda Bottle (28)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-28.85437, -10.650502, 38.728878, -15.010086, 47.090435, 1.7669048, -37.256626, -10.723406, -30.70645, 559.5, -46.8, 68)
+
+[node name="Soda Bottle (23)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-15.422399, -19.7004, -42.661198, -38.974964, -19.719036, 23.195803, -26.249481, 40.853237, -9.376095, 676.2, 154.4, 35.6)
+
+[node name="Soda Bottle (32)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-2.8307087, -13.12748, -15.628935, 4.615422, -15.781517, 12.419697, -19.881958, -1.7945051, 5.1083045, 445.9, 61, -158.1)
+
+[node name="Soda Bottle (9)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(6.379524, -0.7702377, 19.57845, 17.488281, -9.061182, -6.0549335, 8.835659, 18.490784, -2.1516016, 518.5, 127.9, -139)
+
+[node name="Soda Bottle (31)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(6.379519, -0.77022725, 19.578451, -19.582384, 0.44588616, 6.3983407, -0.6628137, -20.58677, -0.59392154, 601.1, -4, -48.2)
+
+[node name="Palm Tree 4 (1)" parent="Level Geometry/Geo" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(13.870508, -2.490457e-07, 11.760859, -1.7193521e-06, 18.1854, 2.4128583e-06, -11.760859, -2.9522928e-06, 13.870508, 243.7, 0.3, 138.2)
+
+[node name="Palm Tree 4 (5)" parent="Level Geometry/Geo" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(23.884018, -1.1766405, 16.131712, 1.7536589, 28.787865, -0.49662787, -16.07922, 1.3919326, 23.907824, 378.4, -21.7, -104.9)
+
+[node name="Palm Tree 1 (1)" parent="Level Geometry/Geo" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-20.760197, 6.9697845e-13, 25.2608, -4.1155067e-06, 32.697, -3.3822664e-06, -25.2608, -5.3270182e-06, -20.760197, 351.0249, -19, 128.31024)
+
+[node name="Spear (28)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(9.377246, -0.31782222, -15.8965645, 12.588561, 11.421837, 7.1975245, 9.71236, -14.497422, 6.019087, 338.14252, -6.57, 183.03436)
+
+[node name="Spear (29)" parent="Level Geometry/Geo" instance=ExtResource("22_aq8ww")]
+transform = Transform3D(2.685994, 2.1601534, -18.134329, -14.699333, 11.132834, -0.85107535, 10.837424, 14.564628, 3.3401344, 327.65002, -6.5700006, 136.2)
+
+[node name="Coconut (10)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(1.5870893, 55.570835, 13.826196, 40.838173, 8.5977955, -39.244385, -40.143803, 10.943511, -39.37658, 420.3, 38.4, 98.9)
+
+[node name="Coconut (11)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(44.56811, 2.8380392, 55.146626, -5.348523, 70.75629, 0.68117505, -54.95997, -4.584347, 44.65319, 572.9, 76.7, -50.1)
+
+[node name="Coconut (26)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-13.656364, 24.844381, -8.388754, 7.9803114, -5.0718946, -28.012518, -24.978573, -15.203398, -4.363291, 498.6, 36.1, -70.2)
+
+[node name="Coconut (28)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(9.1124935, 3.8436453, 0.962446, -3.8555005, 9.157934, -0.06923245, -0.91379917, -0.3099459, 9.8897085, 492.1, 65.3, -5.3)
+
+[node name="Coconut (29)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-2.6474555, 11.323334, 2.3729913, 9.476617, 3.5188656, -6.218462, -6.6364646, 0.5076377, -9.826373, 483.12, 57.1, -21.28)
+
+[node name="Coconut (27)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(18.666498, -27.816761, 9.39729, -13.33433, 1.8895963, 32.08028, -26.158682, -20.812899, -9.647066, 536.7, 18.3, -54.6)
+
+[node name="Coconut (12)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-17.796562, 67.120766, 14.615321, 0.6266757, 15.255839, -69.29928, -68.6907, -17.250639, -4.4188027, 513.9, 21, -145.9)
+
+[node name="Coconut (25)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-53.928574, 7.019871, 12.968297, 1.7537848, 51.871346, -20.785395, -14.641706, -19.642548, -50.254715, 550.3, 73.8, -119.7)
+
+[node name="Palm Tree 2 (1)" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-40.93441, -1.0019873e-12, -6.180924e-06, 5.0130197e-15, 40.93441, -6.6690613e-06, 6.180924e-06, -6.6690613e-06, -40.93441, 273.40002, -19, 191.7)
+
+[node name="Palm Tree 3 (1)" parent="Level Geometry/Geo" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(7.6673303, 0.8029712, -20.30723, -2.8532302, 21.531939, -0.22588682, 20.121815, 2.747214, 7.7059517, 252, -19, 181.6)
+
+[node name="Coconut (14)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(34.39643, 0, 0, 0, 34.39643, 0, 0, 0, 34.39643, 451.3, 30.2, 126.6)
+
+[node name="Coconut (16)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-54.116745, -0.90401113, -15.601673, 15.580525, 1.2515455, -54.115917, 1.2151593, -56.306908, -0.95236015, 476.09998, 74.4, 77)
+
+[node name="Coconut (17)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(-36.83104, -41.783325, -8.395159, 9.503057, 2.7647138, -55.45177, 41.54536, -37.674404, 5.241473, 389.44128, 102.005714, 14.072643)
+
+[node name="Palm Tree 3 (2)" parent="Level Geometry/Geo" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(41.772587, -11.518298, -17.811363, 8.140233, 45.0331, -10.031016, 19.587048, 5.84923, 42.154465, 526.2, -19, 136.4)
+
+[node name="Palm Tree 4 (2)" parent="Level Geometry/Geo" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(-19.235151, -0.40124616, 13.63605, 1.7325467, 23.308723, 3.1298168, -13.531486, 3.5547817, -18.983055, 361.7, -19.000015, 61.5)
+
+[node name="Palm Tree 2 (2)" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-52.090355, -2.085047, -3.1379657, -2.33714, 52.00121, 4.243985, 2.9550004, 4.3733525, -51.95903, 426.5, -19, 55)
+
+[node name="Palm Tree 2 (3)" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-27.811531, -4.836054, 43.94008, -2.3371408, 52.00121, 4.2439885, -44.14358, 0.29367647, -27.908014, 390.8, -19, -50.5)
+
+[node name="Palm Tree 2 (5)" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-3.6799946, -1.548117, 16.23504, -0.25014302, 16.646624, 1.5306644, -16.306767, 0.09401166, -3.6872885, 511.4, 3.5, -30.8)
+
+[node name="Palm Tree 2 (6)" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-7.7347784, 0.06558591, 10.294441, -1.310502, 12.7653, -1.06598, -10.210896, -1.6880246, -7.661253, 445.4, 3.6, 49.8)
+
+[node name="Palm Tree 4 (3)" parent="Level Geometry/Geo" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(2.4893568, -2.9871994e-06, 29.962769, -3.6214462e-06, 30.066002, 3.298367e-06, -29.962769, -3.882105e-06, 2.4893568, 494.2, -19, 226)
+
+[node name="Palm Tree 1 (2)" parent="Level Geometry/Geo" instance=ExtResource("15_lxrer")]
+transform = Transform3D(32.013214, -1.7221696e-06, -10.570564, 4.79094e-13, 33.713238, -5.4926027e-06, 10.570564, 5.2156315e-06, 32.013214, 388.83148, -19, 289.82867)
+
+[node name="Palm Tree 3 (3)" parent="Level Geometry/Geo" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(24.5352, -1.5779248e-06, -9.68521, -9.371217e-13, 26.37763, -4.297474e-06, 9.68521, 3.997304e-06, 24.5352, 470.98248, -19, 211.25656)
+
+[node name="Palm Tree 4 (4)" parent="Level Geometry/Geo" instance=ExtResource("18_kpa4w")]
+transform = Transform3D(-7.9641323, -3.5015228e-06, 23.173622, -2.9514993e-06, 24.503965, 2.6881878e-06, -23.173622, -1.9175613e-06, -7.9641323, 249.5, -19, 316.3)
+
+[node name="Palm Tree 3 (4)" parent="Level Geometry/Geo" instance=ExtResource("16_8j6p8")]
+transform = Transform3D(-20.749243, 3.7001932e-06, 22.71158, -1.9672428e-12, 30.762754, -5.0118997e-06, -22.71158, -3.3804902e-06, -20.749243, 509.0692, -19, 292.38733)
+
+[node name="Coconut (18)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(4.2890573, 16.816782, -6.0521455, -1.1794121, 6.4767222, 17.160702, 17.833721, -3.61615, 2.5904598, 464.90002, 27.136723, 297.5)
+
+[node name="Coconut (19)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(11.212035, -30.219461, 3.8314354, 30.377594, 11.395006, 0.9803839, -2.257779, 3.2470732, 32.217457, 515.5, 0.3, 258.2)
+
+[node name="Coconut (20)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(8.274212, -38.871025, -17.345755, 2.3409643, 18.059244, -39.35325, 42.5012, 6.5727806, 5.5444794, 350.09998, 22.9, 310.4)
+
+[node name="Coconut (21)" parent="Level Geometry/Geo" instance=ExtResource("14_4dlxh")]
+transform = Transform3D(82.71818, -22.789923, 1.1692829, 20.550505, 72.48267, -41.07291, 9.920916, 39.873882, 75.33057, 419.7, 10.3, 389.8)
+
+[node name="Lantern (4)" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.5, 40.18, -207.9)
+
+[node name="Lantern (6)" parent="Level Geometry/Geo" instance=ExtResource("24_1them")]
+transform = Transform3D(0.2342202, 0, 0.9721836, 0, 1, 0, -0.9721836, 0, 0.2342202, 208.46, 21.87, -79.44)
+
+[node name="Plank (9)" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
+transform = Transform3D(2.1855152, -0.053795464, 0.08731388, 0.0037570728, 0.8599622, 0.5103549, -0.22529374, -0.5075146, 0.85551983, 253.19, 2.42, -7.67)
+
+[node name="MeshCollider" type="StaticBody3D" parent="Level Geometry/Geo/Plank (9)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Geometry/Geo/Plank (9)/MeshCollider"]
+shape = SubResource("ConvexPolygonShape3D_emrlx")
+
+[node name="Soda Bottle (27)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3, 0, 0, 0, -3, 1.7619124e-05, 0, -1.7619124e-05, -3, 103.17261, -3.03, 21.91)
+
+[node name="Soda Bottle (20)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(2, 0, 0, 0, -2, 1.1746083e-05, 0, -1.1746083e-05, -2, 74.11, -2.54, 3.41)
+
+[node name="Soda Bottle (30)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-2.1935217, -1.3638566, -1.5258955, 1.9685218, -2.017864, -1.0262294, -0.5598065, -1.751605, 2.3703368, 110.8, 1.78, -39.5)
+
+[node name="Soda Bottle (26)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.7917498, 0, 0, 0, -1.7917501, 2.7054674e-07, 0, -2.7054674e-07, -1.7917501, 92, -2, 21.91)
+
+[node name="Soda Bottle (33)" parent="Level Geometry/Geo" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(1.7917498, 0, 0, 0, -1.7917501, 2.7054674e-07, 0, -2.7054674e-07, -1.7917501, 97, -1, 21.91)
+
+[node name="Mini Challenge Segment" type="Node3D" parent="Level Geometry/Geo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.7901, 21.73, -35.11002)
+
+[node name="Soda Bottle (Lid Pop Platform)" parent="Level Geometry/Geo/Mini Challenge Segment" instance=ExtResource("20_3h5ku")]
+transform = Transform3D(8.761883e-06, 0, 3, 0, 3, 0, -3, 0, 8.761883e-06, -0.48010254, -27.539999, 33.280018)
+
+[node name="Soda Bottle" parent="Level Geometry/Geo/Mini Challenge Segment" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(8.714203e-06, 1.3158081e-12, -3, 4.5298742e-07, -3, 0, -3, -4.5298742e-07, -8.714203e-06, -7.6293945e-05, -5.84, 28.050018)
+
+[node name="Soda Bottle (1)" parent="Level Geometry/Geo/Mini Challenge Segment" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(8.714203e-06, 1.3158081e-12, -3, 4.5298742e-07, -3, 0, -3, -4.5298742e-07, -8.714203e-06, 0, -7.9399986, 0)
+
+[node name="Soda Bottle (3)" parent="Level Geometry/Geo/Mini Challenge Segment" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(-0.22184405, 2.451643, -1.7147102, 2.596249e-07, -1.7194179, -2.4583738, -2.9917865, -0.18179202, 0.12714733, 9.459953, -2.8500004, 18.08003)
+
+[node name="Soda Bottle (2)" parent="Level Geometry/Geo/Mini Challenge Segment" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(0.0068687503, -2.5319748, -1.6090543, 2.429611e-07, -1.6090586, 2.5319815, -2.9999921, -0.0057973135, -0.0036838693, -9.430038, -2.0599995, 10.859982)
+
+[node name="Soda Bottle (4)" parent="Level Geometry/Geo/Mini Challenge Segment" instance=ExtResource("19_d6n1m")]
+transform = Transform3D(3, 0, 0, 0, -2.156648, -2.0853944, 0, 2.0853944, -2.156648, -0.11009979, -14.459999, 16.570019)
+
+[node name="Life Saver" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(20.471157, -2.5967445, -1.13507305e-07, 0, -9.01993e-07, 20.635195, -2.5967448, -20.471155, -8.948226e-07, 260.13, 9.58, 12.66)
+
+[node name="Life Saver (1)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(17.775421, 6.9655757, 7.8311167, -9.991706, 6.6077056, 16.802238, 3.1640875, -18.265547, 9.064743, 251.84, 3.95, 11.23)
+
+[node name="Life Saver (5)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(20.635195, 0, 0, 0, 20.305374, -3.6746342, 0, 3.6746342, 20.305374, 206.26, 0.15, 26.12)
+
+[node name="Life Saver (2)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(20.635195, 0, 0, 0, 20.635195, 0, 0, 0, 20.635195, 270.71, 0.96, 8.59)
+
+[node name="Life Saver (3)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(15.772931, 0, -13.305111, 0, 20.635195, 0, 13.305111, 0, 15.772931, 270.56, 2.51, 8.67)
+
+[node name="Life Saver (4)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(20.242594, 0, 4.0060797, 0, 20.635195, 0, -4.0060797, 0, 20.242594, 270.56, 4.04, 8.67)
+
+[node name="Life Saver (6)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(-52.13092, 14.097208, -53.072193, -54.72947, -19.30928, 48.629814, -4.480398, 71.84317, 23.484158, 189.47, 16.66, -10.89)
+
+[node name="Life Saver (17)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(-65.52968, -30.178787, 22.98095, 37.87233, -49.46663, 43.032093, -2.1377861, 48.7372, 57.906277, 196.6, 10.12, -14.05)
+
+[node name="Life Saver (7)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(0.00022734288, -77.41913, 0, 77.41913, 0.00022734288, 0, 0, 0, 77.41913, 174.11, 2.8086, 18.51)
+
+[node name="Life Saver (18)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(342.35126, 231.79044, 129.65254, -185.60243, 57.506252, 387.27997, 189.96927, -361.53445, 144.72545, 124.5, -26.7, 131.2)
+
+[node name="Life Saver (8)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(0.00021710977, -77.045654, 7.59527, 77.41913, 0.0002181138, -4.909517e-07, -2.090966e-05, 7.59527, 77.045654, 108.01, 2.8086, 22.26)
+
+[node name="Life Saver (9)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(80.3389, 0, 0, 0, 80.3389, 0, 0, 0, 80.3389, 74.02, -2, 22)
+
+[node name="Life Saver (10)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(-19.025019, 7.988696, -0.2015245, -0.5215747, -0.72206384, 20.615961, 7.974198, 19.01238, 0.8676424, 238.18076, 11.01, 1.89)
+
+[node name="Life Saver (11)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(20.635195, 0, 0, 0, 20.635195, 0, 0, 0, 20.635195, 242.5, 16.98575, 4.64)
+
+[node name="Life Saver (12)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(20.635195, 0, 0, 0, 20.635195, 0, 0, 0, 20.635195, 254.72174, 16.89568, 0.8923558)
+
+[node name="Life Saver (13)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(17.963985, 0, 10.154141, 0, 20.635195, 0, -10.154141, 0, 17.963985, 254.57, 18.47, 0.72)
+
+[node name="Life Saver (25)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(17.963985, 0, 10.154141, 0, 20.635195, 0, -10.154141, 0, 17.963985, 261.7, 18, 42.4)
+
+[node name="Life Saver (32)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(17.963985, 0, 10.154141, 0, 20.635195, 0, -10.154141, 0, 17.963985, 253.5, 22, 56.3)
+
+[node name="Life Saver (33)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(17.963985, 0, 10.154141, 0, 20.635195, 0, -10.154141, 0, 17.963985, 232.9, 22, 49.6)
+
+[node name="Life Saver (27)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(17.963985, 0, 10.154141, 0, 20.635195, 0, -10.154141, 0, 17.963985, 250.58, 18, 27.66)
+
+[node name="Life Saver (24)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(47.880287, 0, 27.064331, 0, 55, 0, -27.064331, 0, 47.880287, 266.2, 15, 28.1)
+
+[node name="Life Saver (26)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(47.880287, 0, 27.064331, 0, 55, 0, -27.064331, 0, 47.880287, 246.1, 19, 42.6)
+
+[node name="Life Saver (28)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(47.880287, 0, 27.064331, 0, 55, 0, -27.064331, 0, 47.880287, 239.9, 23, 63.9)
+
+[node name="Life Saver (29)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(39.17478, 0, 22.143543, 0, 45, 0, -22.143543, 0, 39.17478, 280.71, 36, 65.97)
+
+[node name="Life Saver (30)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(39.17478, 0, 22.143543, 0, 45, 0, -22.143543, 0, 39.17478, 277.4, 34, 47.2)
+
+[node name="Life Saver (31)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(39.17478, 0, 22.143543, 0, 45, 0, -22.143543, 0, 39.17478, 281.3, 32, 29.6)
+
+[node name="Life Saver (14)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(259.42932, 67.38906, 12.267333, 13.709366, -98.16659, 249.34055, 67.110565, -240.45245, -98.35719, 278.8, -12.9, 101.9)
+
+[node name="Life Saver (15)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(-52.289173, 0, -62.845467, 0, 81.75396, 0, 62.845467, 0, -52.289173, 134.15, 30.681278, -186.44)
+
+[node name="Life Saver (16)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(-12.6371, 5.6693816, 8.290862, -2.9557264, 10.635733, -11.778009, -9.599164, -10.738524, -7.288123, 168.7, 11.46, -99.31)
+
+[node name="Life Saver (19)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(65.93467, -4.630088, -3.4439523, 3.9450338e-06, 39.501694, -53.106457, 5.770487, 52.90423, 39.351284, 173.2, 16.8, -142.2)
+
+[node name="Palm Tree 1 (3)" parent="Level Geometry/Geo" instance=ExtResource("15_lxrer")]
+transform = Transform3D(-23.326864, 1.7405238e-13, 7.4763904, -1.2180584e-06, 24.495695, -3.8004287e-06, -7.4763904, -3.990855e-06, -23.326864, 333.8, 5.8, -4.4)
+
+[node name="Bubble" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 299.5, 25.6, -8.5)
+
+[node name="Bubble (17)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 299.5, 27.55, -19.5)
+
+[node name="Bubble (1)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-6.5890126, 0, 3.6348386, 0, 7.5251, 0, -3.6348386, 0, -6.5890126, 313.1, 25.1, -19)
+
+[node name="Bubble (18)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-6.5890126, 0, 3.6348386, 0, 7.5251, 0, -3.6348386, 0, -6.5890126, 342, 38.84, -33.3)
+
+[node name="Bubble (2)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 314.4, 25.8, -35.8)
+
+[node name="Bubble (19)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 308.82, 38.22, -29.17)
+
+[node name="Bubble (20)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 322.6, 47.23, -46.6)
+
+[node name="Bubble (21)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 352.4, 44.95, -46.44)
+
+[node name="Bubble (40)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 339.7, 42.91, -41.8)
+
+[node name="Bubble (41)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 347.2, 42.57, -22.8)
+
+[node name="Bubble (42)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 325.57, 39, -29.97)
+
+[node name="Bubble (43)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 315.9, 33.7, -26.4)
+
+[node name="Bubble (44)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 308.7, 30.46, -13.7)
+
+[node name="Bubble (45)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 307.8, 32.31, -5.6)
+
+[node name="Bubble (46)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 285.85, 36.11, -14.23)
+
+[node name="Bubble (47)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 303.5, 27.74, -37.4)
+
+[node name="Bubble (48)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 292.3, 38.75, -29.2)
+
+[node name="Bubble (49)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 290.2, 36.11, -8.4)
+
+[node name="Bubble (50)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 279.1, 36.11, -8.72)
+
+[node name="Bubble (51)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 283.22, 35.94, -21.95)
+
+[node name="Bubble (22)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 361.8, 51.1, -28.1)
+
+[node name="Bubble (23)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 361.8, 47.67, -52.5)
+
+[node name="Bubble (24)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 379.97, 51.75, -65.15)
+
+[node name="Bubble (25)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 392.6, 51.75, -57.9)
+
+[node name="Bubble (26)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 375.99, 44.319996, -37.36)
+
+[node name="Bubble (27)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 407.8, 49.6, -50.3)
+
+[node name="Bubble (28)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 408.8, 44.8, -41.8)
+
+[node name="Bubble (29)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 433.3, 44.7, -49.8)
+
+[node name="Bubble (30)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 441.11, 43.22, -35.800003)
+
+[node name="Bubble (31)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 431.3, 47.29, -11.4)
+
+[node name="Bubble (32)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 444.5, 49.09, -19)
+
+[node name="Bubble (33)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 428.3, 40.1, -23.1)
+
+[node name="Bubble (3)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 331.8, 29.89, -40.7)
+
+[node name="Bubble (4)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 330.3, 28, -22.6)
+
+[node name="Bubble (5)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 319.6, 41.3, -53.2)
+
+[node name="Bubble (6)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-7.4403625, 0, 4.104487, 0, 8.4974, 0, -4.104487, 0, -7.4403625, 344.2, 35.3, -60.4)
+
+[node name="Bubble (7)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-6.5890126, 0, 3.6348386, 0, 7.5251, 0, -3.6348386, 0, -6.5890126, 353.7, 44.3, -38.5)
+
+[node name="Bubble (39)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-6.5890126, 0, 3.6348386, 0, 7.5251, 0, -3.6348386, 0, -6.5890126, 362, 43.89, -31.6)
+
+[node name="Bubble (8)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 374.5, 48.2, -54.8)
+
+[node name="Bubble (9)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 364, 43.1, -67.9)
+
+[node name="Bubble (10)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 388.8, 44.2, -34.1)
+
+[node name="Bubble (34)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 377.4, 43.5, -58.3)
+
+[node name="Bubble (35)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 401.99, 49.319996, -37.57)
+
+[node name="Bubble (36)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-10.149133, 0, 5.5987844, 0, 11.591001, 0, -5.5987844, 0, -10.149133, 421.8, 45.8, -46.9)
+
+[node name="Bubble (11)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-7.4403625, 0, 4.104487, 0, 8.4974, 0, -4.104487, 0, -7.4403625, 394.2, 44.530003, -66.3)
+
+[node name="Bubble (12)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-6.5890126, 0, 3.6348386, 0, 7.5251, 0, -3.6348386, 0, -6.5890126, 406.3, 40.980003, -46.2)
+
+[node name="Bubble (13)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 410.6, 37.780003, -63.5)
+
+[node name="Bubble (37)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 416.3, 41.9, -53.1)
+
+[node name="Bubble (38)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 398.1, 47.199997, -43.4)
+
+[node name="Bubble (14)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-8.756044, 0, 4.830286, 0, 10, 0, -4.830286, 0, -8.756044, 420.9, 40, -32.3)
+
+[node name="Bubble (15)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-4.5768733, 0, 2.524839, 0, 5.2271004, 0, -2.524839, 0, -4.5768733, 404.1, 37.88, -28.7)
+
+[node name="Bubble (16)" parent="Level Geometry/Geo" instance=ExtResource("26_c57cw")]
+transform = Transform3D(-6.5890126, 0, 3.6348386, 0, 7.5251, 0, -3.6348386, 0, -6.5890126, 435.90997, 48.100006, -24.6)
+
+[node name="Life Saver (20)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(165.92348, 0, 0, 0, 165.92348, 0, 0, 0, 165.92348, 479.6, 32.1, 0.9)
+
+[node name="Life Saver (21)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(77.16408, 0, -77.16406, 0, 109.12647, 0, 77.16406, 0, 77.16408, 479.6, 37.6, 0.9)
+
+[node name="Life Saver (22)" parent="Level Geometry/Geo" instance=ExtResource("25_o5oh8")]
+transform = Transform3D(72.47416, 0, 0, 0, 72.47416, 0, 0, 0, 72.47416, 479.6, 41.800003, 0.9)
+
+[node name="Palm Tree 2 (4)" parent="Level Geometry/Geo" instance=ExtResource("17_x7t32")]
+transform = Transform3D(-36.287766, -8.882473e-13, -5.4793004e-06, 4.44397e-15, 36.287766, -5.912027e-06, 5.4793004e-06, -5.912027e-06, -36.287766, 478.9, 9.6, 0.2)
+
+[node name="Surf Board" parent="Level Geometry/Geo" instance=ExtResource("27_7oqrd")]
+transform = Transform3D(-1.8120813, 0, 0.84638125, 0, 2, 0, -0.84638125, 0, -1.8120813, 289.49, 11.44, 18.89)
+
+[node name="Surf Board (1)" parent="Level Geometry/Geo" instance=ExtResource("27_7oqrd")]
+transform = Transform3D(-1.8120815, 1.0259976e-06, -0.846381, -3.019916e-07, -2, -1.7778774e-06, -0.846381, -1.4830293e-06, 1.8120815, 291.48, 9.79, 14.63)
+
+[node name="Surf Board (2)" parent="Level Geometry/Geo" instance=ExtResource("27_7oqrd")]
+transform = Transform3D(1.8287721, 0.06633763, -0.80696464, -1.1175871e-08, 1.9932761, 0.16385998, 0.8096868, -0.14983128, 1.822624, 275.98, 27.65, -2.33)
+
+[node name="Surf Board (3)" parent="Level Geometry/Geo" instance=ExtResource("27_7oqrd")]
+transform = Transform3D(-0.06522608, 1.8460523, -0.76670533, -1.8670701, 0.21774137, 0.68310934, 0.71399945, 0.73802453, 1.716253, 277.41, 19.12, 0.55)
+
+[node name="Draw XXL Lines Manager" type="Node3D" parent="."]

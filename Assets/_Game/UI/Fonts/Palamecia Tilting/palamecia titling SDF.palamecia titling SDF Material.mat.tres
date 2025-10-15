@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c3o7nx4qmyv35"]
+
+[ext_resource type="Texture2D" uid="uid://x6yj1ibdj166" path="res://Assets/_Game/UI/Fonts/Palamecia Tilting/palamecia titling SDF.palamecia titling SDF Atlas.tex" id="1_5n44u"]
+
+[resource]
+resource_name = "palamecia titling SDF Material"
+depth_draw_mode = 1
+albedo_texture = ExtResource("1_5n44u")
+uv1_scale = Vector3(1, 1, 0)

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://337ca6obqwq6"]
+
+[ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="1_ii0x3"]
+[ext_resource type="Texture2D" uid="uid://d378wc575fxr6" path="res://materials/Gradients_Beach.png" id="1_mq25q"]
+[ext_resource type="Texture2D" uid="uid://dv33tmh1u7y7p" path="res://materials/gradient_lighting_beach.tres" id="3_krarm"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ii0x3")
+shader_parameter/albedo = ExtResource("1_mq25q")
+shader_parameter/main_light_gradient = ExtResource("3_krarm")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/vertex_color_intensity = 0.0

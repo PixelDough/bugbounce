@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b13f8s3rr4fih"]
+
+[ext_resource type="PackedScene" uid="uid://c061mxou2he48" path="res://models/level_assets/beach/beach1_island2.glb" id="1_neq5s"]
+
+[node name="beach_island_02" instance=ExtResource("1_neq5s")]

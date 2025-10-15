@@ -1,0 +1,11 @@
+[gd_resource type="Skin" format=3 uid="uid://ds7rdibwswmyy"]
+
+[resource]
+resource_name = "Skin"
+bind_count = 2
+bind/0/name = &"Pole"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -4.967054e-08, -6.2088175e-09, 0)
+bind/1/name = &"Flag"
+bind/1/bone = -1
+bind/1/pose = Transform3D(0, -1, 7.54979e-08, 0, -7.54979e-08, -1, 1, 0, 0, 3.1971803, 2.3517158e-07, -4.967054e-08)
