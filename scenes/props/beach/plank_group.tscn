@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://54lya4c6ewfx"]
+
+[ext_resource type="PackedScene" uid="uid://cqpt6j2w6s2ht" path="res://scenes/props/beach/plank.tscn" id="1_ehv7n"]
+
+[node name="PlankGroup" type="Node3D"]
+
+[node name="plank1" parent="." instance=ExtResource("1_ehv7n")]
+transform = Transform3D(-0.9999833, 9.521571e-08, 0.0057789083, 9.395962e-08, 1, -2.1762986e-07, -0.0057789083, -2.1708324e-07, -0.9999833, 1.5545113, 0, 0.19844317)
+
+[node name="plank2" parent="." instance=ExtResource("1_ehv7n")]
+transform = Transform3D(1, 1.9999673e-07, 7.927053e-06, -1.6997046e-07, 0.99999285, -0.0037876412, -7.927753e-06, 0.0037876412, 0.99999285, 0.53039366, 0, -0.00033734564)
+
+[node name="plank3" parent="." instance=ExtResource("1_ehv7n")]
+transform = Transform3D(0.99999285, -2.8726177e-05, 0.0037777817, -8.66228e-07, -0.9999728, -0.00737448, 0.0037778907, 0.007374424, -0.99996567, -0.5111228, 0.029999733, -0.07569274)
+
+[node name="plank4" parent="." instance=ExtResource("1_ehv7n")]
+transform = Transform3D(-0.9999854, -1.1055037e-06, 0.0054063597, 1.1046701e-06, -1, -1.5716162e-07, 0.0054063597, -1.511871e-07, 0.9999854, -1.5576911, 0, 0.1961032)

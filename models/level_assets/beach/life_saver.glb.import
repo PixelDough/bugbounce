@@ -44,6 +44,14 @@ _subresources={
 "use_external/fallback_path": "res://materials/Mat_BeachGradients_Smooth.material",
 "use_external/path": "uid://d3k3qn3n8dv57"
 }
+},
+"nodes": {
+"PATH:Life Saver_LOD0": {
+"mesh_instance/visibility_range_end": 200.0
+},
+"PATH:Life Saver_LOD1": {
+"mesh_instance/visibility_range_begin": 200.0
+}
 }
 }
 gltf/naming_version=2

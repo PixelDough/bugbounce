@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqpt6j2w6s2ht"]
+
+[ext_resource type="PackedScene" uid="uid://dcvs4stjfbpxj" path="res://models/level_assets/beach/plank.glb" id="1_tudv4"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tudv4"]
+points = PackedVector3Array(0.5, 0.09998073, -3.518952, 0.4964761, 0.10000031, 4.057831, 0.5, -0.10000031, -3.518952, 0.49931479, 0.09998073, -4.0253897, 0.3052075, 0.10000031, 4.035674, 0.4964761, -0.10000031, 4.057831, -0.496574, 0.10000031, 3.9407172, 0.49931479, -0.10000031, -4.0253897, 0.25283867, 0.09998073, -4.0135202, 0.3052075, -0.10000031, 4.035674, 0.25137043, 0.10000031, 4.0293436, -0.496574, -0.10000031, 3.9407172, -0.4994127, 0.09998073, -3.974746, -0.5, 0.09998073, -3.518952, 0.25283867, -0.10000031, -4.0135202, 0.25137043, -0.10000031, 4.0293436, -0.5, -0.10000031, -3.518952, -0.4994127, -0.10000031, -3.974746)
+
+[node name="plank" instance=ExtResource("1_tudv4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("ConvexPolygonShape3D_tudv4")

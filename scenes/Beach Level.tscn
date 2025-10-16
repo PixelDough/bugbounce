@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://balhbsi173js3" path="res://Assets/_Game/Content/Level Features/_Prefabs/Binocular Stand.prefab.scn" id="6_bwdgy"]
 [ext_resource type="PackedScene" uid="uid://b13f8s3rr4fih" path="res://scenes/props/beach/beach_island_02.tscn" id="7_7w3p2"]
 [ext_resource type="PackedScene" uid="uid://dykke75jbg83v" path="res://scenes/props/beach/beach_island_01.tscn" id="8_nm6a2"]
-[ext_resource type="PackedScene" uid="uid://doqd3aup6xxsl" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank Group.prefab.scn" id="11_afqjr"]
+[ext_resource type="PackedScene" uid="uid://54lya4c6ewfx" path="res://scenes/props/beach/plank_group.tscn" id="11_afqjr"]
 [ext_resource type="PackedScene" uid="uid://bhladmbjnqsp4" path="res://scenes/props/beach/banana.tscn" id="12_r17ul"]
 [ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://Assets/StylizedWater2/Prefabs/StylizedWater2_Ocean.prefab.scn" id="13_1xb5j"]
 [ext_resource type="PackedScene" uid="uid://bqlvp015fk45j" path="res://scenes/props/beach/coconut.tscn" id="14_4dlxh"]
@@ -18,12 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://ccky7ndrj7nrs" path="res://scenes/props/beach/tree_palm_04.tscn" id="18_kpa4w"]
 [ext_resource type="PackedScene" uid="uid://docu87ry2vgrw" path="res://scenes/props/beach/sodabottle.tscn" id="19_d6n1m"]
 [ext_resource type="PackedScene" uid="uid://tvegbwb18n10" path="res://scenes/props/beach/sodabottle_lidpop.tscn" id="20_3h5ku"]
-[ext_resource type="PackedScene" uid="uid://db8dhqgrf0ku7" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank.prefab.scn" id="21_bpsff"]
+[ext_resource type="PackedScene" uid="uid://cqpt6j2w6s2ht" path="res://scenes/props/beach/plank.tscn" id="21_bpsff"]
 [ext_resource type="PackedScene" uid="uid://1opymiqb7w85" path="res://scenes/props/beach/spear.tscn" id="22_aq8ww"]
 [ext_resource type="PackedScene" uid="uid://b5w7281e4ysj3" path="res://scenes/props/beach/lantern.tscn" id="24_1them"]
 [ext_resource type="PackedScene" uid="uid://dwwbtdfc8wwc8" path="res://scenes/props/beach/life_saver.tscn" id="25_o5oh8"]
 [ext_resource type="PackedScene" uid="uid://dc46nnspeewgv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Bubble.prefab.scn" id="26_c57cw"]
-[ext_resource type="PackedScene" uid="uid://dbqi0a7x51wi5" path="res://Assets/_Game/Content/Levels/Beach/_Props/Surf Board.prefab.scn" id="27_7oqrd"]
+[ext_resource type="PackedScene" uid="uid://7jwnmpsrokmg" path="res://scenes/props/beach/surfboard.tscn" id="27_7oqrd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nm6a2"]
 panorama = ExtResource("1_7w3p2")
@@ -1105,7 +1105,7 @@ transform = Transform3D(0.9040756, -0.08070091, -0.41968387, 7.450581e-09, 0.982
 transform = Transform3D(0.9040756, -0.088025674, -0.41820893, 1.1175871e-08, 0.9785584, -0.20596942, 0.4273725, 0.18621194, 0.8846908, 287.02026, 4.1201205, 20.319399)
 
 [node name="Plank (8)" parent="Level Geometry/Geo" instance=ExtResource("21_bpsff")]
-transform = Transform3D(0.7660968, 0, 1.8663673, 0, 2, 0, -1.9891742, 0, 0.71879977, 284.57, 15.49, 18.25)
+transform = Transform3D(0.71879977, 0, 1.8663673, 0, 2, 0, -1.8663673, 0, 0.71879977, 284.57, 15.49, 18.25)
 
 [node name="Plank Group (46)" parent="Level Geometry/Geo" instance=ExtResource("11_afqjr")]
 transform = Transform3D(0.7483208, -0.6624516, -0.034261137, 0.12266967, 0.08744198, 0.988588, -0.65189576, -0.74398375, 0.14669734, 218.79, 0.71, 6.95)

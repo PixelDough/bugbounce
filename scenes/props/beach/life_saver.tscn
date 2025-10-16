@@ -7,12 +7,6 @@ data = PackedVector3Array(0.036399998, -0.0365, 0.1358, 0.0416, -0.04, 0.1551999
 
 [node name="life_saver" instance=ExtResource("1_ornap")]
 
-[node name="Life Saver_LOD0" parent="." index="0"]
-visibility_range_end = 100.0
-
-[node name="Life Saver_LOD1" parent="." index="1"]
-visibility_range_begin = 100.0
-
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." index="2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" index="0"]

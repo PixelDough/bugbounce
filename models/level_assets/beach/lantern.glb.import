@@ -41,8 +41,8 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://materials/Mat_BeachGradients.material",
-"use_external/path": "uid://2g1ddcqp4hux"
+"use_external/fallback_path": "res://materials/Mat_BeachGradients_Smooth.material",
+"use_external/path": "uid://d3k3qn3n8dv57"
 }
 }
 }

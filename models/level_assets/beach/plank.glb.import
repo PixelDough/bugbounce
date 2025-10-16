@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b51kgkr2jmqxn"
-path="res://.godot/imported/spear.glb-179806cb7138d4f26b4084b0cd196e30.scn"
+uid="uid://dcvs4stjfbpxj"
+path="res://.godot/imported/plank.glb-9d1af606e5a3323ff1dfc9bb489942ac.scn"
 
 [deps]
 
-source_file="res://models/level_assets/beach/spear.glb"
-dest_files=["res://.godot/imported/spear.glb-179806cb7138d4f26b4084b0cd196e30.scn"]
+source_file="res://models/level_assets/beach/plank.glb"
+dest_files=["res://.godot/imported/plank.glb-9d1af606e5a3323ff1dfc9bb489942ac.scn"]
 
 [params]
 
@@ -43,11 +43,6 @@ _subresources={
 "use_external/enabled": true,
 "use_external/fallback_path": "res://materials/Mat_BeachGradients.material",
 "use_external/path": "uid://2g1ddcqp4hux"
-},
-"Metal": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://materials/Mat_BeachGradients_Smooth.material",
-"use_external/path": "uid://d3k3qn3n8dv57"
 }
 }
 }

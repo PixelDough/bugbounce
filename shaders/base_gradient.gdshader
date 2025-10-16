@@ -14,10 +14,10 @@ uniform vec3 tint : source_color = vec3(1,1,1);
 uniform float vertex_color_intensity : hint_range(0.0, 1.0) = 1.0;
 
 group_uniforms NormalMap;
-uniform sampler2D normal_tex : hint_normal, filter_nearest;
+uniform sampler2D normal_tex : hint_normal, filter_linear;
 
 group_uniforms Matcap;
-uniform sampler2D matcap_tex : hint_default_transparent, source_color, filter_nearest;
+uniform sampler2D matcap_tex : hint_default_transparent, source_color, filter_linear;
 uniform float matcap_intensity = 1.0;
 uniform float matcap_power = 1.0;
 uniform float smoothness : hint_range(0, 1) = 0.0;
