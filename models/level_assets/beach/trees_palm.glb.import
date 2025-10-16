@@ -1,0 +1,107 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://7joue8ide3ba"
+path="res://.godot/imported/trees_palm.glb-c1d2ce96147e87aa21f3438853cc3dc5.scn"
+
+[deps]
+
+source_file="res://models/level_assets/beach/trees_palm.glb"
+dest_files=["res://.godot/imported/trees_palm.glb-c1d2ce96147e87aa21f3438853cc3dc5.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"Bark": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://materials/Mat_BeachGradients.material",
+"use_external/path": "uid://2g1ddcqp4hux"
+},
+"Leaf": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://materials/Mat_BeachGradients.material",
+"use_external/path": "uid://2g1ddcqp4hux"
+}
+},
+"meshes": {
+"trees_palm_tree_1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/beach/trees/trees_palm_tree_1.res",
+"save_to_file/path": "uid://btvmj8e8m7oms"
+},
+"trees_palm_tree_2": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/beach/trees/trees_palm_tree_2.res",
+"save_to_file/path": "uid://dm3rmsw52rlrc"
+},
+"trees_palm_tree_3": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/beach/trees/trees_palm_tree_3.res",
+"save_to_file/path": "uid://bng0gy6166mfb"
+},
+"trees_palm_tree_4": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/beach/trees/trees_palm_tree_4.res",
+"save_to_file/path": "uid://d2ewgn5jfrq5n"
+}
+},
+"nodes": {
+"PATH:Tree_1": {
+"generate/physics": true
+},
+"PATH:Tree_2": {
+"generate/physics": true
+},
+"PATH:Tree_3": {
+"generate/physics": true
+},
+"PATH:Tree_4": {
+"generate/physics": true
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

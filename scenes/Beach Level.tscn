@@ -12,15 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://bhladmbjnqsp4" path="res://scenes/props/beach/banana.tscn" id="12_r17ul"]
 [ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://Assets/StylizedWater2/Prefabs/StylizedWater2_Ocean.prefab.scn" id="13_1xb5j"]
 [ext_resource type="PackedScene" uid="uid://bqlvp015fk45j" path="res://scenes/props/beach/coconut.tscn" id="14_4dlxh"]
-[ext_resource type="PackedScene" uid="uid://bp2fdpi3r0l3l" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 1.prefab.scn" id="15_lxrer"]
-[ext_resource type="PackedScene" uid="uid://dol1s8jebats8" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 3.prefab.scn" id="16_8j6p8"]
-[ext_resource type="PackedScene" uid="uid://qugoy3od5o7w" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 2.prefab.scn" id="17_x7t32"]
-[ext_resource type="PackedScene" uid="uid://cy0nrxtk8nf67" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 4.prefab.scn" id="18_kpa4w"]
+[ext_resource type="PackedScene" uid="uid://ctwrxb4rbwhes" path="res://scenes/props/beach/tree_palm_01.tscn" id="15_lxrer"]
+[ext_resource type="PackedScene" uid="uid://dq5j5rmwvl28t" path="res://scenes/props/beach/tree_palm_03.tscn" id="16_8j6p8"]
+[ext_resource type="PackedScene" uid="uid://cac28yskacgve" path="res://scenes/props/beach/tree_palm_02.tscn" id="17_x7t32"]
+[ext_resource type="PackedScene" uid="uid://ccky7ndrj7nrs" path="res://scenes/props/beach/tree_palm_04.tscn" id="18_kpa4w"]
 [ext_resource type="PackedScene" uid="uid://docu87ry2vgrw" path="res://scenes/props/beach/sodabottle.tscn" id="19_d6n1m"]
 [ext_resource type="PackedScene" uid="uid://tvegbwb18n10" path="res://scenes/props/beach/sodabottle_lidpop.tscn" id="20_3h5ku"]
 [ext_resource type="PackedScene" uid="uid://db8dhqgrf0ku7" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank.prefab.scn" id="21_bpsff"]
-[ext_resource type="PackedScene" uid="uid://cl4i48qmw17qv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Spear.prefab.scn" id="22_aq8ww"]
-[ext_resource type="PackedScene" uid="uid://dig28exat2evx" path="res://Assets/_Game/Content/Levels/Beach/_Props/Lantern.prefab.scn" id="24_1them"]
+[ext_resource type="PackedScene" uid="uid://1opymiqb7w85" path="res://scenes/props/beach/spear.tscn" id="22_aq8ww"]
+[ext_resource type="PackedScene" uid="uid://b5w7281e4ysj3" path="res://scenes/props/beach/lantern.tscn" id="24_1them"]
 [ext_resource type="PackedScene" uid="uid://dwwbtdfc8wwc8" path="res://scenes/props/beach/life_saver.tscn" id="25_o5oh8"]
 [ext_resource type="PackedScene" uid="uid://dc46nnspeewgv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Bubble.prefab.scn" id="26_c57cw"]
 [ext_resource type="PackedScene" uid="uid://dbqi0a7x51wi5" path="res://Assets/_Game/Content/Levels/Beach/_Props/Surf Board.prefab.scn" id="27_7oqrd"]
@@ -456,10 +456,10 @@ transform = Transform3D(2.8336694, 3.5646244e-07, -0.9850471, -4.4649877e-07, 3,
 transform = Transform3D(2.9535882, 2.980923e-07, 0.5256582, -3.6134946e-07, 3, 3.2911248e-07, -0.5256582, -3.8733637e-07, 2.9535882, 205.09999, 0.5, 11.7)
 
 [node name="Palm Tree 4 (5)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
-transform = Transform3D(1.2082938, -1.5569907e-07, 2.7459106, -3.613497e-07, 3, 3.291126e-07, -2.7459106, -4.6329959e-07, 1.2082938, 186.79, 0.5, 25.55)
+transform = Transform3D(1.2082937, -1.5569904e-07, 2.7459106, -3.613497e-07, 3, 3.2911257e-07, -2.7459106, -4.6329959e-07, 1.2082937, 186.79, 0.5, 25.55)
 
 [node name="Palm Tree 4 (6)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
-transform = Transform3D(1.8587266, -3.2567885e-07, -0.7383324, 3.0647846e-07, 2, -1.10652024e-07, 0.7383324, -1.03055555e-08, 1.8587266, 183.76, 0.5, 24.84)
+transform = Transform3D(1.8587266, -3.2567885e-07, -0.7383324, 3.0647846e-07, 2, -1.10652024e-07, 0.7383324, -1.03055555e-08, 1.8587266, 180.92647, 0.5, 24.662548)
 
 [node name="Palm Tree 4 (7)" parent="Level Geometry/Geo/Palm Trees" instance=ExtResource("18_kpa4w")]
 transform = Transform3D(-0.5471126, 2.4703397e-07, 2.9496894, 4.5971814e-07, 3, -1.6597825e-07, -2.9496894, 4.21739e-07, -0.5471126, 192.06999, 0.5, 12.91)
