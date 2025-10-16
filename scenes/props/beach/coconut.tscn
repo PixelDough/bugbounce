@@ -17,7 +17,5 @@ visibility_range_end_margin = 5.0
 visibility_range_end = 15.0
 visibility_range_end_margin = 5.0
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 shape = SubResource("ConcavePolygonShape3D_x5op3")

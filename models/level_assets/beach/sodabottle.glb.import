@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjec5f41xwopv"
-path="res://.godot/imported/coconut.glb-ab97db113a2111cf260f84d53fea0ad8.scn"
+uid="uid://la0ge4drhpks"
+path="res://.godot/imported/sodabottle.glb-dfbe1991ddb8bcccbe81267337294825.scn"
 
 [deps]
 
-source_file="res://models/level_assets/beach/coconut.glb"
-dest_files=["res://.godot/imported/coconut.glb-ab97db113a2111cf260f84d53fea0ad8.scn"]
+source_file="res://models/level_assets/beach/sodabottle.glb"
+dest_files=["res://.godot/imported/sodabottle.glb-dfbe1991ddb8bcccbe81267337294825.scn"]
 
 [params]
 
-nodes/root_type="AnimatableBody3D"
+nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
@@ -39,18 +39,10 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"TT_checker_512x512_UV_GRID": {
+"Material": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://materials/Mat_BeachGradients.material",
 "use_external/path": "uid://2g1ddcqp4hux"
-}
-},
-"nodes": {
-"PATH:Coconut_LOD0": {
-"mesh_instance/visibility_range_end": 100.0
-},
-"PATH:Coconut_LOD1": {
-"mesh_instance/visibility_range_begin": 100.0
 }
 }
 }

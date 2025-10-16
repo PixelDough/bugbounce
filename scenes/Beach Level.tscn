@@ -16,12 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://dol1s8jebats8" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 3.prefab.scn" id="16_8j6p8"]
 [ext_resource type="PackedScene" uid="uid://qugoy3od5o7w" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 2.prefab.scn" id="17_x7t32"]
 [ext_resource type="PackedScene" uid="uid://cy0nrxtk8nf67" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 4.prefab.scn" id="18_kpa4w"]
-[ext_resource type="PackedScene" uid="uid://btgsl70o8w7xu" path="res://Assets/_Game/Content/Levels/Beach/_Props/Soda Bottle.prefab.scn" id="19_d6n1m"]
+[ext_resource type="PackedScene" uid="uid://docu87ry2vgrw" path="res://scenes/props/beach/sodabottle.tscn" id="19_d6n1m"]
 [ext_resource type="PackedScene" uid="uid://cvsw7r4skj7qq" path="res://Assets/_Game/Content/Levels/Beach/_Props/Soda Bottle (Lid Pop Platform).prefab.scn" id="20_3h5ku"]
 [ext_resource type="PackedScene" uid="uid://db8dhqgrf0ku7" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank.prefab.scn" id="21_bpsff"]
 [ext_resource type="PackedScene" uid="uid://cl4i48qmw17qv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Spear.prefab.scn" id="22_aq8ww"]
 [ext_resource type="PackedScene" uid="uid://dig28exat2evx" path="res://Assets/_Game/Content/Levels/Beach/_Props/Lantern.prefab.scn" id="24_1them"]
-[ext_resource type="PackedScene" uid="uid://68kqepjamfm8" path="res://Assets/_Game/Content/Levels/Beach/_Props/Life Saver.prefab.scn" id="25_o5oh8"]
+[ext_resource type="PackedScene" uid="uid://dwwbtdfc8wwc8" path="res://scenes/props/beach/life_saver.tscn" id="25_o5oh8"]
 [ext_resource type="PackedScene" uid="uid://dc46nnspeewgv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Bubble.prefab.scn" id="26_c57cw"]
 [ext_resource type="PackedScene" uid="uid://dbqi0a7x51wi5" path="res://Assets/_Game/Content/Levels/Beach/_Props/Surf Board.prefab.scn" id="27_7oqrd"]
 
@@ -53,7 +53,7 @@ fog_light_energy = 1.75
 fog_density = 1.0
 fog_sky_affect = 0.0
 fog_depth_begin = 0.0
-fog_depth_end = 150.0
+fog_depth_end = 200.0
 volumetric_fog_density = 0.0826
 volumetric_fog_albedo = Color(0.6313726, 1, 1, 1)
 adjustment_enabled = true
@@ -246,109 +246,109 @@ transform = Transform3D(-0.3703475, 2.1153836, -2.0947542, 2.6049328, 1.2521824,
 
 [node name="Bananas" type="Node3D" parent="Level Geometry/Geo"]
 
-[node name="Placeholder Banana" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(0.955393, 0.078466445, 4.9072466, -0.40927196, 4.9832215, -2.1479227e-08, -4.8907795, -0.40167964, 0.9586098, 2.39, 0.57, 8.5)
 
-[node name="Placeholder Banana (1)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (1)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(3.6649876, -0.26890695, -3.3905091, -3.3857832, -0.76182926, -3.5994568, -0.3230141, 4.934299, -0.74051106, 2.52, 1.25, 3.37)
 
-[node name="Placeholder Banana (2)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (2)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-1.3524258, -4.663643, 1.192215, -3.4693713, 0.085929, -3.5994556, 3.3368263, -1.8008466, -3.2592244, 2.38, 1.25, -3.67)
 
-[node name="Placeholder Banana (3)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (3)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-1.9928242, -4.2089276, 1.8203244, -3.4693713, 0.08592941, -3.5994556, 2.9986856, -2.6976924, -2.9547148, 1.8400002, 1.25, -3.8600001)
 
-[node name="Placeholder Banana (4)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (4)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(4.918435, 0.40395135, -0.8036293, -0.40927225, 4.9832215, 5.210903e-08, 0.8009326, 0.06578058, 4.9349957, -3.48, 0.57, 12.9)
 
-[node name="Placeholder Banana (5)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (5)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-3.2061293, -2.4970915, 2.9129486, -3.520444, 0.40526944, -3.5273547, 1.5255195, -4.3128057, -2.0180435, -3.07, 0.86, 13.07)
 
-[node name="Placeholder Banana (6)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (6)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-4.4800754, -0.36794886, 2.1894155, -0.40927225, 4.9832215, 1.1175871e-07, -2.1820686, -0.1792133, -4.4951596, 14.441691, 0.57, 16.284018)
 
-[node name="Placeholder Banana (7)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (7)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-3.357751, -0.27577284, 3.6945174, -0.4092728, 4.983221, 2.6377938e-07, -3.6821196, -0.3024129, -3.3690567, 15.18766, 0.57, 15.422079)
 
-[node name="Placeholder Banana (8)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (8)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(9.65754, 0.7931762, 2.47038, -0.8185463, 9.966442, -1.8626453e-07, -2.46209, -0.20221186, 9.690058, 30.95, -0.39, 4.91)
 
-[node name="Placeholder Banana (9)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (9)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(4.7683806, 0.39162862, 1.4522994, -0.4999634, 4.9657373, 0.30247968, -1.4186554, -0.43368694, 4.774865, 27.52, 0.72, 35.397865)
 
-[node name="Placeholder Banana (10)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (10)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(4.607087, -8.613158, 2.1420226, -4.9403486, -4.493593, -7.4431562, 7.3734465, 2.3708932, -6.325438, 30.26, 2.74, 30.86)
 
-[node name="Placeholder Banana (11)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (11)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(6.7749496, -7.1693077, -1.6434982, -3.8576894, -1.5610199, -9.092934, 6.2624507, 6.794428, -3.8232794, 31.790895, 3.3797758, 29.89662)
 
-[node name="Placeholder Banana (12)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (12)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(3.8283916, -3.2139957, -0.116843134, -2.8369846, -3.2892847, -2.4763129, 1.5149057, 1.9623553, -4.342145, 25.243427, 1.9225641, 39.67971)
 
-[node name="Placeholder Banana (13)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (13)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(1.4956808, -4.521858, -1.5217544, -4.5241575, -0.8378295, -1.9570496, 1.5149059, 1.9623555, -4.342145, 24.09, 1.8027899, 40.34)
 
-[node name="Placeholder Banana (14)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (14)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(2.0060709, -4.459238, 1.0444496, 1.8485857, -0.25486863, -4.6387253, 4.1902757, 2.2472734, 1.5463998, 16.88, 1.54, 37.82)
 
-[node name="Placeholder Banana (15)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (15)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-0.06641075, 4.4133544, -2.3490193, 2.0316331, -2.1226935, -4.0455704, -4.5681567, -1.008203, -1.7650697, 15.55, 1.54, 39.38)
 
-[node name="Placeholder Banana (16)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (16)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(28.223497, -23.95407, 33.610073, -34.111977, 9.3824625, 35.33189, -23.233755, -42.87391, -11.046295, -19.2, 12.1, -23.43)
 
-[node name="Placeholder Banana (17)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (17)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(14.680976, -38.2175, 28.703514, 46.686546, 5.033904, -17.176325, 10.238909, 31.844664, 37.162914, 321.5, 51.3, -68.5)
 
-[node name="Placeholder Banana (18)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (18)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(57.987274, 73.43706, 5.791057, -70.9543, 57.6615, -20.72923, -19.799625, 8.438733, 91.24596, 327.4, 26.4, -112.5)
 
-[node name="Placeholder Banana (19)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (19)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(11.852882, 44.240078, -20.058033, 48.133034, -7.918852, 10.977377, 6.536069, -21.911352, -44.46541, -41, 46.8, 30.2)
 
-[node name="Placeholder Banana (20)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (20)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(6.317158, 8.564465, -22.621748, 23.193474, -8.782273, 3.1518943, -6.8670435, -21.783518, -10.164748, 17.1, 36.8, -22)
 
-[node name="Placeholder Banana (21)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (21)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(10.086802, -18.873287, -12.924996, 15.9269705, 15.9338045, -10.837226, 16.419138, -3.8617232, 18.452614, 30.91, 23.3, -11.52)
 
-[node name="Placeholder Banana (22)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (22)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-64.75521, 35.983868, 67.17087, -65.21043, -71.77382, -24.415571, 39.425426, -59.612762, 69.94251, -92.1, 27.9, 22)
 
-[node name="Placeholder Banana (23)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (23)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-6.531436, -38.221157, 31.56713, -7.089296, 32.23287, 37.560406, -49.062027, 0.43069348, -9.629759, -45, 46.8, -45.2)
 
-[node name="Placeholder Banana (24)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (24)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-36.720448, 32.853382, -8.500819, 32.577522, 30.61971, -22.386118, -9.503342, -21.97928, -43.89303, -3.9, 77.9, -47.6)
 
-[node name="Placeholder Banana (25)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (25)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-17.38891, 59.133057, 62.03949, 67.758125, 48.249207, -26.997036, -52.482857, 42.699966, -55.40985, 455.0774, 43.6, 154.03418)
 
-[node name="Placeholder Banana (26)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (26)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-83.58775, -30.055717, 31.606663, 38.82818, -20.156654, 83.518394, -19.867054, 87.06091, 30.247927, 383.2622, 26.6, 193.16681)
 
-[node name="Placeholder Banana (27)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (27)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(23.377913, -32.92938, 7.6520147, 22.613441, 8.316035, -33.300148, 25.130249, 23.150028, 22.84668, 476.0191, 17.25, 257.08176)
 
-[node name="Placeholder Banana (28)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (28)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(29.925993, 32.471188, 35.021324, 37.41766, -41.623795, 6.6192274, 29.678102, 19.736176, -43.659252, 450.22998, 32.15, 318.1)
 
-[node name="Placeholder Banana (29)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (29)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(0.2676993, -19.12052, -53.016712, 49.20555, 25.930296, -9.103331, 27.480526, -46.24351, 16.816525, 571.4, 28.22, 279)
 
-[node name="Placeholder Banana (30)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (30)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(43.23272, 17.104582, -295.14163, 260.20114, 139.398, 46.19322, 140.34442, -263.71548, 5.2745037, 600.7, -0.8, 439.6)
 
-[node name="Placeholder Banana (31)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (31)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-33.692535, -144.88419, 6.525527, 127.70371, -26.461683, 71.838295, -68.74426, 21.852894, 130.25313, 471, 18.9, -69.6)
 
-[node name="Placeholder Banana (32)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (32)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(0.21070531, 46.94111, 29.531471, -41.660873, -19.358583, 31.068253, 36.605286, -22.302416, 35.189133, 485.2, 18.9, -38.3)
 
-[node name="Placeholder Banana (33)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (33)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-25.242596, 9.060628, -48.542103, 7.9827347, 54.548393, 6.030594, 48.730953, -4.2423043, -26.132658, 426, 18.9, 17.3)
 
-[node name="Placeholder Banana (34)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
+[node name="banana (34)" parent="Level Geometry/Geo/Bananas" instance=ExtResource("12_r17ul")]
 transform = Transform3D(-25.39728, -0.011165238, -7.698522, 7.5699697, 4.7934675, -24.980137, 1.401044, -26.101946, -4.5841613, 470.2, 60.4, 14)
 
 [node name="Palm Trees" type="Node3D" parent="Level Geometry/Geo"]
