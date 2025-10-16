@@ -135,10 +135,10 @@ transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 250.
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.5, 0)
 
 [node name="Plank Group" parent="Level Geometry/Geo/beach_island_01" instance=ExtResource("11_afqjr")]
-transform = Transform3D(0.8700108, -3.2664767e-07, 0.4930326, -0.34279105, 0.71874774, 0.6048934, -0.35436624, -0.69527096, 0.6253181, -1.5899982, -1.91, -20.8)
+transform = Transform3D(0.8700108, -3.2664767e-07, 0.4930326, -0.34279105, 0.71874774, 0.6048934, -0.35436624, -0.69527096, 0.6253181, -1.5899982, -1.8135219, -20.620207)
 
 [node name="Plank Group2" parent="Level Geometry/Geo/beach_island_01" instance=ExtResource("11_afqjr")]
-transform = Transform3D(0.96417046, -0.12411507, 0.23445772, -0.26516274, -0.47748184, 0.83767503, 0.007981244, -0.86983114, -0.4932849, -0.77999794, -2.26, -23.29)
+transform = Transform3D(0.96417046, -0.12411507, 0.23445772, -0.26516274, -0.47748184, 0.83767503, 0.007981244, -0.86983114, -0.4932849, -0.77999794, -2.1635218, -23.110209)
 
 [node name="Water" parent="Level Geometry/Geo" instance=ExtResource("13_1xb5j")]
 transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 212, 0, -5)
