@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://43wbf0nicukp"]
+
+[ext_resource type="PackedScene" uid="uid://cn47rpp17js6t" path="res://models/general/binoculars.glb" id="1_m0qrp"]
+[ext_resource type="PackedScene" uid="uid://b2kyorkcm3kel" path="res://models/general/checkpoint_pad.glb" id="2_k0gn7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pw551"]
+radius = 0.35
+
+[node name="BinocularStand" type="Node3D"]
+
+[node name="SphereCollider" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SphereCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("SphereShape3D_pw551")
+
+[node name="binoculars" parent="." instance=ExtResource("1_m0qrp")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.5, 0)
+
+[node name="checkpoint_pad" parent="." instance=ExtResource("2_k0gn7")]

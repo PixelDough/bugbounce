@@ -8,8 +8,8 @@ varying vec3 v_world_normal;
 varying vec3 v_world_pos;
 varying vec3 v_eye_pos;
 
+group_uniforms Color;
 uniform sampler2D albedo : hint_default_white, source_color;
-uniform sampler2D main_light_gradient : hint_default_white, repeat_disable;
 uniform vec3 tint : source_color = vec3(1,1,1);
 uniform float vertex_color_intensity : hint_range(0.0, 1.0) = 1.0;
 
@@ -22,6 +22,9 @@ uniform float matcap_intensity = 1.0;
 uniform float matcap_power = 1.0;
 uniform float smoothness : hint_range(0, 1) = 0.0;
 uniform float metallic : hint_range(0, 1) = 0.0;
+
+group_uniforms Lighting;
+uniform sampler2D main_light_gradient : hint_default_white, repeat_disable;
 
 void vertex() {
 	v_world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;

@@ -38,11 +38,10 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
-"animations": {},
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/Mat_Checkpoint.material",
+"use_external/fallback_path": "res://materials/Mat_Checkpoint.material",
 "use_external/path": "uid://b8jnfrkv53lfl"
 }
 },
@@ -54,7 +53,6 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/extracted/Fbx_Checkpoint.Checkpoint_004.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://beejxkiqhqd1k"
 },
 "Checkpoint_005": {
@@ -64,7 +62,6 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/extracted/Fbx_Checkpoint.Checkpoint_005.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://cjg76l0g401i0"
 },
 "Checkpoint_006": {
@@ -74,33 +71,13 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/extracted/Fbx_Checkpoint.Checkpoint_006.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://x8drmvpcya5y"
-},
-"Root Scene_Checkpoint_004": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/extracted/Fbx_Checkpoint.Checkpoint_004.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://beejxkiqhqd1k"
-},
-"Root Scene_Checkpoint_005": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/extracted/Fbx_Checkpoint.Checkpoint_005.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://cjg76l0g401i0"
-},
-"Root Scene_Checkpoint_006": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/_Game/Content/Level Features/Checkpoint/extracted/Fbx_Checkpoint.Checkpoint_006.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://x8drmvpcya5y"
 }
 },
 "nodes": {
 "PATH:AnimationPlayer": {
 "optimizer/enabled": true,
-"optimizer/max_angular_error": 0.00277777777777777,
-"optimizer/max_linear_error": 0.5
+"optimizer/max_angular_error": 0.00277777777777777
 }
 }
 }
