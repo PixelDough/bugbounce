@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://qugoy3od5o7w" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 2.prefab.scn" id="17_x7t32"]
 [ext_resource type="PackedScene" uid="uid://cy0nrxtk8nf67" path="res://Assets/_Game/Content/Levels/Beach/_Props/Palm Tree 4.prefab.scn" id="18_kpa4w"]
 [ext_resource type="PackedScene" uid="uid://docu87ry2vgrw" path="res://scenes/props/beach/sodabottle.tscn" id="19_d6n1m"]
-[ext_resource type="PackedScene" uid="uid://cvsw7r4skj7qq" path="res://Assets/_Game/Content/Levels/Beach/_Props/Soda Bottle (Lid Pop Platform).prefab.scn" id="20_3h5ku"]
+[ext_resource type="PackedScene" uid="uid://tvegbwb18n10" path="res://scenes/props/beach/sodabottle_lidpop.tscn" id="20_3h5ku"]
 [ext_resource type="PackedScene" uid="uid://db8dhqgrf0ku7" path="res://Assets/_Game/Content/Levels/Beach/_Props/Plank.prefab.scn" id="21_bpsff"]
 [ext_resource type="PackedScene" uid="uid://cl4i48qmw17qv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Spear.prefab.scn" id="22_aq8ww"]
 [ext_resource type="PackedScene" uid="uid://dig28exat2evx" path="res://Assets/_Game/Content/Levels/Beach/_Props/Lantern.prefab.scn" id="24_1them"]
