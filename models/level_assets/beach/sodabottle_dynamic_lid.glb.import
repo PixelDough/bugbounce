@@ -47,10 +47,12 @@ _subresources={
 },
 "nodes": {
 "PATH:Soda Bottle Lid_LOD0": {
-"mesh_instance/visibility_range_end": 50.0
+"mesh_instance/visibility_range_end": 50.0,
+"mesh_instance/visibility_range_end_margin": 1.0
 },
 "PATH:Soda Bottle Lid_LOD1": {
-"mesh_instance/visibility_range_begin": 50.0
+"mesh_instance/visibility_range_begin": 50.0,
+"mesh_instance/visibility_range_begin_margin": 1.0
 }
 }
 }

@@ -1,8 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://cssgvlk0hc8v8"]
+[gd_scene load_steps=30 format=3 uid="uid://cssgvlk0hc8v8"]
 
 [ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://Assets/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
-[ext_resource type="PackedScene" uid="uid://bnb5u37e5gwi1" path="res://Assets/_Game/Content/Level Features/_Prefabs/Goal Ring.prefab.scn" id="2_y2yyu"]
-[ext_resource type="PackedScene" uid="uid://br2q8ns8c0xk8" path="res://Assets/_Game/Content/Level Features/_Prefabs/Goal Ring (Secret).prefab.scn" id="3_qcu5c"]
+[ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_y2yyu"]
+[ext_resource type="PackedScene" uid="uid://b2adyyhxfcf3q" path="res://scenes/props/general/goal_secret.tscn" id="3_qcu5c"]
 [ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="4_w05b2"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="5_oom3e"]
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="6_bwdgy"]
@@ -60,9 +60,6 @@ adjustment_enabled = true
 adjustment_brightness = 1.1
 adjustment_contrast = 1.15
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hgiv3"]
-size = Vector3(1000, 1000, 1003)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w52jn"]
 radius = 1.0
 height = 5.0
@@ -81,10 +78,9 @@ environment = SubResource("Environment_nulfp")
 transform = Transform3D(0, 0.25889683, 0.965905, 0, 0.96590495, -0.25889683, -1, 0, 0, 475.4, 47.56, 0.9)
 
 [node name="Secret Ring" parent="Level Management" instance=ExtResource("3_qcu5c")]
+transform = Transform3D(0.7071071, 0, 0.7071064, 0, 1, 0, -0.7071064, 0, 0.7071071, 100, 33.37, -216.76)
 
 [node name="Level Manager" parent="Level Management" instance=ExtResource("4_w05b2")]
-
-[node name="Beach Volume" type="Node3D" parent="Level Management"]
 
 [node name="Directional Light" type="Node3D" parent="Level Management"]
 transform = Transform3D(0.9063079, 0.36599806, 0.21130894, 0, 0.49999976, -0.86602557, -0.4226181, 0.78488576, 0.45315373, 0, 0, 0)
@@ -94,21 +90,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 light_energy = 2.0
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
-
-[node name="Live Zone" type="Node3D" parent="Level Management"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 322, -0.25, 119)
-
-[node name="BoxCollider" type="Area3D" parent="Level Management/Live Zone"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Management/Live Zone/BoxCollider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
-shape = SubResource("BoxShape3D_hgiv3")
-
-[node name="Planar Reflection Renderer" type="Node3D" parent="Level Management"]
-
-[node name="Underwater Renderer" type="Node3D" parent="Level Management"]
-
-[node name="Wind and Waves Audio" type="Node3D" parent="Level Management"]
 
 [node name="Level Geometry" type="Node3D" parent="."]
 
@@ -1678,8 +1659,3 @@ transform = Transform3D(1.8287721, 0.06633763, -0.80696464, -1.1175871e-08, 1.99
 
 [node name="Surf Board (3)" parent="Level Geometry/Geo" instance=ExtResource("27_7oqrd")]
 transform = Transform3D(-0.06522608, 1.8460523, -0.76670533, -1.8670701, 0.21774137, 0.68310934, 0.71399945, 0.73802453, 1.716253, 277.41, 19.12, 0.55)
-
-[node name="Draw XXL Lines Manager" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.21777898, 0.6358223, -0.74047434, 0.17940189, 0.77183545, 0.6099877, 0.95936817, 0, -0.28215727, 0, 29.541782, 24.527164)

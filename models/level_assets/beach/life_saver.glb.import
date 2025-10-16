@@ -47,10 +47,12 @@ _subresources={
 },
 "nodes": {
 "PATH:Life Saver_LOD0": {
-"mesh_instance/visibility_range_end": 200.0
+"mesh_instance/visibility_range_end": 200.0,
+"mesh_instance/visibility_range_end_margin": 3.0
 },
 "PATH:Life Saver_LOD1": {
-"mesh_instance/visibility_range_begin": 200.0
+"mesh_instance/visibility_range_begin": 200.0,
+"mesh_instance/visibility_range_begin_margin": 3.0
 }
 }
 }
