@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnglshy5uulg7"]
+
+[ext_resource type="ArrayMesh" uid="uid://cko7nxccf045h" path="res://Assets/3D Text/Example/Models/extracted/Fbx_Font3D.Plane_005.mesh" id="1_dxvp1"]
+[ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://Assets/3D Text/Example/Models/Mat_Font3D_1.material" id="2_d3pam"]
+[ext_resource type="PackedScene" uid="uid://b2kyorkcm3kel" path="res://models/general/checkpoint_pad.glb" id="3_dxvp1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utkuc"]
+radius = 0.75
+height = 1.5
+
+[node name="Tutorial Pad" type="Node3D"]
+
+[node name="Question Mark" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="MeshRenderer" type="MeshInstance3D" parent="Question Mark"]
+gi_mode = 2
+mesh = ExtResource("1_dxvp1")
+surface_material_override/0 = ExtResource("2_d3pam")
+
+[node name="checkpoint_pad" parent="." instance=ExtResource("3_dxvp1")]
+
+[node name="Trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+shape = SubResource("CapsuleShape3D_utkuc")

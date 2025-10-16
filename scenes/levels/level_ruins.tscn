@@ -1,0 +1,955 @@
+[gd_scene load_steps=21 format=3 uid="uid://b5vg06ag7brqj"]
+
+[ext_resource type="Material" uid="uid://d3me3sf1jr1jx" path="res://Assets/Magma! Lava Skybox Pack Vol.I/materials/magmastream.material" id="1_7mk23"]
+[ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="2_qb7mf"]
+[ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://Assets/StylizedWater2/Prefabs/StylizedWater2_Ocean.prefab.scn" id="3_nlkdc"]
+[ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="4_si7my"]
+[ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="5_82f5o"]
+[ext_resource type="PackedScene" uid="uid://b65gr7lysd7ko" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Island (Short).prefab.scn" id="6_0mhyi"]
+[ext_resource type="PackedScene" uid="uid://cotjetef5t521" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Island (Tall).prefab.scn" id="7_irpi2"]
+[ext_resource type="PackedScene" uid="uid://bkva52ogumtar" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Pillar (Full).prefab.scn" id="8_ydmep"]
+[ext_resource type="PackedScene" uid="uid://d2uv5t6pht8sp" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Pillar (Broken).prefab.scn" id="9_lfnnf"]
+[ext_resource type="PackedScene" uid="uid://jik0tp5js3jj" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Trap Falling Pillar.prefab.scn" id="10_a6myy"]
+[ext_resource type="PackedScene" uid="uid://b5s1awsk10c41" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Spike Ball.prefab.scn" id="11_qpf73"]
+[ext_resource type="PackedScene" uid="uid://ch3xueo50nnni" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Spike Ball (Swinging).prefab.scn" id="12_ypt8q"]
+[ext_resource type="PackedScene" uid="uid://dwd5baw2ysf4k" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Ruin Block.prefab.scn" id="13_mrl6s"]
+[ext_resource type="PackedScene" uid="uid://3fd3u16qou2j" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Pot (Breakable).prefab.scn" id="14_y8u2i"]
+[ext_resource type="PackedScene" uid="uid://de7ga2i4w3v6d" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Pot.prefab.scn" id="15_dhag7"]
+[ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="16_ru7w4"]
+[ext_resource type="PackedScene" uid="uid://bwruwtpwogs6r" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Swinging Block.prefab.scn" id="17_qubas"]
+
+[sub_resource type="Sky" id="Sky_0dtfa"]
+sky_material = ExtResource("1_7mk23")
+
+[sub_resource type="Environment" id="Environment_kvil1"]
+background_mode = 2
+sky = SubResource("Sky_0dtfa")
+fog_enabled = true
+fog_light_color = Color(1, 0.6471216, 0.3066038, 1)
+fog_density = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eq3my"]
+size = Vector3(600, 250, 600)
+
+[node name="RootNode3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kvil1")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+
+[node name="Level Management" type="Node3D" parent="."]
+
+[node name="Level Manager" parent="Level Management" instance=ExtResource("2_qb7mf")]
+
+[node name="Player Spawner" parent="Level Management/Level Manager" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Fbx_Player_Coconut_Test" parent="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model" index="3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
+
+[node name="Start Cinemachine Camera" parent="Level Management/Level Manager" index="3"]
+transform = Transform3D(-0.09795928, 0.02027702, -0.9949838, -5.5152923e-06, 0.9997924, 0.020375555, 0.99519044, 0.0020014616, -0.09793877, 21.416428, 74.25061, 1.0543295)
+
+[node name="Directional Light" type="Node3D" parent="Level Management"]
+transform = Transform3D(1, 0, 0, 0, 0.087155916, -0.99619466, 0, 0.99619466, 0.087155916, 0, 0, 0)
+
+[node name="Light" type="DirectionalLight3D" parent="Level Management/Directional Light"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+light_color = Color(1, 0.81909424, 0.6084906, 1)
+light_energy = 1.5
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.4
+
+[node name="Draw XXL Lines Manager" type="Node3D" parent="Level Management"]
+
+[node name="Ambience" type="Node3D" parent="Level Management"]
+
+[node name="Scene Contents" type="Node3D" parent="."]
+
+[node name="Level Features" type="Node3D" parent="Scene Contents"]
+
+[node name="Lava" parent="Scene Contents/Level Features" instance=ExtResource("3_nlkdc")]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="Gurgling Audio" type="Node3D" parent="Scene Contents/Level Features/Lava"]
+
+[node name="Underwater Renderer" type="Node3D" parent="Scene Contents/Level Features/Lava"]
+
+[node name="Live Zone" type="Node3D" parent="Scene Contents/Level Features/Lava"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, -0.25, 0)
+
+[node name="BoxCollider" type="Area3D" parent="Scene Contents/Level Features/Lava/Live Zone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Level Features/Lava/Live Zone/BoxCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 125, 0)
+shape = SubResource("BoxShape3D_eq3my")
+
+[node name="Binocular Stand" parent="Scene Contents/Level Features" instance=ExtResource("4_si7my")]
+transform = Transform3D(0.25881863, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.25881863, -43, 63, -20)
+
+[node name="Fbx_Binoculars" parent="Scene Contents/Level Features/Binocular Stand" index="3"]
+transform = Transform3D(1.5, 0, 0, 0, 1.4152683, 0.49700662, 0, -0.49700662, 1.4152683, 0, 1.5, 0)
+
+[node name="Checkpoint" parent="Scene Contents/Level Features" instance=ExtResource("5_82f5o")]
+transform = Transform3D(0.76983273, 0, -0.63824564, 0, 1, 0, 0.63824564, 0, 0.76983273, -7.19, 18.32299, 11.97)
+
+[node name="Checkpoint2" parent="Scene Contents/Level Features" instance=ExtResource("5_82f5o")]
+transform = Transform3D(0.9243593, 0, 0.38152298, 0, 1, 0, -0.38152298, 0, 0.9243593, 12.35, 43.743, 11.58)
+
+[node name="Geometry" type="Node3D" parent="Scene Contents"]
+
+[node name="Island (Short)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+
+[node name="Island (Short) (4)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28, 0.2, 21.22)
+
+[node name="Island (Tall)" parent="Scene Contents/Geometry" instance=ExtResource("7_irpi2")]
+
+[node name="Island (Short)2" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.01, 5.37, 5.89)
+
+[node name="Island (Short) (1)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08, 18.89, -7.42)
+
+[node name="Pillar (Full) (23)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.7170418, -0.12141002, -1.2655208, 1.2317872, -0.29321072, 0.726058, -0.314617, -1.4246821, -0.04158197, 18.18, -0.76, 7.84)
+
+[node name="Pillar (Full) (4)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.3812854, -1.5620376, 3.3269358, 0.46959284, 3.2966723, 1.6016469, -3.6452632, 0.5880717, -0.14166054, 40.6, 7.6, 51.9)
+
+[node name="Pillar (Full) (5)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.8163475, 3.5915754, 0.29664278, -3.5502982, -0.8537158, 0.56602603, 0.61870253, -0.15996718, 3.6394308, -17.2, 7.6, 48.6)
+
+[node name="Pillar (Full) (7)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(3.0009675, 1.617185, 1.4257429, -0.1788124, 2.6219053, -2.5975902, -2.1485007, 2.0406275, 2.2076273, -22.8, 2.3, 55.2)
+
+[node name="Pillar (Full) (8)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.5418682, -0.5386131, 8.133714, -3.0200996, 7.5582833, 0.70170724, -7.5714207, -3.0534067, 0.30221224, -59.9, 2.3, 15.2)
+
+[node name="Pillar (Full) (20)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(11.783318, 3.604219, -1.6327921, -3.9472284, 11.064147, -4.062886, 0.27529678, 4.370043, 11.633138, -107.8, 60.1, -64.3)
+
+[node name="Pillar (Full) (14)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(6.422217, -4.5222754, -2.24615, 0.089967616, -3.5310462, 7.366454, -5.0485725, -5.815647, -2.726022, -69.8, 2.2999995, 55.3)
+
+[node name="Pillar (Full) (9)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-1.0387164, 4.8602633, 6.4838204, 8.096661, 0.88538015, 0.6334156, -0.3258551, 6.506533, -4.92949, 72.4, -1.9, 18.8)
+
+[node name="Pillar (Full) (17)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(12.528746, -5.137, 11.7334795, 6.337077, 16.749725, 0.5665589, -11.131253, 3.7537675, 13.529124, 125.6, 7.1, 18.2)
+
+[node name="Pillar (Full) (10)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-1.9026717, 1.1617738, 7.859464, 2.3828151, -7.6262126, 1.7041433, 7.5791206, 2.6892738, 1.4372803, -13.4, -1.9, -67.9)
+
+[node name="Pillar (Full) (18)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(20.3145, 0.18951663, 31.245623, -2.8090656, -37.106667, 2.0513947, 31.119673, -3.4732049, -20.21155, -12.4, -27.7, -141.4)
+
+[node name="Pillar (Full) (11)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(3.0131938, -2.6030939, 7.1334147, -0.60422385, -7.7323594, -2.5664313, 7.5694523, 0.41899353, -3.0444822, 50.1, -24.3, -52.8)
+
+[node name="Pillar (Full) (12)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-3.5461671, -3.092129, 6.6786575, 4.031094, -7.018627, -1.1091404, 6.157599, 2.8140092, 4.572348, 36.9, 12.9, -103)
+
+[node name="Pillar (Full) (13)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.36221868, -7.9096065, 2.0119553, -0.59772515, -1.9828179, -7.90267, 8.139567, -0.49759224, -0.49079478, -16.1, -1.5, -51)
+
+[node name="Pillar (Full) (22)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.18226795, -4.3770146, 6.895619, -4.8451076, 5.4946938, 3.6158412, -6.575161, -4.170266, -2.4732914, 8.2, 85.4, 63.6)
+
+[node name="Pillar (Full) (21)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-2.0454113, 4.0210047, 6.8109355, -5.489524, -5.7863574, 1.7675451, 5.694071, -4.1340795, 4.150659, 25.3, 101.1, -42)
+
+[node name="Pillar (Broken) (11)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(2.3944256, 1.4878249, 2.3889196, -1.1655146, 3.3791528, -0.93634313, -2.561667, -0.14676613, 2.6589768, -21.1, -8.2, -7.7)
+
+[node name="Pillar (Broken) (14)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-2.8175464, -0.091281325, 2.388919, -0.6802108, -3.5091891, -0.93634367, 2.2918508, -1.1537304, 2.6589775, -14.8, 20.6, -3.8)
+
+[node name="Pillar (Full)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.9667495, -2.2351742e-08, -0.25572526, -0.20224106, 0.61200625, -0.76455665, 0.1565055, 0.7908529, 0.59165674, -4.58, 4.93, -2.69)
+
+[node name="Pillar (Full) (15)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.5381174, -0.82027966, 0.1938318, -0.6757671, -0.5573132, -0.482432, 0.50375426, 0.1286199, -0.854218, 5.5, 16.94, -10)
+
+[node name="Pillar (Full) (16)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.47736788, -0.007901125, 0.878668, 0.10727228, -0.9919561, -0.06719935, 0.87213105, 0.12633553, -0.47268045, 5.08, 20.46, 5.68)
+
+[node name="Pillar (Broken) (1)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.7269352, 0.5820447, -0.36440244, -5.9604645e-08, -0.53065276, -0.8475894, -0.68670607, 0.6161425, -0.38575017, 5.7, 3.33, 17.38)
+
+[node name="Pillar (Full) (3)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.94545287, -0.32575896, 2.9802322e-08, 0.08431219, 0.24469984, -0.9659262, 0.31465912, 0.9132377, 0.2588176, -1.38, -0.98, 10.37)
+
+[node name="Pillar (Broken) (4)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.97828805, -5.066394e-07, -0.20724982, 4.956393e-07, -1, 1.0500093e-07, -0.20724982, 0, 0.97828805, -0.84, -1.1, 18.23)
+
+[node name="Pillar (Broken) (23)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.68403804, -5.066394e-07, 0.7294463, 3.4656068e-07, -1, -3.6956624e-07, 0.7294463, 2.842171e-14, 0.6840381, 3.27, -2.39, 5.46)
+
+[node name="Pillar (Broken) (24)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.31407177, -5.066394e-07, 0.94939935, 1.5912117e-07, -1, -4.810031e-07, 0.94939935, 8.526513e-14, 0.31407166, -4.23, -1.42, 8.82)
+
+[node name="Pillar (Broken) (5)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.93837714, -0.057131745, 0.3408582, -0.07257225, -0.99682665, 0.03271067, 0.3379077, -0.05543179, -0.9395455, -7.2, 0.42, 21.99)
+
+[node name="Pillar (Full) (6)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.07154441, 0.013062596, 0.99735194, -0.017200116, -0.99978185, 0.011860582, 0.9972891, -0.01630601, 0.07175338, -9.75, 0.77, 8.7)
+
+[node name="Pillar (Broken) (9)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.39824152, -0.91376144, 0.080273956, -0.09020132, -0.04807782, -0.9947624, 0.9128349, -0.40339646, -0.06327593, -15.27, 8.19, 3)
+
+[node name="Pillar (Broken) (12)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.8545413, 0.21527308, -0.47266975, -0.32823682, 0.92912453, -0.17025928, 0.4025168, 0.30064118, 0.8646358, -19.58, 3.45, 0.81)
+
+[node name="Pillar (Broken) (10)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.5907383, -2.842171e-14, -0.80686325, -9.378093e-07, -1, -6.866095e-07, -0.80686325, 1.1622903e-06, -0.5907384, -10.19, 8.7, -0.08)
+
+[node name="Pillar (Broken) (18)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.9886279, -0.15038231, -4.5448542e-07, -7.450581e-09, 2.9206276e-06, -1, 0.15038231, 0.9886279, 2.9206276e-06, -5.81, 20.93, 0.68144035)
+
+[node name="Trap Falling Pillar (3)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.5907383, -4.284096e-07, 0.8068632, -9.466951e-07, 1, 1.224072e-06, -0.8068632, -1.4869596e-06, 0.5907383, -22, 8.82, -8.05)
+
+[node name="Trap Falling Pillar" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.5803455, -3.5432396e-07, 0.81437033, -1.0232484e-06, 1, -2.94109e-07, -0.81437033, -1.0039879e-06, -0.5803455, -20.41, 10, -13.28)
+
+[node name="Trap Falling Pillar (1)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.9994035, -2.231121e-07, -0.034534514, 2.79727e-07, 1, 1.6345404e-06, 0.034534514, -1.6432256e-06, 0.9994035, -14.44, 12, -14.39)
+
+[node name="Trap Falling Pillar (2)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.2705024, -2.8944703e-07, 0.96271926, -1.2989597e-06, 1, 6.6563405e-07, -0.96271926, -1.4305891e-06, 0.2705024, -9.83, 14, -10.93)
+
+[node name="Pillar (Broken) (7)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.58786154, -0.80405146, 0.08899443, -0.8077051, -0.5895151, 0.0091952905, 0.045070067, -0.07728681, -0.9959897, -20.98, 2.09, 15.86)
+
+[node name="Island (Short)3" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.24, 6.01, 22.07)
+
+[node name="Island (Short) (2)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.86, 7.41, 8.92)
+
+[node name="Island (Short) (1)2" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.73, 6.72, 34.95)
+
+[node name="Pillar (Broken)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.98843205, 0, 0.15166505, 0, 1, 0, -0.15166505, 0, -0.98843205, 21.82, 9.009993, 6.1699996)
+
+[node name="Spike Ball" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(0.67984134, 0, 0.7333592, 0, 1, 0, -0.7333592, 0, 0.67984134, 7.65, 4.14, 19.9)
+
+[node name="Spike Ball (3)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(0.67984134, 0, 0.7333592, 0, 1, 0, -0.7333592, 0, 0.67984134, 4.3954544, 3.1399999, 8.701431)
+
+[node name="Spike Ball (4)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(0.67984134, 0, 0.7333592, 0, 1, 0, -0.7333592, 0, 0.67984134, -6.6960783, 4.14, 14.782378)
+
+[node name="Spike Ball (Swinging)" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(-0.23243344, 0, 0.9726124, 0, 1, 0, -0.9726124, 0, -0.23243344, -17.42, 20.05, -14.04)
+
+[node name="Spike Ball (5)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(7.873654, 6.7067585, 20.464844, -9.158723, 20.763853, -3.2810178, -19.491234, -7.04746, 9.808667, -53.7, 43.5, -38.7)
+
+[node name="Spike Ball (6)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(-2.376673, -22.512087, 3.6527202, 1.5424879, 3.5054233, 22.607914, -22.754278, 2.5890055, 1.1510412, -11.1, 57.3, 41.6)
+
+[node name="Spike Ball (8)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(16.328218, 11.9299, -10.809797, -1.5274704, 16.47521, 15.8751135, 16.026262, -10.584415, 12.526534, -35.5, 106.5, 90.7)
+
+[node name="Spike Ball (7)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(-59.209736, 41.90351, -21.389494, 32.944595, 12.383194, -66.93666, -33.58673, -61.724873, -27.949585, 61.2, 0.70000535, 165.9)
+
+[node name="Ruin Block" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(2.108134, -2.3441732, -2.2138548, 1.9230493, 3.0372272, -1.3847971, 2.5880842, -0.34732503, 2.8322635, 10.17, -0.77, 32.07)
+
+[node name="Ruin Block (1)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(18.232088, -5.9171066, 4.8201733, 1.4742112, 14.9785595, 12.811116, -7.4881854, -11.458002, 14.258208, -49.9, -4.4, 40)
+
+[node name="Ruin Block (3)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(18.232088, -5.9171066, 4.8201733, 1.4742112, 14.9785595, 12.811116, -7.4881854, -11.458002, 14.258208, -17.1, 78, -47.7)
+
+[node name="Ruin Block (2)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(20.675028, -4.8311806, -7.801072, 8.595177, 16.929277, 12.295379, 3.2124708, -14.202575, 17.309557, 53.5, 0.9, 30)
+
+[node name="Spike Ball (Swinging) (1)" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(-1.485597, 0, 0.20736858, 0, 1.5, 0, -0.20736858, 0, -1.485597, -23.01, 14.73, 15.36)
+
+[node name="Trap Falling Pillar2" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.14929938, -0.35504645, 0.92284983, -0.9218162, 0.38762742, -9.23872e-07, -0.35772163, -0.850698, -0.3851601, -8.565882, 18.32, 24.601402)
+
+[node name="Pillar (Broken) (6)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.38930446, -0.46492058, 0.7951672, 0.6480327, -0.47524977, -0.59513956, 0.65459573, 0.7469849, 0.11626685, -9.39, 20.69, 26.99)
+
+[node name="Pillar (Broken) (15)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.38930446, -0.46492058, 0.7951672, 0.6480327, -0.47524977, -0.59513956, 0.65459573, 0.7469849, 0.11626685, 12.04, 24.42, 21.34)
+
+[node name="Pillar (Broken) (1)2" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.43271822, 0, 0.90152925, 0, 1, 0, -0.90152925, 0, 0.43271822, -9.706701, 10.359993, 35.621845)
+
+[node name="Trap Falling Pillar3" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.87369645, 0.41725883, 0.25009924, 1.4901161e-07, 0.5141084, -0.8577252, -0.48647153, 0.7493915, 0.44917464, -21.503788, 16.37, 10.404661)
+
+[node name="Island (Short)4" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.328384, 13.81, 24.71)
+
+[node name="Pillar (Full)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.92034245, 0.00055458397, -0.39111316, 0.14147073, 0.93181664, 0.33422118, 0.36463112, -0.362929, 0.85751194, 1.32, 12.551169, 31.17)
+
+[node name="Pillar (Full) (19)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.20361292, 0.54799306, -0.8113233, 0.60915637, -0.57783914, -0.543167, -0.76646614, -0.6048186, -0.21615791, 14.36, 29.06, 11.12)
+
+[node name="Pillar (Broken)2" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.8063619, -0.52503365, -0.27225012, 0.5691096, 0.8140887, 0.11564503, 0.1609182, -0.24819192, 0.9552519, 11.11, 13.77, 12.99)
+
+[node name="Pillar (Broken) (17)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.46135652, -0.46097183, 0.75806016, 0.048594236, -0.8662735, -0.49720114, 0.88588303, -0.19254963, 0.42206138, 2.54, 43.29, -5.58)
+
+[node name="Pillar (Broken) (19)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.73348534, -0.25275445, 0.6309631, 0.0903901, 0.9563162, 0.27800894, -0.67366827, -0.14688264, 0.7242904, 5.41, 50.09, 1.15)
+
+[node name="Island (Tall)2" parent="Scene Contents/Geometry" instance=ExtResource("7_irpi2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.66, 43.75, 12.18)
+
+[node name="Pillar (Broken) (1)3" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.9331739, 0, 0.35942513, 0, 1, 0, -0.35942513, 0, 0.9331739, 9.185423, 17.449993, 24.480293)
+
+[node name="Pillar (Full) (1)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(1.3104662, -1.6631836, 1.6418536, -0.29199883, 1.7510833, 2.0068953, -2.318749, -1.1604792, 0.675184, 12.2, 22.9, -16.9)
+
+[node name="Pillar (Broken) (2)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(1.8491447, -1.5292637, 4.07614, -0.62325454, -4.475955, -1.3965243, 4.308726, 0.008859015, -1.9513338, 17.3, 25.5, 62.6)
+
+[node name="Island (Short) (1)3" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.13, 19.808798, 30.93)
+
+[node name="Pot (Breakable)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(0.2290134, -2.736079, -1.7130134, -9.644629e-08, 1.717319, -2.742956, 3.2280867, 0.19410847, 0.12152796, 8.43, 16.61, 18.08)
+freeze = true
+
+[node name="Pot (Breakable) (1)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(2.4454474, 1.7797781, 1.1511588, 0.055736683, 1.7029697, -2.751323, -2.1188843, 2.0988746, 1.256203, -12.01, 28.19, 8.41)
+freeze = true
+
+[node name="Pot (Breakable) (9)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(3.709153, -1.3659631, -0.61345536, 1.4774882, 3.0723155, 2.092344, -0.24333416, -2.1667993, 3.3534708, -4.947986, 35.729767, 29.106428)
+freeze = true
+
+[node name="Pot (Breakable) (10)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(0.3638892, -2.6584876, -2.9664838, -2.2958589, 2.2943325, -2.3377483, 3.2552443, 1.9153275, -1.3171574, 0.6, 23.1, 34.785854)
+freeze = true
+
+[node name="Island (Short)5" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.08, 25.082092, 14.57)
+
+[node name="Pot (Breakable) (8)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(-0.07138884, 0, -0.9974486, 0, 1, 0, 0.9974486, 0, -0.07138884, 6.42, 14.574266, 24.54)
+
+[node name="Pot" parent="Scene Contents/Geometry" instance=ExtResource("15_dhag7")]
+transform = Transform3D(15.007656, -13.667855, 6.3051276, 14.818417, 14.978709, -2.8013353, -2.6418824, 6.3735833, 20.10454, -3.9, 18.5, 97.5)
+
+[node name="Pot (2)" parent="Scene Contents/Geometry" instance=ExtResource("15_dhag7")]
+transform = Transform3D(0.08249984, 0.9415464, -21.234438, 19.69976, 7.970531, 0.42995504, 7.981694, -19.68194, -0.84169745, 44.2, 120.1, 26.4)
+
+[node name="Pot (1)" parent="Scene Contents/Geometry" instance=ExtResource("15_dhag7")]
+transform = Transform3D(17.775095, 9.5039625, 30.648958, 3.708777, 34.19379, -12.754116, -31.87364, 9.278857, 15.608068, 114.4, 19.4, -33.6)
+
+[node name="Pot (Breakable) (1)2" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(1.9771751, -0.27569038, 0.12154658, 0.27620092, 1.9808365, -1.8447978e-09, -0.12038195, 0.01678564, 1.9963032, -25.87, 25, 8.92)
+freeze = true
+
+[node name="Pot (Breakable) (4)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(0.85745054, 0, -1.8068699, 0, 2, 0, 1.8068699, 0, 0.85745054, -11.44, 3.44, 23.9)
+freeze = true
+
+[node name="Pot (Breakable) (11)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(-0.1518918, 0, -1.9942238, 0, 2, 0, 1.9942238, 0, -0.1518918, -17.21, 4.42, 24.87)
+freeze = true
+
+[node name="Pot (Breakable) (3)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(1.8592426, 0.2124709, 0.70574296, -0.22707845, 1.987067, 1.9261389e-08, -0.70117927, -0.08012953, 1.8713436, -26.09, 26, 3.59)
+freeze = true
+
+[node name="Ruin Block2" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(2.4809768, 0, -1.6866399, 0, 3, 0, 1.6866399, 0, 2.4809768, -25.16, 27.65, -2.7)
+
+[node name="Pot (Breakable) (6)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(0.9988954, 0.14349635, -1.7267358, -0.28439066, 1.9796772, -2.8701693e-08, 1.7091898, 0.24553378, 1.0091498, -21.1, 28, -8.24)
+freeze = true
+
+[node name="Pot (Breakable) (7)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(0.15851554, -0.016473804, -1.9936403, 0.20673765, 1.9892862, 1.0632478e-08, 1.9829606, -0.20608026, 0.15936927, -15.01, 29, -11.19)
+freeze = true
+
+[node name="Trap Falling Pillar4" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.98770773, 0, -0.15631211, 0, 1, 0, 0.15631211, 0, 0.98770773, -9.37, 28, -10.62)
+
+[node name="Spike Ball (Swinging)2" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(-0.85132635, 0, 0.52463645, 0, 1, 0, -0.52463645, 0, -0.85132635, -23.41, 34.56, -5.3)
+
+[node name="Pot (Breakable)2" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(2.433478, -2.4977853, 1.9594014, 2.8650682, 2.791305, 4.936377e-08, -1.3673217, 1.4034547, 3.4872262, 7.15, 28.33, -9.29)
+gravity_scale = 0.0
+freeze = true
+
+[node name="Pillar (Broken)3" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(1.8926537, -0.39366817, -0.5127258, 0.064264834, -1.4639007, 1.3611997, -0.64322037, -1.304615, -1.3726789, -12.78, 14.37, -40.61)
+
+[node name="Pillar (Broken) (2)2" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.24154699, -0.7110596, -0.6603403, 0.032132655, -0.6742562, 0.7377981, -0.969857, -0.19943139, -0.14001632, -17.68, 31.64, -21.84)
+
+[node name="Pillar (Broken) (13)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.2415477, 0.26423636, -0.9337205, -0.03213296, 0.9595069, 0.27984634, 0.9698569, 0.09759945, -0.22327602, -22.03, 25.43, -23.13)
+
+[node name="Pillar (Broken) (16)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.41918063, -0.21302234, 0.88255817, 0.13471769, -0.97591734, -0.17157069, 0.89785224, 0.046977095, 0.43778354, -28.821526, 15.090501, -0.016524183)
+
+[node name="Pillar (Broken) (1)4" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.6760279, 0.6624552, 0.32270628, 0.081748486, -0.5026586, 0.8606111, 0.7323274, -0.55541635, -0.39396596, -2.96, 29.91, -25.76)
+
+[node name="Island (Short) (3)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.76, 41.86, -13.26)
+
+[node name="Island (Short) (2)2" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 33.88, 1.83)
+
+[node name="Pot (Breakable) (2)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(3, 7.237192e-06, 3.1634772e-13, 0, -1.3113416e-07, 3, 7.237192e-06, -3, -1.3113416e-07, 2.14, 35.82, 8.3)
+freeze = true
+
+[node name="Pot (Breakable) (5)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(3.0875167e-06, -3, -1.3113416e-07, 0, -1.3113416e-07, 3, -3, -3.0875167e-06, -1.3495964e-13, 10.63, 40.31, 4.94)
+freeze = true
+
+[node name="Trap Falling Pillar (1)2" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.8910266, 0, -0.45395103, 0, 1, 0, 0.45395103, 0, 0.8910266, 5.76, 35.12098, 3.48)
+
+[node name="Trap Falling Pillar (2)2" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(0.8910266, 0, -0.45395103, 0, 1, 0, 0.45395103, 0, 0.8910266, 7.6, 38.69, 9.06)
+
+[node name="Pillar (Full)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.700242, 47.36, -12.883196)
+
+[node name="Island (Short)6" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 47.9, 12.08)
+
+[node name="Island (Short) (7)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6868839, 66.28001, 18.119503)
+
+[node name="Island (Short) (8)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(0.43759632, 0, 0.89917153, 0, 1, 0, -0.89917153, 0, 0.43759632, -37.51, 72.82, -21.61)
+
+[node name="Island (Short) (9)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(0.43759632, 0, 0.89917153, 0, 1, 0, -0.89917153, 0, 0.43759632, -46.928482, 54.22, 18.005613)
+
+[node name="Pillar (Broken)4" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4568834, 51.539993, 11.700498)
+
+[node name="Pillar (Broken) (20)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43, 69.92, 17.74)
+
+[node name="Pillar (Broken) (21)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.43759632, 0, 0.89917153, 0, 1, 0, -0.89917153, 0, 0.43759632, -37.766884, 76.45999, -21.989502)
+
+[node name="Pillar (Broken) (22)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.43759632, 0, 0.89917153, 0, 1, 0, -0.89917153, 0, 0.43759632, -47.185368, 57.859993, 17.626112)
+
+[node name="Pillar (Full) (1)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.89494824, 0.1449168, -0.42197958, -0.25433183, 0.9427726, -0.2156271, 0.36658284, 0.30029795, 0.88058966, -26.5, 21.04, 33.45)
+
+[node name="Pillar (Full) (2)" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.9929874, -0.09798242, 0.066148326, 0.026877042, -0.73198533, -0.6807901, 0.11512506, -0.67423815, 0.7294856, -38.73, 29.56, 10.08)
+
+[node name="Pillar (Full) (3)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.428501, -0.8388495, 0.33573586, 0.89726156, -0.3513235, 0.2673828, -0.10634202, 0.41581666, 0.90320975, -32.04, 30.74, 15.37)
+
+[node name="Pillar (Full) (4)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.9465928, -0.1912395, 0.25959498, -0.092097096, -0.93194044, -0.3507209, 0.30899876, 0.30808195, -0.89978063, -35.1, 30.74, -8)
+
+[node name="Pillar (Full) (6)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.6048571, 0.7919622, -0.08332887, 0.7908078, -0.6096684, -0.054106716, -0.093653455, -0.033170287, -0.9950521, -17.2, 39.29, 5)
+
+[node name="Pillar (Full) (7)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.58257675, 0.7688569, -0.2635592, 0.26019534, 0.13078153, 0.956658, 0.77000177, -0.6259036, -0.123862624, 3.02, 33.5, 18.27)
+
+[node name="Pillar (Full) (5)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.5124862, -0.64984196, 0.561305, 0.8001674, -0.1242075, 0.58677477, -0.31159258, 0.749852, 0.583637, -19.9, 38.08, -15.37)
+
+[node name="Island (Short) (1)4" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.42, 27.43, 16.97)
+
+[node name="Pillar (Broken) (1)5" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.133535, 31.069994, 17.083473)
+
+[node name="Ruin Block3" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(3.18761, 2.407744, -0.20472401, -1.8816292, 2.2605827, -2.7109475, -1.5161178, 2.2566645, 2.9340844, -11.59, 25.75, 45.72)
+
+[node name="Pillar (Broken) (2)3" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-1.0357174, 0.63164634, 0.87369174, -0.8772994, -1.1979675, -0.17390871, 0.62662584, -0.6331838, 1.2006011, -20.619034, 21.98228, 41.948833)
+
+[node name="Ruin Block (1)2" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(-2.6924822, -2.8328905, -0.8516287, 2.9216335, -2.3663366, -1.3654699, 0.46324664, -1.5411626, 3.6619968, 16.64, 40.008884, -8.97)
+
+[node name="Spike Ball2" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(1.7524163, -0.95515156, 2.239804, 1.3772433, 2.664536, 0.05872481, -2.0080433, 0.9939482, 1.9949509, 29.22, 26.6, -0.39)
+
+[node name="Spike Ball (1)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(0.08195561, 2.9266362, -0.6542814, -0.20139337, -0.6476768, -2.9223201, -2.9921103, 0.12375614, 0.17877482, -10.48, 31.07, -17.22)
+
+[node name="Spike Ball (2)" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(0.08195561, 2.9266362, -0.6542814, -0.20139337, -0.6476768, -2.9223201, -2.9921103, 0.12375614, 0.17877482, -27.73, 16.95, -12.25)
+
+[node name="Pillar (Full) (1)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.84817517, 0.29930547, 0.43705273, -0.33276996, 0.943008, -5.066395e-07, -0.41214436, -0.1454376, 0.8994359, -26, 24.02, 24.57)
+
+[node name="Island (Short) (1)5" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23, 48.77248, 20.4)
+
+[node name="Spike Ball (Swinging)3" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(-0.8734503, 0, -0.4869136, 0, 1, 0, 0.4869136, 0, -0.8734503, 1.42, 55.35, 12.5)
+
+[node name="Ruin Block4" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(2.6276822, 0, 3.015839, 0, 4, 0, -3.015839, 0, 2.6276822, -2.1, 49.67, 4.86)
+
+[node name="Ruin Block (3)2" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(3.666939, -0.7134652, 1.4298689, 1.4557137, 2.9677715, -2.2523828, -0.65913194, 2.5852075, 2.98031, -19, 52.29, -17.8)
+
+[node name="Ruin Block (4)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(3.666939, -0.7134652, 1.4298689, 1.4557137, 2.9677715, -2.2523828, -0.65913194, 2.5852075, 2.98031, 17.5, 34.6, 34.8)
+
+[node name="Spike Ball (Swinging) (1)2" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(0.1858623, 0, 1.4884404, 0, 1.5, 0, -1.4884404, 0, 0.1858623, -9.91, 60.44, 2.08)
+
+[node name="Spike Ball (Swinging) (2)" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(0.2586171, 0, 1.4775376, 0, 1.5, 0, -1.4775376, 0, 0.2586171, -16.38, 60.44, 1)
+
+[node name="Spike Ball (Swinging) (3)" parent="Scene Contents/Geometry" instance=ExtResource("12_ypt8q")]
+transform = Transform3D(0.26267433, 0, 1.4768217, 0, 1.5, 0, -1.4768217, 0, 0.26267433, -22.91, 60.44, -0.23)
+
+[node name="Island (Short) (3)2" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.81, 61.63, -14.65)
+
+[node name="Island (Short) (5)" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 63, -20)
+
+[node name="Trap Falling Pillar5" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -6.13, 71, -6.77)
+
+[node name="Trap Falling Pillar (1)3" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -5.695961, 73, -2.256052)
+
+[node name="Trap Falling Pillar (2)3" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -8.660427, 75, 2.1285853)
+
+[node name="Trap Falling Pillar (3)2" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -13.308815, 77, 0.27194345)
+
+[node name="Trap Falling Pillar (4)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -15.784386, 79, -2.4782865)
+
+[node name="Trap Falling Pillar (5)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -13.991997, 81, -6.9287624)
+
+[node name="Trap Falling Pillar (6)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.29615235, -9.568141, 83, -6.5729346)
+
+[node name="Pot (Breakable)3" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(8.295604, -3.956223, 3.940973, -0.20646155, 6.8352795, 7.2963233, -5.5803533, -6.1341066, 5.588596, 14.364721, 84.56721, 3.1091094)
+freeze = true
+
+[node name="Pot (Breakable) (1)3" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(3.2838979, -1.9778789, 1.1419325, -9.536741e-07, 2.0000036, 3.4640996, -2.2838595, -2.8439376, 1.6419514, -0.11641286, 86.59, -1.9478936)
+freeze = true
+
+[node name="Pot (Breakable) (2)2" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
+transform = Transform3D(-3.966987, 0.4441432, -0.2564226, 3.5911787e-06, 2.000003, 3.4641, 0.5128506, 3.4355094, -1.9834969, -0.22, 85.6, -20.27)
+freeze = true
+
+[node name="Goal Ring" parent="Scene Contents/Geometry" instance=ExtResource("16_ru7w4")]
+transform = Transform3D(0.85311484, 0.9372966, 0.54595786, -0.40812683, 0.92090887, -0.9432704, -1.0050014, 0.4216652, 0.84650505, 11.405464, 89.68, -1.4791756)
+
+[node name="Swinging Block" parent="Scene Contents/Geometry" instance=ExtResource("17_qubas")]
+transform = Transform3D(-2.6809325, 0, -1.3463286, 0, 3, 0, 1.3463286, 0, -2.6809325, 25.863644, 52.59, 12.771224)
+
+[node name="Island (Tall) (1)" parent="Scene Contents/Geometry" instance=ExtResource("7_irpi2")]
+transform = Transform3D(-0.5000006, 0, -0.86602503, 0, 1, 0, 0.86602503, 0, -0.5000006, -31.547508, 53.75, -2.5040061)
+
+[node name="Swinging Block (3)" parent="Scene Contents/Geometry" instance=ExtResource("17_qubas")]
+transform = Transform3D(0.17451453, 0, 2.9949198, 0, 3, 0, -2.9949198, 0, 0.17451453, -38.661366, 62.59, 8.635062)
+
+[node name="Swinging Block (2)" parent="Scene Contents/Geometry" instance=ExtResource("17_qubas")]
+transform = Transform3D(5.794127, 7.110856, -11.868606, -12.586019, 8.053008, -1.3195494, 5.7463236, 10.468275, 9.0771675, -71, 92.5, 57.8)
+
+[node name="Pillar (Full) (2)2" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.97120035, 0, 0.2382643, 0, 1, 0, -0.2382643, 0, 0.97120035, -31.73, 57.79, -14.98)
+
+[node name="Pillar (Full) (4)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.24382246, -0.6514845, 0.7184139, 0.8578391, -0.2006731, -0.4731198, 0.45239657, 0.73164076, 0.5099403, -43.294426, 68.831276, -24.544909)
+
+[node name="Pillar (Full) (5)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.47325903, -0.11595705, 0.8732582, -0.348719, -0.9349822, 0.064833805, 0.8089629, -0.3352049, -0.48292518, -29.99, 52, 11.47)
+
+[node name="Pillar (Full) (6)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(-0.012213111, -0.12830994, 0.9916589, 0.88648486, 0.45741677, 0.0701026, -0.4625963, 0.8799468, 0.10815835, -18.26, 47.23, 18.6)
+
+[node name="Pillar (Full) (3)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.9203025, 0, 0.39120752, 0, 1, 0, -0.39120752, 0, 0.9203025, -23.27, 60.57, -14.51)
+
+[node name="Spike Ball3" parent="Scene Contents/Geometry" instance=ExtResource("11_qpf73")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -27.6, 65.37, -14.62)
+
+[node name="Trap Falling Pillar (8)" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
+transform = Transform3D(1, 0, 0, 0, 5.9604645e-08, -1, 0, 1, 5.9604645e-08, -29.1, 65.05, -22.68)
+
+[node name="Ruin Block5" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(4.504553, 0, 2.1700232, 0, 5, 0, -2.1700232, 0, 4.504553, -18.32, 65.67, -16.1)
+
+[node name="Ruin Block (5)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(1.9337767, 0, 4.610912, 0, 5, 0, -4.610912, 0, 1.9337767, -3.88, 70, -33.14)
+
+[node name="Ruin Block (6)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(-3.209816, 0, -3.8336773, 0, 5, 0, 3.8336773, 0, -3.209816, -28.6, 74.33, -1.3)
+
+[node name="Ruin Block (1)3" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(-2.3870249, 0, 4.9550085, 0, 5.5, 0, -4.9550085, 0, -2.3870249, -15.23, 67.64, -9.6)
+
+[node name="Ruin Block (2)2" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(-2.6040273, 0, 5.405464, 0, 6, 0, -5.405464, 0, -2.6040273, -7.52, 69.64, -12.03)
+
+[node name="Ruin Block (7)" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(-2.391923, 0, -5.5026093, 0, 6, 0, 5.5026093, 0, -2.391923, 17.31, 75.33, -23.31)
+
+[node name="Pillar (Full) (1)4" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.96640426, 0, 0.25702682, 0, 1, 0, -0.25702682, 0, 0.96640426, -23.68, 4, 2.87)
+
+[node name="Pillar (Full) (2)3" parent="Scene Contents/Geometry" instance=ExtResource("8_ydmep")]
+transform = Transform3D(0.99969935, 0, -0.024519414, 0, 1, 0, 0.024519414, 0, 0.99969935, -24.05, 5.5, -2.37)
+
+[node name="Ruin Block6" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(2.682005, 0, 1.3441907, 0, 3, 0, -1.3441907, 0, 2.682005, -20.24, 20.05, 26.01)
+
+[node name="Ruin Block (1)4" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(2.682005, 0, 1.3441907, 0, 3, 0, -1.3441907, 0, 2.682005, -21.88, 22.19, 22.73)
+
+[node name="Ruin Block (2)3" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
+transform = Transform3D(2.682005, 0, 1.3441907, 0, 3, 0, -1.3441907, 0, 2.682005, -23.53, 23.9, 19.45)
+
+[node name="Pillar (Broken)5" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.88864493, -4.513803e-08, -0.45859584, -1.5432716e-08, -1, 6.852183e-08, -0.45859584, -5.38142e-08, -0.88864505, 3.26, 46.02, 15.92)
+
+[node name="Pillar (Broken) (1)6" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.7606199, -4.513801e-08, 0.6491974, -6.0316374e-10, -0.9999999, -7.023563e-08, 0.6491974, -5.381419e-08, 0.76062, -0.24, 47.48, 9.14)
+
+[node name="Pillar (Broken) (2)4" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.123072505, -4.5138016e-08, 0.9923977, -4.7849845e-08, -1, -5.141791e-08, 0.9923977, -5.38142e-08, 0.123072386, -6.36, 49.01, 2.49)
+
+[node name="Pillar (Broken) (3)" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(0.98851776, -4.5138005e-08, 0.1511046, -5.2751293e-08, -1, 4.637572e-08, 0.1511046, -5.3814187e-08, -0.9885179, -13.09, 49.01, 1.43)
+
+[node name="Pillar (Broken) (4)2" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.99709547, -4.5138002e-08, -0.0761614, 4.910546e-08, -1, -5.0220102e-08, -0.0761614, -5.3814176e-08, 0.9970955, -19.54, 49.01, 0.28)
+
+[node name="Pillar (Broken) (5)2" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
+transform = Transform3D(-0.99709547, -4.5138002e-08, -0.0761614, 4.910546e-08, -1, -5.0220102e-08, -0.0761614, -5.3814176e-08, 0.9970955, -26.23, 49.14, -0.29)
+
+[editable path="Level Management/Level Manager"]
+[editable path="Level Management/Level Manager/HUD Stuff/Stopwatch Render/Stopwatch Root/Fbx_Stopwatch"]
+[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJoystick"]
+[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJump"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Resume"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Restart"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Settings"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Quit"]
+[editable path="Level Management/Level Manager/Player Spawner"]
+[editable path="Level Management/Level Manager/Pause Scene Management"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Fbx_TvRemote"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_RollyPoly"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Player_Pumpkin"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Meatball"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Shadow Blob"]
+[editable path="Scene Contents/Level Features/Lava"]
+[editable path="Scene Contents/Level Features/Binocular Stand"]
+[editable path="Scene Contents/Level Features/Binocular Stand/Fbx_Checkpoint"]
+[editable path="Scene Contents/Level Features/Binocular Stand/Fbx_Binoculars"]
+[editable path="Scene Contents/Level Features/Checkpoint"]
+[editable path="Scene Contents/Level Features/Checkpoint/Fbx_Checkpoint"]
+[editable path="Scene Contents/Level Features/Checkpoint/Checkpoint Flag/Fbx_CheckpointFlag"]
+[editable path="Scene Contents/Level Features/Checkpoint2"]
+[editable path="Scene Contents/Level Features/Checkpoint2/Fbx_Checkpoint"]
+[editable path="Scene Contents/Level Features/Checkpoint2/Checkpoint Flag/Fbx_CheckpointFlag"]
+[editable path="Scene Contents/Geometry/Island (Short)"]
+[editable path="Scene Contents/Geometry/Island (Short) (4)"]
+[editable path="Scene Contents/Geometry/Island (Tall)"]
+[editable path="Scene Contents/Geometry/Island (Short)2"]
+[editable path="Scene Contents/Geometry/Island (Short) (1)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (23)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (4)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (5)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (7)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (8)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (20)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (14)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (9)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (17)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (10)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (18)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (11)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (12)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (13)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (22)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (21)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (11)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (14)"]
+[editable path="Scene Contents/Geometry/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (15)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (16)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (1)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (3)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (4)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (23)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (24)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (5)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (6)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (9)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (12)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (10)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (18)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (3)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (3)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (1)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (1)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (2)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (2)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (7)"]
+[editable path="Scene Contents/Geometry/Island (Short)3"]
+[editable path="Scene Contents/Geometry/Island (Short) (2)"]
+[editable path="Scene Contents/Geometry/Island (Short) (1)2"]
+[editable path="Scene Contents/Geometry/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Spike Ball"]
+[editable path="Scene Contents/Geometry/Spike Ball (3)"]
+[editable path="Scene Contents/Geometry/Spike Ball (4)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Spike Ball (5)"]
+[editable path="Scene Contents/Geometry/Spike Ball (6)"]
+[editable path="Scene Contents/Geometry/Spike Ball (8)"]
+[editable path="Scene Contents/Geometry/Spike Ball (7)"]
+[editable path="Scene Contents/Geometry/Ruin Block"]
+[editable path="Scene Contents/Geometry/Ruin Block (1)"]
+[editable path="Scene Contents/Geometry/Ruin Block (3)"]
+[editable path="Scene Contents/Geometry/Ruin Block (2)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar2"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar2/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (6)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (15)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (1)2"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar3"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar3/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Island (Short)4"]
+[editable path="Scene Contents/Geometry/Pillar (Full)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (19)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken)2"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (17)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (19)"]
+[editable path="Scene Contents/Geometry/Island (Tall)2"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (1)3"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (1)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (2)"]
+[editable path="Scene Contents/Geometry/Island (Short) (1)3"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (9)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (9)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (9)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (10)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (10)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (10)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Island (Short)5"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (8)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (8)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (8)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot"]
+[editable path="Scene Contents/Geometry/Pot (2)"]
+[editable path="Scene Contents/Geometry/Pot (1)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)2"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)2/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)2/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (4)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (4)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (4)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (11)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (11)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (11)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (3)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (3)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (3)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Ruin Block2"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (6)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (6)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (6)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (7)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (7)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (7)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar4"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar4/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)2"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)2/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)2/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)2/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)2"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)2/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)2/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pillar (Broken)3"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (2)2"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (13)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (16)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (1)4"]
+[editable path="Scene Contents/Geometry/Island (Short) (3)"]
+[editable path="Scene Contents/Geometry/Island (Short) (2)2"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (2)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (2)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (2)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (5)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (5)/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (5)/Broken Parts"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (1)2"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (1)2/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (2)2"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (2)2/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Pillar (Full)3"]
+[editable path="Scene Contents/Geometry/Island (Short)6"]
+[editable path="Scene Contents/Geometry/Island (Short) (7)"]
+[editable path="Scene Contents/Geometry/Island (Short) (8)"]
+[editable path="Scene Contents/Geometry/Island (Short) (9)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken)4"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (20)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (21)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (22)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (1)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (2)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (3)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (4)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (6)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (7)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (5)2"]
+[editable path="Scene Contents/Geometry/Island (Short) (1)4"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (1)5"]
+[editable path="Scene Contents/Geometry/Ruin Block3"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (2)3"]
+[editable path="Scene Contents/Geometry/Ruin Block (1)2"]
+[editable path="Scene Contents/Geometry/Spike Ball2"]
+[editable path="Scene Contents/Geometry/Spike Ball (1)"]
+[editable path="Scene Contents/Geometry/Spike Ball (2)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (1)3"]
+[editable path="Scene Contents/Geometry/Island (Short) (1)5"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)3"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)3/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)3/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging)3/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Ruin Block4"]
+[editable path="Scene Contents/Geometry/Ruin Block (3)2"]
+[editable path="Scene Contents/Geometry/Ruin Block (4)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)2"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)2/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)2/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (1)2/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (2)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (2)/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (2)/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (2)/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (3)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (3)/Ruin Block"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (3)/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Spike Ball (Swinging) (3)/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Island (Short) (3)2"]
+[editable path="Scene Contents/Geometry/Island (Short) (5)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar5"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar5/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (1)3"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (1)3/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (2)3"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (2)3/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (3)2"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (3)2/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (4)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (4)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (5)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (5)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (6)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (6)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)3"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)3/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable)3/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)3"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)3/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (1)3/Broken Parts"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (2)2"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (2)2/Solid Pot"]
+[editable path="Scene Contents/Geometry/Pot (Breakable) (2)2/Broken Parts"]
+[editable path="Scene Contents/Geometry/Goal Ring"]
+[editable path="Scene Contents/Geometry/Goal Ring/Fbx_GoalRing"]
+[editable path="Scene Contents/Geometry/Swinging Block"]
+[editable path="Scene Contents/Geometry/Swinging Block/Ruin Block"]
+[editable path="Scene Contents/Geometry/Swinging Block/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Swinging Block/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Swinging Block/Hinge/Ruin Block"]
+[editable path="Scene Contents/Geometry/Island (Tall) (1)"]
+[editable path="Scene Contents/Geometry/Swinging Block (3)"]
+[editable path="Scene Contents/Geometry/Swinging Block (3)/Ruin Block"]
+[editable path="Scene Contents/Geometry/Swinging Block (3)/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Swinging Block (3)/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Swinging Block (3)/Hinge/Ruin Block"]
+[editable path="Scene Contents/Geometry/Swinging Block (2)"]
+[editable path="Scene Contents/Geometry/Swinging Block (2)/Ruin Block"]
+[editable path="Scene Contents/Geometry/Swinging Block (2)/Hinge/Pillar (Full)"]
+[editable path="Scene Contents/Geometry/Swinging Block (2)/Hinge/Spike Ball"]
+[editable path="Scene Contents/Geometry/Swinging Block (2)/Hinge/Ruin Block"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (2)2"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (4)3"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (5)3"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (6)3"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (3)3"]
+[editable path="Scene Contents/Geometry/Spike Ball3"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (8)"]
+[editable path="Scene Contents/Geometry/Trap Falling Pillar (8)/Pillar (Broken)"]
+[editable path="Scene Contents/Geometry/Ruin Block5"]
+[editable path="Scene Contents/Geometry/Ruin Block (5)"]
+[editable path="Scene Contents/Geometry/Ruin Block (6)"]
+[editable path="Scene Contents/Geometry/Ruin Block (1)3"]
+[editable path="Scene Contents/Geometry/Ruin Block (2)2"]
+[editable path="Scene Contents/Geometry/Ruin Block (7)"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (1)4"]
+[editable path="Scene Contents/Geometry/Pillar (Full) (2)3"]
+[editable path="Scene Contents/Geometry/Ruin Block6"]
+[editable path="Scene Contents/Geometry/Ruin Block (1)4"]
+[editable path="Scene Contents/Geometry/Ruin Block (2)3"]
+[editable path="Scene Contents/Geometry/Pillar (Broken)5"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (1)6"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (2)4"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (3)"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (4)2"]
+[editable path="Scene Contents/Geometry/Pillar (Broken) (5)2"]

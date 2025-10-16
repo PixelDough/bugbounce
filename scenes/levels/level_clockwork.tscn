@@ -1,0 +1,184 @@
+[gd_scene load_steps=11 format=3 uid="uid://fvmvuqfq3woj"]
+
+[ext_resource type="Material" uid="uid://c6af2qcccg3hd" path="res://Assets/_Game/Content/Levels/Clockwork/Mat_ClockworkSky.material" id="1_0t1bx"]
+[ext_resource type="PackedScene" uid="uid://cjvc5w1qqongf" path="res://Assets/_Game/Content/Levels/Clockwork/Gears/Gears.fbx_Gear2.fbx" id="2_naqm0"]
+[ext_resource type="PackedScene" uid="uid://c832wurmnqddm" path="res://Assets/_Game/Content/Levels/Clockwork/Shaft/Shaft.fbx" id="3_qbmvj"]
+[ext_resource type="PackedScene" uid="uid://di6ctd4bdqif2" path="res://Assets/_Game/Content/Levels/Clockwork/Gears/Gears.fbx_Gear3.fbx" id="4_ki8ih"]
+[ext_resource type="PackedScene" uid="uid://du2j6nu2snnm2" path="res://Assets/_Game/Content/Levels/Clockwork/Pendulum/Pendulum.fbx" id="5_52e6q"]
+[ext_resource type="PackedScene" uid="uid://be1lytmn5qkjl" path="res://Assets/_Game/Content/Level Features/_Prefabs/Player Spawner.prefab.scn" id="6_yg3wy"]
+[ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="7_qaiy5"]
+
+[sub_resource type="Sky" id="Sky_d0j3m"]
+sky_material = ExtResource("1_0t1bx")
+
+[sub_resource type="Environment" id="Environment_om00g"]
+background_mode = 2
+sky = SubResource("Sky_d0j3m")
+fog_enabled = true
+fog_light_color = Color(0.49056602, 0.20874165, 0.025453899, 1)
+fog_density = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_85xls"]
+size = Vector3(300, 200, 300)
+
+[node name="RootNode3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_om00g")
+
+[node name="Gears_fbx_Gear2 (2)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(0.98789304, -0.1551364, 0, 0.1551364, 0.98789304, 0, 0, 0, 1, 60.25, 16.499975, 28.25)
+
+[node name="Shaft" parent="Gears_fbx_Gear2 (2)" instance=ExtResource("3_qbmvj")]
+transform = Transform3D(2.7661004, 0.43438193, 0, -0.43438193, 2.7661004, 0, 0, 0, 5.997609, 0, 0, 0.9999924)
+
+[node name="Gears_fbx_Gear3 (5)" parent="Gears_fbx_Gear2 (2)" instance=ExtResource("4_ki8ih")]
+transform = Transform3D(0.98789304, 0.1551364, 0, -0.1551364, 0.98789304, 0, 0, 0, 1, 0, 0, 8.44)
+
+[node name="Draw XXL Lines Manager" type="Node3D" parent="."]
+
+[node name="Gears_fbx_Gear3" parent="." instance=ExtResource("4_ki8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 16.499975, 28.5)
+
+[node name="Gears_fbx_Gear2" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(1, 0, 0, 0, -8.34465e-07, -1, 0, 1, -8.34465e-07, 0, -1.0000046, 10.5)
+
+[node name="Gears_fbx_Gear3 (3)" parent="." instance=ExtResource("4_ki8ih")]
+transform = Transform3D(0.9999803, -0.0062830625, 0, 0.0062830625, 0.9999803, 0, 0, 0, 1, 17.26, 11, 81.09)
+
+[node name="Shaft" parent="Gears_fbx_Gear3 (3)" instance=ExtResource("3_qbmvj")]
+transform = Transform3D(2.799779, -0.035184547, 6.041191e-07, -0.035184547, -2.799779, 1.0134891e-05, 3.33627e-07, -7.0975802e-06, -4.0009003, 2.483527e-09, -1.4901161e-08, -1.5899963)
+
+[node name="Gears_fbx_Gear2" parent="Gears_fbx_Gear3 (3)" instance=ExtResource("2_naqm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.8399963)
+
+[node name="Gears_fbx_Gear3 (2)" parent="." instance=ExtResource("4_ki8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, -13.250025, -26.25)
+
+[node name="Scene Contents" type="Node3D" parent="."]
+
+[node name="Level Features" type="Node3D" parent="Scene Contents"]
+
+[node name="Geometry" type="Node3D" parent="Scene Contents"]
+
+[node name="Pendulum" parent="." instance=ExtResource("5_52e6q")]
+transform = Transform3D(0.8660236, 0, -0.50000316, 0, 1, 0, 0.50000316, 0, 0.8660236, -40.157753, 41.39352, 88.8361)
+
+[node name="Gears_fbx_Gear2 (1)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.000025, 28.5)
+
+[node name="Level Management" type="Node3D" parent="."]
+
+[node name="Player Spawner" parent="Level Management" instance=ExtResource("6_yg3wy")]
+
+[node name="Level Manager" parent="Level Management" instance=ExtResource("7_qaiy5")]
+
+[node name="Fbx_Player_Coconut_Test" parent="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model" index="3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
+
+[node name="Directional Light" type="Node3D" parent="Level Management"]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0, 0)
+
+[node name="Light" type="DirectionalLight3D" parent="Level Management/Directional Light"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+light_energy = 2.0
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.4
+
+[node name="Kill Zone" type="Node3D" parent="Level Management"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="BoxCollider" type="Area3D" parent="Level Management/Kill Zone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Management/Kill Zone/BoxCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
+shape = SubResource("BoxShape3D_85xls")
+
+[node name="Gears_fbx_Gear2 (6)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, -13.250025, 28.5)
+
+[node name="Shaft" parent="Gears_fbx_Gear2 (6)" instance=ExtResource("3_qbmvj")]
+transform = Transform3D(-2.8, 0, 8.078276e-06, 0, 2.8, 0, -4.2278825e-07, 0, -53.5, 0, 0, 0)
+
+[node name="Gears_fbx_Gear2 (8)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(-0.044590473, 0.9990053, 0, 0, 0, -1, -0.9990053, -0.044590503, 0, 12.43, -0.61, 62.75)
+
+[node name="Gears_fbx_Gear2 (3)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(0.49999976, 0, -0.8660255, 0, 1, 0, 0.8660255, 0, 0.49999976, -24.347511, 10.89351, 68.483)
+
+[node name="Gears_fbx_Gear2 (7)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.25, -0.6064911, 45)
+
+[node name="Gears_fbx_Gear3 (4)" parent="." instance=ExtResource("4_ki8ih")]
+transform = Transform3D(0, 0, -1, 0.065403245, 0.99785894, 0, 0.9978589, -0.065403245, 0, 39.25, 16.49998, 59)
+
+[node name="Gears_fbx_Gear2 (4)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(-0.5000001, 0.8660253, 0, 0, 0, -1, -0.8660253, -0.5000001, 0, -33.46532, 21.64351, 75.190506)
+
+[node name="Gears_fbx_Gear2 (5)" parent="." instance=ExtResource("2_naqm0")]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -15.11725, -0.6064911, 61.307217)
+
+[node name="Shaft" parent="Gears_fbx_Gear2 (5)" instance=ExtResource("3_qbmvj")]
+transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 53.5, 0, 0, 0)
+
+[node name="Gears_fbx_Gear2 (7)" parent="Gears_fbx_Gear2 (5)" instance=ExtResource("2_naqm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52.35649)
+
+[node name="Shaft (1)" parent="Gears_fbx_Gear2 (5)" instance=ExtResource("3_qbmvj")]
+transform = Transform3D(-2.8, 0, 8.078276e-06, 0, 2.8, 0, -4.2278825e-07, 0, -53.5, 0, 0, 0)
+
+[node name="Gears_fbx_Gear3 (1)" parent="Gears_fbx_Gear2 (5)" instance=ExtResource("4_ki8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 54.39351)
+
+[editable path="Gears_fbx_Gear2 (2)"]
+[editable path="Gears_fbx_Gear2 (2)/Shaft"]
+[editable path="Gears_fbx_Gear2 (2)/Gears_fbx_Gear3 (5)"]
+[editable path="Gears_fbx_Gear3"]
+[editable path="Gears_fbx_Gear2"]
+[editable path="Gears_fbx_Gear3 (3)"]
+[editable path="Gears_fbx_Gear3 (3)/Shaft"]
+[editable path="Gears_fbx_Gear3 (3)/Gears_fbx_Gear2"]
+[editable path="Gears_fbx_Gear3 (2)"]
+[editable path="Pendulum"]
+[editable path="Gears_fbx_Gear2 (1)"]
+[editable path="Level Management/Player Spawner"]
+[editable path="Level Management/Level Manager"]
+[editable path="Level Management/Level Manager/HUD Stuff/Stopwatch Render/Stopwatch Root/Fbx_Stopwatch"]
+[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJoystick"]
+[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJump"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Resume"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Restart"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Settings"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Quit"]
+[editable path="Level Management/Level Manager/Player Spawner"]
+[editable path="Level Management/Level Manager/Pause Scene Management"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Fbx_TvRemote"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_RollyPoly"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Player_Pumpkin"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Meatball"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Shadow Blob"]
+[editable path="Gears_fbx_Gear2 (6)"]
+[editable path="Gears_fbx_Gear2 (6)/Shaft"]
+[editable path="Gears_fbx_Gear2 (8)"]
+[editable path="Gears_fbx_Gear2 (3)"]
+[editable path="Gears_fbx_Gear2 (7)"]
+[editable path="Gears_fbx_Gear3 (4)"]
+[editable path="Gears_fbx_Gear2 (4)"]
+[editable path="Gears_fbx_Gear2 (5)"]
+[editable path="Gears_fbx_Gear2 (5)/Shaft"]
+[editable path="Gears_fbx_Gear2 (5)/Gears_fbx_Gear2 (7)"]
+[editable path="Gears_fbx_Gear2 (5)/Shaft (1)"]
+[editable path="Gears_fbx_Gear2 (5)/Gears_fbx_Gear3 (1)"]

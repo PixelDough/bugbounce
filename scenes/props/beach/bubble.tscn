@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://su6wdhhatlew"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1buup"]
+resource_name = "Sphere"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dr2fv"]
+
+[node name="Bubble" type="Area3D"]
+transform = Transform3D(9.999999, 0, 0, 0, 10, 0, 0, 0, 9.999999, 0, 0, 0)
+
+[node name="MeshRenderer" type="MeshInstance3D" parent="."]
+layers = 2048
+gi_mode = 2
+mesh = SubResource("SphereMesh_1buup")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_dr2fv")
+
+[node name="Pop Particle" type="Node3D" parent="."]
+
+[node name="ParticleSystem" type="Node" parent="Pop Particle"]
+
+[node name="ParticleSystemRenderer" type="Node" parent="Pop Particle"]

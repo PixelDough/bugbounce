@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1bfg6m5drjbj"]
+
+[ext_resource type="Material" uid="uid://dx1lsmb42vcii" path="res://Assets/_Game/Backgrounds/Mat_SpaceSkybox.material" id="1_trsx3"]
+[ext_resource type="PackedScene" uid="uid://diucg8okddkp4" path="res://Assets/_Game/Content/Main Menu/Fbx_Logo.fbx" id="2_oxigu"]
+[ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://Assets/3D Text/Example/Models/Mat_Font3D_1.material" id="3_xhyjc"]
+[ext_resource type="Material" uid="uid://cb73v05q58j7f" path="res://Assets/3D Text/Example/Models/Mat_Font3D_2.material" id="4_7x4ts"]
+
+[sub_resource type="Sky" id="Sky_pkid5"]
+sky_material = ExtResource("1_trsx3")
+
+[sub_resource type="Environment" id="Environment_grj1y"]
+background_mode = 2
+sky = SubResource("Sky_pkid5")
+fog_enabled = true
+fog_light_color = Color(0.13741495, 0, 0.2830189, 1)
+fog_density = 0.00774091
+
+[node name="RootNode3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_grj1y")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+
+[node name="Main Menu" type="Node3D" parent="."]
+
+[node name="Fbx_Logo" parent="." instance=ExtResource("2_oxigu")]
+transform = Transform3D(-1, 0, 0, 0, 0.9961947, -0.087155774, 0, -0.087155774, -0.9961947, 0, 0.64, 0)
+
+[node name="Rolly Poly" parent="Fbx_Logo" index="0"]
+transform = Transform3D(2.4585614, 0, 0.58646053, 0, 2.5275404, 0, -0.58646053, 0, 2.4585614, -0.028521035, 0, 0)
+
+[node name="Text" parent="Fbx_Logo" index="1"]
+transform = Transform3D(1.4861, 0, 0, 0, -6.4959494e-08, -1.4861, 0, 1.4861, -6.4959494e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("3_xhyjc")
+surface_material_override/1 = ExtResource("4_7x4ts")
+
+[node name="Pillar Full" parent="Fbx_Logo" index="2"]
+transform = Transform3D(0.3357061, 0.22977042, -0.11018129, -0.2636049, 0.3922087, 0.0030924687, 0.20291536, 0.12937805, 0.18630292, -4.8060684, -1.14, -10.36)
+
+[node name="Pot" parent="Fbx_Logo" index="3"]
+transform = Transform3D(0.8727559, -0.114090286, 0.355398, 0.43247607, 0.2592194, -0.6653737, -0.036316976, 0.34510663, 0.6172737, 2.8215709, -0.05, -9.18)
+
+[node name="Spike Ball" parent="Fbx_Logo" index="4"]
+transform = Transform3D(0.0027621323, -0.37845135, -0.7170547, -0.14165023, 0.6617885, -0.3518834, 0.34328985, 0.27611598, -0.1394267, -2.1836874, -2.32, -9.49)
+
+[node name="Life Saver" parent="Fbx_Logo" index="5"]
+transform = Transform3D(4.8917394, -1.3669776, -2.6327753, 1.8793874e-07, 1.9107729, -4.7290883, 3.9797928, 1.6802125, 3.2360606, 2.553753, -1.43, -8.14)
+
+[node name="Tree_2" parent="Fbx_Logo" index="6"]
+transform = Transform3D(1.4095905, 0.6862852, -0.02639622, -0.68628514, 1.4107057, 0.006082175, 0.05763048, 0.013279135, 0.718057, -0.60898936, -0.96, -11.22)
+
+[node name="Spear" parent="Fbx_Logo" index="7"]
+transform = Transform3D(0.54167765, -0.2935874, 0.011292098, 0.2935874, 0.54220235, 0.0028621552, -0.024653867, 0.0062488983, 0.28218573, -3.0690727, -0.75, -8.22)
+
+[node name="Soda Bottle" parent="Fbx_Logo" index="8"]
+transform = Transform3D(1.2512754, -1.5690149, 0.060348168, 1.5690147, 1.2565966, 0.02902332, -0.13175735, 0.06336595, 0.91873574, 2.1370914, -0.95, -14.08)
+
+[node name="Plate" parent="Fbx_Logo" index="9"]
+transform = Transform3D(24.363564, 7.0247264, 14.969051, 16.986282, -1.267547e-06, -27.646788, -13.067587, 13.097088, -8.028771, -4.6825047, -0.53, -15.4)
+
+[node name="Cake" parent="Fbx_Logo" index="10"]
+transform = Transform3D(1.3536279, 2.0001726, 12.820889, 0.49124032, 13.066567, -2.2857275, -5.9229884, 1.5408292, 2.7404869, -3.324128, -1.17, -7.8)
+
+[node name="Sausage" parent="Fbx_Logo" index="11"]
+transform = Transform3D(-20.994415, -2.7412572, -5.657681, -5.423741, -0.7379848, 21.830736, -6.1977406, 9.931641, 0.06057357, 1.0817387, -1.81, -8.22)
+
+[node name="Cleaver" parent="Fbx_Logo" index="12"]
+transform = Transform3D(0.06917402, 0.37215462, -0.077180125, -0.3707447, -0.014594551, -0.08447291, -0.17158613, 0.18156645, 0.15140514, 2.8672771, 2.03, -10.02)
+
+[node name="Info Text" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -4.2, 0)
+
+[node name="BGM" type="Node3D" parent="."]
+
+[node name="Directional Light" type="Node3D" parent="."]
+transform = Transform3D(0.42135236, 0.69472337, 0.58294225, 0, 0.6427877, -0.7660444, -0.906897, 0.32277462, 0.2708401, 0, 3, 0)
+
+[node name="Light" type="DirectionalLight3D" parent="Directional Light"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.4
+
+[node name="CinemachineCamera" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Start Prompt Text" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -3.19, 0)
+
+[editable path="Fbx_Logo"]

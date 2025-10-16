@@ -1,0 +1,584 @@
+[gd_scene load_steps=25 format=3 uid="uid://0dxny8jexjm8"]
+
+[ext_resource type="Material" uid="uid://dx1lsmb42vcii" path="res://Assets/_Game/Backgrounds/Mat_SpaceSkybox.material" id="1_qvhuk"]
+[ext_resource type="PackedScene" uid="uid://bo21l0t6adjfk" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Ball Return Feature.prefab.scn" id="2_pqaur"]
+[ext_resource type="PackedScene" uid="uid://dxqe8rvug2dvm" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Pin Ring.prefab.scn" id="3_n1ptr"]
+[ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="4_adloq"]
+[ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="5_pcbo2"]
+[ext_resource type="PackedScene" uid="uid://ddnnsrxwsgmsd" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Island 1.prefab.scn" id="6_doofy"]
+[ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="7_4nif1"]
+[ext_resource type="PackedScene" uid="uid://dlfiu7liqjfcf" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Ball Return.prefab.scn" id="8_qpk1b"]
+[ext_resource type="PackedScene" uid="uid://b7h0rlcusr2yu" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Island 2.prefab.scn" id="9_ey43s"]
+[ext_resource type="Material" uid="uid://it867cc61dl4" path="res://Assets/_Game/Content/Levels/Bowling/Carpet/Mat_Bowling_Carpet.material" id="11_8wrje"]
+[ext_resource type="PackedScene" uid="uid://djxlfmbea4fb1" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Ball (Spinning).prefab.scn" id="13_drhmw"]
+[ext_resource type="PackedScene" uid="uid://mf8ima13i3jd" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Pin Red.prefab.scn" id="14_n4jqo"]
+[ext_resource type="PackedScene" uid="uid://cyx04qq32mfro" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Pin.prefab.scn" id="15_x8365"]
+[ext_resource type="PackedScene" uid="uid://b1kpcsy5akt5t" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Island 3.prefab.scn" id="16_bfwhg"]
+[ext_resource type="PackedScene" uid="uid://tng8mv14ss3t" path="res://Assets/_Game/Content/Levels/Bowling/_Props/UFO.prefab.scn" id="17_l62jf"]
+
+[sub_resource type="Sky" id="Sky_6byus"]
+sky_material = ExtResource("1_qvhuk")
+
+[sub_resource type="Environment" id="Environment_yhb0f"]
+background_mode = 2
+sky = SubResource("Sky_6byus")
+fog_enabled = true
+fog_light_color = Color(0.23294112, 0.176, 0.5176471, 1)
+fog_density = 0.005
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lbpco"]
+size = Vector3(400, 200, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_l0bj8"]
+data = PackedVector3Array(7.25, 0, -36.75, 6.5, 0, -37.25, 6.25, 0, -38.5, 6.75, 0, -39.5, 8, 0, -35, 7.25, 0, -36.75, 6.75, 0, -39.5, 7.25, 0, -36.75, 6.25, 0, -38.5, 7.75, 0, -40.25, 8, 0, -35, 6.75, 0, -39.5, 10.25, 0, -34.5, 8, 0, -35, 7.75, 0, -40.25, 8.5, 0, -40.25, 10.25, 0, -34.5, 7.75, 0, -40.25, 9.5, 0, -39.75, 10.25, 0, -34.5, 8.5, 0, -40.25, 11.25, 0, -35.75, 10.25, 0, -34.5, 9.5, 0, -39.75, 10.25, 0, -39, 11.25, 0, -35.75, 9.5, 0, -39.75, 11.25, 0, -37.75, 11.25, 0, -35.75, 10.25, 0, -39, 10.25, 0, -39, 9.5, 0, -39.75, 9.25, -0.25, -39.25, 10.25, 0, -39, 9.25, -0.25, -39.25, 10, -0.25, -38.75, 9.5, 0, -39.75, 8.5, 0, -40.25, 8.5, -0.25, -39.75, 9.5, 0, -39.75, 8.5, -0.25, -39.75, 9.25, -0.25, -39.25, 7.75, 0, -40.25, 8, -0.25, -39.75, 8.5, -0.25, -39.75, 7.75, 0, -40.25, 8.5, -0.25, -39.75, 8.5, 0, -40.25, 11.25, 0, -37.75, 10.25, 0, -39, 10, -0.25, -38.75, 11.25, 0, -37.75, 10, -0.25, -38.75, 10.75, -0.25, -37.75, 11.25, 0, -37.75, 10.75, -0.25, -37.75, 10.75, -0.25, -36, 11.25, 0, -37.75, 10.75, -0.25, -36, 11.25, 0, -35.75, 10.25, 0, -34.5, 11.25, 0, -35.75, 10.75, -0.25, -36, 10.25, 0, -34.5, 10.75, -0.25, -36, 10, -0.25, -35, 8, 0, -35, 10.25, 0, -34.5, 10, -0.25, -35, 8, 0, -35, 10, -0.25, -35, 8.25, -0.25, -35.5, 7.25, 0, -36.75, 8, 0, -35, 8.25, -0.25, -35.5, 7.25, 0, -36.75, 8.25, -0.25, -35.5, 7.5, -0.25, -36.75, 6.5, 0, -37.25, 7.25, 0, -36.75, 7.5, -0.25, -36.75, 6.5, 0, -37.25, 7.5, -0.25, -36.75, 7, -0.25, -37.25, 6.25, 0, -38.5, 6.5, 0, -37.25, 7, -0.25, -37.25, 6.25, 0, -38.5, 7, -0.25, -37.25, 6.75, -0.25, -38.25, 6.75, 0, -39.5, 6.25, 0, -38.5, 6.75, -0.25, -38.25, 6.75, 0, -39.5, 6.75, -0.25, -38.25, 7, -0.25, -39, 6.75, 0, -39.5, 7, -0.25, -39, 8, -0.25, -39.75, 6.75, 0, -39.5, 8, -0.25, -39.75, 7.75, 0, -40.25, 8.5, -0.25, -39.75, 8.6525, -2.0665, -38.3015, 9.2376995, -2.0665, -37.9114, 8.5, -0.25, -39.75, 9.2376995, -2.0665, -37.9114, 10, -0.25, -38.75, 10, -0.25, -38.75, 9.2376995, -2.0665, -37.9114, 9.5302, -2.0665, -37.521297, 10, -0.25, -38.75, 9.5302, -2.0665, -37.521297, 10.75, -0.25, -37.75, 8, -0.25, -39.75, 8.457399, -2.0665, -38.3015, 8.6525, -2.0665, -38.3015, 8, -0.25, -39.75, 8.6525, -2.0665, -38.3015, 8.5, -0.25, -39.75, 7, -0.25, -39, 8.0673, -2.0665, -38.009, 8.457399, -2.0665, -38.3015, 7, -0.25, -39, 8.457399, -2.0665, -38.3015, 8, -0.25, -39.75, 6.75, -0.25, -38.25, 7.9698, -2.0665, -37.7164, 8.0673, -2.0665, -38.009, 6.75, -0.25, -38.25, 8.0673, -2.0665, -38.009, 7, -0.25, -39, 7, -0.25, -37.25, 8.0673, -2.0665, -37.3262, 7.9698, -2.0665, -37.7164, 7, -0.25, -37.25, 7.9698, -2.0665, -37.7164, 6.75, -0.25, -38.25, 7.5, -0.25, -36.75, 8.2623, -2.0665, -37.1312, 8.0673, -2.0665, -37.3262, 7.5, -0.25, -36.75, 8.0673, -2.0665, -37.3262, 7, -0.25, -37.25, 8.25, -0.25, -35.5, 8.5549, -2.0665, -36.643497, 8.2623, -2.0665, -37.1312, 8.25, -0.25, -35.5, 8.2623, -2.0665, -37.1312, 7.5, -0.25, -36.75, 10, -0.25, -35, 9.2376995, -2.0665, -36.448498, 8.5549, -2.0665, -36.643497, 10, -0.25, -35, 8.5549, -2.0665, -36.643497, 8.25, -0.25, -35.5, 10.75, -0.25, -36, 9.5302, -2.0665, -36.8386, 9.2376995, -2.0665, -36.448498, 10.75, -0.25, -36, 9.2376995, -2.0665, -36.448498, 10, -0.25, -35, 10.75, -0.25, -37.75, 9.5302, -2.0665, -37.521297, 9.5302, -2.0665, -36.8386, 10.75, -0.25, -37.75, 9.5302, -2.0665, -36.8386, 10.75, -0.25, -36, 8.6525, -2.0665, -38.3015, 8.6879, -4.331, -37.468098, 9.2376995, -2.0665, -37.9114, 9.2376995, -2.0665, -37.9114, 8.6879, -4.331, -37.468098, 9.5302, -2.0665, -37.521297, 8.457399, -2.0665, -38.3015, 8.6879, -4.331, -37.468098, 8.6525, -2.0665, -38.3015, 8.0673, -2.0665, -38.009, 8.6879, -4.331, -37.468098, 8.457399, -2.0665, -38.3015, 7.9698, -2.0665, -37.7164, 8.6879, -4.331, -37.468098, 8.0673, -2.0665, -38.009, 8.0673, -2.0665, -37.3262, 8.6879, -4.331, -37.468098, 7.9698, -2.0665, -37.7164, 8.2623, -2.0665, -37.1312, 8.6879, -4.331, -37.468098, 8.0673, -2.0665, -37.3262, 8.5549, -2.0665, -36.643497, 8.6879, -4.331, -37.468098, 8.2623, -2.0665, -37.1312, 9.2376995, -2.0665, -36.448498, 8.6879, -4.331, -37.468098, 8.5549, -2.0665, -36.643497, 9.5302, -2.0665, -36.8386, 8.6879, -4.331, -37.468098, 9.2376995, -2.0665, -36.448498, 9.5302, -2.0665, -37.521297, 8.6879, -4.331, -37.468098, 9.5302, -2.0665, -36.8386)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_14gad"]
+data = PackedVector3Array(7.25, 0, -36.75, 6.5, 0, -37.25, 6.25, 0, -38.5, 6.75, 0, -39.5, 8, 0, -35, 7.25, 0, -36.75, 6.75, 0, -39.5, 7.25, 0, -36.75, 6.25, 0, -38.5, 7.75, 0, -40.25, 8, 0, -35, 6.75, 0, -39.5, 10.25, 0, -34.5, 8, 0, -35, 7.75, 0, -40.25, 8.5, 0, -40.25, 10.25, 0, -34.5, 7.75, 0, -40.25, 9.5, 0, -39.75, 10.25, 0, -34.5, 8.5, 0, -40.25, 11.25, 0, -35.75, 10.25, 0, -34.5, 9.5, 0, -39.75, 10.25, 0, -39, 11.25, 0, -35.75, 9.5, 0, -39.75, 11.25, 0, -37.75, 11.25, 0, -35.75, 10.25, 0, -39, 10.25, 0, -39, 9.5, 0, -39.75, 9.25, -0.25, -39.25, 10.25, 0, -39, 9.25, -0.25, -39.25, 10, -0.25, -38.75, 9.5, 0, -39.75, 8.5, 0, -40.25, 8.5, -0.25, -39.75, 9.5, 0, -39.75, 8.5, -0.25, -39.75, 9.25, -0.25, -39.25, 7.75, 0, -40.25, 8, -0.25, -39.75, 8.5, -0.25, -39.75, 7.75, 0, -40.25, 8.5, -0.25, -39.75, 8.5, 0, -40.25, 11.25, 0, -37.75, 10.25, 0, -39, 10, -0.25, -38.75, 11.25, 0, -37.75, 10, -0.25, -38.75, 10.75, -0.25, -37.75, 11.25, 0, -37.75, 10.75, -0.25, -37.75, 10.75, -0.25, -36, 11.25, 0, -37.75, 10.75, -0.25, -36, 11.25, 0, -35.75, 10.25, 0, -34.5, 11.25, 0, -35.75, 10.75, -0.25, -36, 10.25, 0, -34.5, 10.75, -0.25, -36, 10, -0.25, -35, 8, 0, -35, 10.25, 0, -34.5, 10, -0.25, -35, 8, 0, -35, 10, -0.25, -35, 8.25, -0.25, -35.5, 7.25, 0, -36.75, 8, 0, -35, 8.25, -0.25, -35.5, 7.25, 0, -36.75, 8.25, -0.25, -35.5, 7.5, -0.25, -36.75, 6.5, 0, -37.25, 7.25, 0, -36.75, 7.5, -0.25, -36.75, 6.5, 0, -37.25, 7.5, -0.25, -36.75, 7, -0.25, -37.25, 6.25, 0, -38.5, 6.5, 0, -37.25, 7, -0.25, -37.25, 6.25, 0, -38.5, 7, -0.25, -37.25, 6.75, -0.25, -38.25, 6.75, 0, -39.5, 6.25, 0, -38.5, 6.75, -0.25, -38.25, 6.75, 0, -39.5, 6.75, -0.25, -38.25, 7, -0.25, -39, 6.75, 0, -39.5, 7, -0.25, -39, 8, -0.25, -39.75, 6.75, 0, -39.5, 8, -0.25, -39.75, 7.75, 0, -40.25, 8.5, -0.25, -39.75, 8.6171, -1.5913999, -38.637398, 9.4144, -1.5913999, -38.1059, 8.5, -0.25, -39.75, 9.4144, -1.5913999, -38.1059, 10, -0.25, -38.75, 10, -0.25, -38.75, 9.4144, -1.5913999, -38.1059, 9.8131, -1.5913999, -37.5743, 10, -0.25, -38.75, 9.8131, -1.5913999, -37.5743, 10.75, -0.25, -37.75, 8, -0.25, -39.75, 8.3513, -1.5913999, -38.637398, 8.6171, -1.5913999, -38.637398, 8, -0.25, -39.75, 8.6171, -1.5913999, -38.637398, 8.5, -0.25, -39.75, 7, -0.25, -39, 7.8198, -1.5913999, -38.2388, 8.3513, -1.5913999, -38.637398, 7, -0.25, -39, 8.3513, -1.5913999, -38.637398, 8, -0.25, -39.75, 6.75, -0.25, -38.25, 7.6868997, -1.5913999, -37.8401, 7.8198, -1.5913999, -38.2388, 6.75, -0.25, -38.25, 7.8198, -1.5913999, -38.2388, 7, -0.25, -39, 7, -0.25, -37.25, 7.8198, -1.5913999, -37.308598, 7.6868997, -1.5913999, -37.8401, 7, -0.25, -37.25, 7.6868997, -1.5913999, -37.8401, 6.75, -0.25, -38.25, 7.5, -0.25, -36.75, 8.0856, -1.5913999, -37.0428, 7.8198, -1.5913999, -37.308598, 7.5, -0.25, -36.75, 7.8198, -1.5913999, -37.308598, 7, -0.25, -37.25, 8.25, -0.25, -35.5, 8.4842, -1.5913999, -36.3784, 8.0856, -1.5913999, -37.0428, 8.25, -0.25, -35.5, 8.0856, -1.5913999, -37.0428, 7.5, -0.25, -36.75, 10, -0.25, -35, 9.4144, -1.5913999, -36.1126, 8.4842, -1.5913999, -36.3784, 10, -0.25, -35, 8.4842, -1.5913999, -36.3784, 8.25, -0.25, -35.5, 10.75, -0.25, -36, 9.8131, -1.5913999, -36.6441, 9.4144, -1.5913999, -36.1126, 10.75, -0.25, -36, 9.4144, -1.5913999, -36.1126, 10, -0.25, -35, 10.75, -0.25, -37.75, 9.8131, -1.5913999, -37.5743, 9.8131, -1.5913999, -36.6441, 10.75, -0.25, -37.75, 9.8131, -1.5913999, -36.6441, 10.75, -0.25, -36, 8.6171, -1.5913999, -38.637398, 8.6654, -3.0684, -37.5018, 9.4144, -1.5913999, -38.1059, 8.3513, -1.5913999, -38.637398, 8.6654, -3.0684, -37.5018, 8.6171, -1.5913999, -38.637398, 7.8198, -1.5913999, -38.2388, 8.6654, -3.0684, -37.5018, 8.3513, -1.5913999, -38.637398, 7.6868997, -1.5913999, -37.8401, 8.6654, -3.0684, -37.5018, 7.8198, -1.5913999, -38.2388, 7.8198, -1.5913999, -37.308598, 8.6654, -3.0684, -37.5018, 7.6868997, -1.5913999, -37.8401, 8.0856, -1.5913999, -37.0428, 8.6654, -3.0684, -37.5018, 7.8198, -1.5913999, -37.308598, 8.4842, -1.5913999, -36.3784, 8.6654, -3.0684, -37.5018, 8.0856, -1.5913999, -37.0428, 9.4144, -1.5913999, -36.1126, 8.6654, -3.0684, -37.5018, 8.4842, -1.5913999, -36.3784, 9.8131, -1.5913999, -36.6441, 8.6654, -3.0684, -37.5018, 9.4144, -1.5913999, -36.1126, 9.8131, -1.5913999, -37.5743, 8.6654, -3.0684, -37.5018, 9.8131, -1.5913999, -36.6441, 9.4144, -1.5913999, -38.1059, 8.6654, -3.0684, -37.5018, 9.8131, -1.5913999, -37.5743)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7kc5v"]
+radius = 0.50000006
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dtv5i"]
+radius = 0.50000006
+
+[node name="RootNode3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yhb0f")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+
+[node name="Ball Return Feature" parent="." instance=ExtResource("2_pqaur")]
+transform = Transform3D(-1.0352621, 0, -3.863707, 0, 4, 0, 3.863707, 0, -1.0352621, 142, 43.75, 154.25)
+
+[node name="CamRoot" parent="Ball Return Feature" index="1"]
+transform = Transform3D(-0.61243856, -0.24183051, -0.75262004, 0.03814382, 0.94191, -0.33369207, 0.78959733, -0.2330737, -0.5676377, -1.4156103e-06, 1.1048536, 0.5745231)
+
+[node name="Bowling Pin Ring" parent="." instance=ExtResource("3_n1ptr")]
+transform = Transform3D(0.9552784, -0.2560906, 0.14785403, 0, -0.5000001, -0.8660253, 0.295708, 0.8272953, -0.47763932, 148.75194, 82.027374, 131.29724)
+
+[node name="Draw XXL Lines Manager" type="Node3D" parent="."]
+
+[node name="Ball Return Feature (2)" parent="." instance=ExtResource("2_pqaur")]
+transform = Transform3D(2.828434, 0, 2.8284202, 0, 4, 0, -2.8284202, 0, 2.828434, 153.35834, 80.25, 76.822945)
+
+[node name="CamRoot" parent="Ball Return Feature (2)" index="1"]
+transform = Transform3D(-0.60418385, 0.2877214, 0.743087, 0.038143747, 0.94191027, -0.33369163, -0.79593146, -0.17326696, -0.58006173, 1.4305115e-06, 1.1048546, 0.5745243)
+
+[node name="Checkpoint" parent="." instance=ExtResource("4_adloq")]
+transform = Transform3D(-1, 0, -7.1525557e-07, 0, 1, 0, 7.1525557e-07, 0, -1, 166.5, 84.01436, 18)
+
+[node name="Goal Ring" parent="." instance=ExtResource("5_pcbo2")]
+transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881857, 0, -0.25881857, 0.96592593, 166.5859, 86.01436, 7.6782217)
+
+[node name="Bowling Island 1 (1)" parent="." instance=ExtResource("6_doofy")]
+transform = Transform3D(0.86602587, 0, -0.49999917, 0, 1, 0, 0.49999917, 0, 0.86602587, 126.80084, 45.75, 149.97588)
+
+[node name="Level Management" type="Node3D" parent="."]
+
+[node name="Level Manager" parent="Level Management" instance=ExtResource("7_4nif1")]
+
+[node name="Player Spawner" parent="Level Management/Level Manager" index="1"]
+transform = Transform3D(0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071068, 18.388979, 14, -29.018887)
+
+[node name="Fbx_Player_Coconut_Test" parent="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model" index="3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
+
+[node name="Live Zone" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, -18, 410.75)
+
+[node name="BoxCollider" type="Area3D" parent="Live Zone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Live Zone/BoxCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
+shape = SubResource("BoxShape3D_lbpco")
+
+[node name="Bowling Island 1 (2)" parent="." instance=ExtResource("6_doofy")]
+transform = Transform3D(0.50000167, 0, 0.8660245, 0, 1, 0, -0.8660245, 0, 0.50000167, 162.5, 84, 91.5)
+
+[node name="Bowling Island 1" parent="." instance=ExtResource("6_doofy")]
+transform = Transform3D(0.8556992, 0, -0.5174735, 0, 1, 0, 0.5174735, 0, 0.8556992, 123.64, 48.25, 148.37)
+visible = false
+
+[node name="Ball Return Feature (1)" type="Node3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 28.494688, 15.364466, 174.61462)
+
+[node name="Ball Return" parent="Ball Return Feature (1)" instance=ExtResource("8_qpk1b")]
+transform = Transform3D(-0.25881612, 0.68301296, -0.68301356, 2.9802322e-08, 0.7071071, 0.7071065, 0.9659266, 0.18301053, -0.18301074, 0, 0, 0)
+
+[node name="Ball Return Camera" type="Node3D" parent="Ball Return Feature (1)"]
+transform = Transform3D(-0.7056453, 0.26183027, 0.6584145, 0.038144108, 0.9419117, -0.33368763, -0.7075378, -0.21035048, -0.67464286, -2.8688712, 1.7909188, 0.5353391)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Bowling Volume" type="Node3D" parent="."]
+
+[node name="Ball Return Feature (4)" parent="." instance=ExtResource("2_pqaur")]
+transform = Transform3D(2.8284283, 0, -2.828426, 0, 4, 0, 2.828426, 0, 2.8284283, 178, 82.5, 51.75)
+
+[node name="Ball Return" parent="Ball Return Feature (4)" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.25881916, 0.96592575, 0, -0.96592575, 0.25881916, 0, 0, 0)
+
+[node name="CamRoot" parent="Ball Return Feature (4)" index="1"]
+transform = Transform3D(-0.1355896, -0.32596904, -0.93560654, 0.038143903, 0.94190973, -0.333693, 0.9900306, -0.080933, -0.115279436, 6.966293e-07, 1.244093, -0.054875195)
+
+[node name="Directional Light" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0, 0)
+
+[node name="Light" type="DirectionalLight3D" parent="Directional Light"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+light_energy = 1.5
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.4
+
+[node name="Visual Effect (Bowling Pins)" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+
+[node name="VisualEffect" type="Node" parent="Visual Effect (Bowling Pins)"]
+
+[node name="VFXRenderer" type="Node" parent="Visual Effect (Bowling Pins)"]
+
+[node name="Scene Contents" type="Node3D" parent="."]
+
+[node name="Level Features" type="Node3D" parent="Scene Contents"]
+
+[node name="Checkpoint" parent="Scene Contents/Level Features" instance=ExtResource("4_adloq")]
+transform = Transform3D(-0.49999893, 0, 0.866026, 0, 1, 0, -0.866026, 0, -0.49999893, 11, 18.007181, 177.75)
+
+[node name="Geometry" type="Node3D" parent="Scene Contents"]
+
+[node name="Bowling Island 1" parent="Scene Contents/Geometry" instance=ExtResource("6_doofy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.356764, -3.07, 41.075787)
+
+[node name="Bowling Island 2" parent="Scene Contents/Geometry" instance=ExtResource("9_ey43s")]
+transform = Transform3D(-0.25881934, 0, 0.96592575, 0, 1, 0, -0.96592575, 0, -0.25881934, -0.8150052, 0, -1.6427023)
+
+[node name="Bowling Island 2 (1)" parent="Scene Contents/Geometry" instance=ExtResource("9_ey43s")]
+transform = Transform3D(0.2588176, 0, 0.96592623, 0, 1, 0, -0.96592623, 0, 0.2588176, -7.4904246, -2, 85.367485)
+
+[node name="UModeler Object" type="Node3D" parent="Scene Contents/Geometry"]
+transform = Transform3D(0.339301, 0.52573425, -0.7800502, -0.8209444, 0.5703544, 0.027315667, 0.45926586, 0.6311096, 0.6251204, -42.510544, 10.821452, 29.44406)
+
+[node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Geometry/UModeler Object"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Geometry/UModeler Object/MeshCollider"]
+shape = SubResource("ConcavePolygonShape3D_l0bj8")
+
+[node name="UModeler Object (1)" type="Node3D" parent="Scene Contents/Geometry"]
+transform = Transform3D(0.5523151, -0.47225234, -0.6869685, 0.64987016, 0.7600453, -7.897229e-08, 0.5221272, -0.4464403, 0.7266872, -32.85, -4.7744875, 57.78)
+
+[node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Geometry/UModeler Object (1)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Geometry/UModeler Object (1)/MeshCollider"]
+shape = SubResource("ConcavePolygonShape3D_14gad")
+
+[node name="Portal Planet" type="Node3D" parent="Scene Contents/Geometry"]
+transform = Transform3D(-0.7432326, -0.6248616, -0.23906745, 2.9802319e-08, 0.35733274, -0.9339771, 0.6690331, -0.69416225, -0.2655813, 102.71374, -10.25, 260.5719)
+
+[node name="Bowling Ball (Spinning)" parent="Scene Contents/Geometry/Portal Planet" instance=ExtResource("13_drhmw")]
+transform = Transform3D(126.654816, -1.1247398e-05, 3.996589e-06, 1.1395869e-05, 126.55686, -4.9809656, -3.5511678e-06, 4.9809647, 126.55689, 0, 0, 0)
+
+[node name="Rocket Root" type="RigidBody3D" parent="Scene Contents/Geometry/Portal Planet"]
+transform = Transform3D(-0.25881937, 1.0813773e-15, -0.96592575, -1.0813773e-15, 1, 1.4092788e-15, 0.96592575, 1.4092789e-15, -0.25881937, 0, 0, 0)
+gravity_scale = 0.0
+freeze = true
+freeze_mode = 1
+continuous_cd = true
+angular_damp = 0.05
+
+[node name="Bowling Pin Red" parent="Scene Contents/Geometry/Portal Planet/Rocket Root" instance=ExtResource("14_n4jqo")]
+transform = Transform3D(-7.5896714e-05, -100, 0, 100, -7.5896714e-05, 0, 0, 0, 100, 0, 0, 90)
+
+[node name="Bowling Ball (Spinning) (3)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(10.343389, 80.21674, -97.46663, 119.69477, -37.294773, -17.991972, -40.095207, -90.64118, -78.854324, -111.75, 217, 146.75)
+
+[node name="Bowling Ball (Spinning)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(27, 0, 0, 0, 27, 0, 0, 0, 27, -20.317715, -8.03, 154.55)
+
+[node name="Planet with Pins" type="Node3D" parent="Scene Contents/Geometry"]
+transform = Transform3D(0.9751494, 0.20782723, -0.07675674, -0.20430654, 0.9775637, 0.051265053, 0.08568887, -0.03430918, 0.995731, -265.3, -30.3, 124.6)
+
+[node name="Bowling Ball (Spinning)" parent="Scene Contents/Geometry/Planet with Pins" instance=ExtResource("13_drhmw")]
+transform = Transform3D(38.414368, 104.93304, -84.970314, 21.964888, 82.30898, 111.57655, 133.22327, -43.827503, 6.104893, 0, 0, 0)
+
+[node name="Bowling Pin Ring" type="Node3D" parent="Scene Contents/Geometry/Planet with Pins"]
+transform = Transform3D(0.019618917, -0.9998037, -0.0027710097, 0.29829633, 0.00849867, -0.95443547, 0.9542717, 0.01789841, 0.29840448, 0, 0, 0)
+
+[node name="VisualEffect" type="Node" parent="Scene Contents/Geometry/Planet with Pins/Bowling Pin Ring"]
+
+[node name="VFXRenderer" type="Node" parent="Scene Contents/Geometry/Planet with Pins/Bowling Pin Ring"]
+
+[node name="Bowling Pin Ring (1)" type="Node3D" parent="Scene Contents/Geometry/Planet with Pins"]
+transform = Transform3D(0.01456403, -0.9998037, -0.013433952, -0.29724735, 0.008498786, -0.9547627, 0.9546895, 0.017898398, -0.29706523, 0, 0, 0)
+
+[node name="VisualEffect" type="Node" parent="Scene Contents/Geometry/Planet with Pins/Bowling Pin Ring (1)"]
+
+[node name="VFXRenderer" type="Node" parent="Scene Contents/Geometry/Planet with Pins/Bowling Pin Ring (1)"]
+
+[node name="Root" type="Node3D" parent="Scene Contents/Geometry/Planet with Pins"]
+transform = Transform3D(0.9999569, -0.00886193, -0.0027708777, 4.6566112e-10, 0.29842463, -0.9544332, 0.009285019, 0.9543921, 0.29841176, 0, 0, 0)
+
+[node name="Bowling Ball (Spinning)" parent="Scene Contents/Geometry/Planet with Pins/Root" instance=ExtResource("13_drhmw")]
+transform = Transform3D(15.736504, -28.016872, 23.820522, -28.66292, 6.887944, 27.036886, -23.039085, -27.705795, -17.366331, 550.7, -25.70001, -1.1444092e-05)
+
+[node name="Root (1)" type="Node3D" parent="Scene Contents/Geometry/Planet with Pins"]
+transform = Transform3D(-0.30573133, 0.95211387, -0.002770996, -0.28331557, -0.09375262, -0.9544332, -0.90898883, -0.29101506, 0.29841176, 0, 0, 0)
+
+[node name="Bowling Pin" parent="Scene Contents/Geometry/Planet with Pins/Root (1)" instance=ExtResource("15_x8365")]
+transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 1456, -26, 0)
+
+[node name="SphereCollider" type="StaticBody3D" parent="Scene Contents/Geometry/Planet with Pins/Root (1)/Bowling Pin"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Geometry/Planet with Pins/Root (1)/Bowling Pin/SphereCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8924475e-06, -2.3543835e-06, -5.066395e-07)
+shape = SubResource("SphereShape3D_7kc5v")
+
+[node name="Root (2)" type="Node3D" parent="Scene Contents/Geometry/Planet with Pins"]
+transform = Transform3D(-18.341202, -57.127686, -0.16626272, 17.096195, -5.322175, -57.266, 54.50982, -17.552828, 17.904686, -469.89975, -410.07004, -1315.9213)
+
+[node name="PositionConstraint" type="Node" parent="Scene Contents/Geometry/Planet with Pins/Root (2)"]
+
+[node name="Bowling Pin" parent="Scene Contents/Geometry/Planet with Pins/Root (2)" instance=ExtResource("15_x8365")]
+transform = Transform3D(0.50506, 0, 0, 0, 0.50506, 0, 0, 0, 0.50506, 0, 4.03, 0)
+
+[node name="SphereCollider" type="StaticBody3D" parent="Scene Contents/Geometry/Planet with Pins/Root (2)/Bowling Pin"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Geometry/Planet with Pins/Root (2)/Bowling Pin/SphereCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8295984e-06, 3.8444996e-06, 1.8775463e-06)
+shape = SubResource("SphereShape3D_dtv5i")
+
+[node name="Bowling Pin Red (2)" parent="Scene Contents/Geometry" instance=ExtResource("14_n4jqo")]
+transform = Transform3D(24.051556, -3.6660305e-07, -6.4445853, -3.7597954e-06, -24.9, -1.2615322e-05, -6.4445853, 1.3158571e-05, -24.051556, -8.43, -10.71, 95.97)
+
+[node name="GameObject" type="Node3D" parent="Scene Contents/Geometry"]
+transform = Transform3D(15.890376, 37.196087, -19.813147, 7.36, -23.298632, -37.836727, -41.49625, 10.1113205, -14.298079, 0.89, -9.14, 127.53)
+
+[node name="Bowling Pin" parent="Scene Contents/Geometry/GameObject" instance=ExtResource("15_x8365")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8472524e-05, 0.35253403, -3.0123083e-05)
+
+[node name="Bowling Pin (1)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(27.296463, 12.710521, 0, -12.710521, 27.296463, 0, 0, 0, 30.110704, -31.43, 13.75, 19.32)
+
+[node name="Bowling Ball (Spinning)2" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -10.383237, -5.08, 53)
+
+[node name="Bowling Ball (Spinning)3" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(-14.454068, -57.87336, -24.82933, -42.669674, 27.736086, -39.808895, 46.315445, 7.491757, -44.424004, 73, -19.6, 25.5)
+
+[node name="Bowling Ball (Spinning) (4)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(-26.77884, -78.05989, 77.296104, -65.91427, -52.22957, -75.581215, 87.88257, -62.959324, -33.134903, 303, 164.25, 169)
+
+[node name="Bowling Ball (Spinning)4" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(-48.54125, 35.435383, 40.62179, -12.951543, 45.39645, -55.07694, -52.326416, -44.10835, -24.050974, -48, 72.9, 293.3)
+
+[node name="Bowling Ball (Spinning) (1)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -9.536029, -4.58, 63)
+
+[node name="Bowling Ball (Spinning) (2)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -8.57, -4.08, 73)
+
+[node name="Bowling Pin (4)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-19.147697, -8.916069, 21.459824, -12.710518, 27.296469, 1.4353096e-06, -19.45412, -9.058753, -21.121807, -29.898193, -8.09, -7.5683274)
+
+[node name="Bowling Pin Red (1)" parent="Scene Contents/Geometry" instance=ExtResource("14_n4jqo")]
+transform = Transform3D(-11.580551, -5.392444, -27.266586, -12.710524, 27.296467, 5.339585e-06, 24.718174, 11.509948, -12.774488, -43.07641, -1.67, -5.36139)
+
+[node name="Bowling Pin (5)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-121.95037, 13.977737, -48.607197, 4.876211, 129.53885, 25.016953, 50.34141, 21.313099, -120.1725, 36.71163, -12.918449, -56.253338)
+
+[node name="Bowling Pin (6)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(125.57583, -70.63048, 0, 70.63048, 125.57583, 0, 0, 0, 144.0762, 89, 70.5, 77.5)
+
+[node name="Bowling Pin (24)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-232.84239, 31.693039, -91.38491, 8.752254, 244.14061, 62.369835, 96.32782, 54.425632, -226.56133, 247, 50, 39)
+
+[node name="Bowling Pin (25)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(153.48276, -54.659912, 192.42288, 8.752259, 244.14061, 62.369827, -199.84413, -31.287245, 150.51466, 271.5, 134.25, -56.25)
+
+[node name="Bowling Pin (7)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(0.6964338, -0.117980465, 8.790793, 5.9457903, 6.502095, -0.38377997, -6.476072, 5.956996, 0.593003, -25.345753, -2.2179022, -16.359638)
+
+[node name="Bowling Pin (8)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-8.625283, -1.5741279, 0.9505635, 1.8229661, -7.917944, 3.4292715, 0.24133883, 3.5503843, 8.069292, -22.06, -6.85, -17.16)
+
+[node name="Bowling Pin (9)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(2.4944222, -2.8302011, -7.9714966, 6.799489, 5.614791, 0.1342047, 5.032071, -6.1839333, 3.7701685, -54.58, 5.6, -16.24)
+
+[node name="Bowling Pin (10)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-81.71868, -38.304817, -28.077682, -1.6516052, 58.136234, -74.5051, 47.46459, -63.92557, -50.933212, -99.8, 4.2, -33.2)
+
+[node name="Bowling Pin (11)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(12.847046, -27.23248, 1.1903694e-06, 0, -1.3161807e-06, -30.110704, 27.232483, 12.847044, -5.6156216e-07, -25.474197, 1.1199999, 171.79968)
+
+[node name="Bowling Pin (12)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(25.721823, -2.515384e-06, 15.653831, -4.5465904e-06, -30.110704, 2.6323653e-06, 15.653831, -4.6123387e-06, -25.721823, -37.071693, -6.44, 183.89313)
+
+[node name="Bowling Pin Red" parent="Scene Contents/Geometry" instance=ExtResource("14_n4jqo")]
+transform = Transform3D(-3.0848722, 0.49432778, 29.94818, 4.026381, 29.84019, -0.0777997, -29.680403, 3.9966788, -3.1232586, -26.582445, 0.57870436, 182.69096)
+
+[node name="Bowling Pin (13)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(20.720217, -2.0262678e-06, 12.609944, -3.662506e-06, -24.255678, 2.1205021e-06, 12.609944, -3.7154696e-06, -20.720217, -33.16381, -2.84, 189.45544)
+
+[node name="Bowling Pin (14)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(17.991903, -1.7594609e-06, 10.949543, -3.1802495e-06, -21.061836, 1.8412873e-06, 10.949543, -3.2262387e-06, -17.991903, -27.32541, -0.5999999, 191.28777)
+
+[node name="Bowling Pin (15)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(15.94573, -1.5593622e-06, 9.704279, -2.8185677e-06, -18.66653, 1.6318824e-06, 9.704279, -2.8593274e-06, -15.94573, -21.4328, 1.75, 188.58769)
+
+[node name="Bowling Ball (Spinning)5" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(-18.313585, 5.0957775, -37.90519, -17.149809, 36.47055, 13.188697, 34.185593, 21.025959, -13.689868, -59.6, 40.7, -70.6)
+
+[node name="Bowling Ball (Spinning) (5)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(-89.528984, -34.476482, 45.104572, -51.96438, 83.68516, -39.178932, -22.863802, -55.196556, -87.57325, 238.23665, 52.695114, 273.99796)
+
+[node name="Bowling Ball (Spinning) (6)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(160.37074, -64.346985, 122.86027, 130.23933, 134.4352, -99.59346, -47.67492, 150.79993, 141.21063, 449.25, -27.25, 22.25)
+
+[node name="Bowling Pin Red (3)" parent="Scene Contents/Geometry" instance=ExtResource("14_n4jqo")]
+transform = Transform3D(-117.8619, -38.15277, -45.638535, -11.100366, 113.61788, -66.31515, 58.44049, -55.364998, -104.639206, 97.96197, 65.15195, -28.578745)
+
+[node name="Bowling Pin (16)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-60.00391, 75.47304, 90.18475, 57.995678, 107.06915, -51.016033, -102.30333, 16.430265, -81.81696, -65.56617, 161.8093, 26.70935)
+
+[node name="Bowling Pin (17)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-112.71382, 32.08574, -60.795063, 57.995693, 107.069145, -51.016033, 36.905746, -70.26124, -105.5048, 20.4, 219.8, 104)
+
+[node name="Bowling Ball (Spinning)6" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
+transform = Transform3D(84.521255, -53.55979, 35.320545, 55.474495, 31.66336, -84.735146, 32.229973, 85.95824, 53.220737, 70, 85.3, -145.8)
+
+[node name="Bowling Pin (2)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(19.577364, 0, 0, 0, 18.922235, -5.022169, 0, 5.022169, 18.922235, -3.05, 0.92, 18.61)
+
+[node name="Bowling Pin" parent="Scene Contents/Geometry/Bowling Pin (2)" instance=ExtResource("14_n4jqo")]
+transform = Transform3D(-0.8466726, 1.4901161e-08, 0.53211427, -0.1971181, 0.9288551, -0.31364414, -0.49425703, -0.37044325, -0.7864362, -0.016, 0.775, -0.141)
+
+[node name="Bowling Pin (3)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(23.232382, 18.712967, -7.0458126, 8.988661, -19.422005, -21.94429, -17.861204, 14.566151, -20.20809, 10.99, -4.54, 20.66)
+
+[node name="Bowling Pin" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(3.0752242, -15.786962, 25.324196, -23.39952, -17.075472, -7.8032503, 18.520405, -18.952576, -14.063945, -18.802406, -0.18960547, 4.1049833)
+
+[node name="Bowling Pin (18)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-7.9160795, 14.020572, -25.313223, -18.21113, -22.80829, -6.938055, -22.487562, 13.53534, 14.529423, 8.25, -6.28, 46.25)
+
+[node name="Bowling Pin (19)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(12.450039, -19.28594, 9.646711, 1.6819533e-06, -11.139074, -22.269508, 21.564009, 11.13479, -5.569554, -18.42, -5.31, 108.6)
+
+[node name="Bowling Pin (20)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(4.572969, 13.918111, -20.134151, -2.455859, -20.118273, -14.464918, -24.352955, 4.642342, -2.322061, 4.73, -13.9, 111.88)
+
+[node name="Bowling Pin (21)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(1.4645741, -19.366184, 15.582557, 2.9308934, -15.366151, -19.372696, 24.683502, 2.9736366, 1.3757163, -23.64, -15.81037, 124.97)
+
+[node name="Bowling Pin (22)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(73.309746, 13.799831, -71.458374, -41.026638, 91.6112, -24.397902, 60.11279, 45.694725, 70.49467, 48.623672, -3.226532, 430.1925)
+
+[node name="Bowling Pin (23)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(15.471068, 67.07272, 77.02566, 39.481865, -75.7757, 58.054123, 94.195984, 20.74483, -36.984108, -0.7, 47.405148, 401.5)
+
+[node name="Bowling Island 3" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
+
+[node name="Bowling Island 3 (1)" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
+transform = Transform3D(-2.3841858e-07, 0, -1, 0, 1, 0, 1, 0, -2.3841858e-07, -20.735874, 5.1399994, 138.38416)
+
+[node name="Bowling Island 3 (2)" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
+transform = Transform3D(0.25881946, 0, 0.96592575, 0, 1, 0, -0.96592575, 0, 0.25881946, -24.908787, 16.67, 55.905075)
+
+[node name="Bowling Island 4" parent="Scene Contents/Geometry" instance=ExtResource("6_doofy")]
+transform = Transform3D(0.50000083, 0, 0.8660249, 0, 1, 0, -0.8660249, 0, 0.50000083, -13.306897, 8.9, 190.36131)
+
+[node name="Bowling Island 3 (3)" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
+transform = Transform3D(0.70710576, 0, -0.7071078, 0, 1, 0, 0.7071078, 0, 0.70710576, -3.1857789, 0.0071821213, -16.877304)
+
+[node name="Bowling Island 5" parent="Scene Contents/Geometry" instance=ExtResource("9_ey43s")]
+transform = Transform3D(0.48296294, 0, -0.12940927, 0, 0.5, 0, 0.12940927, 0, 0.48296294, 20.033295, 14, -28.48924)
+
+[node name="Bowling Pin2" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(30, 0, 0, 0, -30, 3.4868714e-05, 0, -3.4868714e-05, -30, 13.195881, 3.0134013, -27.85536)
+
+[node name="Bowling Pin (3)2" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(18.195047, 9.36536, -21.936964, -7.3568163, 28.449112, 6.043615, 22.68959, 1.7140782, 19.551071, 22.184464, 11.5905485, -16.403913)
+
+[node name="Bowling Pin (1)2" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(30, 0, 0, 0, -30, 3.4868714e-05, 0, -3.4868714e-05, -30, 5.695881, 0.0134038925, -30.105364)
+
+[node name="Bowling Pin (2)2" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(30, 0, 0, 0, -30, 3.4868714e-05, 0, -3.4868714e-05, -30, -2.554119, -3.9865987, -27.855368)
+
+[node name="UFO" parent="Scene Contents/Geometry" instance=ExtResource("17_l62jf")]
+transform = Transform3D(-0.11001229, 0, -0.9939303, 0, 1, 0, 0.9939303, 0, -0.11001229, 4, 29.25, 182.5)
+
+[node name="UFO (1)" parent="Scene Contents/Geometry" instance=ExtResource("17_l62jf")]
+transform = Transform3D(-0.99705684, 0, 0.076664686, 0, 1, 0, -0.076664686, 0, -0.99705684, 39.178516, 32.75, 169.59517)
+
+[node name="UFO (2)" parent="Scene Contents/Geometry" instance=ExtResource("17_l62jf")]
+transform = Transform3D(0.29422307, 0, -0.95573676, 0, 1, 0, 0.95573676, 0, 0.29422307, 52.083157, 35.25, 153.86198)
+
+[node name="Bowling Island 2 (1)2" parent="Scene Contents/Geometry" instance=ExtResource("9_ey43s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 8.907181, 182.5)
+
+[node name="Bowling Pin3" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-3.2661545, 18.18872, -23.632664, -25.711082, -13.762211, -7.0385895, -15.108688, 19.48774, 17.086706, 91.75, 16.36, 164.5)
+
+[node name="Bowling Pin (2)3" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(48.275143, -11.871786, -5.345228, -5.438379, 0.26394963, -49.70266, 11.829405, 48.569447, -1.0364212, 76.91952, 41, 185.07388)
+
+[node name="Bowling Pin (1)3" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
+transform = Transform3D(-13.518423, 6.1399245, 47.744667, -41.6859, -26.293772, -8.421586, 24.073593, -42.08252, 12.227973, 85.08333, 15.333334, 114.41333)
+
+[node name="UFO2" parent="Scene Contents/Geometry" instance=ExtResource("17_l62jf")]
+transform = Transform3D(2.1457672e-06, 0, -1, 0, 1, 0, 1, 0, 2.1457672e-06, 110.07, 59.25, 147.29)
+
+[node name="Bowling Island 6" parent="Scene Contents/Geometry" instance=ExtResource("9_ey43s")]
+transform = Transform3D(0.97115, 0, -0.23846965, 0, 1, 0, 0.23846965, 0, 0.97115, 65.75, 19.805538, 153.25)
+
+[node name="Bowling Island 7" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
+transform = Transform3D(0.7071068, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071068, 14.5, 18, 174.75)
+
+[node name="Bowling Island 2" parent="." instance=ExtResource("9_ey43s")]
+transform = Transform3D(5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, 5.9604645e-08, 167.25, 84.00718, 17.75)
+
+[editable path="Ball Return Feature"]
+[editable path="Ball Return Feature/Ball Return"]
+[editable path="Bowling Pin Ring"]
+[editable path="Bowling Pin Ring/Bowling Pin Red"]
+[editable path="Bowling Pin Ring/Bowling Pin (4)"]
+[editable path="Bowling Pin Ring/Bowling Pin (5)"]
+[editable path="Bowling Pin Ring/Bowling Pin (6)"]
+[editable path="Bowling Pin Ring/Bowling Pin (2)"]
+[editable path="Bowling Pin Ring/Bowling Pin (2)2"]
+[editable path="Bowling Pin Ring/Bowling Pin (2)3"]
+[editable path="Bowling Pin Ring/Bowling Pin (2)4"]
+[editable path="Ball Return Feature (2)"]
+[editable path="Ball Return Feature (2)/Ball Return"]
+[editable path="Checkpoint"]
+[editable path="Checkpoint/Fbx_Checkpoint"]
+[editable path="Checkpoint/Checkpoint Flag/Fbx_CheckpointFlag"]
+[editable path="Goal Ring"]
+[editable path="Goal Ring/Fbx_GoalRing"]
+[editable path="Bowling Island 1 (1)"]
+[editable path="Level Management/Level Manager"]
+[editable path="Level Management/Level Manager/HUD Stuff/Stopwatch Render/Stopwatch Root/Fbx_Stopwatch"]
+[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJoystick"]
+[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJump"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Resume"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Restart"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Settings"]
+[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Quit"]
+[editable path="Level Management/Level Manager/Player Spawner"]
+[editable path="Level Management/Level Manager/Pause Scene Management"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Fbx_TvRemote"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_RollyPoly"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Player_Pumpkin"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Meatball"]
+[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Shadow Blob"]
+[editable path="Bowling Island 1 (2)"]
+[editable path="Bowling Island 1"]
+[editable path="Ball Return Feature (1)/Ball Return"]
+[editable path="Ball Return Feature (4)"]
+[editable path="Ball Return Feature (4)/Ball Return"]
+[editable path="Scene Contents/Level Features/Checkpoint"]
+[editable path="Scene Contents/Level Features/Checkpoint/Fbx_Checkpoint"]
+[editable path="Scene Contents/Level Features/Checkpoint/Checkpoint Flag/Fbx_CheckpointFlag"]
+[editable path="Scene Contents/Geometry/Bowling Island 1"]
+[editable path="Scene Contents/Geometry/Bowling Island 2"]
+[editable path="Scene Contents/Geometry/Bowling Island 2 (1)"]
+[editable path="Scene Contents/Geometry/Portal Planet/Bowling Ball (Spinning)"]
+[editable path="Scene Contents/Geometry/Portal Planet/Bowling Ball (Spinning)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Portal Planet/Rocket Root/Bowling Pin Red"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (3)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (3)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Planet with Pins/Bowling Ball (Spinning)"]
+[editable path="Scene Contents/Geometry/Planet with Pins/Bowling Ball (Spinning)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Planet with Pins/Root/Bowling Ball (Spinning)"]
+[editable path="Scene Contents/Geometry/Planet with Pins/Root/Bowling Ball (Spinning)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Planet with Pins/Root (1)/Bowling Pin"]
+[editable path="Scene Contents/Geometry/Planet with Pins/Root (2)/Bowling Pin"]
+[editable path="Scene Contents/Geometry/Bowling Pin Red (2)"]
+[editable path="Scene Contents/Geometry/GameObject/Bowling Pin"]
+[editable path="Scene Contents/Geometry/Bowling Pin (1)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)2"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)2/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)3"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)3/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (4)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (4)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)4"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)4/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (1)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (1)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (2)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (2)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Pin (4)"]
+[editable path="Scene Contents/Geometry/Bowling Pin Red (1)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (5)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (6)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (24)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (25)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (7)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (8)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (9)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (10)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (11)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (12)"]
+[editable path="Scene Contents/Geometry/Bowling Pin Red"]
+[editable path="Scene Contents/Geometry/Bowling Pin (13)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (14)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (15)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)5"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)5/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (5)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (5)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (6)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning) (6)/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Pin Red (3)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (16)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (17)"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)6"]
+[editable path="Scene Contents/Geometry/Bowling Ball (Spinning)6/Fbx_Bowling_BowlingBall"]
+[editable path="Scene Contents/Geometry/Bowling Pin (2)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (2)/Bowling Pin"]
+[editable path="Scene Contents/Geometry/Bowling Pin (3)"]
+[editable path="Scene Contents/Geometry/Bowling Pin"]
+[editable path="Scene Contents/Geometry/Bowling Pin (18)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (19)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (20)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (21)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (22)"]
+[editable path="Scene Contents/Geometry/Bowling Pin (23)"]
+[editable path="Scene Contents/Geometry/Bowling Island 3"]
+[editable path="Scene Contents/Geometry/Bowling Island 3 (1)"]
+[editable path="Scene Contents/Geometry/Bowling Island 3 (2)"]
+[editable path="Scene Contents/Geometry/Bowling Island 4"]
+[editable path="Scene Contents/Geometry/Bowling Island 3 (3)"]
+[editable path="Scene Contents/Geometry/Bowling Island 5"]
+[editable path="Scene Contents/Geometry/Bowling Pin2"]
+[editable path="Scene Contents/Geometry/Bowling Pin (3)2"]
+[editable path="Scene Contents/Geometry/Bowling Pin (1)2"]
+[editable path="Scene Contents/Geometry/Bowling Pin (2)2"]
+[editable path="Scene Contents/Geometry/UFO"]
+[editable path="Scene Contents/Geometry/UFO (1)"]
+[editable path="Scene Contents/Geometry/UFO (2)"]
+[editable path="Scene Contents/Geometry/Bowling Island 2 (1)2"]
+[editable path="Scene Contents/Geometry/Bowling Pin3"]
+[editable path="Scene Contents/Geometry/Bowling Pin (2)3"]
+[editable path="Scene Contents/Geometry/Bowling Pin (1)3"]
+[editable path="Scene Contents/Geometry/UFO2"]
+[editable path="Scene Contents/Geometry/Bowling Island 6"]
+[editable path="Scene Contents/Geometry/Bowling Island 7"]
+[editable path="Bowling Island 2"]
