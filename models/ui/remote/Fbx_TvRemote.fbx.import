@@ -1,0 +1,232 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dajcmqatqcotw"
+path="res://.godot/imported/Fbx_TvRemote.fbx-7cf8230d10aa695f5cc209fb2d7599fc.scn"
+
+[deps]
+
+source_file="res://models/ui/remote/Fbx_TvRemote.fbx"
+dest_files=["res://.godot/imported/Fbx_TvRemote.fbx-7cf8230d10aa695f5cc209fb2d7599fc.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=1
+meshes/generate_lods=true
+meshes/create_shadow_meshes=false
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=24.0
+animation/trimming=true
+animation/remove_immutable_tracks=false
+animation/import_rest_as_RESET=true
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"animations": {},
+"materials": {
+"Hidden": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/_Game/UI/Pause Screen/Mat_Hidden.material",
+"use_external/path": "uid://c1fqhpg1g8pg2"
+},
+"LED": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/_Game/UI/Pause Screen/Mat_Pause_LED.material",
+"use_external/path": "uid://11xbxmkokbvk"
+},
+"Material": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/_Game/UI/Pause Screen/Mat_Pause.material",
+"use_external/path": "uid://dtpogo43objl2"
+}
+},
+"meshes": {
+"Circle_009": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_009.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cigciklnjvuwc"
+},
+"Circle_010": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_010.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bia1uq8syh7k6"
+},
+"Circle_011": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_011.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b48w1ee8wof4h"
+},
+"Circle_012": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_012.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://kdwav88vh2l2"
+},
+"Circle_013": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_013.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://wen2jxiht1ca"
+},
+"Circle_014": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_014.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://d4iq16n6u6817"
+},
+"Circle_015": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_015.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://hmiahqg6xejw"
+},
+"Circle_016": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_016.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b8bbh1a2bd673"
+},
+"Circle_017": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_017.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c6a88njdxy4c3"
+},
+"Cube_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Cube_005.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://ywavvw86vifo"
+},
+"Root Scene_Circle_009": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_009.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cigciklnjvuwc"
+},
+"Root Scene_Circle_010": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_010.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bia1uq8syh7k6"
+},
+"Root Scene_Circle_011": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_011.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b48w1ee8wof4h"
+},
+"Root Scene_Circle_012": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_012.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://kdwav88vh2l2"
+},
+"Root Scene_Circle_013": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_013.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://wen2jxiht1ca"
+},
+"Root Scene_Circle_014": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_014.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://d4iq16n6u6817"
+},
+"Root Scene_Circle_015": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_015.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://hmiahqg6xejw"
+},
+"Root Scene_Circle_016": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_016.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b8bbh1a2bd673"
+},
+"Root Scene_Circle_017": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Circle_017.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c6a88njdxy4c3"
+},
+"Root Scene_Cube_005": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/ui/remote/extracted/Fbx_TvRemote.Cube_005.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://ywavvw86vifo"
+}
+},
+"nodes": {
+"PATH:AnimationPlayer": {
+"optimizer/enabled": true,
+"optimizer/max_angular_error": 0.00277777777777777,
+"optimizer/max_linear_error": 0.5
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2

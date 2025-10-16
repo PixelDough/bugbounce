@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://6ldfqldmdso2"]
 
 [ext_resource type="Material" uid="uid://dx1lsmb42vcii" path="res://Assets/_Game/Backgrounds/Mat_SpaceSkybox.material" id="1_mrv81"]
-[ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://Assets/_Game/Content/General UI/ArrowUI.fbx" id="2_vrxil"]
+[ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://models/ui/ui_arrow/ArrowUI.fbx" id="2_vrxil"]
 [ext_resource type="PackedScene" uid="uid://bliou4vei2ddu" path="res://Assets/_Game/Content/Level Select/Mode Icons/ModeIcons.fbx_Base.fbx" id="3_x0tbs"]
 [ext_resource type="PackedScene" uid="uid://tg8fug8y2w1v" path="res://Assets/_Game/Content/Level Select/Mode Icons/ModeIcons.fbx_Speedrun.fbx" id="4_edrtx"]
 [ext_resource type="PackedScene" uid="uid://yr1ehvr2bkqy" path="res://Assets/_Game/Content/Level Select/Mode Icons/ModeIcons.fbx_Countdown.fbx" id="5_lwvyp"]

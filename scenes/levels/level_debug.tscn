@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://cft5tev25vv8f" path="res://Assets/_Game/Content/Level Features/_Prefabs/One Way Wall.prefab.scn" id="12_clwtg"]
 [ext_resource type="ArrayMesh" uid="uid://dki7x4le2anog" path="res://models/level_assets/debug/DebugScene.pb_Mesh45732.mesh" id="13_n8wwm"]
 [ext_resource type="ArrayMesh" uid="uid://it0ttr2mk4ec" path="res://models/level_assets/debug/DebugScene.pb_Mesh45770.mesh" id="14_apppj"]
-[ext_resource type="PackedScene" uid="uid://bfs2sgyqh61kw" path="res://Assets/_Game/Models/Level Test/Fbx_LevelTest.fbx" id="15_xwa2n"]
-[ext_resource type="Material" uid="uid://dg1tvcl2ssswi" path="res://Assets/_Game/Models/Level Test/Mat_LevelTest.material" id="16_5e4ha"]
+[ext_resource type="PackedScene" uid="uid://bfs2sgyqh61kw" path="res://models/level_assets/debug/leveltest/Fbx_LevelTest.fbx" id="15_xwa2n"]
+[ext_resource type="Material" uid="uid://dg1tvcl2ssswi" path="res://models/level_assets/debug/leveltest/Mat_LevelTest.material" id="16_5e4ha"]
 
 [sub_resource type="Sky" id="Sky_572ep"]
 sky_material = ExtResource("1_e807m")

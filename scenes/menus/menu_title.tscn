@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1bfg6m5drjbj"]
 
 [ext_resource type="Material" uid="uid://dx1lsmb42vcii" path="res://Assets/_Game/Backgrounds/Mat_SpaceSkybox.material" id="1_trsx3"]
-[ext_resource type="PackedScene" uid="uid://diucg8okddkp4" path="res://Assets/_Game/Content/Main Menu/Fbx_Logo.fbx" id="2_oxigu"]
+[ext_resource type="PackedScene" uid="uid://diucg8okddkp4" path="res://models/ui/logo/Fbx_Logo.fbx" id="2_oxigu"]
 [ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://models/text3d/Mat_Font3D_1.material" id="3_xhyjc"]
 [ext_resource type="Material" uid="uid://cb73v05q58j7f" path="res://models/text3d/Mat_Font3D_2.material" id="4_7x4ts"]
 
