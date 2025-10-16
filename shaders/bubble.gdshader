@@ -9,6 +9,7 @@ uniform sampler2D matcap_tex : hint_default_transparent, source_color, filter_li
 varying vec3 v_world_normal;
 varying vec3 v_world_pos;
 varying vec3 v_eye_pos;
+varying vec2 matcap_uv;
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
@@ -16,29 +17,26 @@ float fresnel(float amount, vec3 normal, vec3 view)
 }
 
 void vertex() {
-	v_world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	v_eye_pos = (INV_VIEW_MATRIX * vec4(EYE_OFFSET, 1.0)).xyz;
-	vec4 worldPos = (MODEL_MATRIX * vec4(VERTEX, 1.0));
-	v_world_pos = worldPos.xyz;
+	matcap_uv = generate_matcap_uv_perspective_correct(
+		VERTEX, NORMAL, MODEL_MATRIX, VIEW_MATRIX, INV_VIEW_MATRIX, MODELVIEW_MATRIX
+	);
 }
 
 void fragment() {
 	float fresnel_value = fresnel(1.0, NORMAL, VIEW);
-	vec3 color = texture(color_gradient, vec2(fresnel_value, 0.0)).rgb;
-	vec3 albedo_with_matcap = apply_matcap_classic(
+	vec3 color = texture(color_gradient, vec2(fresnel_value, 0.0)).rgb * 1.5;
+	
+	vec3 albedo_with_matcap = apply_matcap(
 		color,
 		matcap_tex,
-		2.0,
+		matcap_uv,
 		2.0,
 		1.0,
-		0.0,
-		vec3(0.5, 0.5, 1.0),
-		TANGENT,
-		BINORMAL,
-		NORMAL,
-		NODE_POSITION_VIEW
+		1.0,
+		0.0
 	);
-	ALBEDO = albedo_with_matcap * 2.0;
+	
+	ALBEDO = albedo_with_matcap;
 }
 
 //void light() {
