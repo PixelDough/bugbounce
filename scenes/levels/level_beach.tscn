@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://cssgvlk0hc8v8"]
 
-[ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://Assets/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
+[ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://addons/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_y2yyu"]
 [ext_resource type="PackedScene" uid="uid://b2adyyhxfcf3q" path="res://scenes/props/general/goal_secret.tscn" id="3_qcu5c"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="5_oom3e"]

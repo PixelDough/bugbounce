@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://b5vg06ag7brqj"]
 
-[ext_resource type="Material" uid="uid://d3me3sf1jr1jx" path="res://Assets/Magma! Lava Skybox Pack Vol.I/materials/magmastream.material" id="1_7mk23"]
+[ext_resource type="Material" uid="uid://d3me3sf1jr1jx" path="res://addons/Magma! Lava Skybox Pack Vol.I/materials/magmastream.material" id="1_7mk23"]
 [ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="2_qb7mf"]
 [ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://Assets/StylizedWater2/Prefabs/StylizedWater2_Ocean.prefab.scn" id="3_nlkdc"]
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="4_si7my"]

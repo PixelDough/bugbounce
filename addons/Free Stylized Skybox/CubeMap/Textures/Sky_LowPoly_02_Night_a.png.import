@@ -1,0 +1,27 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://bulvwh7vnahox"
+path="res://.godot/imported/Sky_LowPoly_02_Night_a.png-dd210ab22db10552e56d2bc8d4446b14.ccube"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://addons/Free Stylized Skybox/CubeMap/Textures/Sky_LowPoly_02_Night_a.png"
+dest_files=["res://.godot/imported/Sky_LowPoly_02_Night_a.png-dd210ab22db10552e56d2bc8d4446b14.ccube"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.5
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/arrangement=1
