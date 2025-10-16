@@ -41,7 +41,7 @@ void fragment() {
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
 
 	// Basic waves
-	float time = TIME * 0.05;
+	float time = TIME * 0.03;
 	vec2 normal_uv = vec2(world_vertex.x, world_vertex.z) * 0.025;
 	vec3 normal_sample_1 = texture(normal_map_texture, normal_uv + vec2(-1, 1) * time).xyz * 2.0 - 1.0;
 	vec3 normal_sample_2 = texture(normal_map_texture, -normal_uv + vec2(0, 1) * time).xyz * 2.0 - 1.0;
