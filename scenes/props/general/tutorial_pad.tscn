@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnglshy5uulg7"]
 
-[ext_resource type="ArrayMesh" uid="uid://cko7nxccf045h" path="res://Assets/3D Text/Example/Models/extracted/Fbx_Font3D.Plane_005.mesh" id="1_dxvp1"]
-[ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://Assets/3D Text/Example/Models/Mat_Font3D_1.material" id="2_d3pam"]
+[ext_resource type="ArrayMesh" uid="uid://cko7nxccf045h" path="res://models/text3d/extracted/Fbx_Font3D.Plane_005.mesh" id="1_dxvp1"]
+[ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://models/text3d/Mat_Font3D_1.material" id="2_d3pam"]
 [ext_resource type="PackedScene" uid="uid://b2kyorkcm3kel" path="res://models/general/checkpoint_pad.glb" id="3_dxvp1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utkuc"]

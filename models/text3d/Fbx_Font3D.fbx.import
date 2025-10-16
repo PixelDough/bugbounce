@@ -1,0 +1,718 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://32yjw3bwhmap"
+path="res://.godot/imported/Fbx_Font3D.fbx-9532853e0fedc0f3d754c4ffa946c6e0.scn"
+
+[deps]
+
+source_file="res://models/text3d/Fbx_Font3D.fbx"
+dest_files=["res://.godot/imported/Fbx_Font3D.fbx-9532853e0fedc0f3d754c4ffa946c6e0.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=1
+meshes/generate_lods=true
+meshes/create_shadow_meshes=false
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=24.0
+animation/trimming=true
+animation/remove_immutable_tracks=false
+animation/import_rest_as_RESET=true
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"animations": {},
+"materials": {
+"Material": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://models/text3d/Mat_Font3D.material",
+"use_external/path": "uid://bi6aunxpjb47a"
+}
+},
+"meshes": {
+"-": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.-.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bvxcjupdyxrsp"
+},
+"4": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dm7fkef8b48ga"
+},
+"4_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cmx3a255oo48q"
+},
+"4_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_002.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c3y0tenf6nfny"
+},
+"4_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_003.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b5d06t5vicq16"
+},
+"4_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_004.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://8k6f8xe6r7l7"
+},
+"4_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_005.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://fccs5x4xbmgh"
+},
+"A_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.A_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://casvnktap38r4"
+},
+"B_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.B_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cwe70lulkto48"
+},
+"C_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.C_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b8ub0ltjewehi"
+},
+"D_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.D_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cdk0m7ucb1cmx"
+},
+"E_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.E_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://usdlaairhpxx"
+},
+"F": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.F.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://o3etoyi38pg6"
+},
+"G": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.G.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c7vfrbs44tdbh"
+},
+"H_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.H_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://jlupppjflbqf"
+},
+"I_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.I_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c6ohi4tj4fxis"
+},
+"J": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.J.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bcumrm0f6s7ck"
+},
+"K_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.K_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://yi0s8apsr4nx"
+},
+"L": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.L.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b0i546ykiwvv6"
+},
+"M_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.M_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dteqassbaeh0h"
+},
+"N": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.N.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://hunj7jywcuud"
+},
+"O_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.O_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b2p86xrjll0rl"
+},
+"P": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.P.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bo5fyqed77x7r"
+},
+"Plane": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cu4onbhlghkyl"
+},
+"Plane_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_002.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bdfrpt6kqnw1c"
+},
+"Plane_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_003.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://ba3s5xjqyds1k"
+},
+"Plane_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_004.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bqphonbth2e4q"
+},
+"Plane_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_005.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cko7nxccf045h"
+},
+"Plane_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_006.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bnk7r2vvrxm78"
+},
+"Plane_007": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_007.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://q48i6kdohnd4"
+},
+"Q": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Q.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c6gw80f3sq1kp"
+},
+"R": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.R.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cbbtn8s6ltm3d"
+},
+"Root Scene_-": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.-.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bvxcjupdyxrsp"
+},
+"Root Scene_4": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dm7fkef8b48ga"
+},
+"Root Scene_4_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cmx3a255oo48q"
+},
+"Root Scene_4_002": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_002.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c3y0tenf6nfny"
+},
+"Root Scene_4_003": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_003.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b5d06t5vicq16"
+},
+"Root Scene_4_004": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_004.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://8k6f8xe6r7l7"
+},
+"Root Scene_4_005": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.4_005.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://fccs5x4xbmgh"
+},
+"Root Scene_A_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.A_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://casvnktap38r4"
+},
+"Root Scene_B_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.B_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cwe70lulkto48"
+},
+"Root Scene_C_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.C_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b8ub0ltjewehi"
+},
+"Root Scene_D_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.D_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cdk0m7ucb1cmx"
+},
+"Root Scene_E_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.E_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://usdlaairhpxx"
+},
+"Root Scene_F": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.F.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://o3etoyi38pg6"
+},
+"Root Scene_G": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.G.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c7vfrbs44tdbh"
+},
+"Root Scene_H_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.H_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://jlupppjflbqf"
+},
+"Root Scene_I_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.I_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c6ohi4tj4fxis"
+},
+"Root Scene_J": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.J.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bcumrm0f6s7ck"
+},
+"Root Scene_K_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.K_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://yi0s8apsr4nx"
+},
+"Root Scene_L": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.L.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b0i546ykiwvv6"
+},
+"Root Scene_M_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.M_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dteqassbaeh0h"
+},
+"Root Scene_N": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.N.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://hunj7jywcuud"
+},
+"Root Scene_O_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.O_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b2p86xrjll0rl"
+},
+"Root Scene_P": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.P.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bo5fyqed77x7r"
+},
+"Root Scene_Plane": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cu4onbhlghkyl"
+},
+"Root Scene_Plane_002": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_002.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bdfrpt6kqnw1c"
+},
+"Root Scene_Plane_003": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_003.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://ba3s5xjqyds1k"
+},
+"Root Scene_Plane_004": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_004.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bqphonbth2e4q"
+},
+"Root Scene_Plane_005": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_005.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cko7nxccf045h"
+},
+"Root Scene_Plane_006": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_006.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://bnk7r2vvrxm78"
+},
+"Root Scene_Plane_007": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Plane_007.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://q48i6kdohnd4"
+},
+"Root Scene_Q": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Q.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://c6gw80f3sq1kp"
+},
+"Root Scene_R": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.R.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cbbtn8s6ltm3d"
+},
+"Root Scene_S": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.S.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cirpkybrmohos"
+},
+"Root Scene_T_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.T_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://mcfvg2fav3no"
+},
+"Root Scene_U_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.U_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dvlq8v4lb25ya"
+},
+"Root Scene_V_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.V_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dr8mfjyqe8jbk"
+},
+"Root Scene_W_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.W_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://yjfpbumq8ugo"
+},
+"Root Scene_X_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.X_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b2qvqft5yiur5"
+},
+"Root Scene_Y_001": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Y_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cqhsrkbmwp6gh"
+},
+"Root Scene_Z": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Z.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://csdu6sgca0p5c"
+},
+"Root Scene__": {
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D._.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://biprds2uamrro"
+},
+"S": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.S.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cirpkybrmohos"
+},
+"T_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.T_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://mcfvg2fav3no"
+},
+"U_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.U_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dvlq8v4lb25ya"
+},
+"V_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.V_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://dr8mfjyqe8jbk"
+},
+"W_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.W_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://yjfpbumq8ugo"
+},
+"X_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.X_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://b2qvqft5yiur5"
+},
+"Y_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Y_001.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://cqhsrkbmwp6gh"
+},
+"Z": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D.Z.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://csdu6sgca0p5c"
+},
+"_": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/text3d/extracted/Fbx_Font3D._.mesh",
+"save_to_file/make_streamable": "",
+"save_to_file/path": "uid://biprds2uamrro"
+}
+},
+"nodes": {
+"PATH:AnimationPlayer": {
+"optimizer/enabled": true,
+"optimizer/max_angular_error": 0.00277777777777777,
+"optimizer/max_linear_error": 0.5
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2

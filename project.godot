@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="bugbounce"
+config/name="Bugbounce"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://kfjnryfy3osr"
 
 [dotnet]
 
