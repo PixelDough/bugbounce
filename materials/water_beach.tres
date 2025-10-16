@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b6caon0m37olc"]
 
-[ext_resource type="Shader" uid="uid://bb1084pt8njc" path="res://materials/water.gdshader" id="1_x51k6"]
+[ext_resource type="Shader" uid="uid://bb1084pt8njc" path="res://shaders/water.gdshader" id="1_x51k6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qrnx6"]
 noise_type = 2
@@ -23,3 +23,5 @@ shader_parameter/color_deep = Color(0.1250222, 0.47665578, 0.99170333, 1)
 shader_parameter/color_shallow = Color(0.47000003, 0.91166663, 1, 1)
 shader_parameter/beers_law = 4.0
 shader_parameter/depth_distance = 6.0
+shader_parameter/foam_distance = 2.0
+shader_parameter/sparkle_amount = 0.4

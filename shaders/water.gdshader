@@ -10,8 +10,11 @@ uniform vec4 color_deep : source_color;
 uniform vec4 color_shallow : source_color;
 uniform float beers_law = 2.0;
 uniform float depth_distance = 2;
+uniform float foam_distance = 2;
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+
+uniform float sparkle_amount : hint_range(0.0, 1.0) = 0.4;
 
 // Returns 1.0 if we can see above the water, 0.0 otherwise
 float snells_window(vec3 normal, vec3 view, float ior) {
@@ -22,6 +25,11 @@ float snells_window(vec3 normal, vec3 view, float ior) {
 float fresnel(float amount, vec3 normal, vec3 view)
 {
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
+}
+
+float edge(float near, float far, float depth){
+	depth = 1.0 - 2.0 * depth;
+	return near * far / (far + depth * (near - far));
 }
 
 void fragment() {
@@ -58,13 +66,36 @@ void fragment() {
 	float depth_blend = clamp((vertex_y - depth_texture_y) / depth_distance, 0.0, 1.0);
 	depth_blend = exp(-depth_blend * beers_law);
 	
+	// Need a water depth value for both the regular UVs and the distorted UVs
+	// regular waterdepth
+	float z_depth = edge(0.05, 200, texture(DEPTH_TEXTURE, SCREEN_UV).x); // depth texture
+	float z_pos = edge(0.05, 200, FRAGCOORD.z); // from position
+	float waterDepth = z_depth - z_pos; // diff
+	float behind_multiplier = max(sign(waterDepth), 0.0);
+	// distorted waterdepth
+	float z_depth_distorted = edge(0.05, 200, texture(DEPTH_TEXTURE, distorted_uv).x); // depth texture
+	float z_pos_distorted = edge(0.05, 200, FRAGCOORD.z); // from position
+	float waterDepth_distorted = z_depth_distorted - z_pos_distorted; // diff
+	float behind_multiplier_distorted = max(sign(waterDepth_distorted), 0.0);
+	
+	float depth_blend_foam = clamp((vertex_y - depth_texture_y) / foam_distance, 0.0, 1.0);
+	depth_blend_foam = exp(-depth_blend_foam * beers_law);
+	depth_blend_foam *= 1.0 - waterDepth;
+	
+	depth_blend *= behind_multiplier_distorted;
 	vec3 screen_color = textureLod(SCREEN_TEXTURE, distorted_uv, depth_blend * 2.5).rgb;
 	vec3 depth_color = mix(color_deep.rgb, color_shallow.rgb, depth_blend);
-	vec3 color = mix(depth_color * 0.25, screen_color * depth_color, depth_blend);
+	vec3 color = mix(depth_color * 0.25, depth_color, depth_blend);
 	
 	vec3 surface_color = mix(water_color, color, 0.75);
 	ALBEDO = mix(surface_color, mix(surface_color * 10.0, vec3(1.0), 0.5), fresnel);
 	
+	float bump_amount = normal_sample_1.x * normal_sample_2.x;
+	float sparkle_value = sign(sparkle_amount * bump_amount - 0.01);
+	float shallow_foam_value = step(0.9, (bump_amount + depth_blend_foam) * 2.0);
+	ALBEDO = mix(ALBEDO, vec3(1.0), max(0.0, sparkle_value));
+	ALBEDO = mix(ALBEDO, vec3(1.0), max(0.0, shallow_foam_value));
+
 	// Apply Snell's window mask to water surface when viewed from below
 	if(!FRONT_FACING) {
 		float mask = snells_window(NORMAL, VIEW, index_of_refraction);

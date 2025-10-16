@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cssgvlk0hc8v8"]
+[gd_scene load_steps=30 format=3 uid="uid://cssgvlk0hc8v8"]
 
 [ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://addons/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_y2yyu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="6_bwdgy"]
 [ext_resource type="PackedScene" uid="uid://b13f8s3rr4fih" path="res://scenes/props/beach/beach_island_02.tscn" id="7_7w3p2"]
 [ext_resource type="PackedScene" uid="uid://dykke75jbg83v" path="res://scenes/props/beach/beach_island_01.tscn" id="8_nm6a2"]
+[ext_resource type="Material" uid="uid://b6caon0m37olc" path="res://materials/water_beach.tres" id="10_2qpy7"]
 [ext_resource type="PackedScene" uid="uid://54lya4c6ewfx" path="res://scenes/props/beach/plank_group.tscn" id="11_afqjr"]
 [ext_resource type="PackedScene" uid="uid://bhladmbjnqsp4" path="res://scenes/props/beach/banana.tscn" id="12_r17ul"]
 [ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://Assets/StylizedWater2/Prefabs/StylizedWater2_Ocean.prefab.scn" id="13_1xb5j"]
@@ -120,6 +121,7 @@ transform = Transform3D(0.96417046, -0.12411507, 0.23445772, -0.26516274, -0.477
 
 [node name="Water" parent="Level Geometry/Geo" instance=ExtResource("13_1xb5j")]
 transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 212, 0, -5)
+material_override = ExtResource("10_2qpy7")
 
 [node name="Coconuts" type="Node3D" parent="Level Geometry/Geo"]
 
