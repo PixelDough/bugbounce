@@ -1,5 +1,6 @@
 shader_type spatial;
 render_mode unshaded;
+render_mode depth_draw_always;
 
 #include "shading.gdshaderinc"
 
@@ -35,6 +36,8 @@ void fragment() {
 		1.0,
 		0.0
 	);
+	
+	ALPHA = mix(fresnel_value * fresnel_value, 1.0, 0.7);
 	
 	ALBEDO = albedo_with_matcap;
 }

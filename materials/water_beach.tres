@@ -12,16 +12,17 @@ fractal_lacunarity = 3.0
 noise = SubResource("FastNoiseLite_qrnx6")
 seamless = true
 as_normal_map = true
+bump_strength = 5.0
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_x51k6")
 shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_u1f0m")
-shader_parameter/water_color = Color(0.24, 0.59999996, 0.96, 1)
+shader_parameter/water_color = Color(0, 0.6240001, 0.96, 1)
 shader_parameter/index_of_refraction = 1.333
-shader_parameter/color_deep = Color(0.1250222, 0.47665578, 0.99170333, 1)
-shader_parameter/color_shallow = Color(0.47000003, 0.91166663, 1, 1)
+shader_parameter/color_deep = Color(0.029099973, 0.31136993, 0.97, 1)
+shader_parameter/color_shallow = Color(0, 0.9833336, 1, 1)
 shader_parameter/beers_law = 4.0
-shader_parameter/depth_distance = 6.0
-shader_parameter/foam_distance = 2.0
-shader_parameter/sparkle_amount = 0.4
+shader_parameter/depth_distance = 5.0
+shader_parameter/foam_distance = 3.0
+shader_parameter/sparkle_amount = 0.800000038
