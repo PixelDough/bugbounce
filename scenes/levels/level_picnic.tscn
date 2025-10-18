@@ -4,17 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_t6161"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="3_hj6ap"]
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="4_t5h0g"]
-[ext_resource type="PackedScene" uid="uid://b8uc42rpicu32" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Picnic Blanket.prefab.scn" id="5_lg0qp"]
-[ext_resource type="PackedScene" uid="uid://0bdsr63571j5" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Cake.prefab.scn" id="6_hvhix"]
-[ext_resource type="PackedScene" uid="uid://bsvmxsd7lf8l6" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Fork.prefab.scn" id="7_ldtbs"]
-[ext_resource type="PackedScene" uid="uid://bsaut7m84474s" path="res://Assets/_Game/Content/Levels/Kitchen/Sausage/FBX_Sausage.fbx" id="8_4ny8g"]
-[ext_resource type="PackedScene" uid="uid://ca78bicjcb5r8" path="res://Assets/_Game/Content/Levels/Kitchen/Plate/FBX_Plate.fbx" id="9_k2ckw"]
-[ext_resource type="PackedScene" uid="uid://d6nvrvdxhh2r" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Orange Half.prefab.scn" id="10_m0e3u"]
-[ext_resource type="PackedScene" uid="uid://co72bw3t4shgg" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Lemon Half.prefab.scn" id="11_ikaan"]
-[ext_resource type="PackedScene" uid="uid://82dqxjyoe765" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Knife.prefab.scn" id="12_fr5ig"]
-[ext_resource type="PackedScene" uid="uid://dukpaluw3ubxt" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Orange Wedge.prefab.scn" id="13_5qfnu"]
-[ext_resource type="PackedScene" uid="uid://dtb8uf3wsl4gf" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Picnic Basket.prefab.scn" id="14_7dtnt"]
-[ext_resource type="PackedScene" uid="uid://7072nojlnb87" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Cleaver.prefab.scn" id="15_jplag"]
+[ext_resource type="PackedScene" uid="uid://dogive4na0vc1" path="res://scenes/props/picnic/blanket.tscn" id="5_lg0qp"]
+[ext_resource type="PackedScene" uid="uid://bou68cugt3n5m" path="res://scenes/props/picnic/cake_slice.tscn" id="6_hvhix"]
+[ext_resource type="PackedScene" uid="uid://1soggapx7o0t" path="res://scenes/props/picnic/fork.tscn" id="7_ldtbs"]
+[ext_resource type="PackedScene" uid="uid://cjaay0j42pxib" path="res://scenes/props/picnic/sausage.tscn" id="8_4ny8g"]
+[ext_resource type="PackedScene" uid="uid://dmkk7ndne58j8" path="res://scenes/props/picnic/plate.tscn" id="9_k2ckw"]
+[ext_resource type="PackedScene" uid="uid://bfe5odun1l2go" path="res://scenes/props/picnic/fruit_half.tscn" id="10_m0e3u"]
+[ext_resource type="PackedScene" uid="uid://bn7kacynx526" path="res://scenes/props/picnic/fruit_half_lemon.tscn" id="11_ikaan"]
+[ext_resource type="PackedScene" uid="uid://0glva1i7vo3w" path="res://scenes/props/picnic/knife.tscn" id="12_fr5ig"]
+[ext_resource type="PackedScene" uid="uid://c73aqfee36fsk" path="res://scenes/props/picnic/fruit_wedge.tscn" id="13_5qfnu"]
+[ext_resource type="PackedScene" uid="uid://cwuxm0ntqj6g8" path="res://scenes/props/picnic/basket.tscn" id="14_7dtnt"]
+[ext_resource type="PackedScene" uid="uid://c7o8juvb4w5ko" path="res://scenes/props/picnic/cleaver.tscn" id="15_jplag"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t6161"]
 panorama = ExtResource("1_tlrsl")
@@ -34,12 +34,12 @@ fog_light_color = Color(0.9757151, 0.9980627, 0.9979659, 1)
 fog_density = 1.0
 fog_aerial_perspective = 0.5
 fog_sky_affect = 0.0
-fog_depth_curve = 2.0000007
+fog_depth_curve = 1.0000001
 fog_depth_begin = 0.0
 fog_depth_end = 250.0
 adjustment_enabled = true
-adjustment_brightness = 1.1
 adjustment_contrast = 1.05
+adjustment_saturation = 1.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_okjl2"]
 size = Vector3(1200, 1000, 1200)
@@ -132,13 +132,8 @@ transform = Transform3D(43.285007, 42.342445, 109.35504, 3.352761e-05, 116.56689
 [node name="FBX_Sausage (1)" parent="Scene Contents/Scene Geometry" instance=ExtResource("8_4ny8g")]
 transform = Transform3D(-23.18699, 0, -122.83063, 0, 125, 0, 122.83063, 0, -23.18699, -7.61, -3.81, 63.12)
 
-[node name="Spinning Plate Ring" type="RigidBody3D" parent="Scene Contents/Scene Geometry"]
+[node name="Spinning Plate Ring" type="Node3D" parent="Scene Contents/Scene Geometry"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0.8, -17, -16.7)
-mass = 5.0
-gravity_scale = 0.0
-freeze = true
-freeze_mode = 1
-angular_damp = 0.05
 
 [node name="FBX_Plate (18)" parent="Scene Contents/Scene Geometry/Spinning Plate Ring" instance=ExtResource("9_k2ckw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2969, 0)
@@ -174,21 +169,10 @@ transform = Transform3D(-9.407743, -40.84366, 27.263344, -0.6109044, 27.85433, 4
 transform = Transform3D(0.00014682605, 0, -50, 0, 50, 0, 50, 0, 0.00014682605, 0.87014115, -4.455, 48.039997)
 
 [node name="FBX_Sausage (2)" parent="Scene Contents/Scene Geometry" instance=ExtResource("8_4ny8g")]
-transform = Transform3D(90.25673, -86.46801, 1.4169903, 1.0232154, -0.98025066, -124.99199, 86.47356, 90.262535, 9.397492e-06, -13.590725, -3.6848, 93.683044)
+transform = Transform3D(90.25673, -86.467995, 1.41699, 1.0232154, -0.98025054, -124.99197, 86.47356, 90.26253, 9.39749e-06, -13.590725, -3.6848, 93.683044)
 
 [node name="Orange Half" parent="Scene Contents/Scene Geometry" instance=ExtResource("10_m0e3u")]
 transform = Transform3D(1.4541764e-05, 0, -4.952039, 0, 4.952039, 0, 4.952039, 0, 1.4541764e-05, -19.739702, -6.3050003, 102.46005)
-
-[node name="GameObject" type="RigidBody3D" parent="Scene Contents/Scene Geometry"]
-transform = Transform3D(2.9365208e-06, 0, -1, 0, 1, 0, 1, 0, 2.9365208e-06, -14.9098625, -3.9, 46.490044)
-gravity_scale = 0.0
-freeze = true
-freeze_mode = 1
-angular_damp = 0.05
-
-[node name="FBX_Sausage (3)" parent="Scene Contents/Scene Geometry/GameObject" instance=ExtResource("8_4ny8g")]
-transform = Transform3D(-10.91703, -99.000725, -8.926126, 27.030527, 5.684729, -96.10949, 95.65652, -12.905082, 26.139816, 0, 0, 0)
-visible = false
 
 [node name="Orange Half (2)" parent="Scene Contents/Scene Geometry" instance=ExtResource("10_m0e3u")]
 transform = Transform3D(8.714203e-06, 1.3158081e-12, 3, 4.5298742e-07, -3, 0, 3, 4.5298742e-07, -8.714203e-06, -26.02968, -8.77, 108.52008)
@@ -462,7 +446,7 @@ transform = Transform3D(70, 0, 0, 0, 68.93654, -12.155378, 0, 12.155378, 68.9365
 shape = SubResource("ConcavePolygonShape3D_kbpu1")
 
 [node name="Cake (12)" parent="Scene Contents/Scene Geometry" instance=ExtResource("6_hvhix")]
-transform = Transform3D(-160.82663, -80.58479, 172.78085, -87.51732, 232.02841, 26.755573, -169.3749, -43.37316, -177.8855, 13.7, 0, 253.1)
+transform = Transform3D(-159.90843, -80.124725, 171.79442, -87.017654, 230.70374, 26.60282, -168.4079, -43.12553, -176.86992, 13.7, 0, 253.1)
 
 [node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Scene Geometry/Cake (12)"]
 
@@ -470,7 +454,7 @@ transform = Transform3D(-160.82663, -80.58479, 172.78085, -87.51732, 232.02841, 
 shape = SubResource("ConcavePolygonShape3D_c1jwm")
 
 [node name="Cake (16)" parent="Scene Contents/Scene Geometry" instance=ExtResource("6_hvhix")]
-transform = Transform3D(340.85263, 60.665604, -877.22656, -62.76907, 940.1048, 40.624645, 877.0783, 43.703583, 343.8176, 13.5, -46, 404.3)
+transform = Transform3D(340.82623, 60.66088, -877.1583, -62.764206, 940.0317, 40.621475, 877.0103, 43.70019, 343.7909, 13.5, -46, 404.3)
 
 [node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Scene Geometry/Cake (16)"]
 
@@ -478,7 +462,7 @@ transform = Transform3D(340.85263, 60.665604, -877.22656, -62.76907, 940.1048, 4
 shape = SubResource("ConcavePolygonShape3D_26elo")
 
 [node name="Cake (21)" parent="Scene Contents/Scene Geometry" instance=ExtResource("6_hvhix")]
-transform = Transform3D(-563.58417, -672.74615, 345.21365, -750.9111, 548.5336, -156.9403, -88.83753, -368.66068, -863.4721, 37.8, 113.92248, 403.8)
+transform = Transform3D(-562.94293, -671.9805, 344.82083, -750.0567, 547.90936, -156.76175, -88.73646, -368.2411, -862.4896, 37.8, 113.92248, 403.8)
 
 [node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Scene Geometry/Cake (21)"]
 
@@ -486,7 +470,7 @@ transform = Transform3D(-563.58417, -672.74615, 345.21365, -750.9111, 548.5336, 
 shape = SubResource("ConcavePolygonShape3D_0ltvo")
 
 [node name="Cake (13)" parent="Scene Contents/Scene Geometry" instance=ExtResource("6_hvhix")]
-transform = Transform3D(92.21971, 6.8818035, 109.86075, 23.654745, 138.73267, -28.546722, -107.50441, 36.429424, 87.95975, -76.1, 0, 245.2)
+transform = Transform3D(91.833824, 6.853007, 109.40103, 23.555763, 138.15215, -28.427275, -107.05454, 36.276993, 87.5917, -76.1, 0, 245.2)
 
 [node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Scene Geometry/Cake (13)"]
 
@@ -494,7 +478,7 @@ transform = Transform3D(92.21971, 6.8818035, 109.86075, 23.654745, 138.73267, -2
 shape = SubResource("ConcavePolygonShape3D_lwl27")
 
 [node name="Cake (14)" parent="Scene Contents/Scene Geometry" instance=ExtResource("6_hvhix")]
-transform = Transform3D(-130.71516, -28.28639, 52.293755, -30.674318, 140.28426, -0.79291826, -50.929775, -11.892141, -133.73837, -76.1, 17.8, 241)
+transform = Transform3D(-130.16821, -28.168024, 52.074936, -30.545967, 139.69725, -0.78960127, -50.716667, -11.84238, -133.17874, -76.1, 17.8, 241)
 
 [node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Scene Geometry/Cake (14)"]
 
@@ -502,7 +486,7 @@ transform = Transform3D(-130.71516, -28.28639, 52.293755, -30.674318, 140.28426,
 shape = SubResource("ConcavePolygonShape3D_fatop")
 
 [node name="Cake (15)" parent="Scene Contents/Scene Geometry" instance=ExtResource("6_hvhix")]
-transform = Transform3D(88.044395, 2.4471066, 113.416985, 35.198326, 135.8928, -30.256132, -107.8447, 46.35048, 82.71862, -76.1, 34.2, 250.3)
+transform = Transform3D(87.67597, 2.4368691, 112.9424, 35.05104, 135.32419, -30.12953, -107.39343, 46.156532, 82.37249, -76.1, 34.2, 250.3)
 
 [node name="MeshCollider" type="StaticBody3D" parent="Scene Contents/Scene Geometry/Cake (15)"]
 
@@ -534,13 +518,13 @@ transform = Transform3D(2.180196, 20.465086, 66.906105, -14.136895, 65.68678, -1
 shape = SubResource("ConcavePolygonShape3D_62afy")
 
 [node name="Picnic Basket (2)" parent="Scene Contents/Scene Geometry" instance=ExtResource("14_7dtnt")]
-transform = Transform3D(-95.79019, -28.476692, -3.6487699, -27.42112, 86.985016, 41.00839, -8.503949, 40.28257, -91.13172, 40, -5.8, 138.2)
+transform = Transform3D(-95.790215, -28.476692, -3.6487713, -27.421125, 86.985016, 41.008404, -8.503951, 40.28257, -91.13176, 40, -5.8, 138.2)
 
 [node name="Picnic Basket (11)" parent="Scene Contents/Scene Geometry" instance=ExtResource("14_7dtnt")]
-transform = Transform3D(84.0014, 5.1991315, -285.77814, -176.79897, 234.98914, -47.69302, 224.58469, 183.04497, 69.344376, 273.0973, -32.20282, 96.13279)
+transform = Transform3D(84.025826, 5.200643, -285.86118, -176.85036, 235.05745, -47.706882, 224.64998, 183.09819, 69.36453, 273.0973, -32.20282, 96.13279)
 
 [node name="Picnic Basket (12)" parent="Scene Contents/Scene Geometry" instance=ExtResource("14_7dtnt")]
-transform = Transform3D(120.00395, -68.86533, 115.60039, 26.972572, -139.43976, -111.06694, 131.82701, 91.21925, -82.50768, 146.2, 108.2, 153.14)
+transform = Transform3D(116.478645, -66.8423, 112.20443, 26.180212, -135.34348, -107.80416, 127.954384, 88.539536, -80.083885, 146.2, 108.2, 153.14)
 
 [node name="Cleaver" type="Node3D" parent="Scene Contents/Scene Geometry"]
 transform = Transform3D(0.7222325, 0, 0.69165033, 0, 1, 0, -0.69165033, 0, 0.7222325, -10.23, -2.6093612, 101.55)

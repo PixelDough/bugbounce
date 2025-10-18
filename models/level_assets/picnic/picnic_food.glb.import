@@ -1,0 +1,124 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dge8l2cf7ar0g"
+path="res://.godot/imported/picnic_food.glb-ddde018972aefc11abc18d8e0e08796d.scn"
+
+[deps]
+
+source_file="res://models/level_assets/picnic/picnic_food.glb"
+dest_files=["res://.godot/imported/picnic_food.glb-ddde018972aefc11abc18d8e0e08796d.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"Base": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://materials/mat_gradients_picnic.material",
+"use_external/path": "uid://coipb48ku8yhb"
+}
+},
+"meshes": {
+"picnic_food_cake_slice": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_cake_slice.res",
+"save_to_file/path": "uid://c4ap5jh43err6"
+},
+"picnic_food_fruit_half": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_fruit_half.res",
+"save_to_file/path": "uid://dk0rd1kml51dj"
+},
+"picnic_food_fruit_half_lemon": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_fruit_half_lemon.res",
+"save_to_file/path": "uid://1rk2cy6a5bmp"
+},
+"picnic_food_fruit_slice": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_fruit_slice.res",
+"save_to_file/path": "uid://ebqtwjs5dp1p"
+},
+"picnic_food_fruit_wedge": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_fruit_wedge.res",
+"save_to_file/path": "uid://bkpq5vpw38tna"
+},
+"picnic_food_fruit_whole": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_fruit_whole.res",
+"save_to_file/path": "uid://b7vuk5kdrj4n1"
+},
+"picnic_food_peach": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_peach.res",
+"save_to_file/path": "uid://cdhi0j7m3qjo5"
+},
+"picnic_food_sausage": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/picnic_food_sausage.res",
+"save_to_file/path": "uid://dc3nmga5lkll6"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

@@ -21,3 +21,7 @@ project/assembly_name="bugbounce"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/unidot_importer/plugin.cfg")
+
+[rendering]
+
+mesh_lod/lod_change/threshold_pixels=0.1

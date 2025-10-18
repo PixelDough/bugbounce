@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cspr4av2gv3bt"]
+
+[ext_resource type="ArrayMesh" uid="uid://vpv5ev5ahq7a" path="res://models/level_assets/picnic/meshes/picnic_food_fruit_whole.res" id="1_lums0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vlwe8"]
+radius = 1.0
+
+[node name="fruit_whole" type="AnimatableBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_lums0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vlwe8")

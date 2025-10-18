@@ -1,0 +1,111 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dcav6kr53jc4c"
+path="res://.godot/imported/utensils.glb-fd50a11bf8082781f9c40299379140e4.scn"
+
+[deps]
+
+source_file="res://models/level_assets/picnic/utensils.glb"
+dest_files=["res://.godot/imported/utensils.glb-fd50a11bf8082781f9c40299379140e4.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"Basic": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://materials/mat_gradients_picnic_smooth.material",
+"use_external/path": "uid://cx2vc6jcye144"
+},
+"Utensils": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://materials/mat_gradients_picnic_metal.material",
+"use_external/path": "uid://n3p07stvgowf"
+}
+},
+"meshes": {
+"utensils_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/utensils_plate.res",
+"save_to_file/path": "uid://dviqb1pqyedin"
+},
+"utensils_cleaver": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/utensils_cleaver.res",
+"save_to_file/path": "uid://b12c8qmkd32he"
+},
+"utensils_fork": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/utensils_fork.res",
+"save_to_file/path": "uid://bhj6pvnyofw7d"
+},
+"utensils_fork_collider": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/utensils_fork_collider.res",
+"save_to_file/path": "uid://cbql8ui3ry2p8"
+},
+"utensils_knife": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/utensils_knife.res",
+"save_to_file/path": "uid://dhiyokivc7fiv"
+},
+"utensils_spoon": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/level_assets/picnic/meshes/utensils_spoon.res",
+"save_to_file/path": "uid://uulngbpjrgon"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1
