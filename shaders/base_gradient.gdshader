@@ -25,7 +25,7 @@ uniform float smoothness : hint_range(0, 1) = 0.0;
 uniform float metallic : hint_range(0, 1) = 0.0;
 
 group_uniforms Lighting;
-uniform sampler2D main_light_gradient : hint_default_white, repeat_disable;
+uniform sampler2D main_light_gradient : hint_default_white, source_color, repeat_disable;
 
 varying vec2 matcap_uv;
 
@@ -73,6 +73,6 @@ void light() {
 		vec2(light_dot_normalized, 0)
 	).rgb;
 	
-	DIFFUSE_LIGHT = main_light_color * ATTENUATION * ALBEDO;
+	DIFFUSE_LIGHT = main_light_color * ATTENUATION;
 	SPECULAR_LIGHT = vec3(0);
 }

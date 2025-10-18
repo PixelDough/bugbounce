@@ -25,7 +25,7 @@ sky_material = SubResource("PanoramaSkyMaterial_t6161")
 [sub_resource type="Environment" id="Environment_c6jy4"]
 background_mode = 2
 sky = SubResource("Sky_2125t")
-ambient_light_sky_contribution = 0.5
+ambient_light_sky_contribution = 0.15
 reflected_light_source = 1
 glow_enabled = true
 fog_enabled = true
@@ -38,7 +38,8 @@ fog_depth_curve = 1.0000001
 fog_depth_begin = 0.0
 fog_depth_end = 250.0
 adjustment_enabled = true
-adjustment_contrast = 1.05
+adjustment_brightness = 0.9
+adjustment_contrast = 1.35
 adjustment_saturation = 1.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_okjl2"]

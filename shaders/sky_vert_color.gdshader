@@ -6,6 +6,7 @@ render_mode depth_prepass_alpha;
 render_mode fog_disabled;
 
 uniform sampler2D depth_texture : hint_depth_texture;
+uniform float power = 1.0;
 
 void vertex() {
 	// billboard
@@ -22,5 +23,5 @@ void fragment() {
 		//discard;
 	//}
 	
-	ALBEDO = COLOR.rgb;
+	ALBEDO = pow(COLOR.rgb, vec3(power));
 }

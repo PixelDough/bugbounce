@@ -35,9 +35,7 @@ sky_material = SubResource("PanoramaSkyMaterial_nm6a2")
 [sub_resource type="Environment" id="Environment_nulfp"]
 background_mode = 2
 sky = SubResource("Sky_kidpj")
-ambient_light_color = Color(0.4817894, 0.48178953, 0.48178923, 1)
 ambient_light_sky_contribution = 0.05
-ambient_light_energy = 0.0
 ssao_light_affect = 1.0
 glow_enabled = true
 glow_normalized = true
@@ -56,8 +54,7 @@ fog_depth_end = 200.0
 volumetric_fog_density = 0.0826
 volumetric_fog_albedo = Color(0.6313726, 1, 1, 1)
 adjustment_enabled = true
-adjustment_brightness = 1.1
-adjustment_contrast = 1.15
+adjustment_contrast = 1.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w52jn"]
 radius = 1.0

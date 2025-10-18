@@ -5,3 +5,4 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_pkj14")
+shader_parameter/power = 1.2
