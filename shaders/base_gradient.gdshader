@@ -1,6 +1,7 @@
 shader_type spatial;
 render_mode cull_disabled;
 render_mode depth_draw_opaque;
+render_mode shadows_disabled;
 
 #include "shading.gdshaderinc"
 

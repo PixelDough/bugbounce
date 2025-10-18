@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du7j4xji57juy"
-path.s3tc="res://.godot/imported/Tex_SpaceSkyboxTexture.png-22c47cb1bcd715be2e3efe0b31475acd.s3tc.ctex"
+uid="uid://kal5jn2vw23i"
+path.s3tc="res://.godot/imported/gradients_bowling.png-855208ad7473fbcf9ab0269ab4027d4d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/backgrounds/Tex_SpaceSkyboxTexture.png"
-dest_files=["res://.godot/imported/Tex_SpaceSkyboxTexture.png-22c47cb1bcd715be2e3efe0b31475acd.s3tc.ctex"]
+source_file="res://materials/gradients_bowling.png"
+dest_files=["res://.godot/imported/gradients_bowling.png-855208ad7473fbcf9ab0269ab4027d4d.s3tc.ctex"]
 
 [params]
 

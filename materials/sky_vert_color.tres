@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctsvjnumcnaan"]
+
+[ext_resource type="Shader" uid="uid://dtrxmyuytv7fx" path="res://shaders/sky_vert_color.gdshader" id="1_pkj14"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_pkj14")

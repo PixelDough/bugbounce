@@ -38,8 +38,6 @@ sky = SubResource("Sky_kidpj")
 ambient_light_color = Color(0.4817894, 0.48178953, 0.48178923, 1)
 ambient_light_sky_contribution = 0.05
 ambient_light_energy = 0.0
-tonemap_mode = 1
-tonemap_white = 7.0
 ssao_enabled = true
 ssao_light_affect = 1.0
 glow_enabled = true
@@ -87,7 +85,6 @@ transform = Transform3D(0.9063079, 0.36599806, 0.21130894, 0, 0.49999976, -0.866
 
 [node name="Light" type="DirectionalLight3D" parent="Level Management/Directional Light"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-light_energy = 2.0
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
 

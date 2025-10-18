@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://menstlsmwd6q"]
+
+[ext_resource type="PackedScene" uid="uid://cph2ox0omb17o" path="res://models/skyboxes/sky_space_01.glb" id="1_wcofb"]
+
+[node name="sky_space_01" instance=ExtResource("1_wcofb")]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+
+[node name="Background" parent="." index="0"]
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+
+[node name="Stars" parent="." index="1"]
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+
+[node name="Sun" parent="." index="2"]
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+
+[node name="Asteroid Belt 1" parent="." index="3"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.8767519, -0.48094282, 0, 0.48094282, 0.8767519, 0, 0, 0)
+visible = false
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+
+[node name="Asteroid Belt 2" parent="." index="4"]
+transform = Transform3D(0.6681572, 0.74402004, 0, -0.74402004, 0.6681572, 0, 0, 0, 0.99999994, 0, 0, 0)
+visible = false
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+
+[node name="Earth" parent="." index="5"]
+visible = false
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
