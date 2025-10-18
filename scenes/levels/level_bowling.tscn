@@ -109,8 +109,8 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 light_energy = 1.5
 light_bake_mode = 0
 shadow_enabled = true
-shadow_bias = 0.05
-shadow_normal_bias = 0.4
+shadow_opacity = 0.2
+shadow_blur = 5.0
 
 [node name="Visual Effect (Bowling Pins)" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
@@ -341,10 +341,8 @@ transform = Transform3D(73.309746, 13.799831, -71.458374, -41.026638, 91.6112, -
 [node name="Bowling Pin (23)" parent="Scene Contents/Geometry" instance=ExtResource("15_x8365")]
 transform = Transform3D(15.471068, 67.07272, 77.02566, 39.481865, -75.7757, 58.054123, 94.195984, 20.74483, -36.984108, -0.7, 47.405148, 401.5)
 
-[node name="Bowling Island 3" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
-
 [node name="Bowling Island 3 (1)" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
-transform = Transform3D(-2.3841858e-07, 0, -1, 0, 1, 0, 1, 0, -2.3841858e-07, -20.735874, 5.1399994, 138.38416)
+transform = Transform3D(-2.8212997e-07, 0, -1, 0, 1, 0, 1, 0, -2.8212997e-07, -20.735874, 5.1399994, 138.38416)
 
 [node name="Bowling Island 3 (2)" parent="Scene Contents/Geometry" instance=ExtResource("16_bfwhg")]
 transform = Transform3D(0.25881946, 0, 0.96592575, 0, 1, 0, -0.96592575, 0, 0.25881946, -24.908787, 16.67, 55.905075)

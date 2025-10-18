@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uycb778cqrap"
-path.s3tc="res://.godot/imported/Tex_Sky1.png-e21adc118c9484467cd688094bb00f21.s3tc.ctex"
+uid="uid://dr674n0xqu4pm"
+path.s3tc="res://.godot/imported/gradients_picnic.png-5194162e3cf13afee9fcc51743867d8d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/backgrounds/Tex_Sky1.png"
-dest_files=["res://.godot/imported/Tex_Sky1.png-e21adc118c9484467cd688094bb00f21.s3tc.ctex"]
+source_file="res://materials/gradients_picnic.png"
+dest_files=["res://.godot/imported/gradients_picnic.png-5194162e3cf13afee9fcc51743867d8d.s3tc.ctex"]
 
 [params]
 

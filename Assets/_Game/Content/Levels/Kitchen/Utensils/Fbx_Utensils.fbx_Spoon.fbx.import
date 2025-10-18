@@ -38,21 +38,14 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
-"animations": {},
 "materials": {
 "Utensils": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/_Game/Content/Levels/Kitchen/Mat_KitchenGradient.material",
-"use_external/path": "uid://coipb48ku8yhb"
+"use_external/fallback_path": "res://materials/mat_gradients_picnic_metal.material",
+"use_external/path": "uid://n3p07stvgowf"
 }
 },
 "meshes": {
-"Root Scene_Spoon_001": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/_Game/Content/Levels/Kitchen/Utensils/extracted/Fbx_Utensils.fbx_Spoon.Spoon_001.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://dr6rfpjp0b52k"
-},
 "Spoon_001": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -60,15 +53,13 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://Assets/_Game/Content/Levels/Kitchen/Utensils/extracted/Fbx_Utensils.fbx_Spoon.Spoon_001.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://dr6rfpjp0b52k"
 }
 },
 "nodes": {
 "PATH:AnimationPlayer": {
 "optimizer/enabled": true,
-"optimizer/max_angular_error": 0.00277777777777777,
-"optimizer/max_linear_error": 0.5
+"optimizer/max_angular_error": 0.00277777777777777
 }
 }
 }

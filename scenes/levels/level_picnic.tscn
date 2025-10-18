@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://764yuuem4wgo"]
 
-[ext_resource type="Material" uid="uid://bxrih4p7vmaq4" path="res://Assets/_Game/Materials/Mat_SkyClouds.material" id="1_tlrsl"]
+[ext_resource type="Texture2D" uid="uid://uycb778cqrap" path="res://textures/backgrounds/Tex_Sky1.png" id="1_tlrsl"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_t6161"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="3_hj6ap"]
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="4_t5h0g"]
@@ -15,16 +15,31 @@
 [ext_resource type="PackedScene" uid="uid://dukpaluw3ubxt" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Orange Wedge.prefab.scn" id="13_5qfnu"]
 [ext_resource type="PackedScene" uid="uid://dtb8uf3wsl4gf" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Picnic Basket.prefab.scn" id="14_7dtnt"]
 [ext_resource type="PackedScene" uid="uid://7072nojlnb87" path="res://Assets/_Game/Content/Levels/Kitchen/_Props/Cleaver.prefab.scn" id="15_jplag"]
-[ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="16_xyl6r"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t6161"]
+panorama = ExtResource("1_tlrsl")
 
 [sub_resource type="Sky" id="Sky_2125t"]
-sky_material = ExtResource("1_tlrsl")
+sky_material = SubResource("PanoramaSkyMaterial_t6161")
 
 [sub_resource type="Environment" id="Environment_c6jy4"]
 background_mode = 2
 sky = SubResource("Sky_2125t")
+ambient_light_sky_contribution = 0.5
+reflected_light_source = 1
+glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.8980393, 0.9921569, 0.9921569, 1)
+fog_mode = 1
+fog_light_color = Color(0.9757151, 0.9980627, 0.9979659, 1)
+fog_density = 1.0
+fog_aerial_perspective = 0.5
+fog_sky_affect = 0.0
+fog_depth_curve = 2.0000007
+fog_depth_begin = 0.0
+fog_depth_end = 250.0
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.05
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_okjl2"]
 size = Vector3(1200, 1000, 1200)
@@ -64,8 +79,6 @@ data = PackedVector3Array(0.0422, 0, -0.063099995, -0.0422, 0, -0.063099995, 0, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6jy4")
 
-[node name="LightmapGI" type="LightmapGI" parent="."]
-
 [node name="Scene Contents" type="Node3D" parent="."]
 
 [node name="Level Features" type="Node3D" parent="Scene Contents"]
@@ -92,9 +105,6 @@ transform = Transform3D(0.97941643, 0, -0.2018502, 0, 1, 0, 0.2018502, 0, 0.9794
 
 [node name="Binocular Stand" parent="Scene Contents/Level Features" instance=ExtResource("4_t5h0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 20, 217)
-
-[node name="Fbx_Binoculars" parent="Scene Contents/Level Features/Binocular Stand" index="3"]
-transform = Transform3D(1.4903579, -0.08922762, 0.14447182, 2.7939677e-09, 1.2762167, 0.78820735, -0.16980481, -0.78314066, 1.268013, 0, 1.5, 0)
 
 [node name="Scene Geometry" type="Node3D" parent="Scene Contents"]
 
@@ -665,29 +675,7 @@ transform = Transform3D(-87.55786, 14.132807, -278.12076, -2.3906138, -291.57123
 [node name="Picnic Basket (1)" parent="Scene Contents/Scene Geometry" instance=ExtResource("14_7dtnt")]
 transform = Transform3D(-4.310895, 11.526052, 8.577083, 2.7716162e-05, -8.954855, 12.033726, 14.367192, 3.4584239, 2.5735404, 2.5574727, 53.497185, 304.34912)
 
-[node name="Draw XXL Lines Manager" type="Node3D" parent="."]
-
 [node name="Level Management" type="Node3D" parent="."]
-
-[node name="Level Manager" parent="Level Management" instance=ExtResource("16_xyl6r")]
-
-[node name="Player Spawner" parent="Level Management/Level Manager" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
-
-[node name="Fbx_Player_Coconut_Test" parent="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model" index="3"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-script = null
-
-[node name="Start Cinemachine Camera" parent="Level Management/Level Manager" index="3"]
-transform = Transform3D(0.89261734, -0.117910296, -0.43512222, 3.7252903e-09, 0.9651902, -0.2615491, 0.45081508, 0.23346329, 0.86154544, 12.600296, 12.429096, -78.53885)
 
 [node name="Directional Light" type="Node3D" parent="Level Management"]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0, 0)
@@ -696,188 +684,5 @@ transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 light_energy = 1.2
 light_bake_mode = 0
-shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
-
-[node name="Volume 1" type="Node3D" parent="Level Management"]
-
-[editable path="Scene Contents/Level Features/Goal Ring"]
-[editable path="Scene Contents/Level Features/Goal Ring/Fbx_GoalRing"]
-[editable path="Scene Contents/Level Features/Checkpoint (1)"]
-[editable path="Scene Contents/Level Features/Checkpoint (1)/Fbx_Checkpoint"]
-[editable path="Scene Contents/Level Features/Checkpoint (1)/Checkpoint Flag/Fbx_CheckpointFlag"]
-[editable path="Scene Contents/Level Features/Checkpoint"]
-[editable path="Scene Contents/Level Features/Checkpoint/Fbx_Checkpoint"]
-[editable path="Scene Contents/Level Features/Checkpoint/Checkpoint Flag/Fbx_CheckpointFlag"]
-[editable path="Scene Contents/Level Features/Binocular Stand"]
-[editable path="Scene Contents/Level Features/Binocular Stand/Fbx_Checkpoint"]
-[editable path="Scene Contents/Level Features/Binocular Stand/Fbx_Binoculars"]
-[editable path="Scene Contents/Scene Geometry/Picnic Blanket"]
-[editable path="Scene Contents/Scene Geometry/Picnic Blanket (1)"]
-[editable path="Scene Contents/Scene Geometry/Cake (2)"]
-[editable path="Scene Contents/Scene Geometry/Fork (3)"]
-[editable path="Scene Contents/Scene Geometry/Fork (5)"]
-[editable path="Scene Contents/Scene Geometry/Fork (5)/FBX_Sausage (1)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (1)"]
-[editable path="Scene Contents/Scene Geometry/Spinning Plate Ring/FBX_Plate (18)"]
-[editable path="Scene Contents/Scene Geometry/Spinning Plate Ring/FBX_Plate (19)"]
-[editable path="Scene Contents/Scene Geometry/Spinning Plate Ring/FBX_Plate (20)"]
-[editable path="Scene Contents/Scene Geometry/Spinning Plate Ring/FBX_Plate (21)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (4)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (15)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (16)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (17)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (1)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (2)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (3)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half"]
-[editable path="Scene Contents/Scene Geometry/GameObject/FBX_Sausage (3)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (1)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (4)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (5)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (7)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (8)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (9)"]
-[editable path="Scene Contents/Scene Geometry/Orange Half (6)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (11)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (11)/Fork (11)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (12)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (12)/Fork (11)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (13)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (13)/Fork (11)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring/Orange Half"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring/Orange Half (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring/Orange Half (3)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring/Orange Half (3)/Knife (1)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring/Orange Half (1)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (1)/Orange Half"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (1)/Orange Half (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (1)/Orange Half (3)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (1)/Orange Half (3)/Knife"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (1)/Orange Half (1)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (2)/Orange Half"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (2)/Orange Half (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (2)/Orange Half (3)"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (2)/Orange Half (3)/Knife"]
-[editable path="Scene Contents/Scene Geometry/Orange Spin Ring (2)/Orange Half (1)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (1)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (2)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (3)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (4)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (7)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (8)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (10)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (9)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (5)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (14)"]
-[editable path="Scene Contents/Scene Geometry/Lemon Half (6)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (5)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (18)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (20)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (6)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (19)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (7)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (21)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (22)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (8)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (3)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (5)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (8)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (6)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Sausage (7)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (9)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (10)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (11)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (14)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (12)"]
-[editable path="Scene Contents/Scene Geometry/FBX_Plate (13)"]
-[editable path="Scene Contents/Scene Geometry/Fork"]
-[editable path="Scene Contents/Scene Geometry/Fork/Orange Wedge"]
-[editable path="Scene Contents/Scene Geometry/Fork (6)"]
-[editable path="Scene Contents/Scene Geometry/Fork (8)"]
-[editable path="Scene Contents/Scene Geometry/Fork (9)"]
-[editable path="Scene Contents/Scene Geometry/Fork (1)"]
-[editable path="Scene Contents/Scene Geometry/Fork (1)/Orange Wedge"]
-[editable path="Scene Contents/Scene Geometry/Fork (4)"]
-[editable path="Scene Contents/Scene Geometry/Fork (4)/Orange Wedge"]
-[editable path="Scene Contents/Scene Geometry/Cake"]
-[editable path="Scene Contents/Scene Geometry/Fork (2)"]
-[editable path="Scene Contents/Scene Geometry/Fork (2)/Orange Wedge"]
-[editable path="Scene Contents/Scene Geometry/Sausage _ Fork Ring/Content/Fork (1)"]
-[editable path="Scene Contents/Scene Geometry/Sausage _ Fork Ring/Content/Fork (1)2"]
-[editable path="Scene Contents/Scene Geometry/Sausage _ Fork Ring/Content/Fork (1)3"]
-[editable path="Scene Contents/Scene Geometry/Sausage _ Fork Ring/Content/Fork (1)4"]
-[editable path="Scene Contents/Scene Geometry/Cake (1)"]
-[editable path="Scene Contents/Scene Geometry/Cake (12)"]
-[editable path="Scene Contents/Scene Geometry/Cake (16)"]
-[editable path="Scene Contents/Scene Geometry/Cake (21)"]
-[editable path="Scene Contents/Scene Geometry/Cake (13)"]
-[editable path="Scene Contents/Scene Geometry/Cake (14)"]
-[editable path="Scene Contents/Scene Geometry/Cake (15)"]
-[editable path="Scene Contents/Scene Geometry/Cake (6)"]
-[editable path="Scene Contents/Scene Geometry/Cake (7)"]
-[editable path="Scene Contents/Scene Geometry/Cake (8)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (2)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (11)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (12)"]
-[editable path="Scene Contents/Scene Geometry/Cleaver/Model Content/Cleaver"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (3)"]
-[editable path="Scene Contents/Scene Geometry/Cake (3)"]
-[editable path="Scene Contents/Scene Geometry/Cake (4)"]
-[editable path="Scene Contents/Scene Geometry/Cake (9)"]
-[editable path="Scene Contents/Scene Geometry/Cake (5)"]
-[editable path="Scene Contents/Scene Geometry/Cake (10)"]
-[editable path="Scene Contents/Scene Geometry/Cake (17)"]
-[editable path="Scene Contents/Scene Geometry/Cake (19)"]
-[editable path="Scene Contents/Scene Geometry/Cake (11)"]
-[editable path="Scene Contents/Scene Geometry/Cake (18)"]
-[editable path="Scene Contents/Scene Geometry/Cake (20)"]
-[editable path="Scene Contents/Scene Geometry/Fork (7)"]
-[editable path="Scene Contents/Scene Geometry/Fork (10)"]
-[editable path="Scene Contents/Scene Geometry/Fork (10)/Lemon Half (11)"]
-[editable path="Scene Contents/Scene Geometry/Knife"]
-[editable path="Scene Contents/Scene Geometry/Knife (1)"]
-[editable path="Scene Contents/Scene Geometry/Knife (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Wedge"]
-[editable path="Scene Contents/Scene Geometry/Orange Wedge (1)"]
-[editable path="Scene Contents/Scene Geometry/Orange Wedge (2)"]
-[editable path="Scene Contents/Scene Geometry/Orange Wedge (3)"]
-[editable path="Scene Contents/Scene Geometry/Orange Wedge (4)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (4)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (5)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (7)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (8)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (9)"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (6)"]
-[editable path="Scene Contents/Scene Geometry/Fork (11)"]
-[editable path="Scene Contents/Scene Geometry/Fork (13)"]
-[editable path="Scene Contents/Scene Geometry/Fork (14)"]
-[editable path="Scene Contents/Scene Geometry/Fork (15)"]
-[editable path="Scene Contents/Scene Geometry/Fork (16)"]
-[editable path="Scene Contents/Scene Geometry/Fork (17)"]
-[editable path="Scene Contents/Scene Geometry/Fork (12)"]
-[editable path="Scene Contents/Scene Geometry/Fork (12)/Cake"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket"]
-[editable path="Scene Contents/Scene Geometry/Picnic Basket (1)"]
-[editable path="Level Management/Level Manager"]
-[editable path="Level Management/Level Manager/HUD Stuff/Stopwatch Render/Stopwatch Root/Fbx_Stopwatch"]
-[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJoystick"]
-[editable path="Level Management/Level Manager/HUD Stuff/Input Overlay Renderer/InputJump"]
-[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Resume"]
-[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Restart"]
-[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Settings"]
-[editable path="Level Management/Level Manager/HUD Stuff/Pause Text Renderers/Quit"]
-[editable path="Level Management/Level Manager/Player Spawner"]
-[editable path="Level Management/Level Manager/Pause Scene Management"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Fbx_TvRemote"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_RollyPoly"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Player_Pumpkin"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Meatball"]
-[editable path="Level Management/Level Manager/Pause Scene Management/Player Stuff Manager/Shadow Blob"]
