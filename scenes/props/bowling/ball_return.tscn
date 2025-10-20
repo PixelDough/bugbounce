@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cscqijsga68dw"]
+
+[ext_resource type="PackedScene" uid="uid://cvdj1c00xf3ys" path="res://models/level_assets/bowling/ball_return.glb" id="1_seo4d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_seo4d"]
+size = Vector3(1.03, 1.12, 2.062501)
+
+[node name="ball_return" instance=ExtResource("1_seo4d")]
+
+[node name="Trigger" type="Node3D" parent="." index="1"]
+
+[node name="BoxCollider" type="Area3D" parent="Trigger" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger/BoxCollider" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5866063e-09, 0.3200007, 0.11874949)
+shape = SubResource("BoxShape3D_seo4d")
+
+[node name="Player Attach Point" type="Node3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 1.1874995)

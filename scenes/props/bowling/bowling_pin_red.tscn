@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7p5n1dh5i5ex"]
+
+[ext_resource type="PackedScene" uid="uid://biv7it6d5bdkb" path="res://scenes/props/bowling/bowling_pin_white.tscn" id="1_gqor6"]
+[ext_resource type="ArrayMesh" uid="uid://c8nvm87d5aa4s" path="res://models/level_assets/bowling/meshes/bowling_pins_red.res" id="2_3wjme"]
+
+[node name="bowling_pin_red" instance=ExtResource("1_gqor6")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = ExtResource("2_3wjme")

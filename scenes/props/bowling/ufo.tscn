@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d03chr1vglu8m"]
+
+[ext_resource type="PackedScene" uid="uid://dq368ne051ttm" path="res://models/level_assets/bowling/ufo.glb" id="1_f8wng"]
+[ext_resource type="Material" uid="uid://jlt7x330cu2i" path="res://Assets/_Game/Content/Levels/Bowling/UFO/Mat_UFO_AttractionBeam.material" id="2_d1f30"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j20cr"]
+resource_name = "Cylinder"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_raxne"]
+radius = 3.0
+
+[node name="ufo" instance=ExtResource("1_f8wng")]
+
+[node name="Attraction Visual" type="Node3D" parent="." index="2"]
+transform = Transform3D(6, 0, 0, 0, 12, 0, 0, 0, 6, 0, -10, 0)
+
+[node name="MeshRenderer" type="MeshInstance3D" parent="Attraction Visual" index="0"]
+gi_mode = 2
+mesh = SubResource("CylinderMesh_j20cr")
+surface_material_override/0 = ExtResource("2_d1f30")
+
+[node name="Kill Zone" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="SphereCollider" type="Area3D" parent="Kill Zone" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kill Zone/SphereCollider" index="0"]
+shape = SubResource("SphereShape3D_raxne")

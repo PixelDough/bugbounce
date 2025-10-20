@@ -1,19 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://0dxny8jexjm8"]
+[gd_scene load_steps=17 format=3 uid="uid://0dxny8jexjm8"]
 
 [ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="1_um6pw"]
 [ext_resource type="CompressedTexture3D" uid="uid://b5xgvubwlkwvv" path="res://addons/AmplifyColor/LUT/Base/Cold_L.png" id="2_hbfp3"]
-[ext_resource type="PackedScene" uid="uid://bo21l0t6adjfk" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Ball Return Feature.prefab.scn" id="2_pqaur"]
-[ext_resource type="PackedScene" uid="uid://dxqe8rvug2dvm" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Pin Ring.prefab.scn" id="3_n1ptr"]
+[ext_resource type="PackedScene" uid="uid://cscqijsga68dw" path="res://scenes/props/bowling/ball_return.tscn" id="2_pqaur"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="4_adloq"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="5_pcbo2"]
 [ext_resource type="PackedScene" uid="uid://ddnnsrxwsgmsd" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Island 1.prefab.scn" id="6_doofy"]
-[ext_resource type="PackedScene" uid="uid://dlfiu7liqjfcf" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Ball Return.prefab.scn" id="8_qpk1b"]
 [ext_resource type="PackedScene" uid="uid://b7h0rlcusr2yu" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Island 2.prefab.scn" id="9_ey43s"]
-[ext_resource type="PackedScene" uid="uid://djxlfmbea4fb1" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Ball (Spinning).prefab.scn" id="13_drhmw"]
-[ext_resource type="PackedScene" uid="uid://mf8ima13i3jd" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Pin Red.prefab.scn" id="14_n4jqo"]
-[ext_resource type="PackedScene" uid="uid://cyx04qq32mfro" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Pin.prefab.scn" id="15_x8365"]
+[ext_resource type="PackedScene" uid="uid://cnrrfredcpd6f" path="res://scenes/props/bowling/bowling_ball.tscn" id="13_drhmw"]
+[ext_resource type="PackedScene" uid="uid://b7p5n1dh5i5ex" path="res://scenes/props/bowling/bowling_pin_red.tscn" id="14_n4jqo"]
+[ext_resource type="PackedScene" uid="uid://biv7it6d5bdkb" path="res://scenes/props/bowling/bowling_pin_white.tscn" id="15_x8365"]
 [ext_resource type="PackedScene" uid="uid://b1kpcsy5akt5t" path="res://Assets/_Game/Content/Levels/Bowling/_Props/Bowling Island 3.prefab.scn" id="16_bfwhg"]
-[ext_resource type="PackedScene" uid="uid://tng8mv14ss3t" path="res://Assets/_Game/Content/Levels/Bowling/_Props/UFO.prefab.scn" id="17_l62jf"]
+[ext_resource type="PackedScene" uid="uid://d03chr1vglu8m" path="res://scenes/props/bowling/ufo.tscn" id="17_l62jf"]
 
 [sub_resource type="Environment" id="Environment_yhb0f"]
 background_mode = 1
@@ -51,9 +49,6 @@ environment = SubResource("Environment_yhb0f")
 [node name="Ball Return Feature" parent="." instance=ExtResource("2_pqaur")]
 transform = Transform3D(-1.0352621, 0, -3.863707, 0, 4, 0, 3.863707, 0, -1.0352621, 142, 43.75, 154.25)
 
-[node name="Bowling Pin Ring" parent="." instance=ExtResource("3_n1ptr")]
-transform = Transform3D(0.9552784, -0.2560906, 0.14785403, 0, -0.5000001, -0.8660253, 0.295708, 0.8272953, -0.47763932, 148.75194, 82.027374, 131.29724)
-
 [node name="Draw XXL Lines Manager" type="Node3D" parent="."]
 
 [node name="Ball Return Feature (2)" parent="." instance=ExtResource("2_pqaur")]
@@ -87,7 +82,7 @@ visible = false
 [node name="Ball Return Feature (1)" type="Node3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 28.494688, 15.364466, 174.61462)
 
-[node name="Ball Return" parent="Ball Return Feature (1)" instance=ExtResource("8_qpk1b")]
+[node name="Ball Return" parent="Ball Return Feature (1)" instance=ExtResource("2_pqaur")]
 transform = Transform3D(-0.25881612, 0.68301296, -0.68301356, 2.9802322e-08, 0.7071071, 0.7071065, 0.9659266, 0.18301053, -0.18301074, 0, 0, 0)
 
 [node name="Ball Return Camera" type="Node3D" parent="Ball Return Feature (1)"]
