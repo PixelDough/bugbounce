@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://su6wdhhatlew"]
+[gd_scene load_steps=4 format=3 uid="uid://su6wdhhatlew"]
+
+[ext_resource type="Material" uid="uid://c86256gspo8qx" path="res://materials/bubble.material" id="1_pnpub"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1buup"]
 resource_name = "Sphere"
+material = ExtResource("1_pnpub")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dr2fv"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d03chr1vglu8m"]
 
 [ext_resource type="PackedScene" uid="uid://dq368ne051ttm" path="res://models/level_assets/bowling/ufo.glb" id="1_f8wng"]
-[ext_resource type="Material" uid="uid://jlt7x330cu2i" path="res://Assets/_Game/Content/Levels/Bowling/UFO/Mat_UFO_AttractionBeam.material" id="2_d1f30"]
+[ext_resource type="Material" uid="uid://jlt7x330cu2i" path="res://materials/Mat_UFO_AttractionBeam.material" id="2_d1f30"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_j20cr"]
 resource_name = "Cylinder"

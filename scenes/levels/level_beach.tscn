@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://1opymiqb7w85" path="res://scenes/props/beach/spear.tscn" id="22_aq8ww"]
 [ext_resource type="PackedScene" uid="uid://b5w7281e4ysj3" path="res://scenes/props/beach/lantern.tscn" id="24_1them"]
 [ext_resource type="PackedScene" uid="uid://dwwbtdfc8wwc8" path="res://scenes/props/beach/life_saver.tscn" id="25_o5oh8"]
-[ext_resource type="PackedScene" uid="uid://dc46nnspeewgv" path="res://Assets/_Game/Content/Levels/Beach/_Props/Bubble.prefab.scn" id="26_c57cw"]
+[ext_resource type="PackedScene" uid="uid://su6wdhhatlew" path="res://scenes/props/beach/bubble.tscn" id="26_c57cw"]
 [ext_resource type="PackedScene" uid="uid://7jwnmpsrokmg" path="res://scenes/props/beach/surfboard.tscn" id="27_7oqrd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nm6a2"]

@@ -2,7 +2,8 @@ shader_type spatial;
 render_mode unshaded;
 render_mode cull_disabled;
 render_mode depth_test_default;
-render_mode depth_prepass_alpha;
+render_mode depth_draw_always;
+//render_mode depth_prepass_alpha;
 render_mode fog_disabled;
 
 uniform sampler2D depth_texture : hint_depth_texture;
