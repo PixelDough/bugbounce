@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://b5vg06ag7brqj"]
 
-[ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://models/general/StylizedWater2_Ocean.prefab.scn" id="3_nlkdc"]
+[ext_resource type="PackedScene" uid="uid://deh3el2klx0xk" path="res://scenes/props/ruins/water_lava.tscn" id="1_nurh4"]
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="4_si7my"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="5_82f5o"]
 [ext_resource type="PackedScene" uid="uid://b65gr7lysd7ko" path="res://Assets/_Game/Content/Levels/Ruins/_Prefabs/Island (Short).prefab.scn" id="6_0mhyi"]
@@ -60,19 +60,20 @@ shadow_normal_bias = 0.4
 
 [node name="Level Features" type="Node3D" parent="Scene Contents"]
 
-[node name="Lava" parent="Scene Contents/Level Features" instance=ExtResource("3_nlkdc")]
+[node name="water_lava" parent="Scene Contents/Level Features" instance=ExtResource("1_nurh4")]
+
+[node name="Gurgling Audio" type="Node3D" parent="Scene Contents/Level Features/water_lava"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="Gurgling Audio" type="Node3D" parent="Scene Contents/Level Features/Lava"]
+[node name="Underwater Renderer" type="Node3D" parent="Scene Contents/Level Features/water_lava"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="Underwater Renderer" type="Node3D" parent="Scene Contents/Level Features/Lava"]
+[node name="Live Zone" type="Node3D" parent="Scene Contents/Level Features/water_lava"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
-[node name="Live Zone" type="Node3D" parent="Scene Contents/Level Features/Lava"]
-transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, -0.25, 0)
+[node name="BoxCollider" type="Area3D" parent="Scene Contents/Level Features/water_lava/Live Zone"]
 
-[node name="BoxCollider" type="Area3D" parent="Scene Contents/Level Features/Lava/Live Zone"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Level Features/Lava/Live Zone/BoxCollider"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene Contents/Level Features/water_lava/Live Zone/BoxCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 125, 0)
 shape = SubResource("BoxShape3D_eq3my")
 

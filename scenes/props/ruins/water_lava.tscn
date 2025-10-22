@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://deh3el2klx0xk"]
+
+[ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://scenes/props/beach/water_beach.scn" id="1_ap2gn"]
+[ext_resource type="Material" uid="uid://bd77bl3vgniyk" path="res://materials/water_lava.tres" id="2_0b328"]
+
+[node name="water_lava" instance=ExtResource("1_ap2gn")]
+surface_material_override/0 = ExtResource("2_0b328")

@@ -2,19 +2,34 @@ shader_type spatial;
 render_mode cull_disabled;
 render_mode depth_draw_always;
 
-uniform sampler2D normal_map_texture : hint_normal;
-uniform vec3 water_color : source_color = vec3(0.0625, 0.1992, 0.3594);
-uniform float index_of_refraction = 1.333;
-
-uniform vec4 color_deep : source_color;
-uniform vec4 color_shallow : source_color;
-uniform float beers_law = 2.0;
-uniform float depth_distance = 2;
-uniform float foam_distance = 2;
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
+group_uniforms Textures;
+uniform sampler2D normal_map_texture : hint_normal;
+
+group_uniforms Settings;
+uniform float time_scale = 1.0;
+uniform float roughness : hint_range(0.0, 1.0) = 0.1;
+uniform float metallic : hint_range(0.0, 1.0) = 0.0;
+
+group_uniforms Colors;
+uniform vec3 water_color : source_color = vec3(0.0625, 0.1992, 0.3594);
+uniform vec4 color_deep : source_color;
+uniform vec4 color_shallow : source_color;
+
+group_uniforms Foam;
+uniform vec4 color_foam : source_color = vec4(1.0);
+uniform float foam_distance = 2;
+
+group_uniforms DepthRendering;
+uniform float beers_law = 2.0;
+uniform float depth_distance = 2;
+uniform float index_of_refraction = 1.333;
+
+group_uniforms Sparkles;
 uniform float sparkle_amount : hint_range(0.0, 1.0) = 0.4;
+uniform vec4 sparkle_color : source_color = vec4(1.0);
 
 // Returns 1.0 if we can see above the water, 0.0 otherwise
 float snells_window(vec3 normal, vec3 view, float ior) {
@@ -51,15 +66,15 @@ vec3 unpack_normal_map(vec4 rgba) {
 //}
 
 void fragment() {
-	ROUGHNESS = 0.1;
-	METALLIC = 0.1;
+	ROUGHNESS = roughness;
+	METALLIC = metallic;
 
 	vec3 world_vertex = (INV_VIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
 	
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
 
 	// Basic waves
-	float time = TIME * 0.015;
+	float time = TIME * 0.015 * time_scale;
 	vec2 normal_uv = vec2(world_vertex.x, world_vertex.z) * 0.005;
 	vec3 normal_sample_1 = (texture(normal_map_texture, normal_uv + vec2(-1, 1) * time)).rgb;
 	vec3 normal_sample_2 = (texture(normal_map_texture, -normal_uv + vec2(0, 1) * time)).rgb;
@@ -111,8 +126,8 @@ void fragment() {
 	float bump_amount = normal_sample_1.x * normal_sample_2.x;
 	float sparkle_value = sign(sparkle_amount * bump_amount - 0.1);
 	float shallow_foam_value = step(0.9, (bump_amount + depth_blend_foam) * 2.0);
-	ALBEDO = mix(ALBEDO, vec3(1.0), max(0.0, sparkle_value));
-	ALBEDO = mix(ALBEDO, vec3(1.0), max(0.0, shallow_foam_value));
+	ALBEDO = mix(ALBEDO, sparkle_color.rgb, max(0.0, sparkle_value * sparkle_color.a));
+	ALBEDO = mix(ALBEDO, color_foam.rgb, max(0.0, shallow_foam_value * color_foam.a));
 
 	// Apply Snell's window mask to water surface when viewed from below
 	if(!FRONT_FACING) {
@@ -122,7 +137,4 @@ void fragment() {
 		RADIANCE = vec4(vec3(0.0), mask);
 		IRRADIANCE = vec4(vec3(1.0), mask);
 	}
-	
-	ROUGHNESS = 0.15;
-	METALLIC = 0.0;
 }

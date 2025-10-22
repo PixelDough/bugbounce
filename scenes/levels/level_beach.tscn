@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://b6caon0m37olc" path="res://materials/water_beach.tres" id="10_2qpy7"]
 [ext_resource type="PackedScene" uid="uid://54lya4c6ewfx" path="res://scenes/props/beach/plank_group.tscn" id="11_afqjr"]
 [ext_resource type="PackedScene" uid="uid://bhladmbjnqsp4" path="res://scenes/props/beach/banana.tscn" id="12_r17ul"]
-[ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://models/general/StylizedWater2_Ocean.prefab.scn" id="13_1xb5j"]
+[ext_resource type="PackedScene" uid="uid://115eq0rvmt4y" path="res://scenes/props/beach/water_beach.scn" id="13_1xb5j"]
 [ext_resource type="PackedScene" uid="uid://bqlvp015fk45j" path="res://scenes/props/beach/coconut.tscn" id="14_4dlxh"]
 [ext_resource type="PackedScene" uid="uid://ctwrxb4rbwhes" path="res://scenes/props/beach/tree_palm_01.tscn" id="15_lxrer"]
 [ext_resource type="PackedScene" uid="uid://dq5j5rmwvl28t" path="res://scenes/props/beach/tree_palm_03.tscn" id="16_8j6p8"]
