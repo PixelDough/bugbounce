@@ -123,6 +123,8 @@ void fragment() {
 	vec3 surface_color = mix(water_color, color, 0.75);
 	ALBEDO = mix(surface_color, mix(surface_color * 10.0, vec3(1.0), 0.5), fresnel);
 	
+	ALBEDO = mix(ALBEDO, depth_color, pow(normal_map.x, 5.0) * 15.5);
+	
 	float bump_amount = normal_sample_1.x * normal_sample_2.x;
 	float sparkle_value = sign(sparkle_amount * bump_amount - 0.1);
 	float shallow_foam_value = step(0.9, (bump_amount + depth_blend_foam) * 2.0);
