@@ -49,17 +49,25 @@ void fragment() {
 	vec3 normal_adjusted = mix(normal_sample, vec3(0.5, 0.5, 1.0), 0.25);
 	NORMAL_MAP = normal_adjusted;
 	
-	vec3 albedo_with_matcap = apply_matcap(
-		final_color,
-		matcap_tex,
-		matcap_uv,
+	vec4 albedo_with_matcap = apply_matcap_basic(
+		vec4(final_color, 1.0),
+		texture(matcap_tex, generate_matcap_uvs_basic(NORMAL)),
 		matcap_intensity,
 		matcap_power,
 		smoothness,
 		metallic
 	);
+	//vec3 albedo_with_matcap = apply_matcap(
+		//final_color,
+		//matcap_tex,
+		//matcap_uv,
+		//matcap_intensity,
+		//matcap_power,
+		//smoothness,
+		//metallic
+	//);
 	
-	ALBEDO = albedo_with_matcap;
+	ALBEDO = albedo_with_matcap.rgb;
 	
 	ROUGHNESS = 1.0;
 	METALLIC = 0.0;
@@ -73,6 +81,6 @@ void light() {
 		vec2(light_dot_normalized, 0)
 	).rgb;
 	
-	DIFFUSE_LIGHT = main_light_color * ATTENUATION;
+	DIFFUSE_LIGHT += main_light_color * ATTENUATION * LIGHT_COLOR / PI;
 	SPECULAR_LIGHT = vec3(0);
 }

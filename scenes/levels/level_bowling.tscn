@@ -100,9 +100,8 @@ transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49
 
 [node name="Light" type="DirectionalLight3D" parent="Directional Light"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-light_energy = 1.5
+light_energy = 1.2
 light_bake_mode = 0
-shadow_enabled = true
 shadow_opacity = 0.2
 shadow_blur = 5.0
 
@@ -222,7 +221,7 @@ transform = Transform3D(27.296463, 12.710521, 0, -12.710521, 27.296463, 0, 0, 0,
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -10.383237, -5.08, 53)
 
 [node name="Bowling Ball (Spinning)3" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
-transform = Transform3D(-14.454068, -57.87336, -24.82933, -42.669674, 27.736086, -39.808895, 46.315445, 7.491757, -44.424004, 73, -19.6, 25.5)
+transform = Transform3D(-44.774174, 0.59844816, -46.579544, -4.989418, 64.17366, 5.620516, 46.315445, 7.4917545, -44.424004, 73, -19.6, 25.5)
 
 [node name="Bowling Ball (Spinning) (4)" parent="Scene Contents/Geometry" instance=ExtResource("13_drhmw")]
 transform = Transform3D(-26.77884, -78.05989, 77.296104, -65.91427, -52.22957, -75.581215, 87.88257, -62.959324, -33.134903, 303, 164.25, 169)

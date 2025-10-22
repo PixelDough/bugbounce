@@ -1,5 +1,9 @@
 const vec3 up = vec3(0.0, 1.0, 0.0);
 
+vec2 generate_matcap_uvs_basic(vec3 normal_view_space) {
+	return (normal_view_space.xy * 0.5) + 0.5;
+}
+
 vec2 get_matcap_uv(vec3 v_world_normal, vec3 v_eye_pos, vec3 v_world_pos, float margin, bool is_spatial) {
 	/*
 		Fix the normal, and calculate the direction from the eye position.
@@ -125,6 +129,22 @@ vec4 sample_matcap_spatial(
 	uv = 0.5 + 0.5 * uv;
 	
 	return texture(matcap_texture, uv);
+}
+
+vec4 apply_matcap_basic(
+	vec4 albedo_color,
+	vec4 matcap_color,
+	float matcap_intensity,
+	float matcap_power,
+	float smoothness,
+	float metallic,
+) {
+    vec4 matcap_adjusted = pow(mix(vec4(0), matcap_color, matcap_intensity), vec4(matcap_power));
+	float matcap_alpha = matcap_adjusted.a;
+	float matcap_visibility = matcap_alpha * smoothness;
+	vec4 matcap_add = mix(vec4(0), matcap_adjusted, matcap_visibility) * 0.05;
+	vec4 matcap_mul = mix(vec4(1), matcap_adjusted, matcap_visibility);
+	return mix(albedo_color + matcap_add, albedo_color * matcap_mul, metallic);
 }
 
 vec3 apply_matcap(
