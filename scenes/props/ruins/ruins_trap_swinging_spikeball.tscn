@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxokno711m3s6"]
+
+[ext_resource type="PackedScene" uid="uid://bm1q4ydbd4rxt" path="res://scenes/props/ruins/ruins_trap_swinging_base.tscn" id="1_mm2ah"]
+[ext_resource type="PackedScene" uid="uid://d1v0br5a0spiv" path="res://models/level_assets/ruins/spikeball.glb" id="2_7v7gd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_32htq"]
+radius = 0.6
+
+[node name="ruins_trap_swinging_spikeball" instance=ExtResource("1_mm2ah")]
+
+[node name="spikeball" parent="hinge/attach_point" index="0" instance=ExtResource("2_7v7gd")]
+
+[node name="collision_sphere" type="CollisionShape3D" parent="hinge/attach_point" index="1"]
+shape = SubResource("SphereShape3D_32htq")

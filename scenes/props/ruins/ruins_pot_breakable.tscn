@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ktwe1g1h4vd1"]
+
+[ext_resource type="PackedScene" uid="uid://c04rqm7pp8757" path="res://scenes/props/ruins/ruins_pot_solid.tscn" id="1_cr655"]
+
+[node name="ruins_pot_breakable" instance=ExtResource("1_cr655")]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm1q4ydbd4rxt"]
+
+[ext_resource type="PackedScene" uid="uid://cqcw2i2qc4f8s" path="res://models/level_assets/ruins/ruins_block.glb" id="1_306uo"]
+[ext_resource type="ArrayMesh" uid="uid://jhay3h4swavq" path="res://models/level_assets/ruins/meshes/ruins_pillars_full.res" id="2_o45tn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngp00"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kv3yr"]
+radius = 0.16308594
+height = 3.0
+
+[node name="ruins_trap_swinging_base" type="Node3D"]
+
+[node name="ruins_block" parent="." instance=ExtResource("1_306uo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ruins_block"]
+shape = SubResource("BoxShape3D_ngp00")
+
+[node name="hinge" type="AnimatableBody3D" parent="."]
+
+[node name="pillar_mesh" type="MeshInstance3D" parent="hinge"]
+transform = Transform3D(0.17799, 0, 0, 0, 0.32225582, 0, 0, 0, 0.17799, 0, -1.64, 0)
+mesh = ExtResource("2_o45tn")
+skeleton = NodePath("")
+
+[node name="pillar_collision" type="CollisionShape3D" parent="hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.64, 0)
+shape = SubResource("CapsuleShape3D_kv3yr")
+
+[node name="attach_point" type="AnimatableBody3D" parent="hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
