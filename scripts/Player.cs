@@ -64,7 +64,7 @@ public partial class Player : RigidBody3D
 
         _respawnPoint = GlobalPosition;
         _respawnForward = GlobalBasis.Z;
-        
+
         // if (levelManager is not null) levelManager.OnPauseStateChanged += OnPauseStateChange;
     }
 
@@ -151,7 +151,7 @@ public partial class Player : RigidBody3D
         HandleLiveZones();
 
         _cameraTiltRoot.Quaternion = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
-            Quaternion.FromEuler(new(-_inputMovement.Z * 5f, 0f, _inputMovement.X * 5f)), 3f, (float)delta);
+            Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta);
 
         _eyesCurrentAngle = Mathf.LerpAngle(_eyesCurrentAngle, _eyesTargetAngle, 10f * (float)delta);
         Vector3 targetAngleVector = Vector3.Up * _eyesCurrentAngle;
@@ -159,9 +159,9 @@ public partial class Player : RigidBody3D
         float eyeMovementDot =
             (Quaternion.FromEuler(targetAngleVector) * Vector3.Forward).Dot(
                 MathUtil.ProjectOnPlane(LinearVelocity.LimitLength(1f), Vector3.Up));
-        Vector3 targetTiltVector = Vector3.Right * (15 * eyeMovementDot);
-        // _eyesRoot.Quaternion = Quaternion.FromEuler(targetAngleVector) *
-                             // Quaternion.FromEuler(targetTiltVector);
+        Vector3 targetTiltVector = Vector3.Right * (Mathf.DegToRad(15 * eyeMovementDot));
+        _eyesRoot.GlobalRotation = (Quaternion.FromEuler(targetAngleVector) *
+                             Quaternion.FromEuler(targetTiltVector)).GetEuler();
         if (_inputMovement.LengthSquared() < 0.01) return;
 
         _eyesTargetAngle = Vector3.Back.SignedAngleTo(_inputMovement, Vector3.Up);
@@ -180,10 +180,10 @@ public partial class Player : RigidBody3D
             Vector3 flattenedVelocity = new Vector3(LinearVelocity.X, 0f, LinearVelocity.Z);
             if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > 90) reverseMultiplier = 2f;
                 
-            Vector3 inputConvertedToTorque = Quaternion.FromEuler(new(0, Mathf.Pi * 0.5f, 0)) * _inputMovement;
+            Vector3 inputConvertedToTorque = _inputMovement.Rotated(Vector3.Up, Mathf.Pi * 0.5f);
             ApplyTorque(
                 new Vector3(inputConvertedToTorque.X, 0f, inputConvertedToTorque.Z) *
-                (150f * reverseMultiplier * (float)delta));
+                (350f * reverseMultiplier * (float)delta));
         }
         else
         {
@@ -196,7 +196,7 @@ public partial class Player : RigidBody3D
         float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, Vector3.Up).Length();
         if (_isGrounded)
         {
-            LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 13, (float)delta);
+            LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1))), 13, (float)delta);
         }
         else
         {
