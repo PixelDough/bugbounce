@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/beach1_island2.glb-3ad127266529af7a0f56a0d0c0
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="StaticBody3D"
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true

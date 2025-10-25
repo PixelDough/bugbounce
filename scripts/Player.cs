@@ -182,7 +182,7 @@ public partial class Player : RigidBody3D
         {
             float reverseMultiplier = 1f;
             Vector3 flattenedVelocity = new Vector3(LinearVelocity.X, 0f, LinearVelocity.Z);
-            if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > 90) reverseMultiplier = 2f;
+            if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > Mathf.Pi * 0.5f) reverseMultiplier = 2f;
                 
             Vector3 inputConvertedToTorque = _inputMovement.Rotated(Vector3.Up, Mathf.Pi * 0.5f);
             ApplyTorque(
@@ -193,14 +193,14 @@ public partial class Player : RigidBody3D
         {
             float reverseMultiplier = 1f;
             Vector3 flattenedVelocity = new Vector3(LinearVelocity.X, 0f, LinearVelocity.Z);
-            if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > 90) reverseMultiplier = 2f;
+            if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > Mathf.Pi * 0.5f) reverseMultiplier = 2f;
             ApplyForce(_inputMovement * (600 * reverseMultiplier * (float)delta));
         }
 
         float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, Vector3.Up).Length();
         if (_isGrounded)
         {
-            LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1))), 13, (float)delta);
+            LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 13, (float)delta);
         }
         else
         {
@@ -261,7 +261,7 @@ public partial class Player : RigidBody3D
                         ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(LinearVelocity, state.TotalGravity.Normalized()).Length() / 1.25f);
                     }
                     // Hit something that's not a wall
-                    else if (pointNormal.Dot(-state.TotalGravity) > 35f && velTowardsNormal > 9f)
+                    else if (pointNormal.Dot(state.TotalGravity) > 35f && velTowardsNormal > 9f)
                     {
                         ApplyImpulse(pointNormal * velTowardsNormal / 2f);
                     }

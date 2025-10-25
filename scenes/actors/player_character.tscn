@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfx8cm1v7am6a"]
+[gd_scene load_steps=7 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
 [ext_resource type="ArrayMesh" uid="uid://cktgocarxkckl" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
 [ext_resource type="Script" uid="uid://igu8nh3k1x1x" path="res://scripts/Player.cs" id="2_svkgc"]
 [ext_resource type="ArrayMesh" uid="uid://dskjwsemqcogy" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
+[ext_resource type="Texture2D" uid="uid://d1333aa0sj34i" path="res://textures/Tex_BlobShadow.png" id="5_qlpgp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
 radius = 0.25
@@ -27,3 +28,20 @@ mesh = ExtResource("2_eoriv")
 
 [node name="mesh_face" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_sr6cr")
+
+[node name="Node3D" type="Node3D" parent="."]
+top_level = true
+
+[node name="Decal" type="Decal" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+size = Vector3(0.8, 10, 0.8)
+texture_albedo = ExtResource("5_qlpgp")
+modulate = Color(0, 0, 0, 1)
+albedo_mix = 0.9
+normal_fade = 0.2
+upper_fade = 1e-05
+
+[node name="PlayerDecalMover" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Node3D")
+update_rotation = false
+update_scale = false

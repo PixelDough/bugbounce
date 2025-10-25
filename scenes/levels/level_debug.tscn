@@ -14,6 +14,7 @@
 [sub_resource type="Environment" id="Environment_somws"]
 background_mode = 1
 background_color = Color(0.4724639, 0.2694919, 0.56396246, 1)
+tonemap_exposure = 0.8
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.8818556, 0.5518868, 1, 1)
@@ -207,17 +208,17 @@ shape = SubResource("ConcavePolygonShape3D_5haub")
 transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -35.76, 4.7683716e-07, -7.82)
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("_inputCamera", "_cameraTiltRoot") instance=ExtResource("10_tuhi8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.25, -10.279989)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
 _inputCamera = NodePath("../Camera Tilt Root/Camera3D")
 _cameraTiltRoot = NodePath("../Camera Tilt Root")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PlayerCharacter"]
+[node name="Camera Mover" type="RemoteTransform3D" parent="PlayerCharacter"]
 remote_path = NodePath("../../Camera Tilt Root")
 update_rotation = false
 update_scale = false
 
 [node name="Camera Tilt Root" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.25, -10.279989)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
 
 [node name="Camera3D" type="Camera3D" parent="Camera Tilt Root"]
 transform = Transform3D(-1, 1.9368386e-08, -8.5250264e-08, 0, 0.9751494, 0.22154851, 8.742278e-08, 0.22154851, -0.97514933, 0.02840662, 1.4615712, -4.490246)
