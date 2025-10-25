@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cssgvlk0hc8v8"]
+[gd_scene load_steps=32 format=3 uid="uid://cssgvlk0hc8v8"]
 
 [ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://addons/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_y2yyu"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b5w7281e4ysj3" path="res://scenes/props/beach/lantern.tscn" id="24_1them"]
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="25_1feuv"]
 [ext_resource type="PackedScene" uid="uid://dwwbtdfc8wwc8" path="res://scenes/props/beach/life_saver.tscn" id="25_o5oh8"]
+[ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="26_28sqq"]
 [ext_resource type="PackedScene" uid="uid://su6wdhhatlew" path="res://scenes/props/beach/bubble.tscn" id="26_c57cw"]
 [ext_resource type="PackedScene" uid="uid://7jwnmpsrokmg" path="res://scenes/props/beach/surfboard.tscn" id="27_7oqrd"]
 
@@ -1638,18 +1639,15 @@ transform = Transform3D(1.8287721, 0.06633763, -0.80696464, -1.1175871e-08, 1.99
 [node name="Surf Board (3)" parent="Level Geometry/Geo" instance=ExtResource("27_7oqrd")]
 transform = Transform3D(-0.06522608, 1.8460523, -0.76670533, -1.8670701, 0.21774137, 0.68310934, 0.71399945, 0.73802453, 1.716253, 277.41, 19.12, 0.55)
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("_inputCamera", "_cameraTiltRoot") instance=ExtResource("25_1feuv")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("_thirdPersonCameraBehavior") instance=ExtResource("25_1feuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18476772, 1.8475764, -0.3007282)
-_inputCamera = NodePath("../Camera Tilt Root/Camera3D")
-_cameraTiltRoot = NodePath("../Camera Tilt Root")
+_thirdPersonCameraBehavior = NodePath("../ThirdPersonCameraBehavior")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PlayerCharacter"]
-remote_path = NodePath("../../Camera Tilt Root")
-update_rotation = false
-update_scale = false
+[node name="ThirdPersonCameraBehavior" type="Node" parent="." node_paths=PackedStringArray("Camera3D")]
+script = ExtResource("26_28sqq")
+Camera3D = NodePath("../Camera3D")
+metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
 
-[node name="Camera Tilt Root" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18476772, 1.8475764, -0.3007282)
-
-[node name="Camera3D" type="Camera3D" parent="Camera Tilt Root"]
-transform = Transform3D(-1, 1.9368386e-08, -8.5250264e-08, 0, 0.9751494, 0.22154851, 8.742278e-08, 0.22154851, -0.97514933, 0.02840662, 1.4615712, -4.490246)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.9368386e-08, -8.5250264e-08, 0, 0.9751494, 0.22154851, 8.742278e-08, 0.22154851, -0.97514933, -0.1563611, 3.3091476, -4.790974)
+fov = 100.0

@@ -9,7 +9,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
 radius = 0.25
 
-[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_eyesRoot")]
+[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot")]
 physics_material_override = ExtResource("1_eoriv")
 continuous_cd = true
 contact_monitor = true
@@ -17,6 +17,7 @@ max_contacts_reported = 4
 linear_damp = 0.3
 angular_damp = 0.75
 script = ExtResource("2_svkgc")
+_cameraTiltRoot = NodePath("Camera Tilt Root")
 _eyesRoot = NodePath("mesh_face")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -29,10 +30,10 @@ mesh = ExtResource("2_eoriv")
 [node name="mesh_face" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_sr6cr")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Decal Root" type="Node3D" parent="."]
 top_level = true
 
-[node name="Decal" type="Decal" parent="Node3D"]
+[node name="Decal" type="Decal" parent="Decal Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 size = Vector3(0.8, 10, 0.8)
 texture_albedo = ExtResource("5_qlpgp")
@@ -42,6 +43,14 @@ normal_fade = 0.2
 upper_fade = 1e-05
 
 [node name="PlayerDecalMover" type="RemoteTransform3D" parent="."]
-remote_path = NodePath("../Node3D")
+remote_path = NodePath("../Decal Root")
 update_rotation = false
 update_scale = false
+
+[node name="Camera Tilt Root Mover" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Camera Tilt Root")
+update_rotation = false
+update_scale = false
+
+[node name="Camera Tilt Root" type="Node3D" parent="."]
+top_level = true

@@ -28,7 +28,7 @@ public partial class Player : RigidBody3D
 
     private bool _isDamping;
     
-    [Export] private Node3D _inputCamera;
+    [Export] private ThirdPersonCameraBehavior _thirdPersonCameraBehavior;
     [Export] private Node3D _cameraTiltRoot;
 
     [Export] private Node3D _eyesRoot;
@@ -68,6 +68,8 @@ public partial class Player : RigidBody3D
         _respawnForward = GlobalBasis.Z;
 
         // if (levelManager is not null) levelManager.OnPauseStateChanged += OnPauseStateChange;
+
+        _thirdPersonCameraBehavior.Target = _cameraTiltRoot;
     }
 
     public override void _ExitTree()
@@ -152,8 +154,8 @@ public partial class Player : RigidBody3D
         // Former LateUpdate() contents
         HandleLiveZones();
 
-        _cameraTiltRoot.Quaternion = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
-            Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta);
+        _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
+            Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta).GetEuler();
 
         _eyesCurrentAngle = Mathf.LerpAngle(_eyesCurrentAngle, _eyesTargetAngle, 10f * (float)delta);
         Vector3 targetAngleVector = Vector3.Up * _eyesCurrentAngle;
@@ -341,7 +343,7 @@ public partial class Player : RigidBody3D
 
     Vector3 CameraRelativeFlatten(Vector3 input)
     {
-        return input.Rotated(Vector3.Up, _inputCamera.GlobalRotation.Y);
+        return input.Rotated(Vector3.Up, _thirdPersonCameraBehavior.Camera3D.GlobalRotation.Y);
     }
 
     // public void SetRespawnPoint(Vector3 position, Vector3 direction, CheckpointController checkpointController = null)

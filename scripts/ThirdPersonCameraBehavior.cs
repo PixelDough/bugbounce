@@ -5,7 +5,7 @@ using Parallas;
 [GlobalClass]
 public partial class ThirdPersonCameraBehavior : Node
 {
-    [Export] private Camera3D _camera3D;
+    [Export] public Camera3D Camera3D;
     [Export] public Node3D Target;
     [Export] public Vector3 Offset;
 
@@ -48,7 +48,7 @@ public partial class ThirdPersonCameraBehavior : Node
         Vector3 finalPos = Target.GlobalPosition +
                            Vector3.Up * lerp3.X +
                            new Vector3(Mathf.Cos(angleRad), 0f, Mathf.Sin(angleRad)) * lerp3.Y;
-        _camera3D.LookAtFromPosition(finalPos, Target.GlobalPosition + Offset, Vector3.Up);
+        Camera3D.LookAtFromPosition(finalPos, Target.GlobalPosition + Offset, Target.Basis.Y);
     }
 
     public override void _UnhandledInput(InputEvent @event)

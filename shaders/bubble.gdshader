@@ -12,11 +12,6 @@ varying vec3 v_world_pos;
 varying vec3 v_eye_pos;
 varying vec2 matcap_uv;
 
-float fresnel(float amount, vec3 normal, vec3 view)
-{
-	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
-}
-
 void vertex() {
 	matcap_uv = generate_matcap_uv_perspective_correct(
 		VERTEX, NORMAL, MODEL_MATRIX, VIEW_MATRIX, INV_VIEW_MATRIX, MODELVIEW_MATRIX
