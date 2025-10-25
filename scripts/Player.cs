@@ -27,8 +27,7 @@ public partial class Player : RigidBody3D
     private bool _isGrounded;
 
     private bool _isDamping;
-    
-    [Export] private ThirdPersonCameraBehavior _thirdPersonCameraBehavior;
+
     [Export] private Node3D _cameraTiltRoot;
 
     [Export] private Node3D _eyesRoot;
@@ -68,8 +67,6 @@ public partial class Player : RigidBody3D
         _respawnForward = GlobalBasis.Z;
 
         // if (levelManager is not null) levelManager.OnPauseStateChanged += OnPauseStateChange;
-
-        _thirdPersonCameraBehavior.Target = _cameraTiltRoot;
     }
 
     public override void _ExitTree()
@@ -343,7 +340,7 @@ public partial class Player : RigidBody3D
 
     Vector3 CameraRelativeFlatten(Vector3 input)
     {
-        return input.Rotated(Vector3.Up, _thirdPersonCameraBehavior.Camera3D.GlobalRotation.Y);
+        return input.Rotated(Vector3.Up, GetViewport().GetCamera3D().GlobalRotation.Y);
     }
 
     // public void SetRespawnPoint(Vector3 position, Vector3 direction, CheckpointController checkpointController = null)

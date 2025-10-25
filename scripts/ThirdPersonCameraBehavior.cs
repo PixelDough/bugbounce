@@ -28,6 +28,8 @@ public partial class ThirdPersonCameraBehavior : Node
     {
         base._Ready();
         Input.SetMouseMode(Input.MouseModeEnum.Captured);
+
+        Camera3D = GetViewport().GetCamera3D();
     }
 
     public override void _Process(double delta)

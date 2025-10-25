@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=17 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="ArrayMesh" uid="uid://d1a17bi6afxer" path="res://models/level_assets/debug/DebugScene.pb_Mesh45820.mesh" id="2_h3jgp"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -6,7 +6,6 @@
 [ext_resource type="ArrayMesh" uid="uid://nqi57uvw0sn1" path="res://models/level_assets/debug/DebugScene.pb_Mesh45920.mesh" id="7_i6q57"]
 [ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="9_uyr38"]
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="10_tuhi8"]
-[ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="11_rky0j"]
 [ext_resource type="PackedScene" uid="uid://cft5tev25vv8f" path="res://Assets/_Game/Content/Level Features/_Prefabs/One Way Wall.prefab.scn" id="12_clwtg"]
 [ext_resource type="ArrayMesh" uid="uid://dki7x4le2anog" path="res://models/level_assets/debug/DebugScene.pb_Mesh45732.mesh" id="13_n8wwm"]
 [ext_resource type="ArrayMesh" uid="uid://it0ttr2mk4ec" path="res://models/level_assets/debug/DebugScene.pb_Mesh45770.mesh" id="14_apppj"]
@@ -208,15 +207,8 @@ shape = SubResource("ConcavePolygonShape3D_5haub")
 [node name="Fbx_LevelTest" parent="." instance=ExtResource("15_xwa2n")]
 transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -35.76, 4.7683716e-07, -7.82)
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("_thirdPersonCameraBehavior") instance=ExtResource("10_tuhi8")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
-_thirdPersonCameraBehavior = NodePath("../ThirdPersonCameraBehavior")
-
-[node name="ThirdPersonCameraBehavior" type="Node" parent="." node_paths=PackedStringArray("Camera3D")]
-script = ExtResource("11_rky0j")
-Camera3D = NodePath("../Camera3D")
-Offset = Vector3(0, 0.5, 0)
-metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 1.9368386e-08, -8.5250264e-08, 0, 0.9751494, 0.22154851, 8.742278e-08, 0.22154851, -0.97514933, -7.2981086, 1.7738605, -14.770235)
