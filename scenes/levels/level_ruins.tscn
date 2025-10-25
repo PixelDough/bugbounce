@@ -315,19 +315,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.13, 19.808798, 30.93)
 
 [node name="Pot (Breakable)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(0.2290134, -2.736079, -1.7130134, -9.644629e-08, 1.717319, -2.742956, 3.2280867, 0.19410847, 0.12152796, 8.43, 16.61, 18.08)
-freeze = true
 
 [node name="Pot (Breakable) (1)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(2.4454474, 1.7797781, 1.1511588, 0.055736683, 1.7029697, -2.751323, -2.1188843, 2.0988746, 1.256203, -12.01, 28.19, 8.41)
-freeze = true
 
 [node name="Pot (Breakable) (9)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(3.709153, -1.3659631, -0.61345536, 1.4774882, 3.0723155, 2.092344, -0.24333416, -2.1667993, 3.3534708, -4.947986, 35.729767, 29.106428)
-freeze = true
 
 [node name="Pot (Breakable) (10)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(0.3638892, -2.6584876, -2.9664838, -2.2958589, 2.2943325, -2.3377483, 3.2552443, 1.9153275, -1.3171574, 0.6, 23.1, 34.785854)
-freeze = true
 
 [node name="Island (Short)5" parent="Scene Contents/Geometry" instance=ExtResource("6_0mhyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.08, 25.082092, 14.57)
@@ -346,30 +342,24 @@ transform = Transform3D(17.775095, 9.5039625, 30.648958, 3.708777, 34.19379, -12
 
 [node name="Pot (Breakable) (1)2" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(1.9771751, -0.27569038, 0.12154658, 0.27620092, 1.9808365, -1.8447978e-09, -0.12038195, 0.01678564, 1.9963032, -25.87, 25, 8.92)
-freeze = true
 
 [node name="Pot (Breakable) (4)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(0.85745054, 0, -1.8068699, 0, 2, 0, 1.8068699, 0, 0.85745054, -11.44, 3.44, 23.9)
-freeze = true
 
 [node name="Pot (Breakable) (11)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(-0.1518918, 0, -1.9942238, 0, 2, 0, 1.9942238, 0, -0.1518918, -17.21, 4.42, 24.87)
-freeze = true
 
 [node name="Pot (Breakable) (3)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(1.8592426, 0.2124709, 0.70574296, -0.22707845, 1.987067, 1.9261389e-08, -0.70117927, -0.08012953, 1.8713436, -26.09, 26, 3.59)
-freeze = true
 
 [node name="Ruin Block2" parent="Scene Contents/Geometry" instance=ExtResource("13_mrl6s")]
 transform = Transform3D(2.4809768, 0, -1.6866399, 0, 3, 0, 1.6866399, 0, 2.4809768, -25.16, 27.65, -2.7)
 
 [node name="Pot (Breakable) (6)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(0.9988954, 0.14349635, -1.7267358, -0.28439066, 1.9796772, -2.8701693e-08, 1.7091898, 0.24553378, 1.0091498, -21.1, 28, -8.24)
-freeze = true
 
 [node name="Pot (Breakable) (7)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(0.15851554, -0.016473804, -1.9936403, 0.20673765, 1.9892862, 1.0632478e-08, 1.9829606, -0.20608026, 0.15936927, -15.01, 29, -11.19)
-freeze = true
 
 [node name="Trap Falling Pillar4" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
 transform = Transform3D(0.98770773, 0, -0.15631211, 0, 1, 0, 0.15631211, 0, 0.98770773, -9.37, 28, -10.62)
@@ -379,8 +369,6 @@ transform = Transform3D(-0.85132635, 0, 0.52463645, 0, 1, 0, -0.52463645, 0, -0.
 
 [node name="Pot (Breakable)2" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(2.433478, -2.4977853, 1.9594014, 2.8650682, 2.791305, 4.936377e-08, -1.3673217, 1.4034547, 3.4872262, 7.15, 28.33, -9.29)
-gravity_scale = 0.0
-freeze = true
 
 [node name="Pillar (Broken)3" parent="Scene Contents/Geometry" instance=ExtResource("9_lfnnf")]
 transform = Transform3D(1.8926537, -0.39366817, -0.5127258, 0.064264834, -1.4639007, 1.3611997, -0.64322037, -1.304615, -1.3726789, -12.78, 14.37, -40.61)
@@ -405,11 +393,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 33.88, 1.83)
 
 [node name="Pot (Breakable) (2)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(3, 7.237192e-06, 3.1634772e-13, 0, -1.3113416e-07, 3, 7.237192e-06, -3, -1.3113416e-07, 2.14, 35.82, 8.3)
-freeze = true
 
 [node name="Pot (Breakable) (5)" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(3.0875167e-06, -3, -1.3113416e-07, 0, -1.3113416e-07, 3, -3, -3.0875167e-06, -1.3495964e-13, 10.63, 40.31, 4.94)
-freeze = true
 
 [node name="Trap Falling Pillar (1)2" parent="Scene Contents/Geometry" instance=ExtResource("10_a6myy")]
 transform = Transform3D(0.8910266, 0, -0.45395103, 0, 1, 0, 0.45395103, 0, 0.8910266, 5.76, 35.12098, 3.48)
@@ -545,15 +531,12 @@ transform = Transform3D(-0.29615235, 0, 0.95514077, 0, 1, 0, -0.95514077, 0, -0.
 
 [node name="Pot (Breakable)3" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(8.295604, -3.956223, 3.940973, -0.20646155, 6.8352795, 7.2963233, -5.5803533, -6.1341066, 5.588596, 14.364721, 84.56721, 3.1091094)
-freeze = true
 
 [node name="Pot (Breakable) (1)3" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(3.2838979, -1.9778789, 1.1419325, -9.536741e-07, 2.0000036, 3.4640996, -2.2838595, -2.8439376, 1.6419514, -0.11641286, 86.59, -1.9478936)
-freeze = true
 
 [node name="Pot (Breakable) (2)2" parent="Scene Contents/Geometry" instance=ExtResource("14_y8u2i")]
 transform = Transform3D(-3.966987, 0.4441432, -0.2564226, 3.5911787e-06, 2.000003, 3.4641, 0.5128506, 3.4355094, -1.9834969, -0.22, 85.6, -20.27)
-freeze = true
 
 [node name="Goal Ring" parent="Scene Contents/Geometry" instance=ExtResource("16_ru7w4")]
 transform = Transform3D(0.85311484, 0.9372966, 0.54595786, -0.40812683, 0.92090887, -0.9432704, -1.0050014, 0.4216652, 0.84650505, 11.405464, 89.68, -1.4791756)

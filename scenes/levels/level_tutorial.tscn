@@ -1,6 +1,5 @@
 [gd_scene load_steps=46 format=4 uid="uid://cd4mo2ivh0iph"]
 
-[ext_resource type="Material" uid="uid://dx1lsmb42vcii" path="res://Assets/_Game/Backgrounds/Mat_SpaceSkybox.material" id="1_kka41"]
 [ext_resource type="PackedScene" uid="uid://cft5tev25vv8f" path="res://Assets/_Game/Content/Level Features/_Prefabs/One Way Wall.prefab.scn" id="2_frl7g"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://Assets/_Game/Content/Levels/Retro/Bounce House Tiles/Mat_BounceHouseTiles.material" id="3_02mq4"]
 [ext_resource type="PackedScene" uid="uid://dnglshy5uulg7" path="res://scenes/props/general/tutorial_pad.tscn" id="4_rgwxx"]
@@ -19,10 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="17_yqbhy"]
 [ext_resource type="ArrayMesh" uid="uid://kvqfrbdn5tuy" path="res://models/level_assets/tutorial/Demo Tutorial.pb_Mesh-1584328(Clone)(Clone)(Clone)(Clone)(Clone).mesh" id="18_wkwfn"]
 [ext_resource type="ArrayMesh" uid="uid://fx7w0rsgcln" path="res://models/level_assets/tutorial/Demo Tutorial.pb_Mesh-1584328(Clone)(Clone)(Clone)(Clone).mesh" id="19_4e5nu"]
+[ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="20_kka41"]
 [ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="20_nnnq2"]
 
 [sub_resource type="Sky" id="Sky_f8351"]
-sky_material = ExtResource("1_kka41")
 
 [sub_resource type="Environment" id="Environment_h86vh"]
 background_mode = 2
@@ -504,7 +503,7 @@ transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 4, 31, 67)
 [node name="Player Spawner" parent="Level Manager" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
 
-[node name="Fbx_Player_Coconut_Test" parent="Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model" index="3"]
+[node name="Player Stuff Manager" parent="Level Manager/Pause Scene Management" index="2"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -518,6 +517,8 @@ script = null
 
 [node name="Start Cinemachine Camera" parent="Level Manager" index="3"]
 transform = Transform3D(0.8992908, -0.1432173, -0.41323698, 7.450581e-09, 0.9448632, -0.32746527, 0.43735114, 0.29448652, 0.84970677, 6.576641, 7.968569, 5.9034157)
+
+[node name="sky_space_01" parent="." instance=ExtResource("20_kka41")]
 
 [editable path="One Way Wall (4)"]
 [editable path="One Way Wall (4)/Model/Fbx_OneWayWall"]
@@ -581,9 +582,3 @@ transform = Transform3D(0.8992908, -0.1432173, -0.41323698, 7.450581e-09, 0.9448
 [editable path="Level Manager/Player Spawner"]
 [editable path="Level Manager/Pause Scene Management"]
 [editable path="Level Manager/Pause Scene Management/Fbx_TvRemote"]
-[editable path="Level Manager/Pause Scene Management/Player Stuff Manager"]
-[editable path="Level Manager/Pause Scene Management/Player Stuff Manager/Player"]
-[editable path="Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_RollyPoly"]
-[editable path="Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Player_Pumpkin"]
-[editable path="Level Manager/Pause Scene Management/Player Stuff Manager/Player/Model/Fbx_Meatball"]
-[editable path="Level Manager/Pause Scene Management/Player Stuff Manager/Shadow Blob"]

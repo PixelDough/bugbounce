@@ -29,6 +29,17 @@ uniform sampler2D main_light_gradient : hint_default_white, source_color, repeat
 
 varying vec2 matcap_uv;
 
+float get_unpacked_normal_z(vec3 val) {
+	return sqrt((1.0 - (val.x * val.x)) - (val.y * val.y));
+}
+
+vec3 unpack_normal_map(vec4 rgba) {
+     //https://youtu.be/-dMbacvrDrs?si=q68d93F2_R61e6Bs
+    vec3 n = rgba.xzy * vec3(2.0) - vec3(1.0);
+    n.z *= -1.0;
+    return n;
+}
+
 void vertex() {
 	v_world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	v_eye_pos = (INV_VIEW_MATRIX * vec4(EYE_OFFSET, 1.0)).xyz;
@@ -46,26 +57,23 @@ void fragment() {
 	vec3 final_color = albedo_sample * vert_color * tint;
 
 	vec3 normal_sample = texture(normal_tex, UV).rgb;
-	vec3 normal_adjusted = mix(normal_sample, vec3(0.5, 0.5, 1.0), 0.25);
-	NORMAL_MAP = normal_adjusted;
+	//vec3 normal_adjusted = mix(normal_sample, vec3(0.5, 0.5, 1.0), 0.25);
+	NORMAL_MAP = normal_sample;
+	
+	vec3 normal_unpacked = normal_sample * 2.0 - 1.0;
+	normal_unpacked.z = get_unpacked_normal_z(normal_unpacked);
+	
+	mat3 view_to_tangent = mat3(TANGENT, BINORMAL, NORMAL);
+	mat3 tangent_to_view = inverse(view_to_tangent);
 	
 	vec4 albedo_with_matcap = apply_matcap_basic(
 		vec4(final_color, 1.0),
-		texture(matcap_tex, generate_matcap_uvs_basic(NORMAL)),
+		texture(matcap_tex, generate_matcap_uvs_basic(view_to_tangent * normal_unpacked)),
 		matcap_intensity,
 		matcap_power,
 		smoothness,
 		metallic
 	);
-	//vec3 albedo_with_matcap = apply_matcap(
-		//final_color,
-		//matcap_tex,
-		//matcap_uv,
-		//matcap_intensity,
-		//matcap_power,
-		//smoothness,
-		//metallic
-	//);
 	
 	ALBEDO = albedo_with_matcap.rgb;
 	
