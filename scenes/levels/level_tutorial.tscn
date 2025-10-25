@@ -1,7 +1,7 @@
 [gd_scene load_steps=46 format=4 uid="uid://cd4mo2ivh0iph"]
 
 [ext_resource type="PackedScene" uid="uid://cft5tev25vv8f" path="res://Assets/_Game/Content/Level Features/_Prefabs/One Way Wall.prefab.scn" id="2_frl7g"]
-[ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://Assets/_Game/Content/Levels/Retro/Bounce House Tiles/Mat_BounceHouseTiles.material" id="3_02mq4"]
+[ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_02mq4"]
 [ext_resource type="PackedScene" uid="uid://dnglshy5uulg7" path="res://scenes/props/general/tutorial_pad.tscn" id="4_rgwxx"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="5_6yvh5"]
 [ext_resource type="ArrayMesh" uid="uid://lxenw146gsqk" path="res://models/level_assets/tutorial/Demo Tutorial.pb_Mesh-1584328(Clone).mesh" id="6_i4owl"]

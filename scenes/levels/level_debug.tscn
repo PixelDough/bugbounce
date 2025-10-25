@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="ArrayMesh" uid="uid://d1a17bi6afxer" path="res://models/level_assets/debug/DebugScene.pb_Mesh45820.mesh" id="2_h3jgp"]
-[ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://Assets/_Game/Content/Levels/Retro/Bounce House Tiles/Mat_BounceHouseTiles.material" id="3_iby0j"]
+[ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
 [ext_resource type="ArrayMesh" uid="uid://ct8kvk0b3ykuw" path="res://models/level_assets/debug/DebugScene.pb_Mesh45862.mesh" id="5_20ait"]
 [ext_resource type="ArrayMesh" uid="uid://nqi57uvw0sn1" path="res://models/level_assets/debug/DebugScene.pb_Mesh45920.mesh" id="7_i6q57"]
 [ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="9_uyr38"]
@@ -37,6 +37,8 @@ data = PackedVector3Array(5, -1, 0.5, -5, -1, 0.5, 5, 24, 0.5, -5, -1, 0.5, -5, 
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_somws")
+
+[node name="sky_space_01" parent="." instance=ExtResource("9_uyr38")]
 
 [node name="Cube" type="Node3D" parent="."]
 
@@ -201,5 +203,3 @@ shape = SubResource("ConcavePolygonShape3D_5haub")
 
 [node name="Fbx_LevelTest" parent="." instance=ExtResource("15_xwa2n")]
 transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -35.76, 4.7683716e-07, -7.82)
-
-[node name="sky_space_01" parent="." instance=ExtResource("9_uyr38")]
