@@ -1,5 +1,10 @@
 const vec3 up = vec3(0.0, 1.0, 0.0);
 
+float fresnel(float amount, vec3 normal, vec3 view)
+{
+	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
+}
+
 vec2 generate_matcap_uvs_basic(vec3 normal_view_space) {
 	return (normal_view_space.xy * 0.5) + 0.5;
 }

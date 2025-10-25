@@ -2,6 +2,7 @@ shader_type spatial;
 render_mode cull_disabled;
 render_mode depth_draw_opaque;
 render_mode shadows_disabled;
+render_mode diffuse_toon;
 
 #include "shading.gdshaderinc"
 
@@ -77,7 +78,7 @@ void fragment() {
 	
 	ALBEDO = albedo_with_matcap.rgb;
 	
-	ROUGHNESS = 1.0;
+	ROUGHNESS = 0.0;
 	METALLIC = 0.0;
 }
 
@@ -90,5 +91,14 @@ void light() {
 	).rgb;
 	
 	DIFFUSE_LIGHT += main_light_color * ATTENUATION * LIGHT_COLOR / PI;
+	
+	float rim_glow_dot = dot(NORMAL, LIGHT);
+	float rim_amount = 1.0 - ((rim_glow_dot + 1.0) * 0.5);
+	rim_amount *= pow(smoothness, 0.5);
+	vec3 rim_color = texture(
+		main_light_gradient,
+		vec2(pow(rim_amount, 1.0) * fresnel(0.6, NORMAL, VIEW), 0.0)
+	).rgb;
+	DIFFUSE_LIGHT += rim_color * ATTENUATION * LIGHT_COLOR / PI;
 	SPECULAR_LIGHT = vec3(0);
 }

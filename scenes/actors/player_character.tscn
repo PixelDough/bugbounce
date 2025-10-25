@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfx8cm1v7am6a"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
+[ext_resource type="ArrayMesh" uid="uid://cktgocarxkckl" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
+[ext_resource type="Script" uid="uid://igu8nh3k1x1x" path="res://scripts/Player.cs" id="2_svkgc"]
+[ext_resource type="ArrayMesh" uid="uid://dskjwsemqcogy" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
+radius = 0.25
+
+[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_eyesRoot")]
+physics_material_override = ExtResource("1_eoriv")
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 0.3
+angular_damp = 0.75
+script = ExtResource("2_svkgc")
+_eyesRoot = NodePath("mesh_face")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nowa8")
+debug_color = Color(0, 0.99, 0.19800004, 1)
+
+[node name="mesh_body" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_eoriv")
+
+[node name="mesh_face" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_sr6cr")
