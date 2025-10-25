@@ -25,7 +25,6 @@ public partial class Player : RigidBody3D
     private float _coyoteTime = 0f;
 
     private bool _isGrounded;
-    private Vector3 _pastVelocity = Vector3.Zero;
 
     private bool _isDamping;
     
@@ -51,6 +50,9 @@ public partial class Player : RigidBody3D
     private bool _isRespawning = false;
     private Vector3 _pauseLinearVelocity = Vector3.Zero;
     private Vector3 _pauseAngularVelocity = Vector3.Zero;
+
+    private float _bounceCooldown = 0f;
+    private readonly float _bounceCooldownMax = 0.05f;
 
 
     public override void _Ready()
@@ -165,6 +167,8 @@ public partial class Player : RigidBody3D
         if (_inputMovement.LengthSquared() < 0.01) return;
 
         _eyesTargetAngle = Vector3.Back.SignedAngleTo(_inputMovement, Vector3.Up);
+
+        _bounceCooldown = MathUtil.Approach(_bounceCooldown, 0f, (float)delta);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -183,14 +187,14 @@ public partial class Player : RigidBody3D
             Vector3 inputConvertedToTorque = _inputMovement.Rotated(Vector3.Up, Mathf.Pi * 0.5f);
             ApplyTorque(
                 new Vector3(inputConvertedToTorque.X, 0f, inputConvertedToTorque.Z) *
-                (350f * reverseMultiplier * (float)delta));
+                (250f * reverseMultiplier * (float)delta));
         }
         else
         {
             float reverseMultiplier = 1f;
             Vector3 flattenedVelocity = new Vector3(LinearVelocity.X, 0f, LinearVelocity.Z);
             if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > 90) reverseMultiplier = 2f;
-            ApplyForce(_inputMovement * (500 * reverseMultiplier * (float)delta));
+            ApplyForce(_inputMovement * (600 * reverseMultiplier * (float)delta));
         }
 
         float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, Vector3.Up).Length();
@@ -202,8 +206,6 @@ public partial class Player : RigidBody3D
         {
             LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 1, (float)delta);
         }
-        
-        _pastVelocity = LinearVelocity;
     }
     
     private void OnPauseStateChange(bool state)
@@ -227,6 +229,10 @@ public partial class Player : RigidBody3D
     {
         base._IntegrateForces(state);
 
+        // Integrated bounce cooldown because sometimes there would be multiple physics frames
+        // where there was a collision with a wall, causing double bounces.
+        if (_bounceCooldown > 0) return;
+
         // Code migrated from OnCollisionEnter()
         int collisionCount = state.GetContactCount();
         for (int i = 0; i < collisionCount; i++)
@@ -241,7 +247,7 @@ public partial class Player : RigidBody3D
             }
             
             // If the velocity is heading towards the normal at a high enough speed
-            float velTowardsNormal = _pastVelocity.Dot(-pointNormal);
+            float velTowardsNormal = LinearVelocity.Dot(pointNormal);
             PlayBounce(Mathf.InverseLerp(0f, 15f, Mathf.Abs(velTowardsNormal)), _isDamping ? 1 : 0);
 
             if (!_isDamping)
@@ -251,14 +257,17 @@ public partial class Player : RigidBody3D
                     // Hit wall
                     if (Mathf.Abs(pointNormal.Y) < 0.1f)
                     {
-                        ApplyImpulse(pointNormal * MathUtil.ProjectOnPlane(_pastVelocity, state.TotalGravity).Length() / 10f);
-                        ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(_pastVelocity, state.TotalGravity).Length() / 1.25f);
+                        ApplyImpulse(pointNormal * MathUtil.ProjectOnPlane(LinearVelocity, state.TotalGravity.Normalized()).Length() / 10f);
+                        ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(LinearVelocity, state.TotalGravity.Normalized()).Length() / 1.25f);
                     }
                     // Hit something that's not a wall
                     else if (pointNormal.Dot(-state.TotalGravity) > 35f && velTowardsNormal > 9f)
                     {
                         ApplyImpulse(pointNormal * velTowardsNormal / 2f);
                     }
+
+                    _bounceCooldown = _bounceCooldownMax;
+                    break;
                 }
             }
         }

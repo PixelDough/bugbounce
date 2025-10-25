@@ -18,6 +18,10 @@ fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.8818556, 0.5518868, 1, 1)
 fog_density = 1.0
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b806r"]
 data = PackedVector3Array(25, -1, 25, -25, -1, 25, 25, 0, 25, -25, -1, 25, -25, 0, 25, 25, 0, 25, -25, -1, 25, -25, -1, -25, -25, 0, 25, -25, -1, -25, -25, 0, -25, -25, 0, 25, -25, -1, -25, 25, -1, -25, -25, 0, -25, 25, -1, -25, 25, 0, -25, -25, 0, -25, 25, -1, -25, 25, -1, 25, 25, 0, -25, 25, -1, 25, 25, 0, 25, 25, 0, -25, 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25, 25, -1, -25, -25, -1, -25, 25, -1, 25, -25, -1, -25, -25, -1, 25, 25, -1, 25)
@@ -86,7 +90,6 @@ transform = Transform3D(0.9659258, 0.22414398, 0.12940954, -7.450579e-09, 0.4999
 
 [node name="Light" type="DirectionalLight3D" parent="Directional Light"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-light_energy = 1.5
 light_bake_mode = 0
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
