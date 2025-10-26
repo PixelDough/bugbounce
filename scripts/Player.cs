@@ -286,9 +286,9 @@ public partial class Player : RigidBody3D
     }
 
     private Vector2 GetMovementAxes() =>
-        new(
-            Input.GetAxis("move_left", "move_right"),
-            Input.GetAxis("move_backward", "move_forward")
+        Input.GetVector(
+            "move_left", "move_right",
+            "move_backward", "move_forward"
         );
 
     private Vector3 GetCamRelativeMovementAxes()
