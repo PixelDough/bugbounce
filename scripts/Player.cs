@@ -105,7 +105,7 @@ public partial class Player : RigidBody3D
             PhysicsMaterialOverride.Bounce = 0.5f;
         }
 
-        if (_inputMovement.LengthSquared() < 0.1f)
+        if (_inputMovement.LengthSquared() < 0.1f && _isGrounded)
             AngularDamp = 15f;
         else
             AngularDamp = _defaultAngularDrag;
@@ -156,19 +156,17 @@ public partial class Player : RigidBody3D
             Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta).GetEuler();
 
         _eyesCurrentAngle = Mathf.LerpAngle(_eyesCurrentAngle, _eyesTargetAngle, 10f * (float)delta);
-        Vector3 targetAngleVector = Vector3.Up * _eyesCurrentAngle;
 
         float eyeMovementDot =
-            (Quaternion.FromEuler(targetAngleVector) * Vector3.Forward).Dot(
+            Vector3.ModelFront.Rotated(Vector3.Up, _eyesCurrentAngle).Dot(
                 MathUtil.ProjectOnPlane(LinearVelocity.LimitLength(1f), Vector3.Up));
-        Vector3 targetTiltVector = Vector3.Right * (Mathf.DegToRad(15 * eyeMovementDot));
-        _eyesRoot.GlobalRotation = (Quaternion.FromEuler(targetAngleVector) *
-                             Quaternion.FromEuler(targetTiltVector)).GetEuler();
-        if (_inputMovement.LengthSquared() < 0.01) return;
-
-        _eyesTargetAngle = Vector3.Back.SignedAngleTo(_inputMovement, Vector3.Up);
+        _eyesRoot.GlobalBasis = Basis.FromEuler(new(Mathf.DegToRad(15 * eyeMovementDot), _eyesCurrentAngle, 0f));
 
         _bounceCooldown = MathUtil.Approach(_bounceCooldown, 0f, (float)delta);
+        if (_inputMovement.LengthSquared() >= 0.01)
+        {
+            _eyesTargetAngle = Vector3.ModelFront.SignedAngleTo(_inputMovement.LimitLength(1f).Normalized(), Vector3.Up);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -293,7 +291,7 @@ public partial class Player : RigidBody3D
 
     private Vector3 GetCamRelativeMovementAxes()
     {
-        Vector2 rawInputMovement = GetMovementAxes().Normalized();
+        Vector2 rawInputMovement = GetMovementAxes().LimitLength(1f).Normalized();
         Vector3 rawInputMovementVector3 = Vector3.Right * rawInputMovement.X + Vector3.Forward * rawInputMovement.Y;
         Vector3 cameraRelativeInput = CameraRelativeFlatten(rawInputMovementVector3);
         cameraRelativeInput = cameraRelativeInput.Normalized() * cameraRelativeInput.Length();

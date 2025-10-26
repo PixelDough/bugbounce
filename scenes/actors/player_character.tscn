@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
-[ext_resource type="ArrayMesh" uid="uid://cktgocarxkckl" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
+[ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
 [ext_resource type="Script" uid="uid://igu8nh3k1x1x" path="res://scripts/Player.cs" id="2_svkgc"]
-[ext_resource type="ArrayMesh" uid="uid://dskjwsemqcogy" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
+[ext_resource type="ArrayMesh" uid="uid://dk4os4fwya1eg" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
 [ext_resource type="Texture2D" uid="uid://d1333aa0sj34i" path="res://textures/Tex_BlobShadow.png" id="5_qlpgp"]
 [ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="6_qy032"]
 
@@ -64,4 +64,5 @@ Offset = Vector3(0, 0.5, 0)
 metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
 
 [node name="Camera3D" type="Camera3D" parent="."]
+top_level = true
 fov = 100.0
