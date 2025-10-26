@@ -67,6 +67,8 @@ public partial class Player : RigidBody3D
         _respawnPoint = GlobalPosition;
         _respawnForward = GlobalBasis.Z;
 
+        _cameraTiltRoot.RotationDegrees = Vector3.Up * RotationDegrees.Y;
+
         // if (levelManager is not null) levelManager.OnPauseStateChanged += OnPauseStateChange;
     }
 

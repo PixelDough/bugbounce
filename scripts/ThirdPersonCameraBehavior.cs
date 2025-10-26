@@ -7,6 +7,7 @@ public partial class ThirdPersonCameraBehavior : Node
 {
     [Export] public Camera3D Camera3D;
     [Export] public Node3D Target;
+    [Export] public Node3D TargetTilt;
     [Export] public Vector3 Offset;
 
     public float HorizontalAngle;
@@ -30,6 +31,11 @@ public partial class ThirdPersonCameraBehavior : Node
         Input.SetMouseMode(Input.MouseModeEnum.Captured);
 
         Camera3D ??= GetViewport().GetCamera3D();
+
+        HorizontalAngle = Target.RotationDegrees.Y;
+        _targetHorizontalAngle = HorizontalAngle;
+        VerticalPercent = 0.5f;
+        _targetVerticalPercent = VerticalPercent;
     }
 
     public override void _Process(double delta)
@@ -49,8 +55,8 @@ public partial class ThirdPersonCameraBehavior : Node
         float angleRad = Mathf.DegToRad(HorizontalAngle);
         Vector3 finalPos = Target.GlobalPosition +
                            Vector3.Up * lerp3.X +
-                           new Vector3(Mathf.Cos(angleRad), 0f, Mathf.Sin(angleRad)) * lerp3.Y;
-        Camera3D.LookAtFromPosition(finalPos, Target.GlobalPosition + Offset, Target.Basis.Y);
+                           new Vector3(Mathf.Sin(angleRad), 0f, -Mathf.Cos(angleRad)) * lerp3.Y;
+        Camera3D.LookAtFromPosition(finalPos, Target.GlobalPosition + Offset, TargetTilt.Basis.Y);
     }
 
     public override void _UnhandledInput(InputEvent @event)
