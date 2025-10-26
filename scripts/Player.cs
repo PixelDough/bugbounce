@@ -192,9 +192,9 @@ public partial class Player : RigidBody3D
         else
         {
             float reverseMultiplier = 1f;
-            Vector3 flattenedVelocity = new Vector3(LinearVelocity.X, 0f, LinearVelocity.Z);
-            if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > Mathf.Pi * 0.5f) reverseMultiplier = 2f;
-            ApplyForce(_inputMovement * (600 * reverseMultiplier * (float)delta));
+            Vector3 flattenedVelocity = LinearVelocity with { Y = 0 };
+            if (flattenedVelocity.Normalized().AngleTo(_inputMovement.Normalized()) > Mathf.Pi * 0.5f) reverseMultiplier = 2f;
+            ApplyForce(_inputMovement * (700 * reverseMultiplier * (float)delta));
         }
 
         float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, Vector3.Up).Length();
@@ -242,7 +242,6 @@ public partial class Player : RigidBody3D
                         if (Mathf.Abs(pointNormal.Y) < 0.1f)
                         {
                             LinearVelocity = LinearVelocity.Bounce(pointNormal.Normalized()) * PhysicsMaterialOverride.Bounce;
-                            GD.Print(LinearVelocity.Dot(pointNormal));
                             ApplyImpulse(pointNormal * MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() * 0.125f);
                             ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() * 0.8f);
                         }
