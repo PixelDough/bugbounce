@@ -674,4 +674,4 @@ shadow_bias = 0.05
 shadow_normal_bias = 0.4
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("16_tlrsl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.771477, -5.69897, 102.371666)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -60.14851)
