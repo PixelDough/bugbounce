@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://764yuuem4wgo"]
+[gd_scene load_steps=31 format=3 uid="uid://764yuuem4wgo"]
 
 [ext_resource type="Texture2D" uid="uid://uycb778cqrap" path="res://textures/backgrounds/Tex_Sky1.png" id="1_tlrsl"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_t6161"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c73aqfee36fsk" path="res://scenes/props/picnic/fruit_wedge.tscn" id="13_5qfnu"]
 [ext_resource type="PackedScene" uid="uid://cwuxm0ntqj6g8" path="res://scenes/props/picnic/basket.tscn" id="14_7dtnt"]
 [ext_resource type="PackedScene" uid="uid://c7o8juvb4w5ko" path="res://scenes/props/picnic/cleaver.tscn" id="15_jplag"]
+[ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="16_tlrsl"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t6161"]
 panorama = ExtResource("1_tlrsl")
@@ -671,3 +672,6 @@ light_energy = 1.2
 light_bake_mode = 0
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("16_tlrsl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.771477, -5.69897, 102.371666)

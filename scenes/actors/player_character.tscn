@@ -56,8 +56,12 @@ update_scale = false
 [node name="Camera Tilt Root" type="Node3D" parent="."]
 top_level = true
 
-[node name="ThirdPersonCameraBehavior" type="Node" parent="." node_paths=PackedStringArray("Target")]
+[node name="ThirdPersonCameraBehavior" type="Node" parent="." node_paths=PackedStringArray("Camera3D", "Target")]
 script = ExtResource("6_qy032")
+Camera3D = NodePath("../Camera3D")
 Target = NodePath("../Camera Tilt Root")
 Offset = Vector3(0, 0.5, 0)
 metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 100.0

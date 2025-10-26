@@ -209,7 +209,3 @@ transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -3
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 1.9368386e-08, -8.5250264e-08, 0, 0.9751494, 0.22154851, 8.742278e-08, 0.22154851, -0.97514933, -7.2981086, 1.7738605, -14.770235)
-fov = 100.0

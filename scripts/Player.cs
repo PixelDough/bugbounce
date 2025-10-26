@@ -53,6 +53,7 @@ public partial class Player : RigidBody3D
     private float _bounceCooldown = 0f;
     private readonly float _bounceCooldownMax = 0.05f;
 
+    private Vector3 _lastVelocity;
 
     public override void _Ready()
     {
@@ -205,6 +206,59 @@ public partial class Player : RigidBody3D
         {
             LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 1, (float)delta);
         }
+
+        var gravity = GetGravity();
+        var moveAndCollide = MoveAndCollide(LinearVelocity * (float)delta, true);
+        if (moveAndCollide is not null)
+        {
+            // Integrated bounce cooldown because sometimes there would be multiple physics frames
+            // where there was a collision with a wall, causing double bounces.
+            if (_bounceCooldown > 0) return;
+
+            // Code migrated from OnCollisionEnter()
+            int collisionCount = moveAndCollide.GetCollisionCount();
+            for (int i = 0; i < collisionCount; i++)
+            {
+                var pointNormal = moveAndCollide.GetNormal(i);
+                float velTowardsNormal = -LinearVelocity.Dot(pointNormal);
+
+                if (pointNormal.AngleTo(-gravity.Normalized()) < 15f)
+                {
+                    // if (LinearVelocity.Project(state.TotalGravity).LengthSquared() > 2)
+                        // playerStuffManager.sandBurstParticleSystem.Play();
+                    _isGrounded = true;
+                }
+                // if (velTowardsNormal > 0.0f) continue;
+
+                // If the velocity is heading towards the normal at a high enough speed
+                PlayBounce(Mathf.InverseLerp(0f, 15f, Mathf.Abs(velTowardsNormal)), _isDamping ? 1 : 0);
+
+                var prevVelocity = LinearVelocity;
+                if (!_isDamping)
+                {
+                    if (velTowardsNormal > 3f)
+                    {
+                        // Hit wall
+                        if (Mathf.Abs(pointNormal.Y) < 0.1f)
+                        {
+                            LinearVelocity = LinearVelocity.Bounce(pointNormal.Normalized()) * PhysicsMaterialOverride.Bounce;
+                            GD.Print(LinearVelocity.Dot(pointNormal));
+                            ApplyImpulse(pointNormal * MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() * 0.125f);
+                            ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() * 0.8f);
+                        }
+                        // Hit something that's not a wall
+                        else if (pointNormal.AngleTo(-gravity) > Mathf.DegToRad(35f) && velTowardsNormal > 9f)
+                        {
+                            LinearVelocity = LinearVelocity.Bounce(pointNormal) * PhysicsMaterialOverride.Bounce;
+                            ApplyImpulse(pointNormal * Mathf.Abs(velTowardsNormal) * 0.5f);
+                        }
+
+                        _bounceCooldown = _bounceCooldownMax;
+                        break;
+                    }
+                }
+            }
+        }
     }
     
     private void OnPauseStateChange(bool state)
@@ -228,48 +282,7 @@ public partial class Player : RigidBody3D
     {
         base._IntegrateForces(state);
 
-        // Integrated bounce cooldown because sometimes there would be multiple physics frames
-        // where there was a collision with a wall, causing double bounces.
-        if (_bounceCooldown > 0) return;
 
-        // Code migrated from OnCollisionEnter()
-        int collisionCount = state.GetContactCount();
-        for (int i = 0; i < collisionCount; i++)
-        {
-            var pointGround = state.GetContactColliderPosition(i);
-            var pointNormal = state.GetContactLocalNormal(i);
-            if (pointNormal.AngleTo(state.TotalGravity.Normalized()) < 15f)
-            {
-                // if (LinearVelocity.Project(state.TotalGravity).LengthSquared() > 2)
-                    // playerStuffManager.sandBurstParticleSystem.Play();
-                _isGrounded = true;
-            }
-            
-            // If the velocity is heading towards the normal at a high enough speed
-            float velTowardsNormal = LinearVelocity.Dot(pointNormal);
-            PlayBounce(Mathf.InverseLerp(0f, 15f, Mathf.Abs(velTowardsNormal)), _isDamping ? 1 : 0);
-
-            if (!_isDamping)
-            {
-                if (velTowardsNormal > 3f)
-                {
-                    // Hit wall
-                    if (Mathf.Abs(pointNormal.Y) < 0.1f)
-                    {
-                        ApplyImpulse(pointNormal * MathUtil.ProjectOnPlane(LinearVelocity, state.TotalGravity.Normalized()).Length() / 10f);
-                        ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(LinearVelocity, state.TotalGravity.Normalized()).Length() / 1.25f);
-                    }
-                    // Hit something that's not a wall
-                    else if (pointNormal.Dot(state.TotalGravity) > 35f && velTowardsNormal > 9f)
-                    {
-                        ApplyImpulse(pointNormal * velTowardsNormal / 2f);
-                    }
-
-                    _bounceCooldown = _bounceCooldownMax;
-                    break;
-                }
-            }
-        }
     }
 
     private Vector2 GetMovementAxes() =>

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://fvmvuqfq3woj"]
+[gd_scene load_steps=8 format=3 uid="uid://fvmvuqfq3woj"]
 
 [ext_resource type="PackedScene" uid="uid://ee5ta2s5ce45" path="res://scenes/props/clockwork/gear_medium.tscn" id="2_naqm0"]
 [ext_resource type="PackedScene" uid="uid://dcohuwsfiw6wr" path="res://scenes/props/clockwork/gearshaft.tscn" id="3_qbmvj"]
 [ext_resource type="PackedScene" uid="uid://d4j0r27jmbffi" path="res://scenes/props/clockwork/gear_large.tscn" id="4_ki8ih"]
 [ext_resource type="PackedScene" uid="uid://ba15au681fr2" path="res://scenes/props/clockwork/pendulum_weighted.tscn" id="5_52e6q"]
+[ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="5_nvv4a"]
 
 [sub_resource type="Environment" id="Environment_om00g"]
 background_mode = 1
@@ -124,3 +125,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level Management/Kill Zone/BoxCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
 shape = SubResource("BoxShape3D_85xls")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("5_nvv4a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 1.328)

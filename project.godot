@@ -53,6 +53,7 @@ jump={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/bounce_velocity_threshold=3.0
 jolt_physics_3d/limits/max_angular_velocity=100.00736613927508
 3d/default_gravity=19.619999999999997
 
