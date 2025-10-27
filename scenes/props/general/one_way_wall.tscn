@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhg0r5xvbny5b"]
+
+[ext_resource type="PackedScene" uid="uid://bph0joninkynw" path="res://models/general/onewaywall.glb" id="1_m4wfg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e7liy"]
+size = Vector3(2, 2, 0.25)
+
+[node name="one_way_wall" instance=ExtResource("1_m4wfg")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("BoxShape3D_e7liy")
