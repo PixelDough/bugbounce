@@ -214,9 +214,9 @@ transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
 
 [node name="DeathZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.693, 0)
 script = ExtResource("11_rky0j")
 metadata/_custom_type_script = "uid://bchbwe0886hnb"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.692772, 0)
 shape = SubResource("WorldBoundaryShape3D_xjgd8")
