@@ -16,10 +16,17 @@ public partial class CheckpointTrigger : Node
     private void AreaBodyEntered(Node3D body)
     {
         if (body is not Player player) return;
-        if (player.CheckpointId == _checkpoint.CheckpointId) return;
+
+        var velocity = player.LinearVelocity.Length();
+        if (player.CheckpointId == _checkpoint.CheckpointId)
+        {
+            _checkpoint.Shake(velocity);
+            return;
+        }
 
         GetTree().CallGroup("checkpoints", "HideFlag");
-        _checkpoint.ShowFlag(player.LinearVelocity.Length());
+        _checkpoint.ShowFlag();
+        _checkpoint.Shake(velocity);
         player.SetRespawnPoint(
             _checkpoint.RespawnPointNode.GlobalPosition,
             -_checkpoint.RespawnPointNode.GlobalBasis.Z,

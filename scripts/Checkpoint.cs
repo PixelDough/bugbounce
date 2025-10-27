@@ -15,6 +15,7 @@ public partial class Checkpoint : Node3D
     private float _flagScale = 1f;
 
     private Tween _tween;
+    private Tween _tweenShake;
 
     [ExportToolButton("Randomize Checkpoint ID")]
     public Callable RandomizeCheckpointIdButton => Callable.From(RandomizeCheckpointId);
@@ -64,26 +65,36 @@ public partial class Checkpoint : Node3D
             return;
 
         Skeleton.SetBonePoseScale(_flagBoneIndex, new Vector3(1f, _flagScale, 1f));
+
+        Skeleton.SetBonePoseRotation(_flagBoneIndex,
+            Quaternion.FromEuler(new(0f, GetViewport().GetCamera3D().GlobalRotation.Y + Mathf.Pi, -Mathf.Pi * 0.5f)));
     }
 
-    public void ShowFlag(float velocity)
+    public void ShowFlag()
     {
-        CreateTween().TweenProperty(this, "_flagScale", 1f, 0.5f)
+        _tween?.EndTween();
+        _tween = CreateTween();
+        _tween?.TweenProperty(this, "_flagScale", 1f, 0.5f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Back);
-
-        Vector3 dir = MathUtil.RandomInsideUnitSphere();
-        Vector3 dirFlat = (dir with {Y = 0}).Normalized();
-        float angleAmount = Mathf.DegToRad(Mathf.Clamp(velocity, 10f, 25f));
-        FlagRootNode.Quaternion *= MathUtil.AngleAxis(angleAmount, dirFlat);
-        // _tween.Kill(flagRoot);
-        FlagRootNode.CreateTween().TweenProperty(FlagRootNode, "quaternion", Quaternion.Identity, 2.5f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
     }
 
     public void HideFlag()
     {
+        _tween?.EndTween();
         _flagScale = 0.001f;
+    }
+
+    public void Shake(float velocity)
+    {
+        _tweenShake?.EndTween();
+        _tweenShake = CreateTween();
+        Vector3 dir = MathUtil.RandomInsideUnitSphere();
+        Vector3 dirFlat = (dir with {Y = 0}).Normalized();
+        float angleAmount = Mathf.DegToRad(Mathf.Clamp(velocity, 10f, 25f));
+        FlagRootNode.Quaternion *= MathUtil.AngleAxis(angleAmount, dirFlat);
+        _tweenShake?.TweenProperty(FlagRootNode, "quaternion", Quaternion.Identity, 2.5f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
     }
 }
