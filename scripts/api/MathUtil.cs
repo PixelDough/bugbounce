@@ -552,4 +552,28 @@ public static class MathUtil
         s = (v is 0) ? 0f : 2 * (1f - l / v);
         return (h, s, v);
     }
+
+    // Code based on https://gist.github.com/HelloKitty/91b7af87aac6796c3da9
+    public static Quaternion AngleAxis(float radians, Vector3 axis)
+    {
+        Quaternion result = Quaternion.Identity;
+
+        if (axis.LengthSquared() == 0.0f)
+            return result;
+
+        radians *= 0.5f;
+        axis = axis.Normalized();
+        axis *= Mathf.Sin(radians);
+        result.X = axis.X;
+        result.Y = axis.Y;
+        result.Z = axis.Z;
+        result.W = Mathf.Cos(radians);
+
+        return result.Normalized();
+    }
+
+    public static Quaternion AngleAxisDegrees(float degrees, Vector3 axis)
+    {
+        return AngleAxis(Mathf.DegToRad(degrees), axis);
+    }
 }

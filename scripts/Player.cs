@@ -44,7 +44,7 @@ public partial class Player : RigidBody3D
     // [Export] private FMODUnity.StudioEventEmitter windFastEventEmitter;
     // [Export] private EventReference gruntEvent;
 
-    // public CheckpointController currentCheckpoint = null;
+    public ulong CheckpointId = 0;
     private Vector3 _respawnPoint = Vector3.Zero;
     private Vector3 _respawnForward = Vector3.Forward;
 
@@ -338,6 +338,7 @@ public partial class Player : RigidBody3D
     private void HandleMovementInput()
     {
         // if (_isPausable && (!GameManager.DoPlayerMovement || !GameManager.DoPlayerPhysics || GameManager.Instance.quantumConsole.IsActive || _noclip == 1)) return;
+        if (!_doInput) return;
         Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
         _inputMovement = cameraRelativeInput;
 
@@ -377,13 +378,12 @@ public partial class Player : RigidBody3D
         return input.Rotated(Vector3.Up, GetViewport().GetCamera3D().GlobalRotation.Y);
     }
 
-    // public void SetRespawnPoint(Vector3 position, Vector3 direction, CheckpointController checkpointController = null)
-    // {
-    //     _respawnPoint = position;
-    //     _respawnForward = direction;
-    //
-    //     currentCheckpoint = checkpointController;
-    // }
+    public void SetRespawnPoint(Vector3 position, Vector3 direction, ulong checkpointId)
+    {
+        _respawnPoint = position;
+        _respawnForward = direction;
+        CheckpointId = checkpointId;
+    }
 
     public void Kill()
     {
@@ -438,8 +438,6 @@ public partial class Player : RigidBody3D
         //     else
         //     {
         _doInput = true;
-        //         GameManager.DoPlayerMovement = true;
-        //         GameManager.DoPlayerPhysics = true;
         //     }
         //
         //     GameManager.Instance.screenFadeController.FadeFromBlack(0.5f).setOnComplete(() =>

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=20 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="ArrayMesh" uid="uid://d1a17bi6afxer" path="res://models/level_assets/debug/DebugScene.pb_Mesh45820.mesh" id="2_h3jgp"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="10_tuhi8"]
 [ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="11_rky0j"]
 [ext_resource type="PackedScene" uid="uid://cft5tev25vv8f" path="res://Assets/_Game/Content/Level Features/_Prefabs/One Way Wall.prefab.scn" id="12_clwtg"]
+[ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="12_xjgd8"]
 [ext_resource type="ArrayMesh" uid="uid://dki7x4le2anog" path="res://models/level_assets/debug/DebugScene.pb_Mesh45732.mesh" id="13_n8wwm"]
 [ext_resource type="ArrayMesh" uid="uid://it0ttr2mk4ec" path="res://models/level_assets/debug/DebugScene.pb_Mesh45770.mesh" id="14_apppj"]
 [ext_resource type="PackedScene" uid="uid://bfs2sgyqh61kw" path="res://models/level_assets/debug/leveltest/Fbx_LevelTest.fbx" id="15_xwa2n"]
@@ -220,3 +221,11 @@ metadata/_custom_type_script = "uid://bchbwe0886hnb"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
 shape = SubResource("WorldBoundaryShape3D_xjgd8")
+
+[node name="Checkpoint" parent="." instance=ExtResource("12_xjgd8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.457642, 0.11512608, -2.9933882)
+_checkpointId = 3589512883
+
+[node name="Checkpoint2" parent="." instance=ExtResource("12_xjgd8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.457642, 0.11512608, -11.854329)
+_checkpointId = 3695913936
