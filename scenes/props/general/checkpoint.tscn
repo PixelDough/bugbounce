@@ -11,6 +11,7 @@ height = 5.0
 
 [node name="Checkpoint" type="Node3D" node_paths=PackedStringArray("RespawnPointNode", "FlagRootNode", "Skeleton")]
 script = ExtResource("1_38tst")
+_checkpointId = 236077033
 RespawnPointNode = NodePath("Respawn Point")
 FlagRootNode = NodePath("checkpoint_flag")
 Skeleton = NodePath("checkpoint_flag/Armature/Skeleton3D")

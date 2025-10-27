@@ -22,7 +22,7 @@ public partial class CheckpointTrigger : Node
         _checkpoint.ShowFlag(player.LinearVelocity.Length());
         player.SetRespawnPoint(
             _checkpoint.RespawnPointNode.GlobalPosition,
-            _checkpoint.RespawnPointNode.GlobalBasis.Z,
+            -_checkpoint.RespawnPointNode.GlobalBasis.Z,
             _checkpoint.CheckpointId
         );
     }

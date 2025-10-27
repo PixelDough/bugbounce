@@ -12,7 +12,7 @@ public partial class Checkpoint : Node3D
     [Export] private Node3D FlagRootNode { get; set; }
     [Export] private Skeleton3D Skeleton { get; set; }
     private int _flagBoneIndex = 0;
-    private float _flagScale = 0f;
+    private float _flagScale = 1f;
 
     private Tween _tween;
 
@@ -28,12 +28,7 @@ public partial class Checkpoint : Node3D
         base._Ready();
 
         if (Engine.IsEditorHint())
-        {
-            if (_checkpointId == 0)
-                RandomizeCheckpointId();
-
             return;
-        }
 
         if (Skeleton.FindBone("Flag") is var flagBone)
             _flagBoneIndex = flagBone;
@@ -45,6 +40,14 @@ public partial class Checkpoint : Node3D
     {
         base._EnterTree();
         AddToGroup("checkpoints");
+
+        if (Engine.IsEditorHint())
+        {
+            if (_checkpointId == 0)
+                RandomizeCheckpointId();
+
+            return;
+        }
     }
 
     public override void _ExitTree()
@@ -56,6 +59,9 @@ public partial class Checkpoint : Node3D
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        if (Engine.IsEditorHint())
+            return;
 
         Skeleton.SetBonePoseScale(_flagBoneIndex, new Vector3(1f, _flagScale, 1f));
     }

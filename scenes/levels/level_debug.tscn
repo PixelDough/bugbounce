@@ -223,9 +223,9 @@ metadata/_custom_type_script = "uid://bchbwe0886hnb"
 shape = SubResource("WorldBoundaryShape3D_xjgd8")
 
 [node name="Checkpoint" parent="." instance=ExtResource("12_xjgd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.457642, 0.11512608, -2.9933882)
-_checkpointId = 3589512883
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -6)
+_checkpointId = 2393071531
 
 [node name="Checkpoint2" parent="." instance=ExtResource("12_xjgd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.457642, 0.11512608, -11.854329)
-_checkpointId = 3695913936
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -9)
+_checkpointId = 1400573388
