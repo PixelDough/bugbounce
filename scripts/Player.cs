@@ -5,13 +5,17 @@ using Parallas;
 
 public partial class Player : RigidBody3D
 {
+    [Signal] public delegate void OnDeathEventHandler();
+    [Signal] public delegate void OnRespawnEventHandler();
+
     // [Export] private PlayerStuffManager playerStuffManager;
     // public PlayerStuffManager PlayerStuffManager => playerStuffManager;
 
     // [NonSerialized] public LevelManager levelManager;
 
     [Export] private bool _isPausable = true;
-    
+    [Export] private bool _doInput = true;
+
     private Vector3 _inputMovement;
 
     private float _defaultBounciness = 1f;
@@ -55,6 +59,13 @@ public partial class Player : RigidBody3D
 
     private Vector3 _lastVelocity;
 
+    private bool _isJumpHeld = false;
+    private bool _isJumpJustPressed = false;
+    private float _inputStrengthRight = 0f;
+    private float _inputStrengthLeft = 0f;
+    private float _inputStrengthForward = 0f;
+    private float _inputStrengthBackward = 0f;
+
     public override void _Ready()
     {
         base._Ready();
@@ -65,7 +76,7 @@ public partial class Player : RigidBody3D
         _defaultDrag = LinearDamp;
 
         _respawnPoint = GlobalPosition;
-        _respawnForward = GlobalBasis.Z;
+        _respawnForward = -GlobalBasis.Z;
 
         _cameraTiltRoot.RotationDegrees = Vector3.Up * RotationDegrees.Y;
 
@@ -97,7 +108,7 @@ public partial class Player : RigidBody3D
         }
         
         _isDamping = true;
-        if (Input.IsActionPressed("jump"))
+        if (_isJumpHeld)
         {
             _isDamping = false;
             PhysicsMaterialOverride.Bounce = _defaultBounciness;
@@ -152,7 +163,6 @@ public partial class Player : RigidBody3D
 
 
         // Former LateUpdate() contents
-        HandleLiveZones();
 
         _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
             Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta).GetEuler();
@@ -169,6 +179,8 @@ public partial class Player : RigidBody3D
         {
             _eyesTargetAngle = Vector3.ModelFront.SignedAngleTo(_inputMovement.LimitLength(1f).Normalized(), Vector3.Up);
         }
+
+        ResetInputValues();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -259,7 +271,49 @@ public partial class Player : RigidBody3D
             }
         }
     }
-    
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        base._UnhandledInput(@event);
+
+        if (!_doInput) return;
+
+        if (@event.IsActionPressed("jump"))
+        {
+            _isJumpJustPressed = true;
+            _isJumpHeld = true;
+        }
+        if (@event.IsActionReleased("jump"))
+        {
+            _isJumpHeld = false;
+        }
+
+        if (
+            @event.IsAction("move_left") ||
+            @event.IsAction("move_right") ||
+            @event.IsAction("move_forward") ||
+            @event.IsAction("move_backward")
+        )
+        {
+            if (@event.IsAction("move_left"))
+                _inputStrengthLeft = @event.GetActionStrength("move_left");
+            if (@event.IsAction("move_right"))
+                _inputStrengthRight = @event.GetActionStrength("move_right");
+            if (@event.IsAction("move_forward"))
+                _inputStrengthForward = @event.GetActionStrength("move_forward");
+            if (@event.IsAction("move_backward"))
+                _inputStrengthBackward = @event.GetActionStrength("move_backward");
+
+            Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
+            _inputMovement = cameraRelativeInput;
+        }
+    }
+
+    private void ResetInputValues()
+    {
+        _isJumpJustPressed = false;
+    }
+
     private void OnPauseStateChange(bool state)
     {
         if (!_isPausable) return;
@@ -277,17 +331,10 @@ public partial class Player : RigidBody3D
         }
     }
 
-    public override void _IntegrateForces(PhysicsDirectBodyState3D state)
-    {
-        base._IntegrateForces(state);
-
-
-    }
-
     private Vector2 GetMovementAxes() =>
-        Input.GetVector(
-            "move_left", "move_right",
-            "move_backward", "move_forward"
+        new(
+            _inputStrengthRight - _inputStrengthLeft,
+            _inputStrengthForward - _inputStrengthBackward
         );
 
     private Vector3 GetCamRelativeMovementAxes()
@@ -301,14 +348,10 @@ public partial class Player : RigidBody3D
 
     private void HandleMovementInput()
     {
-        _inputMovement = Vector3.Zero;
         // if (_isPausable && (!GameManager.DoPlayerMovement || !GameManager.DoPlayerPhysics || GameManager.Instance.quantumConsole.IsActive || _noclip == 1)) return;
-
-        Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
-        _inputMovement = cameraRelativeInput;
         
         // If the player has pressed the jump button, reset the jump buffer to the max
-        if (Input.IsActionJustPressed("jump"))
+        if (_isJumpJustPressed)
         {
             _jumpBuffer = jumpBufferMax;
         }
@@ -317,24 +360,12 @@ public partial class Player : RigidBody3D
     private void HandleNoclipMovement(double delta)
     {
         // if (!GameManager.DoPlayerMovement || GameManager.Instance.quantumConsole.IsActive || _noclip == 0) return;
-        
-        Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
 
-        cameraRelativeInput.Y +=
+        _inputMovement.Y +=
             (Input.IsKeyPressed(Key.Space) ? 1 : 0) +
             (Input.IsKeyPressed(Key.Shift) ? -1 : 0);
         
-        GlobalPosition += cameraRelativeInput * (20f * (float)delta);
-    }
-
-    private void HandleLiveZones()
-    {
-        if (!_isPausable) return;
-        if (_isRespawning) return;
-        // if (!levelManager) return;
-        // if (levelManager.LiveZones.Count == 0) return;
-        // if (levelManager.LiveZones.Any(liveZone => liveZone.IsInZone(transform.position))) return;
-        // Kill();
+        GlobalPosition += _inputMovement * (20f * (float)delta);
     }
 
     private void Jump()
@@ -378,23 +409,24 @@ public partial class Player : RigidBody3D
     {
         if (_isRespawning) return;
         _isRespawning = true;
-        GD.Print("Respawning...");
-        // GameManager.DoPlayerMovement = false;
-        // GameManager.DoPlayerPhysics = false;
         Freeze = true;
+        _doInput = false;
         _inputMovement = Vector3.Zero;
         // GameManager.Instance.screenFadeController.FadeToBlack(0.5f).setOnComplete(() =>
         // {
-        //     transform.position = _respawnPoint;
-        //     transform.forward = _respawnForward;
-        //     playerStuffManager.SetCameraForward(_respawnForward);
-        //     if (!Freeze)
-        //     {
-        //         LinearVelocity = Vector3.Zero;
-        //         AngularVelocity = Vector3.Zero;
-        //     }
-        //     Freeze = false;
-        //     _cameraTiltRoot.rotation = Quaternion.identity;
+        GlobalPosition = _respawnPoint;
+        GlobalRotation = Basis.LookingAt(_respawnForward).GetEuler();
+        _eyesCurrentAngle = GlobalRotation.Y;
+        _eyesTargetAngle = GlobalRotation.Y;
+        EmitSignalOnRespawn();
+
+        if (!Freeze)
+        {
+            LinearVelocity = Vector3.Zero;
+            AngularVelocity = Vector3.Zero;
+        }
+        Freeze = false;
+        _cameraTiltRoot.GlobalRotation = Vector3.Zero;
         //
         //     // LevelManager.Instance.LevelProgress.LoseCollectables();
         //     levelManager?.ResetLevelElements();
@@ -414,13 +446,14 @@ public partial class Player : RigidBody3D
         //     }
         //     else
         //     {
+        _doInput = true;
         //         GameManager.DoPlayerMovement = true;
         //         GameManager.DoPlayerPhysics = true;
         //     }
         //
         //     GameManager.Instance.screenFadeController.FadeFromBlack(0.5f).setOnComplete(() =>
         //     {
-        //         _isRespawning = false;
+        _isRespawning = false;
         //     });
         // });
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfx8cm1v7am6a"]
+[gd_scene load_steps=9 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
 [ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
@@ -6,6 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dk4os4fwya1eg" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
 [ext_resource type="Texture2D" uid="uid://d1333aa0sj34i" path="res://textures/Tex_BlobShadow.png" id="5_qlpgp"]
 [ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="6_qy032"]
+[ext_resource type="Script" uid="uid://d1flnedngqpy7" path="res://scripts/ThirdPersonCameraPlayerHandling.cs" id="7_6wjry"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
 radius = 0.25
@@ -63,6 +64,11 @@ Target = NodePath("..")
 TargetTilt = NodePath("../Camera Tilt Root")
 Offset = Vector3(0, 0.5, 0)
 metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
+
+[node name="PlayerHandling" type="Node" parent="ThirdPersonCameraBehavior" node_paths=PackedStringArray("ThirdPersonCameraBehavior", "Player")]
+script = ExtResource("7_6wjry")
+ThirdPersonCameraBehavior = NodePath("..")
+Player = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 top_level = true

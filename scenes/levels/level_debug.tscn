@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=19 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="ArrayMesh" uid="uid://d1a17bi6afxer" path="res://models/level_assets/debug/DebugScene.pb_Mesh45820.mesh" id="2_h3jgp"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -6,6 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://nqi57uvw0sn1" path="res://models/level_assets/debug/DebugScene.pb_Mesh45920.mesh" id="7_i6q57"]
 [ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="9_uyr38"]
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="10_tuhi8"]
+[ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="11_rky0j"]
 [ext_resource type="PackedScene" uid="uid://cft5tev25vv8f" path="res://Assets/_Game/Content/Level Features/_Prefabs/One Way Wall.prefab.scn" id="12_clwtg"]
 [ext_resource type="ArrayMesh" uid="uid://dki7x4le2anog" path="res://models/level_assets/debug/DebugScene.pb_Mesh45732.mesh" id="13_n8wwm"]
 [ext_resource type="ArrayMesh" uid="uid://it0ttr2mk4ec" path="res://models/level_assets/debug/DebugScene.pb_Mesh45770.mesh" id="14_apppj"]
@@ -38,6 +39,8 @@ data = PackedVector3Array(5, 0, 0.5, -5, 0, 0.5, 5, 33, 0.5, -5, 0, 0.5, -5, 33,
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5haub"]
 data = PackedVector3Array(5, -1, 0.5, -5, -1, 0.5, 5, 24, 0.5, -5, -1, 0.5, -5, 24, 0.5, 5, 24, 0.5, -5, -1, 0.5, -5, -1, -0.5, -5, 24, 0.5, -5, -1, -0.5, -5, 24, -0.5, -5, 24, 0.5, -5, -1, -0.5, 5, -1, -0.5, -5, 24, -0.5, 5, -1, -0.5, 5, 24, -0.5, -5, 24, -0.5, 5, -1, -0.5, 5, -1, 0.5, 5, 24, -0.5, 5, -1, 0.5, 5, 24, 0.5, 5, 24, -0.5, 5, 25.0001, 0.5, -5, 25.0001, 0.5, 5, 25.0001, -0.5, -5, 25.0001, 0.5, -5, 25.0001, -0.5, 5, 25.0001, -0.5, 5, -1, -0.5, -5, -1, -0.5, 5, -1, 0.5, -5, -1, -0.5, -5, -1, 0.5, 5, -1, 0.5, 5, 24, 5.5000997, -5, 24, 5.5000997, 5, 25.0001, 5.5000997, -5, 24, 5.5000997, -5, 25.0001, 5.5000997, 5, 25.0001, 5.5000997, 5, 24, -0.5, 5, 24, 0.5, 5, 25.0001, -0.5, 5, 24, 0.5, 5, 25.0001, 0.5, 5, 25.0001, -0.5, -5, 24, 0.5, -5, 24, -0.5, -5, 25.0001, 0.5, -5, 24, -0.5, -5, 25.0001, -0.5, -5, 25.0001, 0.5, -5, 24, -0.5, 5, 24, -0.5, -5, 25.0001, -0.5, 5, 24, -0.5, 5, 25.0001, -0.5, -5, 25.0001, -0.5, 5, 24, 0.5, -5, 24, 0.5, 5, 24, 5.5000997, -5, 24, 0.5, -5, 24, 5.5000997, 5, 24, 5.5000997, 5, 25.0001, 0.5, 5, 24, 0.5, 5, 25.0001, 5.5000997, 5, 24, 0.5, 5, 24, 5.5000997, 5, 25.0001, 5.5000997, -5, 24, 0.5, -5, 25.0001, 0.5, -5, 24, 5.5000997, -5, 25.0001, 0.5, -5, 25.0001, 5.5000997, -5, 24, 5.5000997, -5, 25.0001, 0.5, 5, 25.0001, 0.5, -5, 25.0001, 5.5000997, 5, 25.0001, 0.5, 5, 25.0001, 5.5000997, -5, 25.0001, 5.5000997)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xjgd8"]
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -209,3 +212,11 @@ transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -3
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
+
+[node name="DeathZone" type="Area3D" parent="."]
+script = ExtResource("11_rky0j")
+metadata/_custom_type_script = "uid://bchbwe0886hnb"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.692772, 0)
+shape = SubResource("WorldBoundaryShape3D_xjgd8")

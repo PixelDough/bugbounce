@@ -32,10 +32,7 @@ public partial class ThirdPersonCameraBehavior : Node
 
         Camera3D ??= GetViewport().GetCamera3D();
 
-        HorizontalAngle = Target.RotationDegrees.Y;
-        _targetHorizontalAngle = HorizontalAngle;
-        VerticalPercent = 0.5f;
-        _targetVerticalPercent = VerticalPercent;
+        SetForward(Target.RotationDegrees.Y, 0.5f);
     }
 
     public override void _Process(double delta)
@@ -80,5 +77,13 @@ public partial class ThirdPersonCameraBehavior : Node
                 Input.SetMouseMode(Input.MouseModeEnum.Visible);
             }
         }
+    }
+
+    public void SetForward(float yawAngle, float pitchPercent = 0.5f)
+    {
+        HorizontalAngle = Mathf.RadToDeg(yawAngle);
+        _targetHorizontalAngle = HorizontalAngle;
+        VerticalPercent = pitchPercent;
+        _targetVerticalPercent = VerticalPercent;
     }
 }
