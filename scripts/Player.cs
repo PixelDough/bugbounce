@@ -288,25 +288,14 @@ public partial class Player : RigidBody3D
             _isJumpHeld = false;
         }
 
-        if (
-            @event.IsAction("move_left") ||
-            @event.IsAction("move_right") ||
-            @event.IsAction("move_forward") ||
-            @event.IsAction("move_backward")
-        )
-        {
-            if (@event.IsAction("move_left"))
-                _inputStrengthLeft = @event.GetActionStrength("move_left");
-            if (@event.IsAction("move_right"))
-                _inputStrengthRight = @event.GetActionStrength("move_right");
-            if (@event.IsAction("move_forward"))
-                _inputStrengthForward = @event.GetActionStrength("move_forward");
-            if (@event.IsAction("move_backward"))
-                _inputStrengthBackward = @event.GetActionStrength("move_backward");
-
-            Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
-            _inputMovement = cameraRelativeInput;
-        }
+        if (@event.IsAction("move_left"))
+            _inputStrengthLeft = @event.GetActionStrength("move_left");
+        if (@event.IsAction("move_right"))
+            _inputStrengthRight = @event.GetActionStrength("move_right");
+        if (@event.IsAction("move_forward"))
+            _inputStrengthForward = @event.GetActionStrength("move_forward");
+        if (@event.IsAction("move_backward"))
+            _inputStrengthBackward = @event.GetActionStrength("move_backward");
     }
 
     private void ResetInputValues()
@@ -349,7 +338,9 @@ public partial class Player : RigidBody3D
     private void HandleMovementInput()
     {
         // if (_isPausable && (!GameManager.DoPlayerMovement || !GameManager.DoPlayerPhysics || GameManager.Instance.quantumConsole.IsActive || _noclip == 1)) return;
-        
+        Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
+        _inputMovement = cameraRelativeInput;
+
         // If the player has pressed the jump button, reset the jump buffer to the max
         if (_isJumpJustPressed)
         {
