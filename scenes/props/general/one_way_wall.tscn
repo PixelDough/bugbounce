@@ -1,11 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhg0r5xvbny5b"]
+[gd_scene load_steps=6 format=3 uid="uid://bhg0r5xvbny5b"]
 
 [ext_resource type="PackedScene" uid="uid://bph0joninkynw" path="res://models/general/onewaywall.glb" id="1_m4wfg"]
+[ext_resource type="Script" uid="uid://cs7dqlrmx6un5" path="res://scripts/OneWayWall.cs" id="2_e7liy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e7liy"]
 size = Vector3(2, 2, 0.25)
 
-[node name="one_way_wall" instance=ExtResource("1_m4wfg")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_m4wfg"]
+size = Vector3(2, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lu1u6"]
+size = Vector3(2, 2, 0.2)
+
+[node name="one_way_wall" node_paths=PackedStringArray("_modelNode", "_ignoreCollisionArea", "_kickArea") instance=ExtResource("1_m4wfg")]
+script = ExtResource("2_e7liy")
+_modelNode = NodePath("onewaywall")
+_ignoreCollisionArea = NodePath("IgnoreCollisionArea")
+_kickArea = NodePath("KickArea")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
 shape = SubResource("BoxShape3D_e7liy")
+
+[node name="IgnoreCollisionArea" type="Area3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IgnoreCollisionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_m4wfg")
+
+[node name="KickArea" type="Area3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KickArea" index="0"]
+shape = SubResource("BoxShape3D_lu1u6")
