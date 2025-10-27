@@ -8,6 +8,12 @@ public partial class SkyboxObject : Node3D
     [Export] private Node3D _targetNode;
     [Export] private float _scale = 1000f;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        SetProcessPriority(int.MaxValue);
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);

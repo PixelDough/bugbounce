@@ -48,10 +48,10 @@ data = PackedVector3Array(5, -1, 0.5, -5, -1, 0.5, 5, 24, 0.5, -5, -1, 0.5, -5, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_somws")
 
+[node name="SkyboxObject" parent="." instance=ExtResource("1_xjgd8")]
+
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
-
-[node name="SkyboxObject" parent="." instance=ExtResource("1_xjgd8")]
 
 [node name="Cube" type="Node3D" parent="."]
 
