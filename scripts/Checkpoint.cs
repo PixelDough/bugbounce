@@ -42,7 +42,7 @@ public partial class Checkpoint : Node3D
         base._EnterTree();
         AddToGroup("checkpoints");
 
-        if (Engine.IsEditorHint() && GetTree().EditedSceneRoot != this)
+        if (Engine.IsEditorHint() && !this.IsSceneRoot())
         {
             if (_checkpointId == 0)
                 RandomizeCheckpointId();

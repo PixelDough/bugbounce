@@ -11,4 +11,9 @@ public static class Extensions
         if (!tween.IsRunning()) return;
         tween.Kill();
     }
+
+    public static bool IsSceneRoot(this Node node)
+    {
+        return node.GetTree().EditedSceneRoot == node;
+    }
 }

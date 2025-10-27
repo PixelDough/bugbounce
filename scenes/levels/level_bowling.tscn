@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://0dxny8jexjm8"]
 
-[ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="1_um6pw"]
+[ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_um6pw"]
 [ext_resource type="CompressedTexture3D" uid="uid://b5xgvubwlkwvv" path="res://addons/AmplifyColor/LUT/Base/Cold_L.png" id="2_hbfp3"]
 [ext_resource type="PackedScene" uid="uid://cscqijsga68dw" path="res://scenes/props/bowling/ball_return.tscn" id="2_pqaur"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="4_adloq"]
@@ -44,10 +44,10 @@ radius = 0.50000006
 
 [node name="RootNode3D" type="Node3D"]
 
-[node name="sky_space_01" parent="." instance=ExtResource("1_um6pw")]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yhb0f")
+
+[node name="skybox_space_01" parent="." instance=ExtResource("1_um6pw")]
 
 [node name="Ball Return Feature" parent="." instance=ExtResource("2_pqaur")]
 transform = Transform3D(-1.0352621, 0, -3.863707, 0, 4, 0, 3.863707, 0, -1.0352621, 142, 43.75, 154.25)
@@ -59,6 +59,7 @@ transform = Transform3D(2.828434, 0, 2.8284202, 0, 4, 0, -2.8284202, 0, 2.828434
 
 [node name="Checkpoint" parent="." instance=ExtResource("4_adloq")]
 transform = Transform3D(-1, 0, -7.1525557e-07, 0, 1, 0, 7.1525557e-07, 0, -1, 166.5, 84.01436, 18)
+_checkpointId = 479230107
 
 [node name="Goal Ring" parent="." instance=ExtResource("5_pcbo2")]
 transform = Transform3D(1, 0, 0, 0, 0.96592593, 0.25881857, 0, -0.25881857, 0.96592593, 166.5859, 86.01436, 7.6782217)
@@ -121,6 +122,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
 
 [node name="Checkpoint" parent="Scene Contents/Level Features" instance=ExtResource("4_adloq")]
 transform = Transform3D(-0.49999893, 0, 0.866026, 0, 1, 0, -0.866026, 0, -0.49999893, 11, 18.007181, 177.75)
+_checkpointId = 2958378373
 
 [node name="Geometry" type="Node3D" parent="Scene Contents"]
 
@@ -396,10 +398,6 @@ transform = Transform3D(0.7071068, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.707
 
 [node name="Bowling Island 2" parent="." instance=ExtResource("9_ey43s")]
 transform = Transform3D(5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, 5.9604645e-08, 167.25, 84.00718, 17.75)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0272927, 0, 0)
-current = true
 
 [node name="DeathZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.597747, 0)

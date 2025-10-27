@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmwix1mg7unhy"]
+
+[ext_resource type="Script" uid="uid://b02q5cb47vi2i" path="res://scripts/SkyboxObject.cs" id="1_7w8q7"]
+[ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="2_scjys"]
+
+[node name="skybox_space_01" type="Node3D" node_paths=PackedStringArray("_targetNode")]
+script = ExtResource("1_7w8q7")
+_targetNode = NodePath("sky_space_01")
+metadata/_custom_type_script = "uid://b02q5cb47vi2i"
+
+[node name="sky_space_01" parent="." instance=ExtResource("2_scjys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
