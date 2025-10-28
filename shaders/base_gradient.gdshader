@@ -12,6 +12,7 @@ varying vec3 v_eye_pos;
 
 group_uniforms Color;
 uniform sampler2D albedo : hint_default_white, source_color;
+uniform bool use_triplanar = false;
 uniform vec3 tint : source_color = vec3(1,1,1);
 uniform float vertex_color_intensity : hint_range(0.0, 1.0) = 1.0;
 
@@ -30,6 +31,8 @@ uniform sampler2D main_light_gradient : hint_default_white, source_color, repeat
 uniform float rim_multiplier = 1.0;
 
 varying vec2 matcap_uv;
+varying vec3 local_pos;
+varying vec3 local_normal;
 
 float get_unpacked_normal_z(vec3 val) {
 	return sqrt((1.0 - (val.x * val.x)) - (val.y * val.y));
@@ -48,17 +51,25 @@ void vertex() {
 	vec4 worldPos = (MODEL_MATRIX * vec4(VERTEX, 1.0));
 	v_world_pos = worldPos.xyz;
 	
+	local_pos = VERTEX;
+	local_normal = NORMAL;
+	
 	matcap_uv = generate_matcap_uv_perspective_correct(
 		VERTEX, NORMAL, MODEL_MATRIX, VIEW_MATRIX, INV_VIEW_MATRIX, MODELVIEW_MATRIX
 	);
 }
 
 void fragment() {
-	vec3 albedo_sample = texture(albedo, UV).rgb;
+	vec2 triUv = mix(local_pos.xy, local_pos.zy, round(-local_normal.x));
+	triUv = mix(triUv, local_pos.xz, round(-local_normal.y));
+		
+	vec2 uv = mix(UV, triUv, float(int(use_triplanar)));
+	
+	vec3 albedo_sample = texture(albedo, uv).rgb;
 	vec3 vert_color = mix(vec3(1.0), COLOR.rgb, vertex_color_intensity);
 	vec3 final_color = albedo_sample * vert_color * tint;
 
-	vec3 normal_sample = texture(normal_tex, UV).rgb;
+	vec3 normal_sample = texture(normal_tex, uv).rgb;
 	//vec3 normal_adjusted = mix(normal_sample, vec3(0.5, 0.5, 1.0), 0.25);
 	NORMAL_MAP = normal_sample;
 	
