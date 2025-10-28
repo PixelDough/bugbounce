@@ -103,25 +103,25 @@ transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 7.8, 2.199, -12.99)
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 4.55, 1.25, -12.99)
 
 [node name="One Way Wall (5)" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18, 3.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18, 3, -6.48)
 
 [node name="One Way Wall (3)" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 3.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 3, -6.48)
 
 [node name="One Way Wall (4)" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18, 3.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18, 3, -6.48)
 
 [node name="One Way Wall (2)" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18, 1.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18, 1, -6.48)
 
 [node name="One Way Wall (1)" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 1.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 1, -6.48)
 
 [node name="One Way Wall (1)2" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8200002, 1.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.82, 1, -6.48)
 
 [node name="One Way Wall" parent="One Way Walls" instance=ExtResource("12_clwtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18, 1.02, -6.48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18, 1, -6.48)
 
 [node name="One Way Wall (8)" parent="One Way Walls" instance=ExtResource("12_clwtg")]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 11.05, 2.199, -12.99)
