@@ -24,10 +24,15 @@ public partial class Rotate : Node
     {
         if (!UsePhysics) return;
         if (GetParent() is not Node3D parent) return;
-        DoRotation(parent, delta);
+        DoRotationPhysics(parent, delta);
     }
 
     protected virtual void DoRotation(Node3D node, double delta)
+    {
+        node.Rotate(Axis, Angle * (float)delta);
+    }
+
+    protected virtual void DoRotationPhysics(Node3D node, double delta)
     {
         node.Rotate(Axis, Angle * (float)delta);
     }

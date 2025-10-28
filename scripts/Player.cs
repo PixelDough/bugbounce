@@ -231,6 +231,7 @@ public partial class Player : RigidBody3D
             int collisionCount = moveAndCollide.GetCollisionCount();
             for (int i = 0; i < collisionCount; i++)
             {
+                var colliderVelocity = moveAndCollide.GetColliderVelocity(i);
                 var pointNormal = moveAndCollide.GetNormal(i);
                 float velTowardsNormal = -LinearVelocity.Dot(pointNormal);
 
@@ -246,6 +247,7 @@ public partial class Player : RigidBody3D
                 PlayBounce(Mathf.InverseLerp(0f, 15f, Mathf.Abs(velTowardsNormal)), _isDamping ? 1 : 0);
 
                 var prevVelocity = LinearVelocity;
+                var colliderVelocityLength = LinearVelocity.Length();
                 if (!_isDamping)
                 {
                     if (velTowardsNormal > 3f)
@@ -254,13 +256,13 @@ public partial class Player : RigidBody3D
                         if (Mathf.Abs(pointNormal.Y) < 0.1f)
                         {
                             LinearVelocity = LinearVelocity.Bounce(pointNormal.Normalized()) * PhysicsMaterialOverride.Bounce;
-                            ApplyImpulse(pointNormal * MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() * 0.125f);
-                            ApplyImpulse(Vector3.Up * MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() * 0.8f);
+                            ApplyImpulse(pointNormal * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.125f);
+                            ApplyImpulse(Vector3.Up * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.8f);
                         }
                         // Hit something that's not a wall
                         else if (pointNormal.AngleTo(-gravity) > Mathf.DegToRad(35f) && velTowardsNormal > 9f)
                         {
-                            LinearVelocity = LinearVelocity.Bounce(pointNormal) * PhysicsMaterialOverride.Bounce;
+                            LinearVelocity = (LinearVelocity.Bounce(pointNormal) + colliderVelocity) * PhysicsMaterialOverride.Bounce;
                             ApplyImpulse(pointNormal * Mathf.Abs(velTowardsNormal) * 0.5f);
                         }
 
