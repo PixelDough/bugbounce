@@ -27,6 +27,7 @@ uniform float metallic : hint_range(0, 1) = 0.0;
 
 group_uniforms Lighting;
 uniform sampler2D main_light_gradient : hint_default_white, source_color, repeat_disable;
+uniform float rim_multiplier = 1.0;
 
 varying vec2 matcap_uv;
 
@@ -99,6 +100,6 @@ void light() {
 		main_light_gradient,
 		vec2(pow(rim_amount, 1.0) * fresnel(0.6, NORMAL, VIEW), 0.0)
 	).rgb;
-	DIFFUSE_LIGHT += rim_color * ATTENUATION * LIGHT_COLOR / PI;
+	DIFFUSE_LIGHT += rim_color * rim_multiplier * ATTENUATION * LIGHT_COLOR / PI;
 	SPECULAR_LIGHT = vec3(0);
 }

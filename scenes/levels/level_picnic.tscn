@@ -104,9 +104,11 @@ transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, -3, 0, 3, -1.3113416e-07, -4
 
 [node name="Checkpoint (1)" parent="Scene Contents/Level Features" instance=ExtResource("3_hj6ap")]
 transform = Transform3D(0.9981426, 0, 0.060921315, 0, 1, 0, -0.060921315, 0, 0.9981426, -31.419672, -2.6, 113.4301)
+_checkpointId = 1742381383
 
 [node name="Checkpoint" parent="Scene Contents/Level Features" instance=ExtResource("3_hj6ap")]
 transform = Transform3D(0.97941643, 0, -0.2018502, 0, 1, 0, 0.2018502, 0, 0.97941643, -33.74936, 18.35, 217.8901)
+_checkpointId = 3147150003
 
 [node name="Binocular Stand" parent="Scene Contents/Level Features" instance=ExtResource("4_t5h0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 20, 217)

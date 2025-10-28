@@ -82,9 +82,11 @@ transform = Transform3D(0.25881863, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258818
 
 [node name="Checkpoint" parent="Scene Contents/Level Features" instance=ExtResource("5_82f5o")]
 transform = Transform3D(0.76983273, 0, -0.63824564, 0, 1, 0, 0.63824564, 0, 0.76983273, -7.19, 18.32299, 11.97)
+_checkpointId = 3456567261
 
 [node name="Checkpoint2" parent="Scene Contents/Level Features" instance=ExtResource("5_82f5o")]
 transform = Transform3D(0.9243593, 0, 0.38152298, 0, 1, 0, -0.38152298, 0, 0.9243593, 12.35, 43.743, 11.58)
+_checkpointId = 497331892
 
 [node name="Geometry" type="Node3D" parent="Scene Contents"]
 

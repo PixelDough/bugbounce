@@ -48,6 +48,7 @@ radius = 0.50000006
 environment = SubResource("Environment_yhb0f")
 
 [node name="skybox_space_01" parent="." instance=ExtResource("1_um6pw")]
+process_priority = 2147483647
 
 [node name="Ball Return Feature" parent="." instance=ExtResource("2_pqaur")]
 transform = Transform3D(-1.0352621, 0, -3.863707, 0, 4, 0, 3.863707, 0, -1.0352621, 142, 43.75, 154.25)
