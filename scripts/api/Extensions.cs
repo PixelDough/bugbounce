@@ -16,4 +16,14 @@ public static class Extensions
     {
         return node.GetTree().EditedSceneRoot == node;
     }
+
+    public static Transform3D RotatedAround(this Transform3D transform3D, Vector3 point, Vector3 axis, float angle)
+    {
+        return transform3D.Translated(-point).Rotated(axis, angle).Translated(point);
+    }
+
+    public static void TranslateAround(this Node3D node3D, Vector3 point, Quaternion rotation)
+    {
+        node3D.GlobalPosition = point + rotation * (node3D.GlobalPosition - point);
+    }
 }

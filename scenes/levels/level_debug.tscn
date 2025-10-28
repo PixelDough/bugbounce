@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=21 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
-[ext_resource type="ArrayMesh" uid="uid://d1a17bi6afxer" path="res://models/level_assets/debug/DebugScene.pb_Mesh45820.mesh" id="2_h3jgp"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
 [ext_resource type="ArrayMesh" uid="uid://ct8kvk0b3ykuw" path="res://models/level_assets/debug/DebugScene.pb_Mesh45862.mesh" id="5_20ait"]
 [ext_resource type="ArrayMesh" uid="uid://nqi57uvw0sn1" path="res://models/level_assets/debug/DebugScene.pb_Mesh45920.mesh" id="7_i6q57"]
@@ -9,8 +8,11 @@
 [ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="11_rky0j"]
 [ext_resource type="PackedScene" uid="uid://bhg0r5xvbny5b" path="res://scenes/props/general/one_way_wall.tscn" id="12_clwtg"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="12_xjgd8"]
+[ext_resource type="PackedScene" uid="uid://dmkk7ndne58j8" path="res://scenes/props/picnic/plate.tscn" id="13_7mas3"]
 [ext_resource type="ArrayMesh" uid="uid://dki7x4le2anog" path="res://models/level_assets/debug/DebugScene.pb_Mesh45732.mesh" id="13_n8wwm"]
 [ext_resource type="ArrayMesh" uid="uid://it0ttr2mk4ec" path="res://models/level_assets/debug/DebugScene.pb_Mesh45770.mesh" id="14_apppj"]
+[ext_resource type="Script" uid="uid://pa1p4piks2ay" path="res://scripts/Rotate.cs" id="14_ttv4e"]
+[ext_resource type="Script" uid="uid://ckaboqq2i6em3" path="res://scripts/RotateAroundParent.cs" id="15_ttv4e"]
 [ext_resource type="PackedScene" uid="uid://bfs2sgyqh61kw" path="res://models/level_assets/debug/leveltest/Fbx_LevelTest.fbx" id="15_xwa2n"]
 
 [sub_resource type="Environment" id="Environment_somws"]
@@ -28,9 +30,6 @@ adjustment_enabled = true
 adjustment_brightness = 1.1
 adjustment_contrast = 1.2
 adjustment_saturation = 1.2
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b806r"]
-data = PackedVector3Array(25, -1, 25, -25, -1, 25, 25, 0, 25, -25, -1, 25, -25, 0, 25, 25, 0, 25, -25, -1, 25, -25, -1, -25, -25, 0, 25, -25, -1, -25, -25, 0, -25, -25, 0, 25, -25, -1, -25, 25, -1, -25, -25, 0, -25, 25, -1, -25, 25, 0, -25, -25, 0, -25, 25, -1, -25, 25, -1, 25, 25, 0, -25, 25, -1, 25, 25, 0, 25, 25, 0, -25, 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25, 25, -1, -25, -25, -1, -25, 25, -1, 25, -25, -1, -25, -25, -1, 25, 25, -1, 25)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uultp"]
 data = PackedVector3Array(5, 0, 0.5, -5, 0, 0.5, 5, 20, 0.5, -5, 0, 0.5, -5, 20, 0.5, 5, 20, 0.5, -5, 0, 0.5, -5, 0, -0.5, -5, 20, 0.5, -5, 0, -0.5, -5, 20, -0.5, -5, 20, 0.5, -5, 0, -0.5, 5, 0, -0.5, -5, 20, -0.5, 5, 0, -0.5, 5, 20, -0.5, -5, 20, -0.5, 5, 0, -0.5, 5, 0, 0.5, 5, 20, -0.5, 5, 0, 0.5, 5, 20, 0.5, 5, 20, -0.5, 5, 20, 0.5, -5, 20, 0.5, 5, 20, -0.5, -5, 20, 0.5, -5, 20, -0.5, 5, 20, -0.5, 5, 0, -0.5, -5, 0, -0.5, 5, 0, 0.5, -5, 0, -0.5, -5, 0, 0.5, 5, 0, 0.5)
@@ -53,21 +52,10 @@ environment = SubResource("Environment_somws")
 
 [node name="SkyboxObject" parent="." instance=ExtResource("1_xjgd8")]
 process_priority = 2147483647
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032491684, 0, 0.023721695)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
-
-[node name="Cube" type="Node3D" parent="."]
-
-[node name="MeshRenderer" type="MeshInstance3D" parent="Cube"]
-gi_mode = 2
-mesh = ExtResource("2_h3jgp")
-surface_material_override/0 = ExtResource("3_iby0j")
-
-[node name="MeshCollider" type="StaticBody3D" parent="Cube"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/MeshCollider"]
-shape = SubResource("ConcavePolygonShape3D_b806r")
 
 [node name="Level Manager" type="Node3D" parent="."]
 
@@ -236,3 +224,59 @@ _checkpointId = 2393071531
 [node name="Checkpoint2" parent="." instance=ExtResource("12_xjgd8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -9)
 _checkpointId = 1400573388
+
+[node name="Spinning Test" type="AnimatableBody3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.119083, 0.51337194, -29.71868)
+
+[node name="plate" parent="Spinning Test" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 5, 0, 0)
+sync_to_physics = false
+
+[node name="plate2" parent="Spinning Test" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -5, 0, 0)
+sync_to_physics = false
+
+[node name="plate3" parent="Spinning Test" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 5)
+sync_to_physics = false
+
+[node name="plate4" parent="Spinning Test" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, -5)
+sync_to_physics = false
+
+[node name="Rotate" type="Node" parent="Spinning Test"]
+script = ExtResource("14_ttv4e")
+UsePhysics = true
+metadata/_custom_type_script = "uid://pa1p4piks2ay"
+
+[node name="Spinning Test2" type="Node3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99090195, 5.2022343, -29.71868)
+
+[node name="plate" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 5, 0, 0)
+
+[node name="plate2" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -5, 0, 0)
+
+[node name="plate3" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 5, 0)
+
+[node name="plate4" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -5, 0)
+
+[node name="RotateAroundParent" type="Node" parent="Spinning Test2" node_paths=PackedStringArray("_nodes")]
+script = ExtResource("15_ttv4e")
+_nodes = [NodePath("../plate"), NodePath("../plate2"), NodePath("../plate3"), NodePath("../plate4")]
+UsePhysics = true
+Axis = Vector3(0, 0, 1)
+metadata/_custom_type_script = "uid://ckaboqq2i6em3"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -12.5)
+size = Vector3(50, 1, 75)
+material = ExtResource("3_iby0j")
