@@ -17,7 +17,7 @@ void vertex() {
 void fragment() {
 	ALBEDO = (texture(baseMap, UV).rgb * COLOR.rgb) * 5.0;
 	
-	float distance_to_origin = (vertex_pos.y - NODE_POSITION_WORLD.y) - yOffset;
+	float distance_to_origin = vertex_pos.y - yOffset;
 	float alpha = clamp(1.0 - (distance_to_origin / fadeScale), 0.0, 1.0);
 	if (dither_transparent(alpha, FRAGCOORD.xy * 1.0) < 0.5) {
 		discard;
