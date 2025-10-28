@@ -1,45 +1,22 @@
 using Godot;
 using System;
 
-public partial class OneWayWall : AnimatableBody3D
+public partial class OneWayWall : Node3D
 {
     [Export] private Node3D _modelNode;
-    [Export] private Area3D _ignoreCollisionArea;
+    [Export] private Node3D _bodyNode;
     [Export] private Area3D _kickArea;
 
     private float _rotationDifference = 1;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        _ignoreCollisionArea.BodyEntered += IgnoreCollisionAreaOnBodyEntered;
-        _ignoreCollisionArea.BodyExited += IgnoreCollisionOnBodyExited;
-
-        _kickArea.BodyEntered += KickAreaOnBodyEntered;
-    }
-
-    private void IgnoreCollisionAreaOnBodyEntered(Node3D body)
-    {
-        if (body is not Player player) return;
-        // if (player.LinearVelocity.Normalized().Dot(-GlobalBasis.Z) < 0) return;
-        if ((player.GlobalPosition - GlobalPosition).Normalized().Dot(GlobalBasis.Z) < 0.0) return;
-        player.AddCollisionExceptionWith(this);
-        player.RemoveCollisionExceptionWith(_kickArea);
-    }
-
-    private void IgnoreCollisionOnBodyExited(Node3D body)
-    {
-        if (body is not Player player) return;
-        player.RemoveCollisionExceptionWith(this);
-        player.AddCollisionExceptionWith(_kickArea);
-    }
-
     private void KickAreaOnBodyEntered(Node3D body)
     {
         if (body is not Player player) return;
-        // if (player.LinearVelocity.Normalized().Dot(-GlobalBasis.Z) < 0) return;
         if ((player.GlobalPosition - GlobalPosition).Normalized().Dot(GlobalBasis.Z) < 0.0) return;
         player.ApplyImpulse(-GlobalBasis.Z * 6f);
+
+        player.AddCollisionExceptionWith(_bodyNode);
+        player.RemoveCollisionExceptionWith(_kickArea);
 
         _rotationDifference = 1;
         if (Mathf.Abs(GlobalBasis.Y.SignedAngleTo(GlobalPosition - player.GlobalPosition, GlobalBasis.X)) > Mathf.Pi * 0.5f)
@@ -48,6 +25,13 @@ public partial class OneWayWall : AnimatableBody3D
         }
 
         Spin();
+    }
+
+    private void KickAreaOnBodyExited(Node3D body)
+    {
+        if (body is not Player player) return;
+        player.RemoveCollisionExceptionWith(_bodyNode);
+        player.AddCollisionExceptionWith(_kickArea);
     }
 
     private void Spin()

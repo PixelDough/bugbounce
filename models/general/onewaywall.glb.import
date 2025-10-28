@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/onewaywall.glb-5991981d3f269a761c731db059f52a
 
 [params]
 
-nodes/root_type="AnimatableBody3D"
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
