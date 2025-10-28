@@ -185,3 +185,13 @@ vec3 hsv2rgb(vec3 c) {
     vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
+
+const mat4 THRESHOLD_MATRIX = mat4(
+		vec4(1.0 / 17.0,  9.0 / 17.0,  3.0 / 17.0, 11.0 / 17.0),
+		vec4(13.0 / 17.0,  5.0 / 17.0, 15.0 / 17.0,  7.0 / 17.0),
+		vec4(4.0 / 17.0, 12.0 / 17.0,  2.0 / 17.0, 10.0 / 17.0),
+		vec4(16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0));
+		
+float dither_transparent(float alpha, vec2 screen_pos) {
+	return step(0.0, THRESHOLD_MATRIX[int(screen_pos.x) % 4][int(screen_pos.y) % 4] - (1.0 - alpha));
+}

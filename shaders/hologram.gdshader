@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode unshaded;
-render_mode blend_add;
+render_mode blend_mix;
+
+#include "shading.gdshaderinc"
 
 uniform sampler2D baseMap : source_color;
 uniform float fadeScale = 1.0;
@@ -14,10 +16,11 @@ void vertex() {
 }
 
 void fragment() {
-	ALBEDO = texture(baseMap, UV).rgb * COLOR.rgb;
+	ALBEDO = (texture(baseMap, UV).rgb * COLOR.rgb) * 5.0;
 	
 	float distance_to_origin = (vertex_pos.y - NODE_POSITION_WORLD.y) - yOffset;
-	ALPHA = clamp(1.0 - (distance_to_origin / fadeScale), 0.0, 1.0);
+	float alpha = clamp(1.0 - (distance_to_origin / fadeScale), 0.0, 1.0);
+	ALPHA = dither_transparent(alpha, FRAGCOORD.xy * 1.0);
 }
 
 //void light() {

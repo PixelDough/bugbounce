@@ -92,12 +92,15 @@ shadow_blur = 5.0
 
 [node name="Checkpoint (0)" parent="Level Geometry/Level Features" instance=ExtResource("5_oom3e")]
 transform = Transform3D(-0.00887239, 0, 0.99996066, 0, 1, 0, -0.99996066, 0, -0.00887239, 184.68, 0.49999952, 17.71)
+_checkpointId = 3736871416
 
 [node name="Checkpoint (1)" parent="Level Geometry/Level Features" instance=ExtResource("5_oom3e")]
 transform = Transform3D(-0.9054694, 0, 0.4244118, 0, 1, 0, -0.4244118, 0, -0.9054694, 292.07, 32.509396, 6.58)
+_checkpointId = 1982754074
 
 [node name="Checkpoint (2)" parent="Level Geometry/Level Features" instance=ExtResource("5_oom3e")]
 transform = Transform3D(-0.46783996, 0, -0.88381314, 0, 1, 0, 0.88381314, 0, -0.46783996, 210.46, 13.624, -78.56)
+_checkpointId = 3319327236
 
 [node name="Binocular Stand" parent="Level Geometry/Level Features" instance=ExtResource("6_bwdgy")]
 transform = Transform3D(5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, 5.9604645e-08, 301.0742, 32.38664, 12.716674)

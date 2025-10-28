@@ -14,6 +14,7 @@ public partial class Checkpoint : Node3D
     private int _flagBoneIndex = 0;
     private float _flagScale = 1f;
 
+    private bool _hidden = true;
     private Tween _tween;
     private Tween _tweenShake;
 
@@ -64,14 +65,19 @@ public partial class Checkpoint : Node3D
         if (Engine.IsEditorHint())
             return;
 
-        Skeleton.SetBonePoseScale(_flagBoneIndex, new Vector3(1f, _flagScale, 1f));
-
-        Skeleton.SetBonePoseRotation(_flagBoneIndex,
-            Quaternion.FromEuler(new(0f, GetViewport().GetCamera3D().GlobalRotation.Y + Mathf.Pi, -Mathf.Pi * 0.5f)));
+        if (_hidden)
+            Skeleton.SetBonePoseScale(_flagBoneIndex, Vector3.Zero);
+        else
+        {
+            Skeleton.SetBonePoseScale(_flagBoneIndex, new Vector3(1f, _flagScale, 1f));
+            Skeleton.SetBonePoseRotation(_flagBoneIndex,
+                Quaternion.FromEuler(new(0f, GetViewport().GetCamera3D().GlobalRotation.Y + Mathf.Pi, -Mathf.Pi * 0.5f)));
+        }
     }
 
     public void ShowFlag()
     {
+        _hidden = false;
         _tween?.EndTween();
         _tween = CreateTween();
         _tween?.TweenProperty(this, "_flagScale", 1f, 0.5f)
@@ -81,6 +87,7 @@ public partial class Checkpoint : Node3D
 
     public void HideFlag()
     {
+        _hidden = true;
         _tween?.EndTween();
         _flagScale = 0.001f;
     }
