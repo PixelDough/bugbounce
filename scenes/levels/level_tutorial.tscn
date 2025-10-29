@@ -1,7 +1,8 @@
-[gd_scene load_steps=46 format=4 uid="uid://cd4mo2ivh0iph"]
+[gd_scene load_steps=45 format=4 uid="uid://cd4mo2ivh0iph"]
 
 [ext_resource type="PackedScene" uid="uid://bhg0r5xvbny5b" path="res://scenes/props/general/one_way_wall.tscn" id="2_frl7g"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_02mq4"]
+[ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="3_frl7g"]
 [ext_resource type="PackedScene" uid="uid://dnglshy5uulg7" path="res://scenes/props/general/tutorial_pad.tscn" id="4_rgwxx"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="5_6yvh5"]
 [ext_resource type="ArrayMesh" uid="uid://lxenw146gsqk" path="res://models/level_assets/tutorial/Demo Tutorial.pb_Mesh-1584328(Clone).mesh" id="6_i4owl"]
@@ -18,17 +19,24 @@
 [ext_resource type="PackedScene" uid="uid://43wbf0nicukp" path="res://scenes/props/general/binocular_stand.tscn" id="17_yqbhy"]
 [ext_resource type="ArrayMesh" uid="uid://kvqfrbdn5tuy" path="res://models/level_assets/tutorial/Demo Tutorial.pb_Mesh-1584328(Clone)(Clone)(Clone)(Clone)(Clone).mesh" id="18_wkwfn"]
 [ext_resource type="ArrayMesh" uid="uid://fx7w0rsgcln" path="res://models/level_assets/tutorial/Demo Tutorial.pb_Mesh-1584328(Clone)(Clone)(Clone)(Clone).mesh" id="19_4e5nu"]
-[ext_resource type="PackedScene" uid="uid://menstlsmwd6q" path="res://scenes/skyboxes/sky_space_01.tscn" id="20_kka41"]
-[ext_resource type="PackedScene" uid="uid://dal62hi0kgwtc" path="res://Assets/_Game/Content/Level Features/_Prefabs/Level Manager.prefab.scn" id="20_nnnq2"]
+[ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="20_kka41"]
+[ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="21_02mq4"]
 
-[sub_resource type="Sky" id="Sky_f8351"]
-
-[sub_resource type="Environment" id="Environment_h86vh"]
-background_mode = 2
-sky = SubResource("Sky_f8351")
+[sub_resource type="Environment" id="Environment_frl7g"]
+background_mode = 1
+background_color = Color(0.4724639, 0.2694919, 0.56396246, 1)
+tonemap_exposure = 0.8
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.1
 fog_enabled = true
-fog_light_color = Color(0.88235295, 0.5529412, 1, 1)
-fog_density = 0.02
+fog_mode = 1
+fog_light_color = Color(0.8818556, 0.5518868, 1, 1)
+fog_density = 1.0
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfa0w"]
 resource_name = "pb_Mesh-1584328(Clone)(Clone)(Clone)(Clone)(Clone)"
@@ -47,8 +55,7 @@ _surfaces = [{
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_63w8h"]
 data = PackedVector3Array(0, -16, 5, -1, -16, 5, 0, 6, 5, -1, -16, 5, -1, 6, 5, 0, 6, 5, -1, -16, 5, -1, -16, -3, -1, 6, 5, -1, -16, -3, -1, 6, -3, -1, 6, 5, -1, -16, -3, 0, -16, -3, -1, 6, -3, 0, -16, -3, 0, 6, -3, -1, 6, -3, 0, -16, -3, 0, -16, 5, 0, 6, -3, 0, -16, 5, 0, 6, 5, 0, 6, -3, 0, 6, 5, -1, 6, 5, 0, 6, -3, -1, 6, 5, -1, 6, -3, 0, 6, -3, 0, -16, -3, -1, -16, -3, 0, -16, 5, -1, -16, -3, -1, -16, 5, 0, -16, 5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4h5rf"]
-size = Vector3(78, 200, 121.83)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rgwxx"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7swhm"]
 data = PackedVector3Array(6, 0, 10, -10, 0, 10, 6, 1, 10, -10, 0, 10, -10, 1, 10, 6, 1, 10, -15, 0, 7, -15, 0, 2, -15, 1, 7, -15, 0, 2, -15, 1, 2, -15, 1, 7, 7, 0, 0, 7, 0, 9, 7, 1, 0, 7, 0, 9, 7, 1, 9, 7, 1, 0, 6, 1, 9, -10, 1, 9, 6, 1, 0, -10, 1, 9, -10, 1, 0, 6, 1, 0, 6, 0, 0, -10, 0, 0, 6, 0, 9, -10, 0, 0, -10, 0, 9, 6, 0, 9, 6, 0, 9, -10, 0, 9, 6, 0, 10, -10, 0, 9, -10, 0, 10, 6, 0, 10, 7, 1, 9, 7, 0, 9, 7, 1, 10, 7, 0, 9, 7, 0, 10, 7, 1, 10, -10, 0, 9, -10, 1, 9, -10, 0, 10, -10, 1, 9, -10, 1, 10, -10, 0, 10, -10, 2, 9, 6, 4, 9, -10, 2, 10, 6, 4, 9, 6, 4, 10, -10, 2, 10, -10, 1, 9, 6, 1, 9, -10, 2, 9, 6, 1, 9, 6, 4, 9, -10, 2, 9, -10, 1, 10, -10, 1, 9, -10, 2, 10, -10, 1, 9, -10, 2, 9, -10, 2, 10, 7, 1, 9, 7, 1, 10, 7, 4, 9, 7, 1, 10, 7, 4, 10, 7, 4, 9, 6, 1, 10, -10, 1, 10, 6, 4, 10, -10, 1, 10, -10, 2, 10, 6, 4, 10, 6, 0, 0, 6, 0, 9, 7, 0, 0, 6, 0, 9, 7, 0, 9, 7, 0, 0, 6, 1, 0, 6, 0, 0, 7, 1, 0, 6, 0, 0, 7, 0, 0, 7, 1, 0, 6, 4, 9, 6, 2, 0, 7, 4, 9, 6, 2, 0, 7, 2, 0, 7, 4, 9, 6, 0, 9, 6, 0, 10, 7, 0, 9, 6, 0, 10, 7, 0, 10, 7, 0, 9, 6, 0, 10, 6, 1, 10, 7, 0, 10, 6, 1, 10, 7, 1, 10, 7, 0, 10, 6, 1, 10, 6, 4, 10, 7, 1, 10, 6, 4, 10, 7, 4, 10, 7, 1, 10, 6, 4, 10, 6, 4, 9, 7, 4, 10, 6, 4, 9, 7, 4, 9, 7, 4, 10, 6, 1, 9, 6, 1, 0, 6, 4, 9, 6, 1, 0, 6, 2, 0, 6, 4, 9, 6, 1, 0, 7, 1, 0, 6, 2, 0, 7, 1, 0, 7, 2, 0, 6, 2, 0, 7, 1, 0, 7, 1, 9, 7, 2, 0, 7, 1, 9, 7, 4, 9, 7, 2, 0, -10, 0, 9, -10, 0, 0, -11, 0, 7, -10, 0, 0, -11, 0, 2, -11, 0, 7, -10, 1, 9, -10, 0, 9, -11, 1, 7, -10, 0, 9, -11, 0, 7, -11, 1, 7, -10, 0, 0, -10, 1, 0, -11, 0, 2, -10, 1, 0, -11, 1, 2, -11, 0, 2, -10, 1, 0, -10, 1, 9, -11, 1, 2, -10, 1, 9, -11, 1, 7, -11, 1, 2, -11, 0, 7, -11, 0, 2, -14, 0, 7, -11, 0, 2, -14, 0, 2, -14, 0, 7, -11, 1, 7, -11, 0, 7, -14, 1, 7, -11, 0, 7, -14, 0, 7, -14, 1, 7, -11, 0, 2, -11, 1, 2, -14, 0, 2, -11, 1, 2, -14, 1, 2, -14, 0, 2, -11, 1, 2, -11, 1, 7, -14, 1, 2, -11, 1, 7, -14, 1, 7, -14, 1, 2, -14, 0, 7, -14, 0, 2, -15, 0, 7, -14, 0, 2, -15, 0, 2, -15, 0, 7, -14, 1, 7, -14, 0, 7, -15, 1, 7, -14, 0, 7, -15, 0, 7, -15, 1, 7, -14, 0, 2, -14, 1, 2, -15, 0, 2, -14, 1, 2, -15, 1, 2, -15, 0, 2, -14, 5, 2, -14, 5, 7, -15, 5, 2, -14, 5, 7, -15, 5, 7, -15, 5, 2, -14, 1, 2, -14, 1, 7, -14, 5, 2, -14, 1, 7, -14, 5, 7, -14, 5, 2, -15, 1, 2, -14, 1, 2, -15, 5, 2, -14, 1, 2, -14, 5, 2, -15, 5, 2, -14, 1, 7, -15, 1, 7, -14, 5, 7, -15, 1, 7, -15, 5, 7, -14, 5, 7, -15, 1, 7, -15, 1, 2, -15, 5, 7, -15, 1, 2, -15, 5, 2, -15, 5, 7, 6, -5, 0, -10, -5, 0, 6, 0, 0, -10, -5, 0, -10, 0, 0, 6, 0, 0, -10, -5, 0, -10, -5, -2, -10, 0, 0, -10, -5, -2, -10, 0, -2, -10, 0, 0, -10, -5, -2, 6, -5, -2, -10, 0, -2, 6, -5, -2, 6, 0, -2, -10, 0, -2, 6, -5, -2, 6, -5, 0, 6, 0, -2, 6, -5, 0, 6, 0, 0, 6, 0, -2, 6, 1, 0, -10, 1, 0, 6, 1, -2, -10, 1, 0, -10, 1, -2, 6, 1, -2, 6, -5, -2, -10, -5, -2, 6, -5, 0, -10, -5, -2, -10, -5, 0, 6, -5, 0, 6, 0, -2, 6, 0, 0, 6, 1, -2, 6, 0, 0, 6, 1, 0, 6, 1, -2, -10, 0, 0, -10, 0, -2, -10, 1, 0, -10, 0, -2, -10, 1, -2, -10, 1, 0, -10, 0, -2, 6, 0, -2, -10, 1, -2, 6, 0, -2, 6, 1, -2, -10, 1, -2)
@@ -148,18 +155,13 @@ data = PackedVector3Array(0, -1, 7, -8, -1, 7, 0, 0, 7, -8, -1, 7, -8, 0, 7, 0, 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n6eiw"]
 data = PackedVector3Array(0, 0, 5, -1, 0, 5, 0, 6, 5, -1, 0, 5, -1, 6, 5, 0, 6, 5, -1, 0, 5, -1, 0, -3, -1, 6, 5, -1, 0, -3, -1, 6, -3, -1, 6, 5, -1, 0, -3, 0, 0, -3, -1, 6, -3, 0, 0, -3, 0, 6, -3, -1, 6, -3, 0, 0, -3, 0, 0, 5, 0, 6, -3, 0, 0, 5, 0, 6, 5, 0, 6, -3, 0, 6, 5, -1, 6, 5, 0, 6, -3, -1, 6, 5, -1, 6, -3, 0, 6, -3, 0, 0, -3, -1, 0, -3, 0, 0, 5, -1, 0, -3, -1, 0, 5, 0, 0, 5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qamiq"]
-size = Vector3(78, 200, 121.83)
-
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dldpm"]
 data = PackedVector3Array(0, 0, 5, -1, 0, 5, 0, 6, 5, -1, 0, 5, -1, 6, 5, 0, 6, 5, -1, 0, 5, -1, 0, -3, -1, 6, 5, -1, 0, -3, -1, 6, -3, -1, 6, 5, -1, 0, -3, 0, 0, -3, -1, 6, -3, 0, 0, -3, 0, 6, -3, -1, 6, -3, 0, 0, -3, 0, 0, 5, 0, 6, -3, 0, 0, 5, 0, 6, 5, 0, 6, -3, 0, 6, 5, -1, 6, 5, 0, 6, -3, -1, 6, 5, -1, 6, -3, 0, 6, -3, 0, 0, -3, -1, 0, -3, 0, 0, 5, -1, 0, -3, -1, 0, 5, 0, 0, 5)
 
 [node name="RootNode3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_h86vh")
-
-[node name="LightmapGI" type="LightmapGI" parent="."]
+environment = SubResource("Environment_frl7g")
 
 [node name="One Way Wall (4)" parent="." instance=ExtResource("2_frl7g")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 8, 31, 71)
@@ -180,14 +182,13 @@ shape = SubResource("ConcavePolygonShape3D_63w8h")
 [node name="One Way Wall (11)" parent="." instance=ExtResource("2_frl7g")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 2, 31, 69)
 
-[node name="Live Zone" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 27)
+[node name="Death Zone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 27)
+script = ExtResource("3_frl7g")
+metadata/_custom_type_script = "uid://bchbwe0886hnb"
 
-[node name="BoxCollider" type="Area3D" parent="Live Zone"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Live Zone/BoxCollider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
-shape = SubResource("BoxShape3D_4h5rf")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Death Zone"]
+shape = SubResource("WorldBoundaryShape3D_rgwxx")
 
 [node name="Tutorial Pad (4)" parent="." instance=ExtResource("4_rgwxx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 23)
@@ -200,12 +201,15 @@ transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 6, 31, 69)
 
 [node name="Checkpoint" parent="Level Features" instance=ExtResource("5_6yvh5")]
 transform = Transform3D(-1, 0, 5.900859e-06, 0, 1, 0, -5.900859e-06, 0, -1, 5, 23, 77)
+_checkpointId = 3998507001
 
 [node name="Checkpoint (2)" parent="Level Features" instance=ExtResource("5_6yvh5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 31, 77)
+_checkpointId = 372496718
 
 [node name="Checkpoint (1)" parent="Level Features" instance=ExtResource("5_6yvh5")]
 transform = Transform3D(-6.67572e-06, 0, -1, 0, 1, 0, 1, 0, -6.67572e-06, 7.0000024, 8, 71)
+_checkpointId = 2500992745
 
 [node name="One Way Wall (5)" parent="." instance=ExtResource("2_frl7g")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 6, 31, 71)
@@ -225,8 +229,6 @@ surface_material_override/0 = ExtResource("3_02mq4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube (2)/MeshCollider"]
 shape = SubResource("ConcavePolygonShape3D_7swhm")
-
-[node name="Draw XXL Lines Manager" type="Node3D" parent="."]
 
 [node name="Tutorial Pad (3)" parent="." instance=ExtResource("4_rgwxx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 30.999996, 88)
@@ -412,7 +414,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 light_color = Color(0.7764706, 0.84313726, 1, 1)
 light_energy = 3.0
 light_bake_mode = 0
-shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
 
@@ -470,15 +471,6 @@ surface_material_override/0 = ExtResource("3_02mq4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube (9)/MeshCollider"]
 shape = SubResource("ConcavePolygonShape3D_n6eiw")
 
-[node name="Live Zone (1)" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 140)
-
-[node name="BoxCollider" type="Area3D" parent="Live Zone (1)"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Live Zone (1)/BoxCollider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
-shape = SubResource("BoxShape3D_qamiq")
-
 [node name="One Way Wall (16)" parent="." instance=ExtResource("2_frl7g")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 8, 31, 65)
 
@@ -498,87 +490,8 @@ shape = SubResource("ConcavePolygonShape3D_dldpm")
 [node name="One Way Wall (14)" parent="." instance=ExtResource("2_frl7g")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 4, 31, 67)
 
-[node name="Level Manager" parent="." instance=ExtResource("20_nnnq2")]
+[node name="skybox_space_01" parent="." instance=ExtResource("20_kka41")]
+process_priority = 2147483647
 
-[node name="Player Spawner" parent="Level Manager" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
-
-[node name="Player Stuff Manager" parent="Level Manager/Pause Scene Management" index="2"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-script = null
-
-[node name="Start Cinemachine Camera" parent="Level Manager" index="3"]
-transform = Transform3D(0.8992908, -0.1432173, -0.41323698, 7.450581e-09, 0.9448632, -0.32746527, 0.43735114, 0.29448652, 0.84970677, 6.576641, 7.968569, 5.9034157)
-
-[node name="sky_space_01" parent="." instance=ExtResource("20_kka41")]
-
-[editable path="One Way Wall (4)"]
-[editable path="One Way Wall (4)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (11)"]
-[editable path="One Way Wall (11)/Model/Fbx_OneWayWall"]
-[editable path="Tutorial Pad (4)"]
-[editable path="One Way Wall (9)"]
-[editable path="One Way Wall (9)/Model/Fbx_OneWayWall"]
-[editable path="Level Features/Checkpoint"]
-[editable path="Level Features/Checkpoint (2)"]
-[editable path="Level Features/Checkpoint (1)"]
-[editable path="One Way Wall (5)"]
-[editable path="One Way Wall (5)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (10)"]
-[editable path="One Way Wall (10)/Model/Fbx_OneWayWall"]
-[editable path="Tutorial Pad (3)"]
-[editable path="One Way Wall (18)"]
-[editable path="One Way Wall (18)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (3)"]
-[editable path="One Way Wall (3)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (17)"]
-[editable path="One Way Wall (17)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (7)"]
-[editable path="One Way Wall (7)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (15)"]
-[editable path="One Way Wall (15)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (6)"]
-[editable path="One Way Wall (6)/Model/Fbx_OneWayWall"]
-[editable path="Tutorial Pad"]
-[editable path="Death Pit Sign"]
-[editable path="Tutorial Pad (1)"]
-[editable path="One Way Wall (12)"]
-[editable path="One Way Wall (12)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (13)"]
-[editable path="One Way Wall (13)/Model/Fbx_OneWayWall"]
-[editable path="Goal Ring"]
-[editable path="One Way Wall (19)"]
-[editable path="One Way Wall (19)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (1)"]
-[editable path="One Way Wall (1)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (2)"]
-[editable path="One Way Wall (2)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall"]
-[editable path="One Way Wall/Model/Fbx_OneWayWall"]
-[editable path="Binocular Stand"]
-[editable path="Tutorial Pad (2)"]
-[editable path="One Way Wall (8)"]
-[editable path="One Way Wall (8)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (16)"]
-[editable path="One Way Wall (16)/Model/Fbx_OneWayWall"]
-[editable path="One Way Wall (14)"]
-[editable path="One Way Wall (14)/Model/Fbx_OneWayWall"]
-[editable path="Level Manager"]
-[editable path="Level Manager/HUD Stuff/Stopwatch Render/Stopwatch Root/Fbx_Stopwatch"]
-[editable path="Level Manager/HUD Stuff/Input Overlay Renderer/InputJoystick"]
-[editable path="Level Manager/HUD Stuff/Input Overlay Renderer/InputJump"]
-[editable path="Level Manager/HUD Stuff/Pause Text Renderers/Resume"]
-[editable path="Level Manager/HUD Stuff/Pause Text Renderers/Restart"]
-[editable path="Level Manager/HUD Stuff/Pause Text Renderers/Settings"]
-[editable path="Level Manager/HUD Stuff/Pause Text Renderers/Quit"]
-[editable path="Level Manager/Player Spawner"]
-[editable path="Level Manager/Pause Scene Management"]
-[editable path="Level Manager/Pause Scene Management/Fbx_TvRemote"]
+[node name="PlayerCharacter" parent="." instance=ExtResource("21_02mq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16469741, 0.25, 15.220003)
