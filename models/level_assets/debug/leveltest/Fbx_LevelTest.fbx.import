@@ -38,7 +38,6 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
-"animations": {},
 "materials": {
 "Base": {
 "use_external/enabled": true,
@@ -59,7 +58,6 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://models/level_assets/debug/leveltest/extracted/Fbx_LevelTest.Plane.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://djyee441nptou"
 },
 "Plane_001": {
@@ -69,7 +67,6 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://models/level_assets/debug/leveltest/extracted/Fbx_LevelTest.Plane_001.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://cginkpe4dwd51"
 },
 "Plane_002": {
@@ -79,33 +76,22 @@ _subresources={
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://models/level_assets/debug/leveltest/extracted/Fbx_LevelTest.Plane_002.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://c1a0s4ugl8w3j"
-},
-"Root Scene_Plane": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://models/level_assets/debug/leveltest/extracted/Fbx_LevelTest.Plane.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://djyee441nptou"
-},
-"Root Scene_Plane_001": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://models/level_assets/debug/leveltest/extracted/Fbx_LevelTest.Plane_001.mesh",
-"save_to_file/make_streamable": "",
-"save_to_file/path": "uid://cginkpe4dwd51"
-},
-"Root Scene_Plane_002": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://models/level_assets/debug/leveltest/extracted/Fbx_LevelTest.Plane_002.mesh",
-"save_to_file/make_streamable": "",
 "save_to_file/path": "uid://c1a0s4ugl8w3j"
 }
 },
 "nodes": {
 "PATH:AnimationPlayer": {
 "optimizer/enabled": true,
-"optimizer/max_angular_error": 0.00277777777777777,
-"optimizer/max_linear_error": 0.5
+"optimizer/max_angular_error": 0.00277777777777777
+},
+"PATH:Plane": {
+"generate/physics": true
+},
+"PATH:Plane_001": {
+"generate/physics": true
+},
+"PATH:Plane_002": {
+"generate/physics": true
 }
 }
 }
