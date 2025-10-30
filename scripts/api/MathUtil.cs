@@ -577,6 +577,11 @@ public static class MathUtil
         return AngleAxis(Mathf.DegToRad(degrees), axis);
     }
 
+    public static Transform3D RotatedAround(this Transform3D transform3D, Vector3 point, Vector3 axis, float angle)
+    {
+        return transform3D.Translated(-point).Rotated(axis, angle).Translated(point);
+    }
+
     public static Vector3 TranslateAround(this Vector3 vector, Vector3 point, Quaternion rotation)
     {
         vector = point + rotation * (vector - point);
