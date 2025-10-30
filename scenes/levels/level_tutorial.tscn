@@ -407,12 +407,11 @@ surface_material_override/0 = ExtResource("3_02mq4")
 shape = SubResource("ConcavePolygonShape3D_nt3i8")
 
 [node name="Directional Light" type="Node3D" parent="."]
-transform = Transform3D(-0.8703556, -0.4905499, 0.04291742, -1.3160107e-08, -0.08715545, -0.9961947, 0.4924237, -0.8670437, 0.07585622, 0, 0, 0)
+transform = Transform3D(0.43301266, 0.8660253, -0.24999999, 0.5, -3.7855173e-08, 0.8660254, 0.74999994, -0.49999997, -0.43301272, 0, 0, 0)
 
 [node name="Light" type="DirectionalLight3D" parent="Directional Light"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 light_color = Color(0.7764706, 0.84313726, 1, 1)
-light_energy = 3.0
+light_energy = 1.5
 light_bake_mode = 0
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
