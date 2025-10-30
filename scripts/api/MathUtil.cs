@@ -576,4 +576,10 @@ public static class MathUtil
     {
         return AngleAxis(Mathf.DegToRad(degrees), axis);
     }
+
+    public static Vector3 TranslateAround(this Vector3 vector, Vector3 point, Quaternion rotation)
+    {
+        vector = point + rotation * (vector - point);
+        return vector;
+    }
 }
