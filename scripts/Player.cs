@@ -257,7 +257,7 @@ public partial class Player : RigidBody3D
                         {
                             LinearVelocity = LinearVelocity.Bounce(pointNormal.Normalized()) * PhysicsMaterialOverride.Bounce;
                             ApplyImpulse(pointNormal * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.125f);
-                            ApplyImpulse(Vector3.Up * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.8f);
+                            ApplyImpulse(Vector3.Up * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.5f);
                         }
                         // Hit something that's not a wall
                         else if (pointNormal.AngleTo(-gravity) > Mathf.DegToRad(35f) && velTowardsNormal > 9f)
