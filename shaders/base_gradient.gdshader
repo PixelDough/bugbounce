@@ -29,6 +29,7 @@ uniform float metallic : hint_range(0, 1) = 0.0;
 group_uniforms Lighting;
 uniform sampler2D main_light_gradient : hint_default_white, source_color, repeat_disable;
 uniform float rim_multiplier = 1.0;
+uniform bool use_top_and_bottom_lights = false;
 
 group_uniforms Other;
 instance uniform vec2 uv_offset = vec2(0.0);
@@ -63,6 +64,9 @@ void vertex() {
 }
 
 void fragment() {
+	mat3 view_to_tangent = mat3(TANGENT, BINORMAL, NORMAL);
+	mat3 tangent_to_view = inverse(view_to_tangent);
+	
 	vec2 triUv = mix(local_pos.xy, local_pos.zy, round(-local_normal.x));
 	triUv = mix(triUv, local_pos.xz, round(-local_normal.y));
 		
@@ -73,18 +77,15 @@ void fragment() {
 	vec3 final_color = albedo_sample * vert_color * tint;
 
 	vec3 normal_sample = texture(normal_tex, uv).rgb;
+	vec3 normal_unpacked = normal_sample * 2.0 - 1.0;
+	normal_unpacked.z = get_unpacked_normal_z(normal_unpacked);
+	vec3 view_normal = view_to_tangent * normal_unpacked;
 	//vec3 normal_adjusted = mix(normal_sample, vec3(0.5, 0.5, 1.0), 0.25);
 	NORMAL_MAP = normal_sample;
 	
-	vec3 normal_unpacked = normal_sample * 2.0 - 1.0;
-	normal_unpacked.z = get_unpacked_normal_z(normal_unpacked);
-	
-	mat3 view_to_tangent = mat3(TANGENT, BINORMAL, NORMAL);
-	mat3 tangent_to_view = inverse(view_to_tangent);
-	
 	vec4 albedo_with_matcap = apply_matcap_basic(
 		vec4(final_color, 1.0),
-		texture(matcap_tex, generate_matcap_uvs_basic(view_to_tangent * normal_unpacked)),
+		texture(matcap_tex, generate_matcap_uvs_basic(view_normal)),
 		matcap_intensity,
 		matcap_power,
 		smoothness,
@@ -106,6 +107,17 @@ void light() {
 	).rgb;
 	
 	DIFFUSE_LIGHT += main_light_color * ATTENUATION * LIGHT_COLOR / PI;
+	
+	float top_bottom_mul = float(int(use_top_and_bottom_lights));
+	//DIFFUSE_LIGHT *= 1.0 - top_bottom_mul * 0.5; // average the top light and main light
+	
+	float top_light = dot(NORMAL, vec3(0.0, 1.0, -0.5));
+	top_light = clamp(top_light, 0.0, 1.0);
+	DIFFUSE_LIGHT += top_light * LIGHT_COLOR * 0.5 * top_bottom_mul;
+	
+	float bottom_light = dot(NORMAL, vec3(0.0, -1.0, -0.5));
+	bottom_light = clamp(bottom_light, 0.0, 1.0);
+	DIFFUSE_LIGHT += -bottom_light * 0.5 * top_bottom_mul;
 	
 	float rim_glow_dot = dot(NORMAL, LIGHT);
 	float rim_amount = 1.0 - ((rim_glow_dot + 1.0) * 0.5);

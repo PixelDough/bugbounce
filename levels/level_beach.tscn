@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cssgvlk0hc8v8"]
+[gd_scene load_steps=33 format=3 uid="uid://cssgvlk0hc8v8"]
 
 [ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://addons/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_7w3p2"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_y2yyu"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="25_1feuv"]
 [ext_resource type="PackedScene" uid="uid://dwwbtdfc8wwc8" path="res://scenes/props/beach/life_saver.tscn" id="25_o5oh8"]
 [ext_resource type="PackedScene" uid="uid://su6wdhhatlew" path="res://scenes/props/beach/bubble.tscn" id="26_c57cw"]
+[ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="26_eqx7e"]
 [ext_resource type="PackedScene" uid="uid://7jwnmpsrokmg" path="res://scenes/props/beach/surfboard.tscn" id="27_7oqrd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nm6a2"]
@@ -63,6 +64,8 @@ height = 5.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_emrlx"]
 points = PackedVector3Array(0.5, 0.1, -3.518952, 0.4964761, 0.1, 4.057831, 0.5, -0.1, -3.518952, 0.49931479, 0.1, -4.0253897, 0.3052075, 0.1, 4.035674, 0.4964761, -0.1, 4.057831, 0.49931479, -0.1, -4.0253897, 0.25283867, 0.1, -4.0135202, 0.3052075, -0.1, 4.035674, 0.25137043, 0.1, 4.0293436, 0.25283867, -0.1, -4.0135202, -0.4994127, 0.1, -3.974746, 0.25137043, -0.1, 4.0293436, -0.496574, 0.1, 3.9407172, -0.4994127, -0.1, -3.974746, -0.5, 0.1, -3.518952, -0.496574, -0.1, 3.9407172, -0.5, -0.1, -3.518952)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6ntvk"]
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -1647,3 +1650,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18476772, 0.75905967, -0.3
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 1.9368386e-08, -8.5250264e-08, 0, 0.9751494, 0.22154851, 8.742278e-08, 0.22154851, -0.97514933, -0.1563611, 3.3091476, -4.790974)
 fov = 100.0
+
+[node name="DeathZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+script = ExtResource("26_eqx7e")
+metadata/_custom_type_script = "uid://bchbwe0886hnb"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
+shape = SubResource("WorldBoundaryShape3D_6ntvk")

@@ -35,7 +35,6 @@ transform = Transform3D(-0.57941765, 0.6243507, 0.52389055, 6.258487e-07, 0.6427
 
 [node name="Light" type="DirectionalLight3D" parent="Directional Light"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_indirect_energy = 0.0
 light_bake_mode = 0
 shadow_bias = 0.05
@@ -113,7 +112,12 @@ transform = Transform3D(-0.7794228, -6.9420674e-09, 0.45000005, 6.9420683e-09, 0
 transform = Transform3D(0.98702574, -0.08827309, 0.13411933, 0.08779789, 0.99609333, 0.009465185, -0.1344309, 0.0024330132, 0.99091995, 0, 0, 0)
 
 [node name="bouncer" parent="Carousel/Planet" instance=ExtResource("6_mrv81")]
-transform = Transform3D(34.777454, -3.339932, 19.477516, 11.316303, 35.68646, -14.086084, -16.200926, 17.75729, 31.972002, 0, 0, 0)
+transform = Transform3D(-3.3652139, -34.789272, 19.452036, 35.689728, -11.321448, -14.073668, 17.745949, 16.17192, 31.992975, 0, 0, 0)
+
+[node name="Rotate" type="Node" parent="Carousel/Planet"]
+script = ExtResource("7_edrtx")
+AngleDegrees = 5.0
+metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
 [node name="Roly Poly" type="Node3D" parent="."]
 transform = Transform3D(0.99803823, 0, -0.062606886, 0.02348577, 0.9269719, 0.37439486, 0.058034826, -0.37513077, 0.92515343, 1.25, -2, -18.25)
