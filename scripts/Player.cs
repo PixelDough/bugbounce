@@ -80,6 +80,8 @@ public partial class Player : RigidBody3D
 
         _cameraTiltRoot.RotationDegrees = Vector3.Up * RotationDegrees.Y;
 
+        AddToGroup("players");
+
         // if (levelManager is not null) levelManager.OnPauseStateChanged += OnPauseStateChange;
     }
 
