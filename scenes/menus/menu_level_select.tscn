@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6ldfqldmdso2"]
+[gd_scene load_steps=14 format=3 uid="uid://6ldfqldmdso2"]
 
 [ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://models/ui/ui_arrow/ArrowUI.fbx" id="2_vrxil"]
 [ext_resource type="ArrayMesh" uid="uid://kxkqlnla7pii" path="res://models/general/icon_modes/icon_modes_locked.res" id="2_x0tbs"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b6v380pgoiwhg" path="res://models/general/bouncer.glb" id="6_mrv81"]
 [ext_resource type="Script" uid="uid://pa1p4piks2ay" path="res://scripts/Rotate.cs" id="7_edrtx"]
 [ext_resource type="PackedScene" uid="uid://bxoa6mbjr3fui" path="res://models/player/millie_base.glb" id="7_vrxil"]
+[ext_resource type="Script" uid="uid://dctrhfdpvqcrg" path="res://scripts/Text3D.cs" id="8_lwvyp"]
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="8_x0tbs"]
 
 [sub_resource type="Environment" id="Environment_ggd8c"]
@@ -63,13 +64,17 @@ script = ExtResource("7_edrtx")
 AngleDegrees = 180.0
 metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
+[node name="Text3D" type="Node3D" parent="Level Details"]
+script = ExtResource("8_lwvyp")
+metadata/_custom_type_script = "uid://dctrhfdpvqcrg"
+
 [node name="Carousel" type="Node3D" parent="."]
 transform = Transform3D(0.9986295, 0.052335907, -1.5710228e-10, -0.052136753, 0.9948294, 0.087155774, 0.0045613763, -0.08703633, 0.9961947, -0.013083979, 2, 0.021759085)
 
 [node name="Content" type="Node3D" parent="Carousel"]
 
 [node name="Level Title" parent="Carousel/Content" instance=ExtResource("6_lmtvq")]
-transform = Transform3D(-0.9, 0, 1.3589622e-07, 0, 0.9, 0, -1.3589622e-07, 0, -0.9, 0, 0, -13)
+transform = Transform3D(-0.8999999, -4.831236e-09, 1.3690442e-07, -1.9499566e-09, 0.9, -1.4901161e-08, -1.3643876e-07, 0, -0.9, 7.450581e-09, 1.1920929e-07, -13)
 
 [node name="Level Title (11)" parent="Carousel/Content" instance=ExtResource("6_lmtvq")]
 transform = Transform3D(-0.7794228, 6.9420674e-09, -0.45000005, -6.9420683e-09, 0.9, 2.5908147e-08, 0.45000005, 2.5908147e-08, -0.7794228, -6.500001, 0, -11.25833)
