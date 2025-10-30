@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class OneWayWall : Node3D
 {
@@ -9,14 +10,35 @@ public partial class OneWayWall : Node3D
 
     private float _rotationDifference = 1;
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        var players = GetTree().GetNodesInGroup("players").OfType<Player>();
+        foreach (var player in players)
+        {
+            var exceptions = player.GetCollisionExceptions();
+            if (GlobalPosition.DirectionTo(player.GlobalPosition).Dot(GlobalBasis.Z) < 0.0)
+            {
+                if (!exceptions.Contains(_bodyNode)) continue;
+                player.RemoveCollisionExceptionWith(_bodyNode);
+            }
+            else
+            {
+                if (exceptions.Contains(_bodyNode)) continue;
+                player.AddCollisionExceptionWith(_bodyNode);
+            }
+        }
+    }
+
     private void KickAreaOnBodyEntered(Node3D body)
     {
         if (body is not Player player) return;
         if ((player.GlobalPosition - GlobalPosition).Normalized().Dot(GlobalBasis.Z) < 0.0) return;
         player.ApplyImpulse(-GlobalBasis.Z * 6f);
 
-        player.AddCollisionExceptionWith(_bodyNode);
-        player.RemoveCollisionExceptionWith(_kickArea);
+        // player.AddCollisionExceptionWith(_bodyNode);
+        // player.RemoveCollisionExceptionWith(_kickArea);
 
         _rotationDifference = 1;
         if (Mathf.Abs(GlobalBasis.Y.SignedAngleTo(GlobalPosition - player.GlobalPosition, GlobalBasis.X)) > Mathf.Pi * 0.5f)
@@ -30,8 +52,8 @@ public partial class OneWayWall : Node3D
     private void KickAreaOnBodyExited(Node3D body)
     {
         if (body is not Player player) return;
-        player.RemoveCollisionExceptionWith(_bodyNode);
-        player.AddCollisionExceptionWith(_kickArea);
+        // player.RemoveCollisionExceptionWith(_bodyNode);
+        // player.AddCollisionExceptionWith(_kickArea);
     }
 
     private void Spin()
