@@ -474,30 +474,16 @@ public static class MathUtil
 
     public static void Spring(ref Vector2 current, ref Vector2 velocity, Vector2 target, float dampingRatio, float frequency, float deltaTime)
     {
-        var currentX = current.X;
-        var currentY = current.Y;
-        var velX = velocity.X;
-        var velY = velocity.Y;
-        Spring(ref currentX, ref velX, target.X, dampingRatio, frequency, deltaTime);
-        Spring(ref currentY, ref velY, target.Y, dampingRatio, frequency, deltaTime);
-        current = new Vector2(currentX, currentY);
-        velocity = new Vector2(velX, velY);
+        Spring(ref current.X, ref velocity.X, target.X, dampingRatio, frequency, deltaTime);
+        Spring(ref current.Y, ref velocity.Y, target.Y, dampingRatio, frequency, deltaTime);
     }
 
     public static void Spring(ref Vector3 current, ref Vector3 velocity, Vector3 target, float dampingRatio,
         float frequency, float deltaTime)
     {
-        var currentX = current.X;
-        var currentY = current.Y;
-        var currentZ = current.Z;
-        var velX = velocity.X;
-        var velY = velocity.Y;
-        var velZ = velocity.Z;
-        Spring(ref currentX, ref velX, target.X, dampingRatio, frequency, deltaTime);
-        Spring(ref currentY, ref velY, target.Y, dampingRatio, frequency, deltaTime);
-        Spring(ref currentZ, ref velZ, target.Z, dampingRatio, frequency, deltaTime);
-        current = new Vector3(currentX, currentY, currentZ);
-        velocity = new Vector3(velocity.X, velocity.Y, velocity.Z);
+        Spring(ref current.X, ref velocity.X, target.X, dampingRatio, frequency, deltaTime);
+        Spring(ref current.Y, ref velocity.Y, target.Y, dampingRatio, frequency, deltaTime);
+        Spring(ref current.Z, ref velocity.Z, target.Z, dampingRatio, frequency, deltaTime);
     }
 
     public static Vector2 RandomPointInRect(Rect2 rect)

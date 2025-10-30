@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://clvpxpvb0tup5"]
+
+[ext_resource type="PackedScene" uid="uid://dia6ku4us7os1" path="res://Assets/_Game/Content/Level Select/CRT/Fbx_CRT.fbx" id="1_h846i"]
+[ext_resource type="ArrayMesh" uid="uid://cuhbgyf05k7yt" path="res://models/general/medals/medals_secret.res" id="2_h846i"]
+[ext_resource type="Script" uid="uid://b15qqpuiymvny" path="res://scripts/Medal.cs" id="3_jjc6p"]
+[ext_resource type="ArrayMesh" uid="uid://bvlq387gwxbmq" path="res://models/general/medals/medals_race.res" id="3_r3urd"]
+[ext_resource type="ArrayMesh" uid="uid://dbixqlhjotaba" path="res://models/general/medals/medals_timeattack.res" id="4_jjc6p"]
+[ext_resource type="ArrayMesh" uid="uid://dht2gc15gqh1w" path="res://models/general/medals/medals_none.res" id="4_uvovr"]
+[ext_resource type="PackedScene" uid="uid://byaviw3t3g6b8" path="res://models/ui/lock/Lock.fbx" id="5_iwl5c"]
+
+[node name="Level Title" type="Node3D"]
+
+[node name="Fbx_CRT" parent="." instance=ExtResource("1_h846i")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+
+[node name="Medals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65, 1.5000002)
+
+[node name="medal_secret" type="MeshInstance3D" parent="Medals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+mesh = ExtResource("2_h846i")
+skeleton = NodePath("")
+script = ExtResource("3_jjc6p")
+_missingMedalMesh = ExtResource("4_uvovr")
+
+[node name="medal_race" type="MeshInstance3D" parent="Medals"]
+mesh = ExtResource("3_r3urd")
+skeleton = NodePath("")
+script = ExtResource("3_jjc6p")
+_missingMedalMesh = ExtResource("4_uvovr")
+
+[node name="medal_timeattack" type="MeshInstance3D" parent="Medals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+mesh = ExtResource("4_jjc6p")
+skeleton = NodePath("")
+script = ExtResource("3_jjc6p")
+_missingMedalMesh = ExtResource("4_uvovr")
+
+[node name="Title Text" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 1.346)
+
+[node name="Lock" parent="." instance=ExtResource("5_iwl5c")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5522044e-09, -0.2777778, 1.7957428)
+visible = false

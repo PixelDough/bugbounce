@@ -1,28 +1,31 @@
-[gd_scene load_steps=11 format=3 uid="uid://6ldfqldmdso2"]
+[gd_scene load_steps=12 format=3 uid="uid://6ldfqldmdso2"]
 
-[ext_resource type="Material" uid="uid://dx1lsmb42vcii" path="res://Assets/_Game/Backgrounds/Mat_SpaceSkybox.material" id="1_mrv81"]
 [ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://models/ui/ui_arrow/ArrowUI.fbx" id="2_vrxil"]
-[ext_resource type="PackedScene" uid="uid://bliou4vei2ddu" path="res://Assets/_Game/Content/Level Select/Mode Icons/ModeIcons.fbx_Base.fbx" id="3_x0tbs"]
-[ext_resource type="PackedScene" uid="uid://tg8fug8y2w1v" path="res://Assets/_Game/Content/Level Select/Mode Icons/ModeIcons.fbx_Speedrun.fbx" id="4_edrtx"]
-[ext_resource type="PackedScene" uid="uid://yr1ehvr2bkqy" path="res://Assets/_Game/Content/Level Select/Mode Icons/ModeIcons.fbx_Countdown.fbx" id="5_lwvyp"]
-[ext_resource type="PackedScene" uid="uid://dowi4nk22k4fk" path="res://Assets/_Game/Content/Level Select/Level Title.prefab.scn" id="6_lmtvq"]
-[ext_resource type="PackedScene" uid="uid://6imp25p4pot4" path="res://Assets/_Game/Content/Bouncer/Fbx_Bouncer.fbx" id="7_gl0f8"]
-[ext_resource type="PackedScene" uid="uid://b4t3mnc4nlivk" path="res://Assets/_Game/Content/Bouncer/Fbx_RollyPoly.fbx" id="8_avv52"]
-
-[sub_resource type="Sky" id="Sky_rllyn"]
-sky_material = ExtResource("1_mrv81")
+[ext_resource type="ArrayMesh" uid="uid://kxkqlnla7pii" path="res://models/general/icon_modes/icon_modes_locked.res" id="2_x0tbs"]
+[ext_resource type="Script" uid="uid://bx0ron2vdegsu" path="res://scripts/ModeIcon.cs" id="3_edrtx"]
+[ext_resource type="ArrayMesh" uid="uid://p16akix34oa1" path="res://models/general/icon_modes/icon_modes_bounce.res" id="4_lwvyp"]
+[ext_resource type="ArrayMesh" uid="uid://dsedrqy4ukbnu" path="res://models/general/icon_modes/icon_modes_speedrun.res" id="5_lmtvq"]
+[ext_resource type="ArrayMesh" uid="uid://c3bcc51ejmbgb" path="res://models/general/icon_modes/icon_modes_timeattack.res" id="6_gl0f8"]
+[ext_resource type="PackedScene" uid="uid://clvpxpvb0tup5" path="res://scenes/menus/level_title.tscn" id="6_lmtvq"]
+[ext_resource type="PackedScene" uid="uid://b6v380pgoiwhg" path="res://models/general/bouncer.glb" id="6_mrv81"]
+[ext_resource type="PackedScene" uid="uid://bxoa6mbjr3fui" path="res://models/player/millie_base.glb" id="7_vrxil"]
+[ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="8_x0tbs"]
 
 [sub_resource type="Environment" id="Environment_ggd8c"]
-background_mode = 2
-sky = SubResource("Sky_rllyn")
+background_mode = 1
+background_color = Color(0.10464344, 0.044592403, 0.28341702, 1)
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.5
 fog_light_color = Color(0.5, 0.5, 0.5, 1)
+adjustment_enabled = true
+adjustment_contrast = 1.4
+adjustment_saturation = 1.1
 
 [node name="RootNode3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ggd8c")
-
-[node name="LightmapGI" type="LightmapGI" parent="."]
 
 [node name="BGM" type="Node3D" parent="."]
 
@@ -32,8 +35,8 @@ transform = Transform3D(-0.57941765, 0.6243507, 0.52389055, 6.258487e-07, 0.6427
 [node name="Light" type="DirectionalLight3D" parent="Directional Light"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_indirect_energy = 0.0
 light_bake_mode = 0
-shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 0.4
 
@@ -46,44 +49,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0, 0)
 [node name="Arrow Down" parent="Level Details" instance=ExtResource("2_vrxil")]
 transform = Transform3D(-1, 5.9604638e-08, 0, -5.9604638e-08, -1, 0, 0, 0, 1, -2.4, -2.5, 0)
 
-[node name="Bounce Mode" type="Node3D" parent="Level Details"]
+[node name="mode_icon" type="MeshInstance3D" parent="Level Details"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -1.25, 0)
-
-[node name="ModeIcons_fbx_Base" parent="Level Details/Bounce Mode" instance=ExtResource("3_x0tbs")]
-
-[node name="Title Text" type="Node3D" parent="Level Details/Bounce Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.1, 0)
-
-[node name="Description Text" type="Node3D" parent="Level Details/Bounce Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.1, 0)
-
-[node name="Speedrun Mode" type="Node3D" parent="Level Details"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -1.25, 0)
-
-[node name="ModeIcons_fbx_Speedrun" parent="Level Details/Speedrun Mode" instance=ExtResource("4_edrtx")]
-
-[node name="Title Text" type="Node3D" parent="Level Details/Speedrun Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.6, 0)
-
-[node name="Description Text" type="Node3D" parent="Level Details/Speedrun Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.4, 0)
-
-[node name="Score Text" type="Node3D" parent="Level Details/Speedrun Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.35000002, 0)
-
-[node name="Time Attack Mode" type="Node3D" parent="Level Details"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -1.25, 0)
-
-[node name="ModeIcons_fbx_Countdown" parent="Level Details/Time Attack Mode" instance=ExtResource("5_lwvyp")]
-
-[node name="Title Text" type="Node3D" parent="Level Details/Time Attack Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.6, 0)
-
-[node name="Description Text" type="Node3D" parent="Level Details/Time Attack Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.4, 0)
-
-[node name="Score Text" type="Node3D" parent="Level Details/Time Attack Mode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.35, 0)
+mesh = ExtResource("2_x0tbs")
+script = ExtResource("3_edrtx")
+_meshLocked = ExtResource("2_x0tbs")
+_meshBounce = ExtResource("4_lwvyp")
+_meshSpeedrun = ExtResource("5_lmtvq")
+_meshTimeAttack = ExtResource("6_gl0f8")
 
 [node name="Carousel" type="Node3D" parent="."]
 transform = Transform3D(0.9986295, 0.052335907, -1.5710228e-10, -0.052136753, 0.9948294, 0.087155774, 0.0045613763, -0.08703633, 0.9961947, -0.013083979, 2, 0.021759085)
@@ -133,132 +106,21 @@ transform = Transform3D(-0.7794228, -6.9420674e-09, 0.45000005, 6.9420683e-09, 0
 [node name="Planet" type="Node3D" parent="Carousel"]
 transform = Transform3D(0.98702574, -0.08827309, 0.13411933, 0.08779789, 0.99609333, 0.009465185, -0.1344309, 0.0024330132, 0.99091995, 0, 0, 0)
 
-[node name="Fbx_Bouncer" parent="Carousel/Planet" instance=ExtResource("7_gl0f8")]
-transform = Transform3D(34.777454, -3.3399308, 19.477516, 11.316303, 35.686462, -14.086082, -16.200928, 17.75729, 31.972, 0, 0, 0)
-
-[node name="Draw XXL Lines Manager" type="Node3D" parent="."]
+[node name="bouncer" parent="Carousel/Planet" instance=ExtResource("6_mrv81")]
+transform = Transform3D(34.777454, -3.339932, 19.477516, 11.316303, 35.68646, -14.086084, -16.200926, 17.75729, 31.972002, 0, 0, 0)
 
 [node name="Roly Poly" type="Node3D" parent="."]
 transform = Transform3D(0.99803823, 0, -0.062606886, 0.02348577, 0.9269719, 0.37439486, 0.058034826, -0.37513077, 0.92515343, 1.25, -2, -18.25)
 
-[node name="Fbx_RollyPoly" parent="Roly Poly" instance=ExtResource("8_avv52")]
+[node name="millie_base" parent="Roly Poly" instance=ExtResource("7_vrxil")]
 visible = false
 
 [node name="Level Cam" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -20)
 
-[editable path="Level Details/Arrow Up"]
-[editable path="Level Details/Arrow Down"]
-[editable path="Level Details/Bounce Mode/ModeIcons_fbx_Base"]
-[editable path="Level Details/Speedrun Mode/ModeIcons_fbx_Speedrun"]
-[editable path="Level Details/Time Attack Mode/ModeIcons_fbx_Countdown"]
-[editable path="Carousel/Content/Level Title"]
-[editable path="Carousel/Content/Level Title/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title/Lock"]
-[editable path="Carousel/Content/Level Title (11)"]
-[editable path="Carousel/Content/Level Title (11)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (11)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (11)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (11)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (11)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (11)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (11)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (11)/Lock"]
-[editable path="Carousel/Content/Level Title (7)"]
-[editable path="Carousel/Content/Level Title (7)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (7)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (7)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (7)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (7)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (7)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (7)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (7)/Lock"]
-[editable path="Carousel/Content/Level Title (2)"]
-[editable path="Carousel/Content/Level Title (2)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (2)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (2)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (2)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (2)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (2)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (2)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (2)/Lock"]
-[editable path="Carousel/Content/Level Title (9)"]
-[editable path="Carousel/Content/Level Title (9)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (9)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (9)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (9)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (9)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (9)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (9)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (9)/Lock"]
-[editable path="Carousel/Content/Level Title (5)"]
-[editable path="Carousel/Content/Level Title (5)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (5)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (5)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (5)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (5)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (5)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (5)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (5)/Lock"]
-[editable path="Carousel/Content/Level Title (1)"]
-[editable path="Carousel/Content/Level Title (1)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (1)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (1)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (1)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (1)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (1)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (1)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (1)/Lock"]
-[editable path="Carousel/Content/Level Title (10)"]
-[editable path="Carousel/Content/Level Title (10)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (10)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (10)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (10)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (10)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (10)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (10)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (10)/Lock"]
-[editable path="Carousel/Content/Level Title (6)"]
-[editable path="Carousel/Content/Level Title (6)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (6)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (6)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (6)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (6)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (6)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (6)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (6)/Lock"]
-[editable path="Carousel/Content/Level Title (3)"]
-[editable path="Carousel/Content/Level Title (3)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (3)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (3)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (3)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (3)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (3)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (3)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (3)/Lock"]
-[editable path="Carousel/Content/Level Title (8)"]
-[editable path="Carousel/Content/Level Title (8)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (8)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (8)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (8)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (8)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (8)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (8)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (8)/Lock"]
-[editable path="Carousel/Content/Level Title (4)"]
-[editable path="Carousel/Content/Level Title (4)/Fbx_CRT"]
-[editable path="Carousel/Content/Level Title (4)/Medals/Medal Secret"]
-[editable path="Carousel/Content/Level Title (4)/Medals/Medal Secret/Medal None"]
-[editable path="Carousel/Content/Level Title (4)/Medals/Medal Race"]
-[editable path="Carousel/Content/Level Title (4)/Medals/Medal Race/Medal None"]
-[editable path="Carousel/Content/Level Title (4)/Medals/Medal Time Attack"]
-[editable path="Carousel/Content/Level Title (4)/Medals/Medal Time Attack/Medal None"]
-[editable path="Carousel/Content/Level Title (4)/Lock"]
-[editable path="Carousel/Planet/Fbx_Bouncer"]
-[editable path="Roly Poly/Fbx_RollyPoly"]
+[node name="Camera3D" type="Camera3D" parent="Level Cam"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+fov = 65.0
+
+[node name="skybox_space_01" parent="." instance=ExtResource("8_x0tbs")]
+process_priority = 2147483647

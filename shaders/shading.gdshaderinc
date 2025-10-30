@@ -6,7 +6,9 @@ float fresnel(float amount, vec3 normal, vec3 view)
 }
 
 vec2 generate_matcap_uvs_basic(vec3 normal_view_space) {
-	return (normal_view_space.xy * 0.5) + 0.5;
+	vec2 matcap_uv = (normal_view_space.xy * 0.5) + 0.5;
+	matcap_uv.y = 1.0 - matcap_uv.y;
+	return matcap_uv;
 }
 
 vec2 get_matcap_uv(vec3 v_world_normal, vec3 v_eye_pos, vec3 v_world_pos, float margin, bool is_spatial) {
@@ -94,7 +96,7 @@ vec2 generate_matcap_uv_perspective_correct(
     // swizzle perpendicular vector components to create a new perspective corrected view normal
     view_normal = vec3(-viewCross.y, -viewCross.x, 0.0);
 
-	return view_normal.xy * 0.5 + 0.5;
+	return (view_normal.xy * 0.5 + 0.5);
 }
 
 vec4 sample_matcap_spatial(
