@@ -12,22 +12,23 @@ public partial class Medal : MeshInstance3D
 
     public enum MedalState
     {
-        Missing,
-        Bronze,
-        Silver,
-        Gold,
-        Diamond
+        Missing = 0,
+        Bronze = 1,
+        Silver = 2,
+        Gold = 3,
+        Diamond = 4
     }
 
     private Mesh _initialMesh;
-    private ShaderMaterial _material;
+    private readonly float[] _medalOffsets = {0f, -0.75f, -0.5f, -0.25f, 0f};
+
+    private static readonly StringName UvOffsetString = new StringName("uv_offset");
 
     public override void _Ready()
     {
         base._Ready();
 
         _initialMesh = Mesh;
-        _material = (ShaderMaterial)GetActiveMaterial(0).Duplicate();
 
         UpdateMedalVisuals();
     }
@@ -40,27 +41,10 @@ public partial class Medal : MeshInstance3D
 
     private void UpdateMedalVisuals()
     {
+        if (_initialMesh is null) return;
         Mesh = State == MedalState.Missing ? _missingMedalMesh : _initialMesh;
 
-        float offsetX = 0f;
-        switch (State)
-        {
-            case MedalState.Missing:
-                offsetX = -0.5f;
-                break;
-            case MedalState.Bronze:
-                offsetX = -0.75f;
-                break;
-            case MedalState.Silver:
-                offsetX = -0.5f;
-                break;
-            case MedalState.Gold:
-                offsetX = -0.25f;
-                break;
-            case MedalState.Diamond:
-                offsetX = 0;
-                break;
-        }
-        _material.SetShaderParameter("uv_offset", Vector2.Right * offsetX);
+        float offsetX = _medalOffsets[(int)State];
+        SetInstanceShaderParameter(UvOffsetString, Vector2.Right * offsetX);
     }
 }

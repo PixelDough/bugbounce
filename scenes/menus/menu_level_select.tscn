@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://6ldfqldmdso2"]
+[gd_scene load_steps=13 format=3 uid="uid://6ldfqldmdso2"]
 
 [ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://models/ui/ui_arrow/ArrowUI.fbx" id="2_vrxil"]
 [ext_resource type="ArrayMesh" uid="uid://kxkqlnla7pii" path="res://models/general/icon_modes/icon_modes_locked.res" id="2_x0tbs"]
@@ -8,6 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c3bcc51ejmbgb" path="res://models/general/icon_modes/icon_modes_timeattack.res" id="6_gl0f8"]
 [ext_resource type="PackedScene" uid="uid://clvpxpvb0tup5" path="res://scenes/menus/level_title.tscn" id="6_lmtvq"]
 [ext_resource type="PackedScene" uid="uid://b6v380pgoiwhg" path="res://models/general/bouncer.glb" id="6_mrv81"]
+[ext_resource type="Script" uid="uid://pa1p4piks2ay" path="res://scripts/Rotate.cs" id="7_edrtx"]
 [ext_resource type="PackedScene" uid="uid://bxoa6mbjr3fui" path="res://models/player/millie_base.glb" id="7_vrxil"]
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="8_x0tbs"]
 
@@ -57,6 +58,11 @@ _meshLocked = ExtResource("2_x0tbs")
 _meshBounce = ExtResource("4_lwvyp")
 _meshSpeedrun = ExtResource("5_lmtvq")
 _meshTimeAttack = ExtResource("6_gl0f8")
+
+[node name="Rotate" type="Node" parent="Level Details/mode_icon"]
+script = ExtResource("7_edrtx")
+AngleDegrees = 180.0
+metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
 [node name="Carousel" type="Node3D" parent="."]
 transform = Transform3D(0.9986295, 0.052335907, -1.5710228e-10, -0.052136753, 0.9948294, 0.087155774, 0.0045613763, -0.08703633, 0.9961947, -0.013083979, 2, 0.021759085)

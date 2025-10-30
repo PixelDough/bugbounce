@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://15ddujkmkdp1"
-path.s3tc="res://.godot/imported/Matcap_Metal_03.png-69d1da5ddcd2fa4852f4c4b5eb1abc05.s3tc.ctex"
+path="res://.godot/imported/Matcap_Metal_03.png-69d1da5ddcd2fa4852f4c4b5eb1abc05.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://matcaps/Matcap_Metal_03.png"
-dest_files=["res://.godot/imported/Matcap_Metal_03.png-69d1da5ddcd2fa4852f4c4b5eb1abc05.s3tc.ctex"]
+dest_files=["res://.godot/imported/Matcap_Metal_03.png-69d1da5ddcd2fa4852f4c4b5eb1abc05.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -37,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=64
 detect_3d/compress_to=0

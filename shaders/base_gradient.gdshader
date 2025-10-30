@@ -30,6 +30,9 @@ group_uniforms Lighting;
 uniform sampler2D main_light_gradient : hint_default_white, source_color, repeat_disable;
 uniform float rim_multiplier = 1.0;
 
+group_uniforms Other;
+instance uniform vec2 uv_offset = vec2(0.0);
+
 varying vec2 matcap_uv;
 varying vec3 local_pos;
 varying vec3 local_normal;
@@ -63,7 +66,7 @@ void fragment() {
 	vec2 triUv = mix(local_pos.xy, local_pos.zy, round(-local_normal.x));
 	triUv = mix(triUv, local_pos.xz, round(-local_normal.y));
 		
-	vec2 uv = mix(UV, triUv, float(int(use_triplanar)));
+	vec2 uv = mix(UV, triUv, float(int(use_triplanar))) + uv_offset;
 	
 	vec3 albedo_sample = texture(albedo, uv).rgb;
 	vec3 vert_color = mix(vec3(1.0), COLOR.rgb, vertex_color_intensity);
