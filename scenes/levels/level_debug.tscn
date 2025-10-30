@@ -176,7 +176,7 @@ _checkpointId = 1400573388
 
 [node name="Spinning Test" type="Node3D" parent="."]
 physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.119083, 0.25785017, -29.71868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.119083, 0.10803032, -29.71868)
 
 [node name="plate" parent="Spinning Test" instance=ExtResource("13_7mas3")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 5, 0, 0)
