@@ -46,7 +46,10 @@ public partial class OneWayWall : Node3D
             _rotationDifference *= -1f;
         }
 
-        Spin();
+        GD.Print(player.LinearVelocity.Length());
+        int times = Mathf.FloorToInt(player.LinearVelocity.LengthSquared() / (12 * 12)) + 1;
+        times = Mathf.Clamp(times, 1, 3);
+        Spin(times);
     }
 
     private void KickAreaOnBodyExited(Node3D body)
@@ -56,15 +59,15 @@ public partial class OneWayWall : Node3D
         // player.AddCollisionExceptionWith(_kickArea);
     }
 
-    private void Spin()
+    private void Spin(int times = 1)
     {
         _modelNode.Quaternion = Quaternion.Identity;
         // FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/ONE WAY WALL/Spin", gameObject);
         CreateTween()
             .TweenMethod(Callable.From<float>(SpinTweenState),
                 _modelNode.RotationDegrees.X % 360f,
-                _rotationDifference * 360f * 2f,
-                0.75f
+                _rotationDifference * 360f * times,
+                0.65f + (times * 0.1f)
             )
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Back);
