@@ -70,8 +70,17 @@ public partial class Checkpoint : Node3D
         else
         {
             Skeleton.SetBonePoseScale(_flagBoneIndex, new Vector3(1f, _flagScale, 1f));
-            Skeleton.SetBonePoseRotation(_flagBoneIndex,
-                Quaternion.FromEuler(new(0f, GetViewport().GetCamera3D().GlobalRotation.Y + Mathf.Pi, -Mathf.Pi * 0.5f)));
+            Skeleton.SetBonePoseRotation(
+                _flagBoneIndex,
+                Skeleton.GlobalBasis.GetRotationQuaternion().Inverse() *
+                Quaternion.FromEuler(
+                    new(
+                        0f,
+                        GetViewport().GetCamera3D().GlobalRotation.Y + Mathf.Pi,
+                        -Mathf.Pi * 0.5f
+                    )
+                )
+            );
         }
     }
 
