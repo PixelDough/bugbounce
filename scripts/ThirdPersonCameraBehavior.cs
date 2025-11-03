@@ -31,15 +31,13 @@ public partial class ThirdPersonCameraBehavior : Node
         Input.SetMouseMode(Input.MouseModeEnum.Captured);
 
         Camera3D ??= GetViewport().GetCamera3D();
-
-        SetForward(Target.RotationDegrees.Y, 0.5f);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
 
-        _targetHorizontalAngle += _lookInput.X * 0.2f;
+        _targetHorizontalAngle -= _lookInput.X * 0.2f; // subtract because third person inverts it
         _targetVerticalPercent -= _lookInput.Y * 0.1f * 0.01f;
         _targetVerticalPercent = Mathf.Clamp(_targetVerticalPercent, 0f, 0.999f);
         HorizontalAngle = MathUtil.ExpDecay(HorizontalAngle, _targetHorizontalAngle, 25f, (float)delta);
@@ -49,10 +47,10 @@ public partial class ThirdPersonCameraBehavior : Node
         Vector2 lerp1 = _rings[0].Lerp(_rings[1], VerticalPercent);
         Vector2 lerp2 = _rings[1].Lerp(_rings[2], VerticalPercent);
         Vector2 lerp3 = lerp1.Lerp(lerp2, VerticalPercent);
-        float angleRad = Mathf.DegToRad(HorizontalAngle);
+        float angleRad = Mathf.DegToRad(HorizontalAngle) + Mathf.Pi * 0.5f;
         Vector3 finalPos = Target.GlobalPosition +
                            Vector3.Up * lerp3.X +
-                           new Vector3(Mathf.Sin(angleRad), 0f, -Mathf.Cos(angleRad)) * lerp3.Y;
+                           new Vector3(Mathf.Cos(angleRad), 0f, -Mathf.Sin(angleRad)) * lerp3.Y;
         Camera3D.LookAtFromPosition(finalPos, Target.GlobalPosition + Offset, TargetTilt.Basis.Y);
     }
 

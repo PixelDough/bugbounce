@@ -11,6 +11,7 @@ public partial class ThirdPersonCameraPlayerHandling : Node
         base._Ready();
 
         Player.OnRespawn += PlayerOnRespawn;
+        PlayerOnRespawn();
     }
 
     private void PlayerOnRespawn()
