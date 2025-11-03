@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/sodabottle_dynamic_bottle.glb-39d0d2d95f768e9
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="AnimatableBody3D"
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://materials/Mat_BeachGradients_Smooth.material",
+"use_external/fallback_path": "res://materials/mat_gradients_beach_smooth.material",
 "use_external/path": "uid://d3k3qn3n8dv57"
 }
 },

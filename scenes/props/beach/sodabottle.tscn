@@ -7,13 +7,5 @@ data = PackedVector3Array(0, -2.0579, -0.8005, 0.3567, -1.8641, -0.8613, 0, -1.8
 
 [node name="sodabottle" instance=ExtResource("1_nq5qx")]
 
-[node name="Soda Bottle_LOD0" parent="." index="0"]
-visibility_range_end = 100.0
-
-[node name="Soda Bottle_LOD1" parent="." index="1"]
-visibility_range_begin = 100.0
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." index="2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 shape = SubResource("ConcavePolygonShape3D_nq5qx")

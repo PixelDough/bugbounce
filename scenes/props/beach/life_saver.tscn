@@ -7,7 +7,5 @@ data = PackedVector3Array(0.036399998, -0.0365, 0.1358, 0.0416, -0.04, 0.1551999
 
 [node name="life_saver" instance=ExtResource("1_ornap")]
 
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." index="2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 shape = SubResource("ConcavePolygonShape3D_ornap")
