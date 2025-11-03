@@ -65,22 +65,13 @@ public partial class Checkpoint : Node3D
         if (Engine.IsEditorHint())
             return;
 
+        Skeleton.Rotate(new Vector3(0f, 1f, 0f), (float)(Mathf.DegToRad(25f) * delta));
+
         if (_hidden)
             Skeleton.SetBonePoseScale(_flagBoneIndex, Vector3.Zero);
         else
         {
             Skeleton.SetBonePoseScale(_flagBoneIndex, new Vector3(1f, _flagScale, 1f));
-            Skeleton.SetBonePoseRotation(
-                _flagBoneIndex,
-                Skeleton.GlobalBasis.GetRotationQuaternion().Inverse() *
-                Quaternion.FromEuler(
-                    new(
-                        0f,
-                        GetViewport().GetCamera3D().GlobalRotation.Y + Mathf.Pi,
-                        -Mathf.Pi * 0.5f
-                    )
-                )
-            );
         }
     }
 
@@ -109,6 +100,7 @@ public partial class Checkpoint : Node3D
         Vector3 dirFlat = (dir with {Y = 0}).Normalized();
         float angleAmount = Mathf.DegToRad(Mathf.Clamp(velocity, 10f, 25f));
         FlagRootNode.Quaternion *= MathUtil.AngleAxis(angleAmount, dirFlat);
+        FlagRootNode.Quaternion *= MathUtil.AngleAxis(Mathf.Pi, Vector3.Up);
         _tweenShake?.TweenProperty(FlagRootNode, "quaternion", Quaternion.Identity, 2.5f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
