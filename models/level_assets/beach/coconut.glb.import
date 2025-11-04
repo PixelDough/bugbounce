@@ -41,18 +41,20 @@ _subresources={
 "materials": {
 "TT_checker_512x512_UV_GRID": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://materials/Mat_BeachGradients.material",
+"use_external/fallback_path": "res://materials/mat_gradients_beach.material",
 "use_external/path": "uid://2g1ddcqp4hux"
 }
 },
 "nodes": {
 "PATH:Coconut_LOD0": {
-"mesh_instance/visibility_range_end": 100.0,
-"mesh_instance/visibility_range_end_margin": 2.0
+"mesh_instance/visibility_range_end": 25.0,
+"mesh_instance/visibility_range_end_margin": 2.0,
+"mesh_instance/visibility_range_fade_mode": 1
 },
 "PATH:Coconut_LOD1": {
-"mesh_instance/visibility_range_begin": 100.0,
-"mesh_instance/visibility_range_begin_margin": 2.0
+"mesh_instance/visibility_range_begin": 20.0,
+"mesh_instance/visibility_range_begin_margin": 2.0,
+"mesh_instance/visibility_range_fade_mode": 1
 }
 }
 }

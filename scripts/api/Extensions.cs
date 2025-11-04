@@ -21,4 +21,9 @@ public static class Extensions
     {
         node3D.GlobalPosition = node3D.GlobalPosition.TranslateAround(point, rotation);
     }
+
+    public static void TranslateAroundLocal(this Node3D node3D, Vector3 point, Quaternion rotation)
+    {
+        node3D.Position = node3D.Position.TranslateAround(point, rotation);
+    }
 }

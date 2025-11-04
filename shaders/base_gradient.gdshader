@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode cull_disabled;
-render_mode depth_draw_opaque;
+render_mode depth_draw_always;
 render_mode shadows_disabled;
 render_mode diffuse_toon;
 
@@ -96,6 +96,13 @@ void fragment() {
 	
 	ROUGHNESS = 0.0;
 	METALLIC = 0.0;
+	
+	ALPHA_HASH_SCALE = 1.0;
+	
+	//ALPHA_HASH_SCALE = ALPHA;
+	//if (dither_transparent(ALPHA_HASH_SCALE, FRAGCOORD.xy * 1.0) < 0.5) {
+		//discard;
+	//}
 }
 
 void light() {
