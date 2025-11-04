@@ -14,6 +14,7 @@ public partial class DeathZone : Area3D
     public override void _EnterTree()
     {
         base._EnterTree();
+        CollisionMask = UInt32.MaxValue;
         BodyEntered += OnBodyEntered;
         BodyExited += OnBodyExited;
     }
