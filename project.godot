@@ -50,6 +50,13 @@ jump={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="base"
+3d_render/layer_2="player"
+3d_physics/layer_1="general"
+3d_physics/layer_2="player"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dijpq2md73pvi"]
+
+[ext_resource type="Texture2D" uid="uid://d1333aa0sj34i" path="res://textures/Tex_BlobShadow.png" id="1_2t63n"]
+[ext_resource type="Script" uid="uid://dmww3w75ebua5" path="res://scripts/BlobShadow.cs" id="1_ho7m5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ho7m5"]
+radius = 0.4
+
+[node name="Blob Shadow" type="Node3D" node_paths=PackedStringArray("_decal", "_shapeCast", "_rootOffset")]
+process_priority = 100
+top_level = true
+script = ExtResource("1_ho7m5")
+_decal = NodePath("root offset/Decal")
+Depth = 20.0
+_shapeCast = NodePath("ShapeCast3D")
+_rootOffset = NodePath("root offset")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_ho7m5")
+target_position = Vector3(0, -99.5, 0)
+margin = 0.02
+debug_shape_custom_color = Color(0, 0.7833333, 1, 1)
+
+[node name="root offset" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="Decal" type="Decal" parent="root offset"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 9.9)
+size = Vector3(1.5, 20, 1.5)
+texture_albedo = ExtResource("1_2t63n")
+modulate = Color(0, 0, 0, 1)
+albedo_mix = 0.9
+normal_fade = 0.2
+upper_fade = 0.0076148952
+cull_mask = 1

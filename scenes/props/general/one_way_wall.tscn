@@ -7,7 +7,7 @@
 size = Vector3(2, 2, 0.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lu1u6"]
-size = Vector3(2.2, 2.2, 0.6)
+size = Vector3(2.2, 2.2, 0.4)
 
 [node name="one_way_wall" node_paths=PackedStringArray("_modelNode", "_bodyNode", "_kickArea") instance=ExtResource("1_m4wfg")]
 physics_interpolation_mode = 1
@@ -17,15 +17,17 @@ _bodyNode = NodePath("AnimatableBody3D")
 _kickArea = NodePath("KickArea")
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." index="1"]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" index="0"]
 shape = SubResource("BoxShape3D_e7liy")
 
 [node name="KickArea" type="Area3D" parent="." index="2"]
 physics_interpolation_mode = 1
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KickArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.099999994)
 shape = SubResource("BoxShape3D_lu1u6")
 
 [connection signal="body_entered" from="KickArea" to="." method="KickAreaOnBodyEntered"]

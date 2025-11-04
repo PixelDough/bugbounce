@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=16 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
 [ext_resource type="ArrayMesh" uid="uid://nqi57uvw0sn1" path="res://models/level_assets/debug/DebugScene.pb_Mesh45920.mesh" id="7_i6q57"]
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="10_tuhi8"]
 [ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="11_rky0j"]
+[ext_resource type="PackedScene" uid="uid://bpvrl2u8fds8l" path="res://scenes/props/general/item_secret.tscn" id="12_2o6ys"]
 [ext_resource type="PackedScene" uid="uid://bhg0r5xvbny5b" path="res://scenes/props/general/one_way_wall.tscn" id="12_clwtg"]
 [ext_resource type="PackedScene" uid="uid://bgu30vg3jjqmh" path="res://scenes/props/general/checkpoint.tscn" id="12_xjgd8"]
 [ext_resource type="PackedScene" uid="uid://dmkk7ndne58j8" path="res://scenes/props/picnic/plate.tscn" id="13_7mas3"]
@@ -204,19 +205,19 @@ physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99090195, 5.2022343, -29.71868)
 
 [node name="plate" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 5, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.644198, 1.8524914, 0)
 sync_to_physics = false
 
 [node name="plate2" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -5, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.6441965, -1.8524921, 0)
 sync_to_physics = false
 
 [node name="plate3" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 5, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -1.8522055, -4.6443024, 0)
 sync_to_physics = false
 
 [node name="plate4" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -5, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 1.8524916, 4.6441975, 0)
 sync_to_physics = false
 
 [node name="RotateAroundParent" type="Node" parent="Spinning Test2" node_paths=PackedStringArray("_nodes")]
@@ -253,3 +254,6 @@ material = ExtResource("3_iby0j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.5, 24.5)
 size = Vector3(10, 35, 1)
 material = ExtResource("3_iby0j")
+
+[node name="item_secret" parent="." instance=ExtResource("12_2o6ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9349246, 1.058125, 6.3023233)

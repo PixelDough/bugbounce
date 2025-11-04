@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
 [ext_resource type="Script" uid="uid://igu8nh3k1x1x" path="res://scripts/Player.cs" id="2_svkgc"]
 [ext_resource type="ArrayMesh" uid="uid://dk4os4fwya1eg" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
-[ext_resource type="Texture2D" uid="uid://d1333aa0sj34i" path="res://textures/Tex_BlobShadow.png" id="5_qlpgp"]
+[ext_resource type="PackedScene" uid="uid://dijpq2md73pvi" path="res://scenes/common/blob_shadow.tscn" id="5_6wjry"]
 [ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="6_qy032"]
 [ext_resource type="Script" uid="uid://d1flnedngqpy7" path="res://scripts/ThirdPersonCameraPlayerHandling.cs" id="7_6wjry"]
 
@@ -12,6 +12,7 @@
 radius = 0.25
 
 [node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot")]
+collision_layer = 2
 physics_material_override = ExtResource("1_eoriv")
 continuous_cd = true
 contact_monitor = true
@@ -27,27 +28,12 @@ shape = SubResource("SphereShape3D_nowa8")
 debug_color = Color(0, 0.99, 0.19800004, 1)
 
 [node name="mesh_body" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = ExtResource("2_eoriv")
 
 [node name="mesh_face" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = ExtResource("3_sr6cr")
-
-[node name="Decal Root" type="Node3D" parent="."]
-top_level = true
-
-[node name="Decal" type="Decal" parent="Decal Root"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
-size = Vector3(0.8, 10, 0.8)
-texture_albedo = ExtResource("5_qlpgp")
-modulate = Color(0, 0, 0, 1)
-albedo_mix = 0.9
-normal_fade = 0.2
-upper_fade = 1e-05
-
-[node name="PlayerDecalMover" type="RemoteTransform3D" parent="."]
-remote_path = NodePath("../Decal Root")
-update_rotation = false
-update_scale = false
 
 [node name="Camera Tilt Root Mover" type="RemoteTransform3D" parent="."]
 remote_path = NodePath("../Camera Tilt Root")
@@ -73,3 +59,6 @@ Player = NodePath("../..")
 [node name="Camera3D" type="Camera3D" parent="."]
 top_level = true
 fov = 100.0
+
+[node name="Blob Shadow" parent="." instance=ExtResource("5_6wjry")]
+Size = 0.5
