@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dbmoblvu1yq8c"]
+[gd_scene load_steps=35 format=3 uid="uid://dbmoblvu1yq8c"]
 
 [ext_resource type="Texture2D" uid="uid://bwvfqx0kgp7lo" path="res://addons/Free Stylized Skybox/Panoramic/Textures/Sky_LowPoly_01_Day_a.png" id="1_63bxl"]
 [ext_resource type="PackedScene" uid="uid://ihwgiw2mwgsl" path="res://scenes/props/general/goal_base.tscn" id="2_1f4ak"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://7jwnmpsrokmg" path="res://scenes/props/beach/surfboard.tscn" id="25_grutw"]
 [ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="26_edkmj"]
 [ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="27_fh2yh"]
+[ext_resource type="PackedScene" uid="uid://bpvrl2u8fds8l" path="res://scenes/props/general/item_secret.tscn" id="28_1f4ak"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nm6a2"]
 panorama = ExtResource("1_63bxl")
@@ -1460,6 +1461,9 @@ transform = Transform3D(2.110305, 0.8533373, -1.9540799, -2.1090922, 0.43101847,
 [node name="Coconut New (17)" parent="Island 1" instance=ExtResource("11_3g31e")]
 transform = Transform3D(-2.784069, -1.0751219, 0.3050788, -0.4336317, 0.28443497, -2.9548364, 1.0300114, -2.786254, -0.41936442, 3.91, 0.67, 8.88)
 
+[node name="Coconut New (17)2" parent="Island 1" instance=ExtResource("11_3g31e")]
+transform = Transform3D(-4.2234135, -5.898525, 2.126916, 0.33461356, -2.7727637, -7.0251985, 6.26134, -3.8305047, 1.8100861, 17.807579, -3.3131328, -34.706936)
+
 [node name="Coconut New (3)" parent="Island 1" instance=ExtResource("11_3g31e")]
 transform = Transform3D(2.5602431, 2.8828506, -2.6357083, -0.022552986, -3.1404533, -3.456831, -3.9060566, 1.9077102, -1.707628, 5.1799965, 1.73, 39.16999)
 
@@ -1468,6 +1472,26 @@ transform = Transform3D(-0.50849104, 3.2310238, -3.3338494, -2.1229997, -3.14441
 
 [node name="banana" parent="Island 1" instance=ExtResource("12_10flp")]
 transform = Transform3D(2.8296049, 0.07846644, 4.121551, -0.37545788, 4.9832215, 0.16289543, -4.105164, -0.40167964, 2.826002, 3.2771392, 0.5111473, 7.943179)
+
+[node name="banana2" parent="Island 1" instance=ExtResource("12_10flp")]
+transform = Transform3D(5.6592093, 0.15693292, 8.243102, -0.7509157, 9.966443, 0.32579076, -8.210327, -0.80335927, 5.6520033, 3.0310564, 0.012878902, -14.123697)
+
+[node name="Rotate" type="Node" parent="Island 1/banana2"]
+script = ExtResource("18_ws47j")
+UsePhysics = true
+AngleDegrees = 15.0
+Space = 2
+metadata/_custom_type_script = "uid://pa1p4piks2ay"
+
+[node name="banana3" parent="Island 1" instance=ExtResource("12_10flp")]
+transform = Transform3D(0.731061, 0.38085645, -9.965965, -0.7509158, 9.966443, 0.32579085, 9.944932, 0.7245429, 0.75720644, 15.971664, 0.012878902, -24.361351)
+
+[node name="Rotate" type="Node" parent="Island 1/banana3"]
+script = ExtResource("18_ws47j")
+UsePhysics = true
+AngleDegrees = -9.25
+Space = 2
+metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
 [node name="banana (1)" parent="Island 1" instance=ExtResource("12_10flp")]
 transform = Transform3D(3.6649876, -0.26890695, -3.3905091, -3.3857832, -0.76182926, -3.5994568, -0.3230141, 4.934299, -0.74051106, 2.52, 1.25, 3.37)
@@ -1552,3 +1576,12 @@ transform = Transform3D(-0.42138422, 0, 0.90688235, 0, 1, 0, -0.90688235, 0, -0.
 [node name="Checkpoint" parent="." instance=ExtResource("4_ejprg")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 103.17261, 3.3849037, 21.91)
 _checkpointId = 2176640290
+
+[node name="item_secret" parent="." instance=ExtResource("28_1f4ak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116.11759, 28.08248, 42.031185)
+
+[node name="item_secret2" parent="." instance=ExtResource("28_1f4ak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 268.55856, 13.07162, 9.81275)
+
+[node name="item_secret3" parent="." instance=ExtResource("28_1f4ak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.288383, 2.0685122, 41.485023)
