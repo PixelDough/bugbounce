@@ -205,19 +205,19 @@ physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99090195, 5.2022343, -29.71868)
 
 [node name="plate" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -1.6068951, -4.734784, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.965332, -0.58801794, 0)
 sync_to_physics = false
 
 [node name="plate2" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 1.6068945, 4.734785, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.9653325, 0.588017, 0)
 sync_to_physics = false
 
 [node name="plate3" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.734873, -1.6065993, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0.58831954, -4.9652843, 0)
 sync_to_physics = false
 
 [node name="plate4" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.734785, 1.606894, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -0.58801836, 4.965331, 0)
 sync_to_physics = false
 
 [node name="RotateAroundParent" type="Node" parent="Spinning Test2" node_paths=PackedStringArray("_nodes")]

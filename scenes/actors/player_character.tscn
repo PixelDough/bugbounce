@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfx8cm1v7am6a"]
+[gd_scene load_steps=11 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
 [ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dijpq2md73pvi" path="res://scenes/common/blob_shadow.tscn" id="5_6wjry"]
 [ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="6_qy032"]
 [ext_resource type="Script" uid="uid://d1flnedngqpy7" path="res://scripts/ThirdPersonCameraPlayerHandling.cs" id="7_6wjry"]
+[ext_resource type="Script" uid="uid://bo2evdbbwsm8l" path="res://scripts/ThirdPersonCameraCollision.cs" id="7_yj0s3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
 radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lchlr"]
+radius = 0.15
 
 [node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot")]
 collision_layer = 2
@@ -55,6 +59,10 @@ metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
 script = ExtResource("7_6wjry")
 ThirdPersonCameraBehavior = NodePath("..")
 Player = NodePath("../..")
+
+[node name="CameraCollision" type="ShapeCast3D" parent="ThirdPersonCameraBehavior"]
+shape = SubResource("SphereShape3D_lchlr")
+script = ExtResource("7_yj0s3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 top_level = true

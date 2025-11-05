@@ -573,4 +573,9 @@ public static class MathUtil
         vector = point + rotation * (vector - point);
         return vector;
     }
+
+    public static Basis LookRotation(Vector3 facingDirection, Vector3 up)
+    {
+        return Transform3D.Identity.LookingAt(facingDirection, up).Basis;
+    }
 }
