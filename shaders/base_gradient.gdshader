@@ -1,6 +1,7 @@
 shader_type spatial;
 render_mode cull_disabled;
 render_mode depth_draw_always;
+
 render_mode shadows_disabled;
 render_mode diffuse_toon;
 
