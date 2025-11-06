@@ -66,11 +66,12 @@ AngleDegrees = 180.0
 metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
 [node name="Text3D" type="Node3D" parent="Level Details"]
-process_mode = 4
 visible = false
 script = ExtResource("8_lwvyp")
-Text = "test one: 123??"
+Text = "test one: 123??? testing"
 Font = ExtResource("9_avv52")
+UseMaxCharacterWidth = true
+MaxCharacterWidth = 10
 
 [node name="Carousel" type="Node3D" parent="."]
 transform = Transform3D(0.9986295, 0.052335907, -1.5710228e-10, -0.052136753, 0.9948294, 0.087155774, 0.0045613763, -0.08703633, 0.9961947, -0.013083979, 2, 0.021759085)
