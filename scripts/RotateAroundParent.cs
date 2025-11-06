@@ -3,7 +3,7 @@ using System;
 using Godot.Collections;
 using Parallas;
 
-[GlobalClass, Tool]
+[GlobalClass]
 public partial class RotateAroundParent : Rotate
 {
     [Export] private Array<Node3D> _nodes = new();
