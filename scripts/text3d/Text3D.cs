@@ -36,13 +36,16 @@ public partial class Text3D : Node3D, ISerializationListener
         }
     }
     private Font3D _font;
+
     [ExportGroup("Visual Settings")]
     [Export] public Color Tint = Colors.White;
     [Export] public float FontSize = 1f;
-    [ExportGroup("Use Max Character Width")]
+
+    [ExportGroup("Max Character Width")]
     [Export(PropertyHint.GroupEnable)] public bool UseMaxCharacterWidth = false;
     [Export(PropertyHint.Range, "1, 2147483647")] public int MaxCharacterWidth = 16;
     [Export] public bool WordWrap = true;
+
     [ExportGroup("Effects")]
     [Export] public Array<Text3DEffect> TextEffects = new();
 
