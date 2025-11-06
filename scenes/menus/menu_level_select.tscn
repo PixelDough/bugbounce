@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://6ldfqldmdso2"]
+[gd_scene load_steps=18 format=3 uid="uid://6ldfqldmdso2"]
 
 [ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://models/ui/ui_arrow/ArrowUI.fbx" id="2_vrxil"]
 [ext_resource type="ArrayMesh" uid="uid://kxkqlnla7pii" path="res://models/general/icon_modes/icon_modes_locked.res" id="2_x0tbs"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://scripts/text3d/Text3D.cs" id="8_lwvyp"]
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="8_x0tbs"]
 [ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://scripts/text3d/base_font.tres" id="9_avv52"]
+[ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://scripts/text3d/Text3DEffect.cs" id="10_avv52"]
+[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://scripts/text3d/effects/Text3DSway.cs" id="11_wsjeq"]
 
 [sub_resource type="Environment" id="Environment_ggd8c"]
 background_mode = 1
@@ -24,6 +26,12 @@ fog_light_color = Color(0.5, 0.5, 0.5, 1)
 adjustment_enabled = true
 adjustment_contrast = 1.4
 adjustment_saturation = 1.1
+
+[sub_resource type="Resource" id="Resource_u0us5"]
+script = ExtResource("11_wsjeq")
+Speed = 5.0
+IndexOffset = 0.5
+metadata/_custom_type_script = "uid://buqek6b4sujer"
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -71,7 +79,8 @@ script = ExtResource("8_lwvyp")
 Text = "test one: 123??? testing"
 Font = ExtResource("9_avv52")
 UseMaxCharacterWidth = true
-MaxCharacterWidth = 10
+MaxCharacterWidth = 12
+TextEffects = Array[ExtResource("10_avv52")]([SubResource("Resource_u0us5")])
 
 [node name="Carousel" type="Node3D" parent="."]
 transform = Transform3D(0.9986295, 0.052335907, -1.5710228e-10, -0.052136753, 0.9948294, 0.087155774, 0.0045613763, -0.08703633, 0.9961947, -0.013083979, 2, 0.021759085)

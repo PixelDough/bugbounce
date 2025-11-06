@@ -47,7 +47,7 @@ public partial class Text3D : Node3D, ISerializationListener
     [Export] public Array<Text3DEffect> TextEffects = new();
 
     private List<Rid> _instances = new();
-    public System.Collections.Generic.Dictionary<int, Rid> InstancesByIndex { get; private set; } = new();
+    public System.Collections.Generic.Dictionary<int, Rid> CharacterIndexInstances { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Vector2I> CharacterPositions { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Transform3D> Transforms { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Transform3D> RelativeTransforms { get; private set; } = new();
@@ -80,12 +80,11 @@ public partial class Text3D : Node3D, ISerializationListener
 
     private void GenerateText()
     {
-        GD.Print("Generating text");
         ClearText();
 
         if (Font is null) return;
         if (!IsInstanceValid(this)) return;
-        if (GetWorld3D() is not World3D world3d) return;
+        if (GetWorld3D() is not { } world3d) return;
 
         for (int i = 0; i < Text.Length; i++)
         {
@@ -99,12 +98,12 @@ public partial class Text3D : Node3D, ISerializationListener
                 Rid scenario = world3d.Scenario;
                 RenderingServer.InstanceSetScenario(instance, scenario);
                 RenderingServer.InstanceSetBase(instance, mesh.GetRid());
-                // Move the mesh around.
-                // don't include whitespace at the start of a new line
+
+                // create the necessary transform dictionary entries and set them on the rendering server
                 CreateTransform(instance);
 
                 _instances.Add(instance);
-                InstancesByIndex.Add(i, instance);
+                CharacterIndexInstances.Add(i, instance);
             }
         }
     }
@@ -117,7 +116,7 @@ public partial class Text3D : Node3D, ISerializationListener
         }
 
         _instances.Clear();
-        InstancesByIndex.Clear();
+        CharacterIndexInstances.Clear();
         CharacterPositions.Clear();
         Transforms.Clear();
         RelativeTransforms.Clear();
@@ -145,58 +144,59 @@ public partial class Text3D : Node3D, ISerializationListener
 
     private void ProcessTransformChanges(double delta)
     {
+        // update all text effects
         foreach (var text3DEffect in TextEffects)
         {
+            if (text3DEffect is null) continue;
             text3DEffect.Process(delta);
+        }
+        // apply all text effects to the reset relative transform
+        for (int i = 0; i < _instances.Count; i++)
+        {
+            var instance = _instances[i];
+            RelativeTransforms[instance] = Transform3D.Identity;
+            var relativeTransform = RelativeTransforms[instance];
+            foreach (var text3DEffect in TextEffects)
+            {
+                if (text3DEffect is null) continue;
+                relativeTransform *= text3DEffect.UpdateRelativeTransform(instance, i, relativeTransform, delta);
+            }
+            RelativeTransforms[instance] = relativeTransform;
         }
 
         Vector2I characterPos = Vector2I.Zero;
         for (int i = 0; i < Text.Length; i++)
         {
-            int checkOffset = 0;
-            bool hasCharacter = InstancesByIndex.TryGetValue(i, out Rid instance);
+            bool hasCharacter = CharacterIndexInstances.TryGetValue(i, out Rid instance);
+
+            // calculate how much further to check ahead for breaking into a new line by
+            // looking for the distance between spaces
+            int spaceDistance = 0;
+            if (WordWrap && !hasCharacter)
+            {
+                var stringToHere = Text.Substring(i + 1);
+                spaceDistance = stringToHere.TakeWhile((c) => !char.IsWhiteSpace(c)).Count();
+            }
+
+            // if using max width, and the pos + dist to next space is over the max width, wrap
+            if (UseMaxCharacterWidth && characterPos.X + spaceDistance >= MaxCharacterWidth)
+            {
+                characterPos.X = 0;
+                characterPos.Y += 1;
+            }
+
+            // if this is a valid character, set its properties
             if (hasCharacter)
             {
                 CharacterPositions[instance] = characterPos;
                 UpdateInstanceTransform(instance);
             }
-            else
-            {
-                if (WordWrap)
-                {
-                    var stringToHere = Text.Substring(i + 1);
-                    checkOffset = stringToHere.TakeWhile((c) => !char.IsWhiteSpace(c)).Count();
-                }
-            }
 
-            // if whitespace, and first in a row, don't add to characterPos.X
+            // move to the right, but only if this character is not both invalid and the first character in the line
             if (hasCharacter || characterPos.X > 0)
             {
                 characterPos.X += 1;
             }
-
-            if (UseMaxCharacterWidth && characterPos.X + checkOffset >= MaxCharacterWidth)
-            {
-                characterPos.X = 0;
-                characterPos.Y += 1;
-            }
         }
-
-        for (int i = 0; i < _instances.Count; i++)
-        {
-            var instance = _instances[i];
-            ResetRelativeTransform(instance);
-            var relativeTransform = RelativeTransforms[instance];
-            foreach (var text3DEffect in TextEffects)
-            {
-                relativeTransform *= text3DEffect.UpdateRelativeTransform(instance, i, relativeTransform, delta);
-            }
-            RelativeTransforms[instance] = relativeTransform;
-        }
-    }
-
-    private void ResetRelativeTransform(Rid instance)
-    {
-        RelativeTransforms[instance] = Transform3D.Identity;
     }
 }
