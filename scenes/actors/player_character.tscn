@@ -13,7 +13,7 @@
 radius = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lchlr"]
-radius = 0.15
+radius = 0.1
 
 [node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot")]
 collision_layer = 2

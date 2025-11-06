@@ -41,7 +41,7 @@ environment = SubResource("Environment_somws")
 
 [node name="SkyboxObject" parent="." instance=ExtResource("1_xjgd8")]
 process_priority = 2147483647
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032491684, 0, 0.023721695)
+visible = false
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
@@ -205,19 +205,19 @@ physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99090195, 5.2022343, -29.71868)
 
 [node name="plate" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.965332, -0.58801794, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.794221, 1.4197683, 0)
 sync_to_physics = false
 
 [node name="plate2" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.9653325, 0.588017, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.7942195, -1.419769, 0)
 sync_to_physics = false
 
 [node name="plate3" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0.58831954, -4.9652843, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -1.4194709, -4.7942996, 0)
 sync_to_physics = false
 
 [node name="plate4" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -0.58801836, 4.965331, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 1.4197686, 4.794222, 0)
 sync_to_physics = false
 
 [node name="RotateAroundParent" type="Node" parent="Spinning Test2" node_paths=PackedStringArray("_nodes")]
@@ -240,6 +240,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 9.5)
 size = Vector3(10, 1, 20)
 material = ExtResource("3_iby0j")
 
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+visible = false
+size = Vector3(5, 1, 2)
+material = ExtResource("3_iby0j")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2.5, 10)
+size = Vector3(5, 1, 2)
+material = ExtResource("3_iby0j")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 1.5, 12)
+size = Vector3(5, 1, 2)
+material = ExtResource("3_iby0j")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0.5, 14)
+size = Vector3(5, 1, 2)
+material = ExtResource("3_iby0j")
+
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 19.5)
 size = Vector3(10, 26, 1)
@@ -256,4 +276,4 @@ size = Vector3(10, 35, 1)
 material = ExtResource("3_iby0j")
 
 [node name="item_secret" parent="." instance=ExtResource("12_2o6ys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9349246, 0.708125, 6.3023233)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9349246, 0.208125, 6.3023233)

@@ -57,6 +57,7 @@ public partial class ThirdPersonCameraBehavior : Node
         TargetCamOffsetRay = Vector3.Up * lerp3.X +
                              new Vector3(Mathf.Cos(angleRad), 0f, -Mathf.Sin(angleRad)) * lerp3.Y;
         TargetCamDistance = TargetCamOffsetRay.Length();
+        // TargetCamOffsetRay += Offset;
         Vector3 finalPos = FocusPosition + TargetCamOffsetRay.LimitLength(RayLimitDistance);
         Camera3D.LookAtFromPosition(finalPos, FocusPosition, TargetTilt.Basis.Y);
     }
