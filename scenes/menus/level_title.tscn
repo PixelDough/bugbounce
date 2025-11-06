@@ -140,6 +140,3 @@ size = Vector2i(640, 480)
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.750787)
 fov = 35.0
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.3218692, 0.94678414, 0, -0.94678414, 0.3218692, 0, 0, 0)
