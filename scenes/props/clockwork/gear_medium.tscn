@@ -13,3 +13,6 @@ mesh = ExtResource("2_6wd8p")
 
 [node name="CollisionShape3D" parent="." index="1"]
 shape = SubResource("ConcavePolygonShape3D_pdc14")
+
+[node name="Rotate" parent="." index="2"]
+AngleDegrees = 0.0

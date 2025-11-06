@@ -50,4 +50,14 @@ public partial class Rotate : Node
                 break;
         }
     }
+
+    public void SetAngleDegrees(float angle)
+    {
+        AngleDegrees = angle;
+    }
+
+    public void SetAngle(float angle)
+    {
+        Angle = angle;
+    }
 }

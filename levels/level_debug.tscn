@@ -235,11 +235,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 9.5)
 size = Vector3(10, 1, 20)
 material = ExtResource("3_iby0j")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
-visible = false
-size = Vector3(5, 1, 2)
-material = ExtResource("3_iby0j")
-
 [node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2.5, 10)
 size = Vector3(5, 1, 2)

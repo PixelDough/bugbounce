@@ -22,6 +22,15 @@ project/assembly_name="bugbounce"
 
 enabled=PackedStringArray("res://addons/unidot_importer/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://levels/": "blue",
+"res://models/": "gray",
+"res://scenes/": "yellow",
+"res://scripts/": "green"
+}
+
 [input]
 
 move_left={

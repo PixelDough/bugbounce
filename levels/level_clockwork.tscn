@@ -42,72 +42,97 @@ environment = SubResource("Environment_om00g")
 
 [node name="Gears_fbx_Gear2 (2)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(0.98789304, -0.1551364, 0, 0.1551364, 0.98789304, 0, 0, 0, 1, 60.25, 16.499975, 28.25)
+RotationSpeedMultiplier = 1
 
 [node name="Shaft" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (2)" instance=ExtResource("3_qbmvj")]
 transform = Transform3D(2.7661004, 0.43438193, 0, -0.43438193, 2.7661004, 0, 0, 0, 5.997609, 0, 0, 0.9999924)
+sync_to_physics = false
 
 [node name="Gears_fbx_Gear3 (5)" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (2)" instance=ExtResource("4_ki8ih")]
 transform = Transform3D(0.98789304, 0.1551364, 0, -0.1551364, 0.98789304, 0, 0, 0, 1, 0, 0, 8.44)
+sync_to_physics = false
 
 [node name="Gears_fbx_Gear3" parent="Scene Contents/Geometry" instance=ExtResource("4_ki8ih")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 16.499975, 28.5)
+RotationSpeedMultiplier = 1
+Reverse = true
 
 [node name="Gears_fbx_Gear2" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(1, 0, 0, 0, -8.34465e-07, -1, 0, 1, -8.34465e-07, 0, -1.0000046, 10.5)
 
 [node name="Gears_fbx_Gear3 (3)" parent="Scene Contents/Geometry" instance=ExtResource("4_ki8ih")]
 transform = Transform3D(0.9999803, -0.0062830625, 0, 0.0062830625, 0.9999803, 0, 0, 0, 1, 17.26, 11, 81.09)
+RotationSpeedMultiplier = 2
 
 [node name="Shaft" parent="Scene Contents/Geometry/Gears_fbx_Gear3 (3)" instance=ExtResource("3_qbmvj")]
 transform = Transform3D(2.799779, -0.035184547, 6.041191e-07, -0.035184547, -2.799779, 1.0134891e-05, 3.33627e-07, -7.0975802e-06, -4.0009003, 2.483527e-09, -1.4901161e-08, -1.5899963)
+sync_to_physics = false
 
 [node name="Gears_fbx_Gear2" parent="Scene Contents/Geometry/Gears_fbx_Gear3 (3)" instance=ExtResource("2_naqm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.8399963)
-
-[node name="Gears_fbx_Gear3 (2)" parent="Scene Contents/Geometry" instance=ExtResource("4_ki8ih")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, -13.250025, -26.25)
+sync_to_physics = false
 
 [node name="Pendulum" parent="Scene Contents/Geometry" instance=ExtResource("5_52e6q")]
 transform = Transform3D(0.8660236, 0, -0.50000316, 0, 1, 0, 0.50000316, 0, 0.8660236, -40.157753, 41.39352, 88.8361)
 
 [node name="Gears_fbx_Gear2 (1)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.000025, 28.5)
+RotationSpeedMultiplier = 2
 
 [node name="Gears_fbx_Gear2 (6)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, -13.250025, 28.5)
+RotationSpeedMultiplier = 2
+Reverse = true
 
 [node name="Shaft" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (6)" instance=ExtResource("3_qbmvj")]
 transform = Transform3D(-2.8, 0, 8.078276e-06, 0, 2.8, 0, -4.2278825e-07, 0, -53.5, 0, 0, 0)
+sync_to_physics = false
+
+[node name="Gears_fbx_Gear3 (2)" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (6)" instance=ExtResource("4_ki8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -54.75)
+sync_to_physics = false
 
 [node name="Gears_fbx_Gear2 (8)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
-transform = Transform3D(-0.044590473, 0.9990053, 0, 0, 0, -1, -0.9990053, -0.044590503, 0, 12.43, -0.61, 62.75)
+transform = Transform3D(-0.045363035, -0.9989705, -4.366639e-08, 0, -4.3711385e-08, 1, -0.9989705, 0.045363035, 1.9828814e-09, 12.43, -0.61, 62.75)
+RotationSpeedMultiplier = 2
 
 [node name="Gears_fbx_Gear2 (3)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(0.49999976, 0, -0.8660255, 0, 1, 0, 0.8660255, 0, 0.49999976, -24.347511, 10.89351, 68.483)
+RotationSpeedMultiplier = 2
 
 [node name="Gears_fbx_Gear2 (7)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.25, -0.6064911, 45)
+RotationSpeedMultiplier = 2
 
 [node name="Gears_fbx_Gear3 (4)" parent="Scene Contents/Geometry" instance=ExtResource("4_ki8ih")]
 transform = Transform3D(0, 0, -1, 0.065403245, 0.99785894, 0, 0.9978589, -0.065403245, 0, 39.25, 16.49998, 59)
+RotationSpeedMultiplier = 2
 
 [node name="Gears_fbx_Gear2 (4)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(-0.5000001, 0.8660253, 0, 0, 0, -1, -0.8660253, -0.5000001, 0, -33.46532, 21.64351, 75.190506)
+RotationSpeedMultiplier = 2
+Reverse = true
 
 [node name="Gears_fbx_Gear2 (5)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -15.11725, -0.6064911, 61.307217)
+RotationSpeedMultiplier = 2
+Reverse = true
 
 [node name="Shaft" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (5)" instance=ExtResource("3_qbmvj")]
 transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 53.5, 0, 0, 0)
+sync_to_physics = false
 
 [node name="Gears_fbx_Gear2 (7)" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (5)" instance=ExtResource("2_naqm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52.35649)
+sync_to_physics = false
 
 [node name="Shaft (1)" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (5)" instance=ExtResource("3_qbmvj")]
 transform = Transform3D(-2.8, 0, 8.078276e-06, 0, 2.8, 0, -4.2278825e-07, 0, -53.5, 0, 0, 0)
+sync_to_physics = false
 
 [node name="Gears_fbx_Gear3 (1)" parent="Scene Contents/Geometry/Gears_fbx_Gear2 (5)" instance=ExtResource("4_ki8ih")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 54.39351)
+sync_to_physics = false
 
 [node name="Level Management" type="Node3D" parent="."]
 
