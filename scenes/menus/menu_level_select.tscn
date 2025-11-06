@@ -138,4 +138,3 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 fov = 65.0
 
 [node name="skybox_space_01" parent="." instance=ExtResource("8_x0tbs")]
-process_priority = 2147483647
