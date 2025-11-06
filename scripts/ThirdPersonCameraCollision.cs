@@ -16,7 +16,7 @@ public partial class ThirdPersonCameraCollision : ShapeCast3D
         base._Process(delta);
 
         GlobalPosition = _thirdPersonCamera.Target.GlobalPosition;
-        TargetPosition = _thirdPersonCamera.TargetCamOffsetRay + _thirdPersonCamera.Offset;
+        TargetPosition = _thirdPersonCamera.TargetCamOffsetRay;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -24,7 +24,7 @@ public partial class ThirdPersonCameraCollision : ShapeCast3D
         base._PhysicsProcess(delta);
 
         GlobalPosition = _thirdPersonCamera.Target.GlobalPosition;
-        TargetPosition = _thirdPersonCamera.TargetCamOffsetRay + _thirdPersonCamera.Offset;
+        TargetPosition = _thirdPersonCamera.TargetCamOffsetRay;
 
         ForceShapecastUpdate();
 
@@ -32,7 +32,7 @@ public partial class ThirdPersonCameraCollision : ShapeCast3D
         for (int i = 0; i < GetCollisionCount(); i++)
         {
             Vector3 point = this.GetCollisionPoint(i);
-            float dist = (point - _thirdPersonCamera.Target.GlobalPosition).Length();
+            float dist = (point - GlobalPosition).Length();
             _thirdPersonCamera.RayLimitDistance = dist;
             break;
         }
