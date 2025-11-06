@@ -40,8 +40,6 @@ data = PackedVector3Array(0, 0, 0, 0.0541, 0.7337, 0, 0, 0, 1, 0.0541, 0.7337, 0
 environment = SubResource("Environment_somws")
 
 [node name="SkyboxObject" parent="." instance=ExtResource("1_xjgd8")]
-process_priority = 2147483647
-visible = false
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_tuhi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.326515, 0.31228924, -10.279989)
@@ -205,19 +203,19 @@ physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99090195, 5.2022343, -29.71868)
 
 [node name="plate" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.794221, 1.4197683, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 2.6122267, 4.263398, 0)
 sync_to_physics = false
 
 [node name="plate2" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.7942195, -1.419769, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -2.6122272, -4.263397, 0)
 sync_to_physics = false
 
 [node name="plate3" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -1.4194709, -4.7942996, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -4.263554, 2.6119628, 0)
 sync_to_physics = false
 
 [node name="plate4" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 1.4197686, 4.794222, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.2633967, -2.6122272, 0)
 sync_to_physics = false
 
 [node name="RotateAroundParent" type="Node" parent="Spinning Test2" node_paths=PackedStringArray("_nodes")]
