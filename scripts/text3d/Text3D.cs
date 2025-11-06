@@ -40,6 +40,8 @@ public partial class Text3D : Node3D, ISerializationListener
     [ExportGroup("Visual Settings")]
     [Export] public Color Tint = Colors.White;
     [Export] public float FontSize = 1f;
+    [Export] public float LineSpacing = 0.2f;
+    [Export] public float CharacterSpacing = 0f;
 
     [ExportGroup("Max Character Width")]
     [Export(PropertyHint.GroupEnable)] public bool UseMaxCharacterWidth = false;
@@ -136,8 +138,8 @@ public partial class Text3D : Node3D, ISerializationListener
     {
         var characterPosition = CharacterPositions[instance];
         Transform3D xform = GlobalTransform
-            .TranslatedLocal(Vector3.Right * characterPosition.X * FontSize)
-            .TranslatedLocal(Vector3.Down * characterPosition.Y * FontSize)
+            .TranslatedLocal(Vector3.Right * ((characterPosition.X * FontSize) + (characterPosition.X * CharacterSpacing)))
+            .TranslatedLocal(Vector3.Down * ((characterPosition.Y * FontSize) + (characterPosition.Y * LineSpacing)))
             .ScaledLocal(Vector3.One * FontSize);
         Transforms[instance] = xform;
         var finalTransform = Transforms[instance] * RelativeTransforms[instance];
