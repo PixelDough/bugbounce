@@ -284,7 +284,11 @@ public partial class Text3D : Node3D, ISerializationListener
             RelativeTransforms[instance] = relativeTransform;
         }
 
-        String[] words = [.._wordSplitRegex.SearchAll(Text).SelectMany<RegExMatch, String>(match => [match.Strings[1], match.Strings[2]])];
+        String[] words;
+        if (WordWrap)
+            words = [.._wordSplitRegex.SearchAll(Text).SelectMany<RegExMatch, String>(match => [match.Strings[1], match.Strings[2]])];
+        else
+            words = [..Text.ToCharArray().Select(c => c.ToString())];
         List<String> lines = [];
         StringBuilder currentLine = new StringBuilder();
         var currentWidth = 0;
