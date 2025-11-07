@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://b6v380pgoiwhg" path="res://models/general/bouncer.glb" id="6_mrv81"]
 [ext_resource type="Script" uid="uid://pa1p4piks2ay" path="res://scripts/Rotate.cs" id="7_edrtx"]
 [ext_resource type="PackedScene" uid="uid://bxoa6mbjr3fui" path="res://models/player/millie_base.glb" id="7_vrxil"]
-[ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://addons/text_3d/Text3D.cs" id="8_lwvyp"]
+[ext_resource type="Script" uid="uid://2uxxsiaetxmj" path="res://addons/meshtext/MeshText.cs" id="8_lwvyp"]
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="8_x0tbs"]
-[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/text_3d/examples/base_font/base_font.tres" id="9_avv52"]
-[ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://addons/text_3d/Text3DEffect.cs" id="10_avv52"]
+[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/meshtext/examples/base_font/base_font.tres" id="9_avv52"]
+[ext_resource type="Script" uid="uid://c0crjku37j1ud" path="res://addons/meshtext/MeshTextEffect.cs" id="10_avv52"]
 [ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="10_wsjeq"]
 [ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="11_u0us5"]
-[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/text_3d/effects/Sway.cs" id="11_wsjeq"]
+[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="11_wsjeq"]
 
 [sub_resource type="Environment" id="Environment_ggd8c"]
 background_mode = 1

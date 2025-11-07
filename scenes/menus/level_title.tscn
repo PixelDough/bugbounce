@@ -11,12 +11,12 @@
 [ext_resource type="ArrayMesh" uid="uid://dht2gc15gqh1w" path="res://models/general/medals/medals_none.res" id="4_uvovr"]
 [ext_resource type="PackedScene" uid="uid://byaviw3t3g6b8" path="res://models/ui/lock/Lock.fbx" id="5_iwl5c"]
 [ext_resource type="Script" uid="uid://df0ybewvxbn1l" path="res://scripts/RotateWobble.cs" id="5_uvovr"]
-[ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://addons/text_3d/Text3D.cs" id="12_ycqy4"]
-[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/text_3d/examples/base_font/base_font.tres" id="13_ekh6p"]
+[ext_resource type="Script" uid="uid://2uxxsiaetxmj" path="res://addons/meshtext/MeshText.cs" id="12_ycqy4"]
+[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/meshtext/examples/base_font/base_font.tres" id="13_ekh6p"]
 [ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://models/text3d/Mat_Font3D_1.material" id="14_ekh6p"]
-[ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://addons/text_3d/Text3DEffect.cs" id="14_yh3yx"]
-[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/text_3d/effects/Sway.cs" id="15_iiar0"]
-[ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://addons/text_3d/effects/Wave.cs" id="17_yh3yx"]
+[ext_resource type="Script" uid="uid://c0crjku37j1ud" path="res://addons/meshtext/MeshTextEffect.cs" id="14_yh3yx"]
+[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="15_iiar0"]
+[ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://addons/meshtext/effects/Wave.cs" id="17_yh3yx"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5i7wa"]
 _surfaces = [{

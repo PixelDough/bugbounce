@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://c6ibyx7gg7hdu"]
 
-[ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://addons/text_3d/Text3D.cs" id="1_8ieny"]
-[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/text_3d/examples/base_font/base_font.tres" id="2_iratv"]
+[ext_resource type="Script" path="res://addons/text_3d/Text3D.cs" id="1_8ieny"]
+[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/meshtext/examples/base_font/base_font.tres" id="2_iratv"]
 [ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="3_abx05"]
 [ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="4_m4nn0"]
-[ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://addons/text_3d/Text3DEffect.cs" id="5_x4jdw"]
-[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/text_3d/effects/Sway.cs" id="6_6h65s"]
+[ext_resource type="Script" path="res://addons/text_3d/Text3DEffect.cs" id="5_x4jdw"]
+[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="6_6h65s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r8y18"]
 render_priority = 0
