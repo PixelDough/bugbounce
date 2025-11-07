@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://clvpxpvb0tup5"]
+[gd_scene load_steps=22 format=4 uid="uid://clvpxpvb0tup5"]
 
 [ext_resource type="Material" uid="uid://swuiro551ec1" path="res://materials/mat_levelselect.material" id="1_pc6dq"]
 [ext_resource type="ArrayMesh" uid="uid://cuhbgyf05k7yt" path="res://models/general/medals/medals_secret.res" id="2_h846i"]
@@ -11,6 +11,10 @@
 [ext_resource type="ArrayMesh" uid="uid://dht2gc15gqh1w" path="res://models/general/medals/medals_none.res" id="4_uvovr"]
 [ext_resource type="PackedScene" uid="uid://byaviw3t3g6b8" path="res://models/ui/lock/Lock.fbx" id="5_iwl5c"]
 [ext_resource type="Script" uid="uid://df0ybewvxbn1l" path="res://scripts/RotateWobble.cs" id="5_uvovr"]
+[ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://scripts/text3d/Text3D.cs" id="12_ycqy4"]
+[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://scripts/text3d/base_font.tres" id="13_ekh6p"]
+[ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://scripts/text3d/Text3DEffect.cs" id="14_yh3yx"]
+[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://scripts/text3d/effects/Text3DSway.cs" id="15_iiar0"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5i7wa"]
 _surfaces = [{
@@ -80,6 +84,13 @@ shader_parameter/screen_texture = SubResource("ViewportTexture_no5ah")
 
 [sub_resource type="World3D" id="World3D_uvovr"]
 
+[sub_resource type="Resource" id="Resource_ycqy4"]
+resource_local_to_scene = true
+script = ExtResource("15_iiar0")
+Speed = 5.0
+IndexOffset = 0.5
+metadata/_custom_type_script = "uid://buqek6b4sujer"
+
 [node name="Level Title" type="Node3D"]
 
 [node name="crt" type="MeshInstance3D" parent="."]
@@ -140,3 +151,17 @@ size = Vector2i(640, 480)
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.750787)
 fov = 35.0
+
+[node name="Text3D" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, -6.3573026e-08, 0, 1, 0, 6.3573026e-08, 0, 1, 0, 0, -5.3045807)
+script = ExtResource("12_ycqy4")
+Text = "locked"
+Font = ExtResource("13_ekh6p")
+HorizontalAlignment = 1
+VerticalAlignment = 1
+HorizontalJustification = 1
+UseMaxCharacterWidth = true
+MaxCharacterWidth = 10
+TextEffects = Array[ExtResource("14_yh3yx")]([SubResource("Resource_ycqy4")])
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]

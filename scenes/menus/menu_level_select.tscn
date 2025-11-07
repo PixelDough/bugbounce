@@ -74,14 +74,15 @@ AngleDegrees = 180.0
 metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
 [node name="Text3D" type="Node3D" parent="Level Details"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6164446, -3.7973518, -9.536743e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9999999, -0.75, 0)
 script = ExtResource("8_lwvyp")
-Text = "this is some test text. lets see how far it can go... okay"
+Text = "time: 3:12.052"
 Font = ExtResource("9_avv52")
-HorizontalAlignment = 1
+FontSize = 0.2
+CharacterSpacing = 1.1
+LineSpacing = 1.2
 VerticalAlignment = 1
 UseMaxCharacterWidth = true
-MaxCharacterWidth = 10
 TextEffects = Array[ExtResource("10_avv52")]([SubResource("Resource_u0us5")])
 
 [node name="Carousel" type="Node3D" parent="."]

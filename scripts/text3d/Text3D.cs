@@ -44,8 +44,8 @@ public partial class Text3D : Node3D, ISerializationListener
     [Export] public float FontSize = 1f;
 
     [ExportGroup("Spacing")]
-    [Export] public float CharacterSpacing = 0f;
-    [Export] public float LineSpacing = 0.2f;
+    [Export] public float CharacterSpacing = 1f;
+    [Export] public float LineSpacing = 1f;
 
     [ExportGroup("Alignment")]
     [Export] public AlignmentHorizontal HorizontalAlignment = AlignmentHorizontal.Left;
@@ -69,16 +69,16 @@ public partial class Text3D : Node3D, ISerializationListener
 
     private float AlignmentOffsetX => HorizontalAlignment switch
     {
-        AlignmentHorizontal.Left => 0.5f,
-        AlignmentHorizontal.Center => -MaxCharacterWidth * 0.5f + 0.5f,
-        AlignmentHorizontal.Right => -MaxCharacterWidth + 0.5f,
+        AlignmentHorizontal.Left => 0f,
+        AlignmentHorizontal.Center => -MaxCharacterWidth * 0.5f,
+        AlignmentHorizontal.Right => -MaxCharacterWidth,
         _ => 0f
     };
     private float AlignmentOffsetY => VerticalAlignment switch
     {
-        AlignmentVertical.Top => 0.5f,
-        AlignmentVertical.Center => -HorizontalOffsets.Length * 0.5f + 0.5f,
-        AlignmentVertical.Bottom => -HorizontalOffsets.Length + 0.5f,
+        AlignmentVertical.Top => 0f,
+        AlignmentVertical.Center => -HorizontalOffsets.Length * 0.5f,
+        AlignmentVertical.Bottom => -HorizontalOffsets.Length,
         _ => 0f
     };
 
@@ -104,29 +104,14 @@ public partial class Text3D : Node3D, ISerializationListener
     {
         base._Ready();
         _wordSplitRegex.Compile(@"(\s+)|(\S+)");
-        // _wordSplitRegex.Compile(@"\s*\S+");
+    }
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
 
         GenerateText();
-
-        if (Engine.IsEditorHint())
-        {
-            if (GetWorld3D() is not { } world3d) return;
-            _gizmoInstance = RenderingServer.InstanceCreate();
-            // Set the scenario from the world, this ensures it
-            // appears with the same objects as the scene.
-            Rid scenario = world3d.Scenario;
-            RenderingServer.InstanceSetScenario(_gizmoInstance, scenario);
-            _quadMesh ??= new QuadMesh()
-            {
-                Size = Vector2.One,
-                Material = new StandardMaterial3D()
-                {
-                    ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded,
-                    AlbedoColor = Colors.Orange
-                }
-            };
-            RenderingServer.InstanceSetBase(_gizmoInstance, _quadMesh.GetRid());
-        }
+        CreateGizmo();
     }
 
     public override void _ExitTree()
@@ -134,17 +119,18 @@ public partial class Text3D : Node3D, ISerializationListener
         base._ExitTree();
         ClearText();
         ClearGizmo();
-        _quadMesh?.Free();
     }
 
     public void OnBeforeSerialize()
     {
         ClearText();
         ClearGizmo();
-        _quadMesh?.Free();
     }
 
-    public void OnAfterDeserialize() {}
+    public void OnAfterDeserialize()
+    {
+        CreateGizmo();
+    }
 
     public override void _Process(double delta)
     {
@@ -205,6 +191,32 @@ public partial class Text3D : Node3D, ISerializationListener
         }
     }
 
+    private void CreateGizmo()
+    {
+        if (Engine.IsEditorHint())
+        {
+            if (GetWorld3D() is not { } world3d) return;
+            _gizmoInstance = RenderingServer.InstanceCreate();
+            // Set the scenario from the world, this ensures it
+            // appears with the same objects as the scene.
+            Rid scenario = world3d.Scenario;
+            RenderingServer.InstanceSetScenario(_gizmoInstance, scenario);
+            _quadMesh ??= new QuadMesh()
+            {
+                Size = Vector2.One,
+                Material = new StandardMaterial3D()
+                {
+                    ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded,
+                    AlbedoColor = Colors.Orange with { A = 0.1f },
+                    VertexColorUseAsAlbedo = true,
+                    BlendMode = BaseMaterial3D.BlendModeEnum.Mix,
+                    Transparency = BaseMaterial3D.TransparencyEnum.Alpha,
+                }
+            };
+            RenderingServer.InstanceSetBase(_gizmoInstance, _quadMesh.GetRid());
+        }
+    }
+
     private void CreateTransform(Rid instance)
     {
         RelativeTransforms[instance] = Transform3D.Identity;
@@ -216,10 +228,21 @@ public partial class Text3D : Node3D, ISerializationListener
     {
         var characterPosition = CharacterPositions[instance];
         var horizontalOffset = HorizontalOffsets[characterPosition.Y];
+        Vector3 spacingOffsets = Vector3.Zero;
+        if (HorizontalAlignment == AlignmentHorizontal.Center) spacingOffsets.X = (CharacterSpacing - 1) * 0.5f;
+        if (HorizontalAlignment == AlignmentHorizontal.Right) spacingOffsets.X = CharacterSpacing - 1;
+
+        if (VerticalAlignment == AlignmentVertical.Center) spacingOffsets.Y = -(LineSpacing - 1) * 0.5f;
+        if (VerticalAlignment == AlignmentVertical.Bottom) spacingOffsets.Y = -(LineSpacing - 1);
         Transform3D xform = GlobalTransform
-            .TranslatedLocal(Vector3.Right * (((characterPosition.X + horizontalOffset) * FontSize) + ((characterPosition.X + horizontalOffset) * CharacterSpacing)))
-            .TranslatedLocal(Vector3.Down * (((characterPosition.Y + AlignmentOffsetY) * FontSize) + ((characterPosition.Y + AlignmentOffsetY) * LineSpacing)))
-            .ScaledLocal(Vector3.One * FontSize);
+                .ScaledLocal(Vector3.One * FontSize)
+                .TranslatedLocal(new Vector3(CharacterSpacing * 0.5f, -LineSpacing * 0.5f, 0f))
+                .TranslatedLocal(spacingOffsets)
+                .TranslatedLocal(Vector3.Right * (characterPosition.X + horizontalOffset) * CharacterSpacing)
+                .TranslatedLocal(Vector3.Down * (characterPosition.Y + AlignmentOffsetY) * LineSpacing)
+                .TranslatedLocal(Vector3.Left * (CharacterSpacing - 1f) * 0.5f)
+                .TranslatedLocal(Vector3.Up * (LineSpacing - 1f) * 0.5f)
+            ;
         Transforms[instance] = xform;
         var finalTransform = Transforms[instance] * RelativeTransforms[instance];
         RenderingServer.InstanceSetTransform(instance, finalTransform);
@@ -304,6 +327,7 @@ public partial class Text3D : Node3D, ISerializationListener
                 {
                     CharacterPositions[instance] = characterPos;
                     UpdateInstanceTransform(instance);
+                    RenderingServer.InstanceSetVisible(instance, Visible);
                 }
 
                 characterPos.X++;
@@ -316,9 +340,45 @@ public partial class Text3D : Node3D, ISerializationListener
 
         if (Engine.IsEditorHint())
         {
-            // ((characterPosition.X * FontSize) + (characterPosition.X * CharacterSpacing) + horizontalOffset))
-            var translation = Vector3.Right * (AlignmentOffsetX + MaxCharacterWidth * 0.5f);
-            RenderingServer.InstanceSetTransform(_gizmoInstance, GlobalTransform.TranslatedLocal(translation));
+            RenderingServer.InstanceSetVisible(_gizmoInstance, Visible);
+            float charSpacingPad = (CharacterSpacing - 1f) * 0.5f;
+            float lineSpacingPad = (LineSpacing - 1f) * 0.5f;
+
+            float padOffsetX = HorizontalAlignment switch
+            {
+                AlignmentHorizontal.Left => -charSpacingPad,
+                AlignmentHorizontal.Center => 0f,
+                AlignmentHorizontal.Right => charSpacingPad,
+                _ => 0f
+            };
+            float padOffsetY = VerticalAlignment switch
+            {
+                AlignmentVertical.Top => lineSpacingPad,
+                AlignmentVertical.Center => 0f,
+                AlignmentVertical.Bottom => -lineSpacingPad,
+                _ => 0f
+            };
+
+            var translation = Vector3.Zero;
+            var sideOffsetX = MaxCharacterWidth * CharacterSpacing * 0.5f;
+            if (HorizontalAlignment == AlignmentHorizontal.Left) translation.X = sideOffsetX;
+            if (HorizontalAlignment == AlignmentHorizontal.Right) translation.X = -sideOffsetX;
+            translation.X += padOffsetX;
+
+            var sideOffsetY = HorizontalOffsets.Length * LineSpacing * 0.5f;
+            if (VerticalAlignment == AlignmentVertical.Top) translation.Y = -sideOffsetY;
+            if (VerticalAlignment == AlignmentVertical.Bottom) translation.Y = sideOffsetY;
+            translation.Y += padOffsetY;
+
+            var scale = Vector3.One;
+            scale.X = MaxCharacterWidth * CharacterSpacing - charSpacingPad * 2f;
+            scale.Y = HorizontalOffsets.Length * LineSpacing - lineSpacingPad * 2f;
+            Transform3D finalTransform = GlobalTransform
+                    .ScaledLocal(Vector3.One * FontSize)
+                    .TranslatedLocal(translation)
+                    .ScaledLocal(scale)
+                ;
+            RenderingServer.InstanceSetTransform(_gizmoInstance, finalTransform);
         }
     }
 }
