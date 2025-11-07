@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://clvpxpvb0tup5"]
+[gd_scene load_steps=25 format=4 uid="uid://clvpxpvb0tup5"]
 
 [ext_resource type="Material" uid="uid://swuiro551ec1" path="res://materials/mat_levelselect.material" id="1_pc6dq"]
 [ext_resource type="ArrayMesh" uid="uid://cuhbgyf05k7yt" path="res://models/general/medals/medals_secret.res" id="2_h846i"]
@@ -13,8 +13,10 @@
 [ext_resource type="Script" uid="uid://df0ybewvxbn1l" path="res://scripts/RotateWobble.cs" id="5_uvovr"]
 [ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://addons/text_3d/Text3D.cs" id="12_ycqy4"]
 [ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/text_3d/examples/base_font/base_font.tres" id="13_ekh6p"]
+[ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://models/text3d/Mat_Font3D_1.material" id="14_ekh6p"]
 [ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://addons/text_3d/Text3DEffect.cs" id="14_yh3yx"]
 [ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/text_3d/effects/Sway.cs" id="15_iiar0"]
+[ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://addons/text_3d/effects/Wave.cs" id="17_yh3yx"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5i7wa"]
 _surfaces = [{
@@ -91,6 +93,13 @@ Speed = 5.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://buqek6b4sujer"
 
+[sub_resource type="Resource" id="Resource_iiar0"]
+script = ExtResource("17_yh3yx")
+Speed = 5.0
+IndexOffset = 1.0
+Intensity = 0.75
+metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
+
 [node name="Level Title" type="Node3D"]
 
 [node name="crt" type="MeshInstance3D" parent="."]
@@ -157,11 +166,12 @@ transform = Transform3D(1, 0, -6.3573026e-08, 0, 1, 0, 6.3573026e-08, 0, 1, 0, 0
 script = ExtResource("12_ycqy4")
 Text = "locked"
 Font = ExtResource("13_ekh6p")
+Tint = Color(0.9999998, 0.05817572, 0.033706926, 1)
+MaterialOverride = ExtResource("14_ekh6p")
 HorizontalAlignment = 1
 VerticalAlignment = 1
 HorizontalJustification = 1
-UseMaxCharacterWidth = true
 MaxCharacterWidth = 10
-TextEffects = Array[ExtResource("14_yh3yx")]([SubResource("Resource_ycqy4")])
+TextEffects = Array[ExtResource("14_yh3yx")]([SubResource("Resource_ycqy4"), SubResource("Resource_iiar0")])
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
