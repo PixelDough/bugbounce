@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=27 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -54,6 +54,7 @@ shader_parameter/smoothness = 1.0
 shader_parameter/metallic = 0.5130000243675
 shader_parameter/rim_multiplier = 1.0
 shader_parameter/use_top_and_bottom_lights = false
+shader_parameter/show_backfaces = false
 
 [sub_resource type="Resource" id="Resource_u0us5"]
 resource_local_to_scene = true
@@ -61,6 +62,12 @@ script = ExtResource("18_but64")
 Speed = 5.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://buqek6b4sujer"
+
+[sub_resource type="Resource" id="Resource_bve2d"]
+script = ExtResource("19_bve2d")
+Speed = 5.0
+IndexOffset = 1.0
+metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
 
 [sub_resource type="Resource" id="Resource_yqj0b"]
 script = ExtResource("19_bve2d")
@@ -316,7 +323,7 @@ HorizontalAlignment = 1
 VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-TextEffects = Array[ExtResource("17_1sctp")]([SubResource("Resource_u0us5")])
+TextEffects = Array[ExtResource("17_1sctp")]([SubResource("Resource_u0us5"), SubResource("Resource_bve2d")])
 
 [node name="text wave" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0811644, 1.3392546, 0)

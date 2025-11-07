@@ -279,7 +279,7 @@ public partial class Text3D : Node3D, ISerializationListener
             foreach (var text3DEffect in TextEffects)
             {
                 if (text3DEffect is null) continue;
-                relativeTransform *= text3DEffect.UpdateRelativeTransform(instance, i, relativeTransform, _time, delta);
+                relativeTransform = text3DEffect.UpdateRelativeTransform(instance, i, relativeTransform, _time, delta);
             }
             RelativeTransforms[instance] = relativeTransform;
         }
