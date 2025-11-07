@@ -3,7 +3,7 @@ using System;
 using Godot.Collections;
 
 namespace Parallas.Text3D;
-[GlobalClass, Tool]
+[GlobalClass, Tool, Icon("res://addons/text_3d/Font3D.svg")]
 public partial class Font3D : Resource
 {
     [Export] public String CharacterSet;

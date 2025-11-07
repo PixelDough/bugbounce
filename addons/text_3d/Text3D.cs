@@ -7,7 +7,7 @@ using Godot.Collections;
 using Range = System.Range;
 
 namespace Parallas.Text3D;
-[GlobalClass, Tool]
+[GlobalClass, Tool, Icon("res://addons/text_3d/Text3D.svg")]
 public partial class Text3D : Node3D, ISerializationListener
 {
     [Signal] public delegate void TextChangedEventHandler(string text);
