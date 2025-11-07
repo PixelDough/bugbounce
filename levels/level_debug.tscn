@@ -55,6 +55,7 @@ shader_parameter/rim_multiplier = 1.0
 shader_parameter/use_top_and_bottom_lights = false
 
 [sub_resource type="Resource" id="Resource_u0us5"]
+resource_local_to_scene = true
 script = ExtResource("18_but64")
 Speed = 5.0
 IndexOffset = 0.5
@@ -294,10 +295,10 @@ material = ExtResource("3_iby0j")
 [node name="item_secret" parent="." instance=ExtResource("12_2o6ys")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9349246, 0.708125, 6.3023233)
 
-[node name="Text3D" type="Node3D" parent="."]
+[node name="text sway" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9999999, 1.3392546, 0)
 script = ExtResource("13_ntgml")
-Text = "time: 3:12.053"
+Text = "sway sway sway sway sway"
 Font = ExtResource("14_bve2d")
 Tint = Color(1, 0.58750004, 0.00999999, 1)
 FontSize = 0.4
@@ -306,5 +307,6 @@ CharacterSpacing = 1.1
 LineSpacing = 1.2
 HorizontalAlignment = 1
 VerticalAlignment = 1
+HorizontalJustification = 1
 UseMaxCharacterWidth = true
 TextEffects = Array[ExtResource("17_1sctp")]([SubResource("Resource_u0us5")])

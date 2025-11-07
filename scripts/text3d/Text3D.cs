@@ -69,6 +69,7 @@ public partial class Text3D : Node3D, ISerializationListener
     [ExportGroup("Max Character Width")]
     [Export(PropertyHint.GroupEnable)] public bool UseMaxCharacterWidth = false;
     [Export(PropertyHint.Range, "1, 2147483647")] public int MaxCharacterWidth = 16;
+    private int EvaluatedMaxCharacterWidth => UseMaxCharacterWidth ? MaxCharacterWidth : Text.Length;
     [Export] public bool WordWrap = true;
 
     [ExportGroup("Effects")]
@@ -84,8 +85,8 @@ public partial class Text3D : Node3D, ISerializationListener
     private float AlignmentOffsetX => HorizontalAlignment switch
     {
         AlignmentHorizontal.Left => 0f,
-        AlignmentHorizontal.Center => -MaxCharacterWidth * 0.5f,
-        AlignmentHorizontal.Right => -MaxCharacterWidth,
+        AlignmentHorizontal.Center => -EvaluatedMaxCharacterWidth * 0.5f,
+        AlignmentHorizontal.Right => -EvaluatedMaxCharacterWidth,
         _ => 0f
     };
     private float AlignmentOffsetY => VerticalAlignment switch
@@ -99,6 +100,7 @@ public partial class Text3D : Node3D, ISerializationListener
     private RegEx _wordSplitRegex = new RegEx();
     private Rid _gizmoInstance;
     private QuadMesh _quadMesh;
+    private float _time = 0f;
 
     public enum AlignmentHorizontal
     {
@@ -149,6 +151,7 @@ public partial class Text3D : Node3D, ISerializationListener
     public override void _Process(double delta)
     {
         base._Process(delta);
+        _time += (float)delta;
         ProcessTransformChanges(delta);
     }
 
@@ -267,12 +270,6 @@ public partial class Text3D : Node3D, ISerializationListener
 
     private void ProcessTransformChanges(double delta)
     {
-        // update all text effects
-        foreach (var text3DEffect in TextEffects)
-        {
-            if (text3DEffect is null) continue;
-            text3DEffect.Process(delta);
-        }
         // apply all text effects to the reset relative transform
         for (int i = 0; i < _instances.Count; i++)
         {
@@ -282,7 +279,7 @@ public partial class Text3D : Node3D, ISerializationListener
             foreach (var text3DEffect in TextEffects)
             {
                 if (text3DEffect is null) continue;
-                relativeTransform *= text3DEffect.UpdateRelativeTransform(instance, i, relativeTransform, delta);
+                relativeTransform *= text3DEffect.UpdateRelativeTransform(instance, i, relativeTransform, _time, delta);
             }
             RelativeTransforms[instance] = relativeTransform;
         }
@@ -295,7 +292,7 @@ public partial class Text3D : Node3D, ISerializationListener
         {
             var wordWidth = word.Length;
             var wordWidthTrimmed = word.TrimEnd().Length;
-            if (currentWidth + wordWidthTrimmed > MaxCharacterWidth)
+            if (currentWidth + wordWidthTrimmed > EvaluatedMaxCharacterWidth)
             {
                 if (currentWidth > 0)
                 {
@@ -325,7 +322,7 @@ public partial class Text3D : Node3D, ISerializationListener
         {
             var line = lines[i];
             var lineTrimWidth = line.Trim().Length;
-            var offset = MaxCharacterWidth - lineTrimWidth;
+            var offset = EvaluatedMaxCharacterWidth - lineTrimWidth;
 
             float positionOffsetX = HorizontalJustification switch
             {
@@ -377,7 +374,7 @@ public partial class Text3D : Node3D, ISerializationListener
             };
 
             var translation = Vector3.Zero;
-            var sideOffsetX = MaxCharacterWidth * CharacterSpacing * 0.5f;
+            var sideOffsetX = EvaluatedMaxCharacterWidth * CharacterSpacing * 0.5f;
             if (HorizontalAlignment == AlignmentHorizontal.Left) translation.X = sideOffsetX;
             if (HorizontalAlignment == AlignmentHorizontal.Right) translation.X = -sideOffsetX;
             translation.X += padOffsetX;
@@ -388,7 +385,7 @@ public partial class Text3D : Node3D, ISerializationListener
             translation.Y += padOffsetY;
 
             var scale = Vector3.One;
-            scale.X = MaxCharacterWidth * CharacterSpacing - charSpacingPad * 2f;
+            scale.X = EvaluatedMaxCharacterWidth * CharacterSpacing - charSpacingPad * 2f;
             scale.Y = HorizontalOffsets.Length * LineSpacing - lineSpacingPad * 2f;
             Transform3D finalTransform = GlobalTransform
                     .ScaledLocal(Vector3.One * FontSize)
