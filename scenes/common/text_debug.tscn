@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6ibyx7gg7hdu"]
+
+[ext_resource type="Script" uid="uid://ugi6v48qx1hb" path="res://addons/text_3d/Text3D.cs" id="1_8ieny"]
+[ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/text_3d/examples/base_font/base_font.tres" id="2_iratv"]
+[ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="3_abx05"]
+[ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="4_m4nn0"]
+[ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://addons/text_3d/Text3DEffect.cs" id="5_x4jdw"]
+[ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/text_3d/effects/Sway.cs" id="6_6h65s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8y18"]
+render_priority = 0
+shader = ExtResource("3_abx05")
+shader_parameter/use_triplanar = false
+shader_parameter/color = Color(1, 0.63266665, 0.24000001, 1)
+shader_parameter/vertex_color_intensity = 1.0
+shader_parameter/matcap_tex = ExtResource("4_m4nn0")
+shader_parameter/matcap_intensity = 1.2
+shader_parameter/matcap_power = 1.0
+shader_parameter/smoothness = 1.0
+shader_parameter/metallic = 0.6000000285
+shader_parameter/rim_multiplier = 1.0
+shader_parameter/use_top_and_bottom_lights = false
+
+[sub_resource type="Resource" id="Resource_ntgml"]
+script = ExtResource("6_6h65s")
+Speed = 5.0
+IndexOffset = 0.5
+metadata/_custom_type_script = "uid://buqek6b4sujer"
+
+[node name="text_debug" type="Node3D"]
+script = ExtResource("1_8ieny")
+Text = "sample text"
+Font = ExtResource("2_iratv")
+FontSize = 0.2
+MaterialOverride = SubResource("ShaderMaterial_r8y18")
+LineSpacing = 1.5
+HorizontalAlignment = 1
+VerticalAlignment = 1
+HorizontalJustification = 1
+UseMaxCharacterWidth = true
+TextEffects = Array[ExtResource("5_x4jdw")]([SubResource("Resource_ntgml")])
+metadata/_custom_type_script = "uid://ugi6v48qx1hb"

@@ -20,7 +20,7 @@ project/assembly_name="bugbounce"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/unidot_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/text_3d/plugin.cfg", "res://addons/unidot_importer/plugin.cfg")
 
 [file_customization]
 
