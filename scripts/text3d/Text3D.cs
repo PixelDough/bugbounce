@@ -10,8 +10,9 @@ namespace Parallas.Text3D;
 [GlobalClass, Tool]
 public partial class Text3D : Node3D, ISerializationListener
 {
-    [Signal] public delegate void TextChangedEventHandler();
-    [Signal] public delegate void FontChangedEventHandler();
+    [Signal] public delegate void TextChangedEventHandler(string text);
+    [Signal] public delegate void FontChangedEventHandler(Font3D font);
+    [Signal] public delegate void MaterialOverrideChangedEventHandler(Material material);
 
     [Export(PropertyHint.MultilineText)]
     public String Text
@@ -21,7 +22,7 @@ public partial class Text3D : Node3D, ISerializationListener
         {
             _text = value;
             GenerateText();
-            EmitSignalTextChanged();
+            EmitSignalTextChanged(value);
         }
     }
     private String _text;
@@ -34,7 +35,7 @@ public partial class Text3D : Node3D, ISerializationListener
         {
             _font = value;
             GenerateText();
-            EmitSignalFontChanged();
+            EmitSignalFontChanged(value);
         }
     }
     private Font3D _font;
@@ -42,6 +43,19 @@ public partial class Text3D : Node3D, ISerializationListener
     [ExportGroup("Visual Settings")]
     [Export] public Color Tint = Colors.White;
     [Export] public float FontSize = 1f;
+
+    [Export]
+    public Material MaterialOverride
+    {
+        get => _materialOverride;
+        set
+        {
+            _materialOverride = value;
+            GenerateText();
+            EmitSignalMaterialOverrideChanged(value);
+        }
+    }
+    private Material _materialOverride = null;
 
     [ExportGroup("Spacing")]
     [Export] public float CharacterSpacing = 1f;
@@ -158,6 +172,8 @@ public partial class Text3D : Node3D, ISerializationListener
                 Rid scenario = world3d.Scenario;
                 RenderingServer.InstanceSetScenario(instance, scenario);
                 RenderingServer.InstanceSetBase(instance, mesh.GetRid());
+                if (_materialOverride is not null && IsInstanceValid(_materialOverride))
+                    RenderingServer.InstanceSetSurfaceOverrideMaterial(instance, 0, _materialOverride.GetRid());
 
                 // create the necessary transform dictionary entries and set them on the rendering server
                 CreateTransform(instance);
@@ -207,7 +223,7 @@ public partial class Text3D : Node3D, ISerializationListener
                 Material = new StandardMaterial3D()
                 {
                     ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded,
-                    AlbedoColor = Colors.Orange with { A = 0.1f },
+                    AlbedoColor = Colors.Orange with { A = 0.4f },
                     VertexColorUseAsAlbedo = true,
                     BlendMode = BaseMaterial3D.BlendModeEnum.Mix,
                     Transparency = BaseMaterial3D.TransparencyEnum.Alpha,
@@ -328,6 +344,7 @@ public partial class Text3D : Node3D, ISerializationListener
                     CharacterPositions[instance] = characterPos;
                     UpdateInstanceTransform(instance);
                     RenderingServer.InstanceSetVisible(instance, Visible);
+                    RenderingServer.InstanceGeometrySetShaderParameter(instance, "tint", Tint);
                 }
 
                 characterPos.X++;

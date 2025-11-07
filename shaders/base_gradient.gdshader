@@ -14,7 +14,8 @@ varying vec3 v_eye_pos;
 group_uniforms Color;
 uniform sampler2D albedo : hint_default_white, source_color;
 uniform bool use_triplanar = false;
-uniform vec3 tint : source_color = vec3(1,1,1);
+uniform vec3 color : source_color = vec3(1,1,1);
+instance uniform vec3 tint : source_color = vec3(1.0);
 uniform float vertex_color_intensity : hint_range(0.0, 1.0) = 1.0;
 
 group_uniforms NormalMap;
@@ -75,7 +76,7 @@ void fragment() {
 	
 	vec3 albedo_sample = texture(albedo, uv).rgb;
 	vec3 vert_color = mix(vec3(1.0), COLOR.rgb, vertex_color_intensity);
-	vec3 final_color = albedo_sample * vert_color * tint;
+	vec3 final_color = albedo_sample * vert_color * color * tint;
 
 	vec3 normal_sample = texture(normal_tex, uv).rgb;
 	vec3 normal_unpacked = normal_sample * 2.0 - 1.0;
