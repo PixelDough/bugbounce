@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=26 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="16_4so8i"]
 [ext_resource type="Script" uid="uid://da1vu44kxw4sn" path="res://scripts/text3d/Text3DEffect.cs" id="17_1sctp"]
 [ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://scripts/text3d/effects/Text3DSway.cs" id="18_but64"]
+[ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://scripts/text3d/effects/Text3DWave.cs" id="19_bve2d"]
 
 [sub_resource type="Environment" id="Environment_somws"]
 background_mode = 1
@@ -60,6 +61,12 @@ script = ExtResource("18_but64")
 Speed = 5.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://buqek6b4sujer"
+
+[sub_resource type="Resource" id="Resource_yqj0b"]
+script = ExtResource("19_bve2d")
+Speed = 8.0
+IndexOffset = 1.0
+metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -310,3 +317,19 @@ VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
 TextEffects = Array[ExtResource("17_1sctp")]([SubResource("Resource_u0us5")])
+
+[node name="text wave" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0811644, 1.3392546, 0)
+script = ExtResource("13_ntgml")
+Text = "wave wave wave wave wave"
+Font = ExtResource("14_bve2d")
+Tint = Color(1, 0.58750004, 0.00999999, 1)
+FontSize = 0.4
+MaterialOverride = SubResource("ShaderMaterial_j8a8q")
+CharacterSpacing = 1.1
+LineSpacing = 1.5
+HorizontalAlignment = 1
+VerticalAlignment = 1
+HorizontalJustification = 1
+UseMaxCharacterWidth = true
+TextEffects = Array[ExtResource("17_1sctp")]([SubResource("Resource_yqj0b")])
