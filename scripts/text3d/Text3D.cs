@@ -2,7 +2,9 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Godot.Collections;
+using Range = System.Range;
 
 namespace Parallas.Text3D;
 [GlobalClass, Tool]
@@ -11,7 +13,7 @@ public partial class Text3D : Node3D, ISerializationListener
     [Signal] public delegate void TextChangedEventHandler();
     [Signal] public delegate void FontChangedEventHandler();
 
-    [Export]
+    [Export(PropertyHint.MultilineText)]
     public String Text
     {
         get => _text;
@@ -40,8 +42,15 @@ public partial class Text3D : Node3D, ISerializationListener
     [ExportGroup("Visual Settings")]
     [Export] public Color Tint = Colors.White;
     [Export] public float FontSize = 1f;
-    [Export] public float LineSpacing = 0.2f;
+
+    [ExportGroup("Spacing")]
     [Export] public float CharacterSpacing = 0f;
+    [Export] public float LineSpacing = 0.2f;
+
+    [ExportGroup("Alignment")]
+    [Export] public AlignmentHorizontal HorizontalAlignment = AlignmentHorizontal.Left;
+    [Export] public AlignmentVertical VerticalAlignment = AlignmentVertical.Top;
+    [Export] public AlignmentHorizontal HorizontalJustification = AlignmentHorizontal.Left;
 
     [ExportGroup("Max Character Width")]
     [Export(PropertyHint.GroupEnable)] public bool UseMaxCharacterWidth = false;
@@ -56,23 +65,83 @@ public partial class Text3D : Node3D, ISerializationListener
     public System.Collections.Generic.Dictionary<Rid, Vector2I> CharacterPositions { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Transform3D> Transforms { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Transform3D> RelativeTransforms { get; private set; } = new();
+    public float[] HorizontalOffsets { get; private set; } = [];
+
+    private float AlignmentOffsetX => HorizontalAlignment switch
+    {
+        AlignmentHorizontal.Left => 0.5f,
+        AlignmentHorizontal.Center => -MaxCharacterWidth * 0.5f + 0.5f,
+        AlignmentHorizontal.Right => -MaxCharacterWidth + 0.5f,
+        _ => 0f
+    };
+    private float AlignmentOffsetY => VerticalAlignment switch
+    {
+        AlignmentVertical.Top => 0.5f,
+        AlignmentVertical.Center => -HorizontalOffsets.Length * 0.5f + 0.5f,
+        AlignmentVertical.Bottom => -HorizontalOffsets.Length + 0.5f,
+        _ => 0f
+    };
+
+    private RegEx _wordSplitRegex = new RegEx();
+    private Rid _gizmoInstance;
+    private QuadMesh _quadMesh;
+
+    public enum AlignmentHorizontal
+    {
+        Left,
+        Center,
+        Right
+    }
+
+    public enum AlignmentVertical
+    {
+        Top,
+        Center,
+        Bottom
+    }
 
     public override void _Ready()
     {
         base._Ready();
+        _wordSplitRegex.Compile(@"(\s+)|(\S+)");
+        // _wordSplitRegex.Compile(@"\s*\S+");
 
         GenerateText();
+
+        if (Engine.IsEditorHint())
+        {
+            if (GetWorld3D() is not { } world3d) return;
+            _gizmoInstance = RenderingServer.InstanceCreate();
+            // Set the scenario from the world, this ensures it
+            // appears with the same objects as the scene.
+            Rid scenario = world3d.Scenario;
+            RenderingServer.InstanceSetScenario(_gizmoInstance, scenario);
+            _quadMesh ??= new QuadMesh()
+            {
+                Size = Vector2.One,
+                Material = new StandardMaterial3D()
+                {
+                    ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded,
+                    AlbedoColor = Colors.Orange
+                }
+            };
+            RenderingServer.InstanceSetBase(_gizmoInstance, _quadMesh.GetRid());
+        }
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
         ClearText();
+        ClearGizmo();
+        _quadMesh?.Free();
     }
 
     public void OnBeforeSerialize()
     {
         ClearText();
+        ClearGizmo();
+        _quadMesh?.Free();
     }
 
     public void OnAfterDeserialize() {}
@@ -121,10 +190,19 @@ public partial class Text3D : Node3D, ISerializationListener
         }
 
         _instances.Clear();
+        HorizontalOffsets = [];
         CharacterIndexInstances.Clear();
         CharacterPositions.Clear();
         Transforms.Clear();
         RelativeTransforms.Clear();
+    }
+
+    private void ClearGizmo()
+    {
+        if (Engine.IsEditorHint())
+        {
+            RenderingServer.FreeRid(_gizmoInstance);
+        }
     }
 
     private void CreateTransform(Rid instance)
@@ -137,9 +215,10 @@ public partial class Text3D : Node3D, ISerializationListener
     private Transform3D UpdateInstanceTransform(Rid instance)
     {
         var characterPosition = CharacterPositions[instance];
+        var horizontalOffset = HorizontalOffsets[characterPosition.Y];
         Transform3D xform = GlobalTransform
-            .TranslatedLocal(Vector3.Right * ((characterPosition.X * FontSize) + (characterPosition.X * CharacterSpacing)))
-            .TranslatedLocal(Vector3.Down * ((characterPosition.Y * FontSize) + (characterPosition.Y * LineSpacing)))
+            .TranslatedLocal(Vector3.Right * (((characterPosition.X + horizontalOffset) * FontSize) + ((characterPosition.X + horizontalOffset) * CharacterSpacing)))
+            .TranslatedLocal(Vector3.Down * (((characterPosition.Y + AlignmentOffsetY) * FontSize) + ((characterPosition.Y + AlignmentOffsetY) * LineSpacing)))
             .ScaledLocal(Vector3.One * FontSize);
         Transforms[instance] = xform;
         var finalTransform = Transforms[instance] * RelativeTransforms[instance];
@@ -169,39 +248,77 @@ public partial class Text3D : Node3D, ISerializationListener
             RelativeTransforms[instance] = relativeTransform;
         }
 
-        Vector2I characterPos = Vector2I.Zero;
-        for (int i = 0; i < Text.Length; i++)
+        String[] words = [.._wordSplitRegex.SearchAll(Text).SelectMany<RegExMatch, String>(match => [match.Strings[1], match.Strings[2]])];
+        List<String> lines = [];
+        StringBuilder currentLine = new StringBuilder();
+        var currentWidth = 0;
+        foreach (var word in words)
         {
-            bool hasCharacter = CharacterIndexInstances.TryGetValue(i, out Rid instance);
-
-            // calculate how much further to check ahead for breaking into a new line by
-            // looking for the distance between spaces
-            int spaceDistance = 0;
-            if (WordWrap && !hasCharacter)
+            var wordWidth = word.Length;
+            var wordWidthTrimmed = word.TrimEnd().Length;
+            if (currentWidth + wordWidthTrimmed > MaxCharacterWidth)
             {
-                var stringToHere = Text.Substring(i + 1);
-                spaceDistance = stringToHere.TakeWhile((c) => !char.IsWhiteSpace(c)).Count();
+                if (currentWidth > 0)
+                {
+                    lines.Add(currentLine.ToString());
+                    currentLine.Clear();
+                    currentWidth = 0;
+                }
+                else
+                {
+                    lines.Add(word);
+                    continue;
+                }
             }
 
-            // if using max width, and the pos + dist to next space is over the max width, wrap
-            if (UseMaxCharacterWidth && characterPos.X + spaceDistance >= MaxCharacterWidth)
+            currentLine.Append(word);
+            currentWidth += wordWidth;
+        }
+        if (currentWidth > 0)
+        {
+            lines.Add(currentLine.ToString());
+        }
+        HorizontalOffsets = new float[lines.Count];
+
+        int charCounter = 0;
+        Vector2I characterPos = Vector2I.Zero;
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var line = lines[i];
+            var lineTrimWidth = line.Trim().Length;
+            var offset = MaxCharacterWidth - lineTrimWidth;
+
+            float positionOffsetX = HorizontalJustification switch
             {
-                characterPos.X = 0;
-                characterPos.Y += 1;
+                AlignmentHorizontal.Left => 0,
+                AlignmentHorizontal.Center => offset * 0.5f,
+                AlignmentHorizontal.Right => offset,
+                _ => 0f
+            };
+            HorizontalOffsets[i] = positionOffsetX + AlignmentOffsetX;
+
+            for (int charIndex = 0; charIndex < line.Length; charIndex++)
+            {
+                bool hasCharacter = CharacterIndexInstances.TryGetValue(charCounter, out Rid instance);
+                if (hasCharacter)
+                {
+                    CharacterPositions[instance] = characterPos;
+                    UpdateInstanceTransform(instance);
+                }
+
+                characterPos.X++;
+                charCounter++;
             }
 
-            // if this is a valid character, set its properties
-            if (hasCharacter)
-            {
-                CharacterPositions[instance] = characterPos;
-                UpdateInstanceTransform(instance);
-            }
+            characterPos.X = 0;
+            characterPos.Y++;
+        }
 
-            // move to the right, but only if this character is not both invalid and the first character in the line
-            if (hasCharacter || characterPos.X > 0)
-            {
-                characterPos.X += 1;
-            }
+        if (Engine.IsEditorHint())
+        {
+            // ((characterPosition.X * FontSize) + (characterPosition.X * CharacterSpacing) + horizontalOffset))
+            var translation = Vector3.Right * (AlignmentOffsetX + MaxCharacterWidth * 0.5f);
+            RenderingServer.InstanceSetTransform(_gizmoInstance, GlobalTransform.TranslatedLocal(translation));
         }
     }
 }

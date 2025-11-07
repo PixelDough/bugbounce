@@ -74,12 +74,14 @@ AngleDegrees = 180.0
 metadata/_custom_type_script = "uid://pa1p4piks2ay"
 
 [node name="Text3D" type="Node3D" parent="Level Details"]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6164446, -3.7973518, -9.536743e-07)
 script = ExtResource("8_lwvyp")
-Text = "test one: 123??? testing"
+Text = "this is some test text. lets see how far it can go... okay"
 Font = ExtResource("9_avv52")
+HorizontalAlignment = 1
+VerticalAlignment = 1
 UseMaxCharacterWidth = true
-MaxCharacterWidth = 12
+MaxCharacterWidth = 10
 TextEffects = Array[ExtResource("10_avv52")]([SubResource("Resource_u0us5")])
 
 [node name="Carousel" type="Node3D" parent="."]
@@ -152,3 +154,4 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 fov = 65.0
 
 [node name="skybox_space_01" parent="." instance=ExtResource("8_x0tbs")]
+visible = false
