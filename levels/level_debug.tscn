@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=27 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -63,10 +63,16 @@ metadata/_custom_type_script = "uid://buqek6b4sujer"
 
 [sub_resource type="Resource" id="Resource_bve2d"]
 script = ExtResource("19_bve2d")
-Speed = 5.0
+Speed = 3.0
 IndexOffset = 0.5
-Intensity = 0.5
 metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
+
+[sub_resource type="Resource" id="Resource_yqj0b"]
+script = ExtResource("16_8b2nr")
+Speed = 6.0
+IndexOffset = 1.0
+AngleDegrees = 25.0
+metadata/_custom_type_script = "uid://buqek6b4sujer"
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -316,7 +322,7 @@ HorizontalJustification = 1
 UseMaxCharacterWidth = true
 TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_ntgml"), null])
 
-[node name="text sway2" type="Node3D" parent="."]
+[node name="text wave" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3392546, 0)
 script = ExtResource("13_ulwmw")
 Text = "wave wave wave wave wave"
@@ -329,3 +335,17 @@ VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
 TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
+
+[node name="text substrings" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.3392546, 0)
+script = ExtResource("13_ulwmw")
+Text = "press <button_jump> to jump"
+Font = ExtResource("14_bve2d")
+FontSize = 0.2
+MaterialOverride = SubResource("ShaderMaterial_ntgml")
+LineSpacing = 1.5
+HorizontalAlignment = 1
+VerticalAlignment = 1
+HorizontalJustification = 1
+UseMaxCharacterWidth = true
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d"), SubResource("Resource_yqj0b")])
