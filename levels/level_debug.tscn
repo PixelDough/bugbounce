@@ -61,10 +61,11 @@ Speed = 5.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://buqek6b4sujer"
 
-[sub_resource type="Resource" id="Resource_yqj0b"]
+[sub_resource type="Resource" id="Resource_bve2d"]
 script = ExtResource("19_bve2d")
-Speed = 10.0
-IndexOffset = 0.8
+Speed = 5.0
+IndexOffset = 0.5
+Intensity = 0.5
 metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
 
 [node name="RootNode3D" type="Node3D"]
@@ -302,7 +303,7 @@ material = ExtResource("3_iby0j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9349246, 0.708125, 6.3023233)
 
 [node name="text sway" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9999999, 1.3392546, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4999999, 1.3392546, 0)
 script = ExtResource("13_ulwmw")
 Text = "sway sway sway sway sway"
 Font = ExtResource("14_bve2d")
@@ -313,11 +314,10 @@ HorizontalAlignment = 1
 VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-MaxCharacterWidth = 4
 TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_ntgml"), null])
 
-[node name="text wave" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2674928, 1.3392546, 0)
+[node name="text sway2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3392546, 0)
 script = ExtResource("13_ulwmw")
 Text = "wave wave wave wave wave"
 Font = ExtResource("14_bve2d")
@@ -328,4 +328,4 @@ HorizontalAlignment = 1
 VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_yqj0b")])
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
