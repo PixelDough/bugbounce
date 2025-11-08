@@ -170,6 +170,7 @@ public partial class MeshText : Node3D, ISerializationListener
 
         if (Font is null) return;
         if (!IsInstanceValid(this)) return;
+        if (!IsInsideTree()) return;
         if (GetWorld3D() is not { } world3d) return;
 
         var textOriginal = new StringBuilder(Text)

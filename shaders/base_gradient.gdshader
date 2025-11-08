@@ -87,7 +87,7 @@ void fragment() {
 	
 	vec4 albedo_with_matcap = apply_matcap_basic(
 		vec4(final_color, 1.0),
-		texture(matcap_tex, generate_matcap_uvs_basic(view_normal)),
+		texture(matcap_tex, matcap_uv),
 		matcap_intensity,
 		matcap_power,
 		smoothness,

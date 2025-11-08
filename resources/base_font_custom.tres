@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MeshTextFont" load_steps=46 format=3 uid="uid://cnrefcoc285w"]
+[gd_resource type="Resource" script_class="MeshTextFont" load_steps=47 format=3 uid="uid://cnrefcoc285w"]
 
 [ext_resource type="ArrayMesh" uid="uid://cnqgh6nxg6l2h" path="res://addons/meshtext/examples/base_font/meshes/font3d_period.res" id="1_ht87c"]
 [ext_resource type="ArrayMesh" uid="uid://cv7w77mkxouml" path="res://addons/meshtext/examples/base_font/meshes/font3d_apostraphe.res" id="2_ocjbc"]
@@ -43,6 +43,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cn5jiyesllhgu" path="res://addons/meshtext/examples/base_font/meshes/font3d_z.res" id="41_ueobw"]
 [ext_resource type="ArrayMesh" uid="uid://cu480513wdctp" path="res://models/ui/input_buttons/extracted/InputJump.Cylinder_002.mesh" id="42_fsmo8"]
 [ext_resource type="Script" uid="uid://n1b38tk8dayl" path="res://addons/meshtext/MeshTextFont.cs" id="43_g4uxx"]
+[ext_resource type="ArrayMesh" uid="uid://bfo5pgc4ll43p" path="res://models/general/medals/medals_timeattack.res" id="43_vm1f6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_euo3m"]
 size = Vector3(0.8, 0.8, 0.8)
@@ -59,7 +60,8 @@ CharacterMeshes = Array[Mesh]([ExtResource("1_ht87c"), ExtResource("2_ocjbc"), E
 SubstringMeshes = Dictionary[String, Mesh]({
 "<button_jump>": ExtResource("42_fsmo8"),
 "<cube>": SubResource("BoxMesh_euo3m"),
-"<ring>": SubResource("TorusMesh_4yo5q")
+"<ring>": SubResource("TorusMesh_4yo5q"),
+"<time_trial>": ExtResource("43_vm1f6")
 })
 CaseSensitive = false
 metadata/_custom_type_script = "uid://n1b38tk8dayl"

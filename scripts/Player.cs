@@ -146,8 +146,8 @@ public partial class Player : RigidBody3D
         // playerStuffManager.sandBurstParticleSystem.transform.position = position - Vector3.up / 4;
         
         // Important: Set this AFTER checking for a buffered jump, as isGrounded might have been set in OnCollisionEnter.
-        var hitBelow = MoveAndCollide(Vector3.Down * 0.01f, true);
-        if (LinearVelocity.Y <= 8f && hitBelow is not null)
+        var hitBelow = MoveAndCollide(GetGravity().Normalized() * 0.01f, true);
+        if (LinearVelocity.Dot(-GetGravity().Normalized()) <= 8f && hitBelow is not null)
         {
             _isGrounded = true;
         } else { _isGrounded = false; }
@@ -169,8 +169,14 @@ public partial class Player : RigidBody3D
 
         // Former LateUpdate() contents
 
-        _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
-            Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta).GetEuler();
+
+        // _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
+            // Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta).GetEuler();
+        var tiltQuaternion = Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f,
+            Mathf.DegToRad(_inputMovement.X * 5f)));
+        var newQuaternion = MathUtil.LookRotation(Vector3.Forward, -GetGravity().Normalized());
+
+        _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion, newQuaternion * tiltQuaternion, 3f, (float)delta).GetEuler();
 
         _eyesCurrentAngle = Mathf.LerpAngle(_eyesCurrentAngle, _eyesTargetAngle, 10f * (float)delta);
 
@@ -195,26 +201,24 @@ public partial class Player : RigidBody3D
         // TODO: This is old code from Unity. Change this so that it sets GravityScale to 0 or 1 based on the result.
         // if (_isPausable && (!GameManager.DoPlayerPhysics || _noclip == 1)) return;
         
+        float reverseMultiplier = 1f;
+        Vector3 flattenedVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GetGravity().Normalized());
+        if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > Mathf.Pi * 0.5f)
+            reverseMultiplier = 2f;
         if (_isGrounded)
         {
-            float reverseMultiplier = 1f;
-            Vector3 flattenedVelocity = new Vector3(LinearVelocity.X, 0f, LinearVelocity.Z);
-            if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > Mathf.Pi * 0.5f) reverseMultiplier = 2f;
-                
-            Vector3 inputConvertedToTorque = _inputMovement.Rotated(Vector3.Up, Mathf.Pi * 0.5f);
+
+            Vector3 inputConvertedToTorque = MathUtil.AngleAxis(Mathf.Pi * 0.5f, -GetGravity().Normalized()) * _inputMovement;
             ApplyTorque(
-                new Vector3(inputConvertedToTorque.X, 0f, inputConvertedToTorque.Z) *
+                new Vector3(inputConvertedToTorque.X, inputConvertedToTorque.Y, inputConvertedToTorque.Z) *
                 (250f * reverseMultiplier * (float)delta));
         }
         else
         {
-            float reverseMultiplier = 1f;
-            Vector3 flattenedVelocity = LinearVelocity with { Y = 0 };
-            if (flattenedVelocity.Normalized().AngleTo(_inputMovement.Normalized()) > Mathf.Pi * 0.5f) reverseMultiplier = 2f;
             ApplyForce(_inputMovement * (700 * reverseMultiplier * (float)delta));
         }
 
-        float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, Vector3.Up).Length();
+        float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, -GetGravity().Normalized()).Length();
         if (_isGrounded)
         {
             LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 13, (float)delta);
@@ -258,11 +262,11 @@ public partial class Player : RigidBody3D
                     if (velTowardsNormal > 3f)
                     {
                         // Hit wall
-                        if (Mathf.Abs(pointNormal.Y) < 0.1f)
+                        if (Mathf.Abs(pointNormal.Dot(-gravity.Normalized())) < 0.1f)
                         {
                             LinearVelocity = LinearVelocity.Bounce(pointNormal.Normalized()) * PhysicsMaterialOverride.Bounce;
                             ApplyImpulse(pointNormal * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.08f);
-                            ApplyImpulse(Vector3.Up * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.5f);
+                            ApplyImpulse(-GetGravity().Normalized() * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.5f);
                         }
                         // Hit something that's not a wall
                         else if (pointNormal.AngleTo(-gravity) > Mathf.DegToRad(35f) && velTowardsNormal > 9f)
@@ -369,8 +373,8 @@ public partial class Player : RigidBody3D
 
     private void Jump()
     {
-        if (Mathf.Abs(LinearVelocity.Y) < 10f)
-            LinearVelocity = new Vector3(LinearVelocity.X, 10f, LinearVelocity.Z);
+        if (Mathf.Abs(LinearVelocity.Dot(GetGravity().Normalized())) < 10f)
+            LinearVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GetGravity().Normalized()) - GetGravity().Normalized() * 10f;
         _jumpBuffer = 0f;
         _coyoteTime = 0f;
         _isGrounded = false;
@@ -382,7 +386,11 @@ public partial class Player : RigidBody3D
 
     Vector3 CameraRelativeFlatten(Vector3 input)
     {
-        return input.Rotated(Vector3.Up, GetViewport().GetCamera3D().GlobalRotation.Y);
+        var grav = -GetGravity().Normalized();
+        var camForward = -GetViewport().GetCamera3D().GlobalBasis.Z;
+        var projectedOnPlane = MathUtil.ProjectOnPlane(camForward, grav);
+        var quat = MathUtil.LookRotation(projectedOnPlane, grav);
+        return quat * input;
     }
 
     public void SetRespawnPoint(Vector3 position, Vector3 direction, ulong checkpointId)

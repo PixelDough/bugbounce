@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://6ldfqldmdso2"]
+[gd_scene load_steps=23 format=3 uid="uid://6ldfqldmdso2"]
 
 [ext_resource type="PackedScene" uid="uid://c326q7alirdpl" path="res://models/ui/ui_arrow/ArrowUI.fbx" id="2_vrxil"]
 [ext_resource type="ArrayMesh" uid="uid://kxkqlnla7pii" path="res://models/general/icon_modes/icon_modes_locked.res" id="2_x0tbs"]
@@ -17,6 +17,7 @@
 [ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="10_wsjeq"]
 [ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="11_u0us5"]
 [ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="11_wsjeq"]
+[ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="18_sdppc"]
 
 [sub_resource type="Environment" id="Environment_ggd8c"]
 background_mode = 1
@@ -48,6 +49,8 @@ script = ExtResource("11_wsjeq")
 Speed = 5.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://buqek6b4sujer"
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_sdppc"]
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -165,6 +168,9 @@ transform = Transform3D(0.99803823, 0, -0.062606886, 0.02348577, 0.9269719, 0.37
 [node name="millie_base" parent="Roly Poly" instance=ExtResource("7_vrxil")]
 visible = false
 
+[node name="PlayerCharacter" parent="." instance=ExtResource("18_sdppc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, -16)
+
 [node name="Level Cam" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -20)
 
@@ -174,3 +180,45 @@ fov = 65.0
 
 [node name="skybox_space_01" parent="." instance=ExtResource("8_x0tbs")]
 visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+radius = 19.0
+height = 0.5
+sides = 32
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+operation = 2
+radius = 13.0
+height = 1.0
+sides = 16
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0)
+size = Vector3(1, 50, 50)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+collision_mask = 2
+gravity_space_override = 3
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+gravity = 19.6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("WorldBoundaryShape3D_sdppc")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 13, -5, 0)
+collision_mask = 2
+gravity_space_override = 3
+gravity_point_center = Vector3(1, 0, 0)
+gravity_direction = Vector3(1, 0, 0)
+gravity = 19.6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("WorldBoundaryShape3D_sdppc")

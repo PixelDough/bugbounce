@@ -10,6 +10,8 @@ public partial class ThirdPersonCameraBehavior : Node
     [Export] public Node3D TargetTilt;
     [Export] public Vector3 Offset;
 
+    public Quaternion GravityQuaternion => MathUtil.LookRotation(Vector3.Forward, TargetTilt.GlobalBasis.Y);
+    public Vector3 OffsetWithGravity => Offset * GravityQuaternion;
     public Vector3 FocusPosition { get; private set; }
     public Vector3 TargetCamOffsetRay { get; private set; }
     public float TargetCamDistance { get; private set; }
@@ -41,7 +43,7 @@ public partial class ThirdPersonCameraBehavior : Node
     public override void _Process(double delta)
     {
         base._Process(delta);
-        FocusPosition = Target.GlobalPosition + Offset;
+        FocusPosition = Target.GlobalPosition + OffsetWithGravity;
 
         _targetHorizontalAngle -= _lookInput.X * 0.2f; // subtract because third person inverts it
         _targetVerticalPercent -= _lookInput.Y * 0.1f * 0.01f;
@@ -54,8 +56,8 @@ public partial class ThirdPersonCameraBehavior : Node
         Vector2 lerp2 = _rings[1].Lerp(_rings[2], VerticalPercent);
         Vector2 lerp3 = lerp1.Lerp(lerp2, VerticalPercent);
         float angleRad = Mathf.DegToRad(HorizontalAngle) + Mathf.Pi * 0.5f;
-        TargetCamOffsetRay = Vector3.Up * lerp3.X +
-                             new Vector3(Mathf.Cos(angleRad), 0f, -Mathf.Sin(angleRad)) * lerp3.Y;
+        TargetCamOffsetRay = TargetTilt.GlobalBasis.Y * lerp3.X +
+                              (GravityQuaternion * new Vector3(Mathf.Cos(angleRad), 0f, -Mathf.Sin(angleRad))) * lerp3.Y;
         TargetCamDistance = TargetCamOffsetRay.Length();
         // TargetCamOffsetRay += Offset;
         Vector3 finalPos = FocusPosition + TargetCamOffsetRay.LimitLength(RayLimitDistance);

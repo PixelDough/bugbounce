@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="16_4so8i"]
 [ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="16_8b2nr"]
 [ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://addons/meshtext/effects/Wave.cs" id="19_bve2d"]
+[ext_resource type="Resource" uid="uid://cnrefcoc285w" path="res://resources/base_font_custom.tres" id="20_yqj0b"]
 
 [sub_resource type="Environment" id="Environment_somws"]
 background_mode = 1
@@ -66,13 +67,6 @@ script = ExtResource("19_bve2d")
 Speed = 3.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
-
-[sub_resource type="Resource" id="Resource_yqj0b"]
-script = ExtResource("16_8b2nr")
-Speed = 6.0
-IndexOffset = 1.0
-AngleDegrees = 25.0
-metadata/_custom_type_script = "uid://buqek6b4sujer"
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -244,22 +238,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99090195, 5.2022343, -29.71
 
 [node name="plate" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 5, 0)
-sync_to_physics = false
 
 [node name="plate2" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -5, 0)
-sync_to_physics = false
 
 [node name="plate3" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -5, 0, 0)
-sync_to_physics = false
 
 [node name="plate4" parent="Spinning Test2" instance=ExtResource("13_7mas3")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 5, 0, 0)
-sync_to_physics = false
 
-[node name="RotateAroundParent" type="Node" parent="Spinning Test2"]
+[node name="RotateAroundParent" type="Node" parent="Spinning Test2" node_paths=PackedStringArray("_nodes")]
 script = ExtResource("15_ttv4e")
+_nodes = [NodePath("../plate"), NodePath("../plate2"), NodePath("../plate3"), NodePath("../plate4")]
+UsePhysics = true
+Axis = Vector3(0, 0, 1)
 metadata/_custom_type_script = "uid://ckaboqq2i6em3"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
@@ -311,7 +304,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9349246, 0.708125, 6.30232
 [node name="text sway" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4999999, 1.3392546, 0)
 script = ExtResource("13_ulwmw")
-Text = "sway sway sway sway sway"
+Text = "sway sway sway 
+sway sway"
 Font = ExtResource("14_bve2d")
 FontSize = 0.2
 MaterialOverride = SubResource("ShaderMaterial_ntgml")
@@ -320,7 +314,7 @@ HorizontalAlignment = 1
 VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_ntgml"), null])
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_ntgml")])
 
 [node name="text wave" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3392546, 0)
@@ -339,13 +333,15 @@ TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
 [node name="text substrings" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.3392546, 0)
 script = ExtResource("13_ulwmw")
-Text = "press <button_jump> to jump"
-Font = ExtResource("14_bve2d")
+Text = "best <time_trial>:
+02:34.056"
+Font = ExtResource("20_yqj0b")
 FontSize = 0.2
 MaterialOverride = SubResource("ShaderMaterial_ntgml")
-LineSpacing = 1.5
+LineSpacing = 2.5
 HorizontalAlignment = 1
 VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d"), SubResource("Resource_yqj0b")])
+MaxCharacterWidth = 10
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
