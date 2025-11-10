@@ -12,15 +12,15 @@
 [ext_resource type="Script" uid="uid://2uxxsiaetxmj" path="res://addons/meshtext/MeshText.cs" id="13_ulwmw"]
 [ext_resource type="Resource" uid="uid://dydsue4wk6xys" path="res://addons/meshtext/examples/base_font/base_font.tres" id="14_bve2d"]
 [ext_resource type="Script" uid="uid://pa1p4piks2ay" path="res://scripts/Rotate.cs" id="14_ttv4e"]
+[ext_resource type="Material" uid="uid://cb73v05q58j7f" path="res://models/text3d/Mat_Font3D_2.material" id="15_4so8i"]
 [ext_resource type="Script" uid="uid://ckaboqq2i6em3" path="res://scripts/RotateAroundParent.cs" id="15_ttv4e"]
 [ext_resource type="Script" uid="uid://c0crjku37j1ud" path="res://addons/meshtext/MeshTextEffect.cs" id="15_u16dj"]
 [ext_resource type="PackedScene" uid="uid://bfs2sgyqh61kw" path="res://models/level_assets/debug/leveltest/Fbx_LevelTest.fbx" id="15_xwa2n"]
-[ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="15_yqj0b"]
-[ext_resource type="Texture2D" uid="uid://15ddujkmkdp1" path="res://matcaps/Matcap_Metal_03.png" id="16_4so8i"]
 [ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="16_8b2nr"]
 [ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://addons/meshtext/effects/Wave.cs" id="19_bve2d"]
 [ext_resource type="Resource" uid="uid://cnrefcoc285w" path="res://resources/base_font_custom.tres" id="20_yqj0b"]
 [ext_resource type="PackedScene" uid="uid://dnglshy5uulg7" path="res://scenes/props/general/tutorial_pad.tscn" id="21_4so8i"]
+[ext_resource type="PackedScene" uid="uid://btyvyq3cplm12" path="res://scenes/props/general/grav_flip.tscn" id="22_1sctp"]
 
 [sub_resource type="Environment" id="Environment_somws"]
 background_mode = 1
@@ -43,30 +43,23 @@ data = PackedVector3Array(0, 0, 0, 0.0541, 0.7337, 0, 0, 0, 1, 0.0541, 0.7337, 0
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xjgd8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntgml"]
-render_priority = 0
-shader = ExtResource("15_yqj0b")
-shader_parameter/use_triplanar = false
-shader_parameter/color = Color(1, 0.63266665, 0.24000001, 1)
-shader_parameter/vertex_color_intensity = 1.0
-shader_parameter/matcap_tex = ExtResource("16_4so8i")
-shader_parameter/matcap_intensity = 1.2
-shader_parameter/matcap_power = 1.0
-shader_parameter/smoothness = 1.0
-shader_parameter/metallic = 0.6000000285
-shader_parameter/rim_multiplier = 1.0
-shader_parameter/use_top_and_bottom_lights = false
-
-[sub_resource type="Resource" id="Resource_ntgml"]
+[sub_resource type="Resource" id="Resource_1sctp"]
 script = ExtResource("16_8b2nr")
 Speed = 5.0
 IndexOffset = 0.5
 metadata/_custom_type_script = "uid://buqek6b4sujer"
 
-[sub_resource type="Resource" id="Resource_bve2d"]
+[sub_resource type="Resource" id="Resource_but64"]
 script = ExtResource("19_bve2d")
-Speed = 3.0
+Speed = 5.0
 IndexOffset = 0.5
+metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
+
+[sub_resource type="Resource" id="Resource_j8a8q"]
+script = ExtResource("19_bve2d")
+Speed = 4.0
+IndexOffset = 1.0
+Intensity = 0.1
 metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
 
 [node name="RootNode3D" type="Node3D"]
@@ -269,6 +262,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 9.5)
 size = Vector3(10, 1, 20)
 material = ExtResource("3_iby0j")
 
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.5, 9.5)
+size = Vector3(10, 1, 20)
+material = ExtResource("3_iby0j")
+
 [node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2.5, 10)
 size = Vector3(5, 1, 2)
@@ -308,28 +306,26 @@ script = ExtResource("13_ulwmw")
 Text = "sway sway sway 
 sway sway"
 Font = ExtResource("14_bve2d")
-FontSize = 0.2
-MaterialOverride = SubResource("ShaderMaterial_ntgml")
+FontSize = 0.15
+MaterialOverride = ExtResource("15_4so8i")
 LineSpacing = 1.5
 HorizontalAlignment = 1
-VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_ntgml")])
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_1sctp")])
 
 [node name="text wave" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3392546, 0)
 script = ExtResource("13_ulwmw")
 Text = "wave wave wave wave wave"
 Font = ExtResource("14_bve2d")
-FontSize = 0.2
-MaterialOverride = SubResource("ShaderMaterial_ntgml")
+FontSize = 0.15
+MaterialOverride = ExtResource("15_4so8i")
 LineSpacing = 1.5
 HorizontalAlignment = 1
-VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_but64")])
 
 [node name="text substrings" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.3392546, 0)
@@ -337,15 +333,19 @@ script = ExtResource("13_ulwmw")
 Text = "best <time_trial>:
 02:34.056"
 Font = ExtResource("20_yqj0b")
-FontSize = 0.2
-MaterialOverride = SubResource("ShaderMaterial_ntgml")
-LineSpacing = 2.5
+FontSize = 0.15
+MaterialOverride = ExtResource("15_4so8i")
+LineSpacing = 1.5
 HorizontalAlignment = 1
-VerticalAlignment = 1
 HorizontalJustification = 1
 UseMaxCharacterWidth = true
-MaxCharacterWidth = 10
-TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
+TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_j8a8q")])
 
 [node name="Tutorial Pad" parent="." instance=ExtResource("21_4so8i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 6)
+
+[node name="grav_flip" parent="." instance=ExtResource("22_1sctp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 2.5)
+
+[node name="grav_flip2" parent="." instance=ExtResource("22_1sctp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 16)
