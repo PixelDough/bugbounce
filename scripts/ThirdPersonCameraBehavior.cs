@@ -61,7 +61,16 @@ public partial class ThirdPersonCameraBehavior : Node
         TargetCamDistance = TargetCamOffsetRay.Length();
         // TargetCamOffsetRay += Offset;
         Vector3 finalPos = FocusPosition + TargetCamOffsetRay.LimitLength(RayLimitDistance);
-        Camera3D.LookAtFromPosition(finalPos, FocusPosition, TargetTilt.Basis.Y);
+
+        // if finalPos == FocusPosition, the game will crash
+        if (finalPos == FocusPosition)
+        {
+            Camera3D.GlobalPosition = FocusPosition;
+        }
+        else
+        {
+            Camera3D.LookAtFromPosition(finalPos, FocusPosition, TargetTilt.Basis.Y);
+        }
     }
 
     public override void _UnhandledInput(InputEvent @event)

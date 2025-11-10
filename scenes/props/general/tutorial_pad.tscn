@@ -1,8 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnglshy5uulg7"]
+[gd_scene load_steps=9 format=3 uid="uid://dnglshy5uulg7"]
 
-[ext_resource type="ArrayMesh" uid="uid://cko7nxccf045h" path="res://models/text3d/extracted/Fbx_Font3D.Plane_005.mesh" id="1_dxvp1"]
-[ext_resource type="Material" uid="uid://dclmg41yxms5i" path="res://models/text3d/Mat_Font3D_1.material" id="2_d3pam"]
+[ext_resource type="ArrayMesh" uid="uid://bksxdrlj2786y" path="res://addons/meshtext/examples/base_font/meshes/font3d_question.res" id="1_dxvp1"]
+[ext_resource type="Shader" uid="uid://dpmoby3ol6x1l" path="res://shaders/base_gradient.gdshader" id="2_d3pam"]
 [ext_resource type="PackedScene" uid="uid://b2kyorkcm3kel" path="res://models/general/checkpoint_pad.glb" id="3_dxvp1"]
+[ext_resource type="Texture2D" uid="uid://c4uyro4rnrpoa" path="res://matcaps/Matcap_Gold_02.png" id="3_yfbla"]
+[ext_resource type="Script" uid="uid://cdal3i2m8rgk8" path="res://scripts/BobUpDown.cs" id="4_yfbla"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgo68"]
+render_priority = 0
+shader = ExtResource("2_d3pam")
+shader_parameter/use_triplanar = false
+shader_parameter/color = Color(1, 0.7305, 0.23000002, 1)
+shader_parameter/vertex_color_intensity = 1.0
+shader_parameter/matcap_tex = ExtResource("3_yfbla")
+shader_parameter/matcap_intensity = 3.0
+shader_parameter/matcap_power = 1.0
+shader_parameter/smoothness = 0.150000007125
+shader_parameter/metallic = 0.50000002375
+shader_parameter/rim_multiplier = 1.0
+shader_parameter/use_top_and_bottom_lights = false
+
+[sub_resource type="Curve" id="Curve_tgo68"]
+_data = [Vector2(0, 0), 0.0, 4.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utkuc"]
 radius = 0.75
@@ -10,18 +30,22 @@ height = 1.5
 
 [node name="Tutorial Pad" type="Node3D"]
 
-[node name="Question Mark" type="Node3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="MeshRenderer" type="MeshInstance3D" parent="Question Mark"]
-gi_mode = 2
 mesh = ExtResource("1_dxvp1")
-surface_material_override/0 = ExtResource("2_d3pam")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_tgo68")
+
+[node name="BobUpDown" type="Node" parent="MeshInstance3D"]
+script = ExtResource("4_yfbla")
+Curve = SubResource("Curve_tgo68")
+metadata/_custom_type_script = "uid://cdal3i2m8rgk8"
 
 [node name="checkpoint_pad" parent="." instance=ExtResource("3_dxvp1")]
 
 [node name="Trigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
 shape = SubResource("CapsuleShape3D_utkuc")

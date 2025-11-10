@@ -490,7 +490,6 @@ shape = SubResource("ConcavePolygonShape3D_dldpm")
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 4, 31, 67)
 
 [node name="skybox_space_01" parent="." instance=ExtResource("20_kka41")]
-process_priority = 2147483647
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("21_02mq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16469741, 0.25, 15.220003)

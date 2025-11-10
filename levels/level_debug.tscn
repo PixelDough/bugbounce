@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=28 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://buqek6b4sujer" path="res://addons/meshtext/effects/Sway.cs" id="16_8b2nr"]
 [ext_resource type="Script" uid="uid://c0bjjju0pm6b6" path="res://addons/meshtext/effects/Wave.cs" id="19_bve2d"]
 [ext_resource type="Resource" uid="uid://cnrefcoc285w" path="res://resources/base_font_custom.tres" id="20_yqj0b"]
+[ext_resource type="PackedScene" uid="uid://dnglshy5uulg7" path="res://scenes/props/general/tutorial_pad.tscn" id="21_4so8i"]
 
 [sub_resource type="Environment" id="Environment_somws"]
 background_mode = 1
@@ -345,3 +346,6 @@ HorizontalJustification = 1
 UseMaxCharacterWidth = true
 MaxCharacterWidth = 10
 TextEffects = Array[ExtResource("15_u16dj")]([SubResource("Resource_bve2d")])
+
+[node name="Tutorial Pad" parent="." instance=ExtResource("21_4so8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 6)

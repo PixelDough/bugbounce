@@ -168,15 +168,17 @@ transform = Transform3D(0.99803823, 0, -0.062606886, 0.02348577, 0.9269719, 0.37
 [node name="millie_base" parent="Roly Poly" instance=ExtResource("7_vrxil")]
 visible = false
 
+[node name="Camera (Ring)" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, -2.262668e-08, 0.9659259, 0.25881907, 8.444392e-08, 0.25881907, -0.9659258, 0, 0.5, -20)
+fov = 65.0
+
+[node name="Camera (Static)" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, -20)
+visible = false
+fov = 65.0
+
 [node name="PlayerCharacter" parent="." instance=ExtResource("18_sdppc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, -16)
-
-[node name="Level Cam" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -20)
-
-[node name="Camera3D" type="Camera3D" parent="Level Cam"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-fov = 65.0
 
 [node name="skybox_space_01" parent="." instance=ExtResource("8_x0tbs")]
 visible = false
