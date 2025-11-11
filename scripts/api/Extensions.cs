@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Parallas;
@@ -26,4 +27,13 @@ public static class Extensions
     {
         node3D.Position = node3D.Position.TranslateAround(point, rotation);
     }
+
+    public static Vector3 ToVector3(this Vector3.Axis axis) =>
+        axis switch
+        {
+            Vector3.Axis.X => Vector3.Right,
+            Vector3.Axis.Y => Vector3.Up,
+            Vector3.Axis.Z => Vector3.Forward,
+            _ => throw new ArgumentOutOfRangeException()
+        };
 }

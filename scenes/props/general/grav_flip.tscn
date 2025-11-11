@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://btyvyq3cplm12"]
+[gd_scene load_steps=7 format=3 uid="uid://btyvyq3cplm12"]
 
 [ext_resource type="PackedScene" uid="uid://bp5kah8boi8ip" path="res://models/general/grav_flip.glb" id="1_2vgh7"]
+[ext_resource type="Script" uid="uid://ceqiv4vg68i7u" path="res://scripts/Flipper.cs" id="2_hgedj"]
 [ext_resource type="Script" uid="uid://cbbxrcfahnoi2" path="res://scripts/Billboard.cs" id="2_k23iv"]
 [ext_resource type="PackedScene" uid="uid://dijpq2md73pvi" path="res://scenes/common/blob_shadow.tscn" id="2_prq4n"]
 [ext_resource type="Script" uid="uid://dibp0lie30v01" path="res://scripts/GravityChanger.cs" id="3_prq4n"]
@@ -14,6 +15,12 @@ collision_mask = 2
 [node name="model root" type="Node3D" parent="."]
 
 [node name="model" parent="model root" instance=ExtResource("1_2vgh7")]
+
+[node name="Flipper" type="Node" parent="model root/model" node_paths=PackedStringArray("Target")]
+script = ExtResource("2_hgedj")
+Target = NodePath("..")
+Axis = 0
+metadata/_custom_type_script = "uid://ceqiv4vg68i7u"
 
 [node name="billboard" type="Node" parent="model root"]
 script = ExtResource("2_k23iv")
@@ -32,3 +39,4 @@ Size = 2.0
 script = ExtResource("3_prq4n")
 
 [connection signal="body_entered" from="." to="gravity changer" method="FlipGravity"]
+[connection signal="body_entered" from="." to="model root/model/Flipper" method="FlipBasic" unbinds=1]

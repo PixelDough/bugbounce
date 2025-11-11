@@ -176,7 +176,7 @@ public partial class Player : RigidBody3D
             Mathf.DegToRad(_inputMovement.X * 5f)));
         var newQuaternion = MathUtil.LookRotation(Vector3.Forward, -GetGravity().Normalized());
 
-        _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion, newQuaternion * tiltQuaternion, 3f, (float)delta).GetEuler();
+        _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion, newQuaternion * tiltQuaternion, 6f, (float)delta).GetEuler();
 
         _eyesCurrentAngle = Mathf.LerpAngle(_eyesCurrentAngle, _eyesTargetAngle, 10f * (float)delta);
 
