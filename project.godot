@@ -14,13 +14,17 @@ config/name="Bugbounce"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="uid://kfjnryfy3osr"
 
+[autoload]
+
+parallas_console="*res://addons/parallas_console/ParallasConsole.cs"
+
 [dotnet]
 
 project/assembly_name="bugbounce"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/meshtext/plugin.cfg", "res://addons/unidot_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/meshtext/plugin.cfg", "res://addons/parallas_console/plugin.cfg", "res://addons/unidot_importer/plugin.cfg")
 
 [file_customization]
 

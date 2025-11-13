@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Godot;
 using Parallas;
+using Parallas.Console;
 
 public partial class Player : RigidBody3D
 {
@@ -395,7 +396,7 @@ public partial class Player : RigidBody3D
         _jumpBuffer = 0f;
         _coyoteTime = 0f;
         _isGrounded = false;
-        
+
         // playerStuffManager.sandBurstParticleSystem.transform.position = position - Vector3.up / 4;
         // playerStuffManager.sandBurstParticleSystem.Play();
         PlayBounce(0.3f, 1);
