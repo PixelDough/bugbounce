@@ -206,6 +206,10 @@ metadata/_custom_type_script = "uid://bchbwe0886hnb"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
 shape = SubResource("WorldBoundaryShape3D_xjgd8")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="DeathZone"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 130.58838, -1.1416399e-05)
+shape = SubResource("WorldBoundaryShape3D_xjgd8")
+
 [node name="Checkpoint" parent="." instance=ExtResource("12_xjgd8")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, -6)
 _checkpointId = 2393071531
@@ -276,8 +280,8 @@ size = Vector3(10, 1, 20)
 material = ExtResource("3_iby0j")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.5, 9.5)
-size = Vector3(10, 1, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.5, 13.25)
+size = Vector3(10, 1, 12.5)
 material = ExtResource("3_iby0j")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
