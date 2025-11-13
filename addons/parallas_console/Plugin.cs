@@ -9,7 +9,7 @@ public partial class Plugin : EditorPlugin
 	public override void _EnablePlugin()
 	{
 		base._EnablePlugin();
-		AddAutoloadSingleton("parallas_console", "res://addons/parallas_console/ParallasConsole.cs");
+		AddAutoloadSingleton("parallas_console", "res://addons/parallas_console/console_default.tscn");
 	}
 
 	public override void _DisablePlugin()

@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn6wponjc8fa8"]
+
+[ext_resource type="Script" uid="uid://x0qyxr2vyj8u" path="res://addons/parallas_console/ParallasConsole.cs" id="1_cd4qq"]
+[ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
+[ext_resource type="Script" uid="uid://m8gh1c6i0id6" path="res://addons/parallas_console/CommandInput.cs" id="2_bf6pj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4qq"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.79607844)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ConsoleDefault" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+script = ExtResource("1_cd4qq")
+_inputToggle = "console_toggle"
+metadata/_custom_type_script = "uid://x0qyxr2vyj8u"
+
+[node name="console_panel" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="console_panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="History" type="Panel" parent="console_panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_cd4qq")
+
+[node name="command_history" type="RichTextLabel" parent="console_panel/VBoxContainer/History"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_a5bj4")
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+bbcode_enabled = true
+scroll_following = true
+vertical_alignment = 2
+selection_enabled = true
+
+[node name="Message Box" type="PanelContainer" parent="console_panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="command_input" type="LineEdit" parent="console_panel/VBoxContainer/Message Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_a5bj4")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "input command here"
+keep_editing_on_text_submit = true
+caret_blink = true
+script = ExtResource("2_bf6pj")

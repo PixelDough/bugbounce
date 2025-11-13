@@ -10,7 +10,7 @@ public partial class DebugShow : Node
     [Export] public Node3D TargetNode;
     [Export] public string VisName;
 
-    public static HashSet<string> VisNames = [];
+    public static readonly HashSet<string> VisNames = [];
     public static string[] GetVisNames => VisNames.ToArray();
 
     public override void _Ready()
@@ -19,8 +19,12 @@ public partial class DebugShow : Node
         VisNames.Add(VisName);
     }
 
-    [ConsoleCommand("debug_vis", "Toggles the visibility of a specific debug node.")]
-    // [AutoComplete(nameof(GetVisNames))]
+    [ConsoleCommand(
+        name: "debug_vis",
+        Description = "Toggles the visibility of a specific debug node.",
+        AutocompleteMethodNames = [nameof(GetVisNames)],
+        CommandOutput = "Toggled Debug Visibility."
+    )]
     public void ToggleVisibility(string name)
     {
         GD.Print($"{name} given to VisName: {VisName}");
