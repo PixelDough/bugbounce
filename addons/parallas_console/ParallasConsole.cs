@@ -18,6 +18,7 @@ public partial class ParallasConsole : Control
     private RichTextLabel _commandHistory;
     private LineEdit _commandInput;
     private float _offsetX = 0f;
+    private Tween _tween;
 
     public bool IsOpen { get; private set; } = false;
 
@@ -75,7 +76,9 @@ public partial class ParallasConsole : Control
     public void Open()
     {
         IsOpen = true;
-        CreateTween()
+        if (_tween is not null && _tween.IsValid() && _tween.IsRunning()) _tween.Kill();
+        _tween = CreateTween();
+        _tween
             .TweenProperty(this, PropertyName._offsetX.ToString(), 0f, 0.25f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Back);
@@ -86,7 +89,9 @@ public partial class ParallasConsole : Control
     public void Close()
     {
         IsOpen = false;
-        CreateTween()
+        if (_tween is not null && _tween.IsValid() && _tween.IsRunning()) _tween.Kill();
+        _tween = CreateTween();
+        _tween
             .TweenProperty(this, PropertyName._offsetX.ToString(), -_consolePanel.Size.X, 0.05f)
             .SetEase(Tween.EaseType.In)
             .SetTrans(Tween.TransitionType.Cubic);
