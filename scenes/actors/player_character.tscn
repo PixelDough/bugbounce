@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfx8cm1v7am6a"]
+[gd_scene load_steps=14 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
 [ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
@@ -12,10 +12,19 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
 radius = 0.25
 
+[sub_resource type="BoxMesh" id="BoxMesh_yj0s3"]
+size = Vector3(0.1, 2, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lchlr"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_an8on"]
+size = Vector3(0.1, 0.1, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_lchlr"]
 radius = 0.1
 
-[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot")]
+[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_gravTiltRoot", "_cameraTiltRoot", "_cameraYawNode", "_eyesRoot")]
 collision_layer = 2
 physics_material_override = ExtResource("1_eoriv")
 continuous_cd = true
@@ -24,7 +33,9 @@ max_contacts_reported = 4
 linear_damp = 0.3
 angular_damp = 0.75
 script = ExtResource("2_svkgc")
-_cameraTiltRoot = NodePath("Camera Tilt Root")
+_gravTiltRoot = NodePath("Grav Tilt")
+_cameraTiltRoot = NodePath("Grav Tilt/Camera Tilt Root")
+_cameraYawNode = NodePath("")
 _eyesRoot = NodePath("mesh_face")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -39,26 +50,40 @@ mesh = ExtResource("2_eoriv")
 layers = 2
 mesh = ExtResource("3_sr6cr")
 
-[node name="Camera Tilt Root Mover" type="RemoteTransform3D" parent="."]
-remote_path = NodePath("../Camera Tilt Root")
+[node name="Tilt Root Mover" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Grav Tilt")
 update_rotation = false
 update_scale = false
 
-[node name="Camera Tilt Root" type="Node3D" parent="."]
+[node name="Grav Tilt" type="Node3D" parent="."]
 top_level = true
+
+[node name="Camera Tilt Root" type="Node3D" parent="Grav Tilt"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Grav Tilt/Camera Tilt Root"]
+mesh = SubResource("BoxMesh_yj0s3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Grav Tilt/Camera Tilt Root/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_lchlr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Grav Tilt/Camera Tilt Root/MeshInstance3D/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("BoxMesh_an8on")
 
 [node name="ThirdPersonCameraBehavior" type="Node" parent="." node_paths=PackedStringArray("Camera3D", "Target", "TargetTilt")]
 script = ExtResource("6_qy032")
 Camera3D = NodePath("../Camera3D")
 Target = NodePath("..")
-TargetTilt = NodePath("../Camera Tilt Root")
+TargetTilt = NodePath("../Grav Tilt/Camera Tilt Root")
 Offset = Vector3(0, 0.5, 0)
 metadata/_custom_type_script = "uid://bhh2yk2k0pvjb"
 
-[node name="PlayerHandling" type="Node" parent="ThirdPersonCameraBehavior" node_paths=PackedStringArray("ThirdPersonCameraBehavior", "Player")]
+[node name="PlayerHandling" type="Node" parent="ThirdPersonCameraBehavior" node_paths=PackedStringArray("ThirdPersonCameraBehavior", "Player", "GravTiltRoot")]
 script = ExtResource("7_6wjry")
 ThirdPersonCameraBehavior = NodePath("..")
 Player = NodePath("../..")
+GravTiltRoot = NodePath("../../Grav Tilt")
 
 [node name="CameraCollision" type="ShapeCast3D" parent="ThirdPersonCameraBehavior"]
 shape = SubResource("SphereShape3D_lchlr")

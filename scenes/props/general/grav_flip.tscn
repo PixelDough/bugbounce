@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://btyvyq3cplm12"]
+[gd_scene load_steps=9 format=3 uid="uid://btyvyq3cplm12"]
 
 [ext_resource type="PackedScene" uid="uid://bp5kah8boi8ip" path="res://models/general/grav_flip.glb" id="1_2vgh7"]
 [ext_resource type="Script" uid="uid://ceqiv4vg68i7u" path="res://scripts/Flipper.cs" id="2_hgedj"]
 [ext_resource type="Script" uid="uid://cbbxrcfahnoi2" path="res://scripts/Billboard.cs" id="2_k23iv"]
 [ext_resource type="PackedScene" uid="uid://dijpq2md73pvi" path="res://scenes/common/blob_shadow.tscn" id="2_prq4n"]
+[ext_resource type="Script" uid="uid://cdal3i2m8rgk8" path="res://scripts/BobUpDown.cs" id="3_kpfh2"]
 [ext_resource type="Script" uid="uid://dibp0lie30v01" path="res://scripts/GravityChanger.cs" id="3_prq4n"]
+
+[sub_resource type="Curve" id="Curve_pihbq"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k23iv"]
 radius = 1.2
@@ -21,6 +27,13 @@ script = ExtResource("2_hgedj")
 Target = NodePath("..")
 Axis = 0
 metadata/_custom_type_script = "uid://ceqiv4vg68i7u"
+
+[node name="BobUpDown" type="Node" parent="model root/model"]
+script = ExtResource("3_kpfh2")
+Speed = 0.3
+Height = 0.15
+Curve = SubResource("Curve_pihbq")
+metadata/_custom_type_script = "uid://cdal3i2m8rgk8"
 
 [node name="billboard" type="Node" parent="model root"]
 script = ExtResource("2_k23iv")

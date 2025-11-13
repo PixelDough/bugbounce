@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://drrsdnrukhhch"]
+[gd_scene load_steps=32 format=3 uid="uid://drrsdnrukhhch"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_xjgd8"]
 [ext_resource type="Material" uid="uid://cnmbhgtd07244" path="res://materials/mat_gradients_retro.material" id="3_iby0j"]
@@ -61,6 +61,19 @@ Speed = 4.0
 IndexOffset = 1.0
 Intensity = 0.1
 metadata/_custom_type_script = "uid://c0bjjju0pm6b6"
+
+[sub_resource type="SphereMesh" id="SphereMesh_4so8i"]
+radius = 30.0
+height = 60.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4so8i"]
+radius = 30.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1sctp"]
+radius = 50.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_4so8i"]
+size = Vector3(1, 100, 1)
 
 [node name="RootNode3D" type="Node3D"]
 
@@ -186,7 +199,7 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 8.8, 2.1989956, 21.85)
 transform = Transform3D(-1, 0, -5.6624407e-07, 0, 1, 0, 5.6624407e-07, 0, -1, -35.76, 4.7683716e-07, -7.82)
 
 [node name="DeathZone" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.693, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -64.693, 0)
 script = ExtResource("11_rky0j")
 metadata/_custom_type_script = "uid://bchbwe0886hnb"
 
@@ -349,3 +362,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 2.5)
 
 [node name="grav_flip2" parent="." instance=ExtResource("22_1sctp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 16)
+
+[node name="planet" type="StaticBody3D" parent="."]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.14426, 0, 76.70605)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="planet"]
+mesh = SubResource("SphereMesh_4so8i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="planet"]
+shape = SubResource("SphereShape3D_4so8i")
+
+[node name="Area3D" type="Area3D" parent="planet"]
+collision_mask = 2
+priority = 10
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 19.6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="planet/Area3D"]
+shape = SubResource("SphereShape3D_1sctp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="planet"]
+mesh = SubResource("BoxMesh_4so8i")

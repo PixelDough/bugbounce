@@ -16,7 +16,21 @@ public partial class Player : RigidBody3D
     [Export] private bool _isPausable = true;
     [Export] private bool _doInput = true;
 
-    private Vector3 _inputMovement;
+    private bool _useFlippedGravity = false;
+    [Export]
+    public bool UseFlippedGravity
+    {
+        get => _useFlippedGravity;
+        set
+        {
+            _useFlippedGravity = value;
+            GravityScale = value ? -1f : 1f;
+        }
+    }
+    public Vector3 GravityDirection => GetGravity().Normalized();
+
+    private Vector2 _inputMovement;
+    private Vector3 _inputMovementLocal;
 
     private float _defaultBounciness = 1f;
     private float _defaultAngularDrag = 0f;
@@ -32,8 +46,11 @@ public partial class Player : RigidBody3D
 
     private bool _isDamping;
 
+    [ExportGroup("Tilt Roots")]
     [Export] private Node3D _cameraTiltRoot;
+    [Export] private Node3D _cameraYawNode;
 
+    [ExportGroup("Model Parts")]
     [Export] private Node3D _eyesRoot;
     private float _eyesTargetAngle = 0f;
     private float _eyesCurrentAngle = 0f;
@@ -78,6 +95,7 @@ public partial class Player : RigidBody3D
         _respawnPoint = GlobalPosition;
         _respawnForward = -GlobalBasis.Z;
 
+        UseFlippedGravity = false;
         _cameraTiltRoot.RotationDegrees = Vector3.Up * RotationDegrees.Y;
 
         _eyesCurrentAngle = GlobalRotation.Y;
@@ -123,7 +141,7 @@ public partial class Player : RigidBody3D
             PhysicsMaterialOverride.Bounce = 0.5f;
         }
 
-        if (_inputMovement.LengthSquared() < 0.1f && _isGrounded)
+        if (_inputMovementLocal.LengthSquared() < 0.1f && _isGrounded)
             AngularDamp = 15f;
         else
             AngularDamp = _defaultAngularDrag;
@@ -146,8 +164,8 @@ public partial class Player : RigidBody3D
         // playerStuffManager.sandBurstParticleSystem.transform.position = position - Vector3.up / 4;
         
         // Important: Set this AFTER checking for a buffered jump, as isGrounded might have been set in OnCollisionEnter.
-        var hitBelow = MoveAndCollide(GetGravity().Normalized() * 0.01f, true);
-        if (LinearVelocity.Dot(-GetGravity().Normalized()) <= 8f && hitBelow is not null)
+        var hitBelow = MoveAndCollide(GravityDirection * 0.01f, true);
+        if (LinearVelocity.Dot(-GravityDirection) <= 8f && hitBelow is not null)
         {
             _isGrounded = true;
         } else { _isGrounded = false; }
@@ -171,12 +189,11 @@ public partial class Player : RigidBody3D
 
 
         // _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
-            // Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f, Mathf.DegToRad(_inputMovement.X * 5f))), 3f, (float)delta).GetEuler();
-        var tiltQuaternion = Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Z * 5f), 0f,
-            Mathf.DegToRad(_inputMovement.X * 5f)));
-        var newQuaternion = MathUtil.LookRotation(Vector3.Forward, -GetGravity().Normalized());
-
-        _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion, newQuaternion * tiltQuaternion, 6f, (float)delta).GetEuler();
+            // Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovementLocal.Z * 5f), 0f, Mathf.DegToRad(_inputMovementLocal.X * 5f))), 3f, (float)delta).GetEuler();
+        var tiltQuaternion = Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Y * 5f), 0f,
+            Mathf.DegToRad(_inputMovement.X * 5f))).Normalized();
+        Basis tiltBasis = new Basis(tiltQuaternion);
+        _cameraTiltRoot.Basis = MathUtil.ExpDecay(_cameraTiltRoot.Basis, tiltBasis, 3f, (float)delta);
 
         _eyesCurrentAngle = Mathf.LerpAngle(_eyesCurrentAngle, _eyesTargetAngle, 10f * (float)delta);
 
@@ -186,9 +203,9 @@ public partial class Player : RigidBody3D
         _eyesRoot.GlobalBasis = Basis.FromEuler(new(Mathf.DegToRad(15 * eyeMovementDot), _eyesCurrentAngle, 0f));
 
         _bounceCooldown = MathUtil.Approach(_bounceCooldown, 0f, (float)delta);
-        if (_inputMovement.LengthSquared() >= 0.01)
+        if (_inputMovementLocal.LengthSquared() >= 0.01)
         {
-            _eyesTargetAngle = Vector3.ModelFront.SignedAngleTo(_inputMovement.LimitLength(1f).Normalized(), Vector3.Up);
+            _eyesTargetAngle = Vector3.ModelFront.SignedAngleTo(_inputMovementLocal.LimitLength(1f).Normalized(), Vector3.Up);
         }
 
         ResetInputValues();
@@ -202,23 +219,23 @@ public partial class Player : RigidBody3D
         // if (_isPausable && (!GameManager.DoPlayerPhysics || _noclip == 1)) return;
         
         float reverseMultiplier = 1f;
-        Vector3 flattenedVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GetGravity().Normalized());
-        if (flattenedVelocity.Normalized().AngleTo(_inputMovement) > Mathf.Pi * 0.5f)
+        Vector3 flattenedVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GravityDirection);
+        if (flattenedVelocity.Normalized().AngleTo(_inputMovementLocal) > Mathf.Pi * 0.5f)
             reverseMultiplier = 2f;
         if (_isGrounded)
         {
 
-            Vector3 inputConvertedToTorque = MathUtil.AngleAxis(Mathf.Pi * 0.5f, -GetGravity().Normalized()) * _inputMovement;
+            Vector3 inputConvertedToTorque = MathUtil.AngleAxis(Mathf.Pi * 0.5f, -GravityDirection) * _inputMovementLocal;
             ApplyTorque(
                 new Vector3(inputConvertedToTorque.X, inputConvertedToTorque.Y, inputConvertedToTorque.Z) *
                 (250f * reverseMultiplier * (float)delta));
         }
         else
         {
-            ApplyForce(_inputMovement * (700 * reverseMultiplier * (float)delta));
+            ApplyForce(_inputMovementLocal * (700 * reverseMultiplier * (float)delta));
         }
 
-        float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, -GetGravity().Normalized()).Length();
+        float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, -GravityDirection).Length();
         if (_isGrounded)
         {
             LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 13, (float)delta);
@@ -228,7 +245,6 @@ public partial class Player : RigidBody3D
             LinearDamp = MathUtil.ExpDecay(LinearDamp, (1f / (Mathf.Max(projectedMagnitude, 1) * 2)), 1, (float)delta);
         }
 
-        var gravity = GetGravity();
         var moveAndCollide = MoveAndCollide(LinearVelocity * (float)delta, true);
         if (moveAndCollide is not null)
         {
@@ -244,7 +260,7 @@ public partial class Player : RigidBody3D
                 var pointNormal = moveAndCollide.GetNormal(i);
                 float velTowardsNormal = -LinearVelocity.Dot(pointNormal);
 
-                if (pointNormal.AngleTo(-gravity.Normalized()) < 15f)
+                if (pointNormal.AngleTo(-GravityDirection.Normalized()) < 15f)
                 {
                     // if (LinearVelocity.Project(state.TotalGravity).LengthSquared() > 2)
                         // playerStuffManager.sandBurstParticleSystem.Play();
@@ -262,14 +278,14 @@ public partial class Player : RigidBody3D
                     if (velTowardsNormal > 3f)
                     {
                         // Hit wall
-                        if (Mathf.Abs(pointNormal.Dot(-gravity.Normalized())) < 0.1f)
+                        if (Mathf.Abs(pointNormal.Dot(-GravityDirection.Normalized())) < 0.1f)
                         {
                             LinearVelocity = LinearVelocity.Bounce(pointNormal.Normalized()) * PhysicsMaterialOverride.Bounce;
-                            ApplyImpulse(pointNormal * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.08f);
-                            ApplyImpulse(-GetGravity().Normalized() * (MathUtil.ProjectOnPlane(prevVelocity, gravity).Length() + colliderVelocityLength) * 0.5f);
+                            ApplyImpulse(pointNormal * (MathUtil.ProjectOnPlane(prevVelocity, GravityDirection).Length() + colliderVelocityLength) * 0.08f);
+                            ApplyImpulse(-GravityDirection * (MathUtil.ProjectOnPlane(prevVelocity, GravityDirection).Length() + colliderVelocityLength) * 0.5f);
                         }
                         // Hit something that's not a wall
-                        else if (pointNormal.AngleTo(-gravity) > Mathf.DegToRad(35f) && velTowardsNormal > 9f)
+                        else if (pointNormal.AngleTo(-GravityDirection) > Mathf.DegToRad(35f) && velTowardsNormal > 9f)
                         {
                             LinearVelocity = (LinearVelocity.Bounce(pointNormal) + colliderVelocity) * PhysicsMaterialOverride.Bounce;
                             ApplyImpulse(pointNormal * Mathf.Abs(velTowardsNormal) * 0.5f);
@@ -332,15 +348,15 @@ public partial class Player : RigidBody3D
     }
 
     private Vector2 GetMovementAxes() =>
-        new(
+        new Vector2(
             _inputStrengthRight - _inputStrengthLeft,
             _inputStrengthForward - _inputStrengthBackward
-        );
+        ).LimitLength();
 
-    private Vector3 GetCamRelativeMovementAxes()
+    private Vector3 GetCamRelativeMovementAxes(Vector2 input)
     {
-        Vector2 rawInputMovement = GetMovementAxes().LimitLength(1f).Normalized();
-        Vector3 rawInputMovementVector3 = Vector3.Right * rawInputMovement.X + Vector3.Forward * rawInputMovement.Y;
+
+        Vector3 rawInputMovementVector3 = Vector3.Right * input.X + Vector3.Forward * input.Y;
         Vector3 cameraRelativeInput = CameraRelativeFlatten(rawInputMovementVector3);
         cameraRelativeInput = cameraRelativeInput.Normalized() * cameraRelativeInput.Length();
         return cameraRelativeInput;
@@ -350,8 +366,9 @@ public partial class Player : RigidBody3D
     {
         // if (_isPausable && (!GameManager.DoPlayerMovement || !GameManager.DoPlayerPhysics || GameManager.Instance.quantumConsole.IsActive || _noclip == 1)) return;
         if (!_doInput) return;
-        Vector3 cameraRelativeInput = GetCamRelativeMovementAxes();
-        _inputMovement = cameraRelativeInput;
+        _inputMovement = GetMovementAxes();
+        Vector3 cameraRelativeInput = GetCamRelativeMovementAxes(_inputMovement);
+        _inputMovementLocal = cameraRelativeInput;
 
         // If the player has pressed the jump button, reset the jump buffer to the max
         if (_isJumpJustPressed)
@@ -364,17 +381,17 @@ public partial class Player : RigidBody3D
     {
         // if (!GameManager.DoPlayerMovement || GameManager.Instance.quantumConsole.IsActive || _noclip == 0) return;
 
-        _inputMovement.Y +=
+        _inputMovementLocal.Y +=
             (Input.IsKeyPressed(Key.Space) ? 1 : 0) +
             (Input.IsKeyPressed(Key.Shift) ? -1 : 0);
         
-        GlobalPosition += _inputMovement * (20f * (float)delta);
+        GlobalPosition += _inputMovementLocal * (20f * (float)delta);
     }
 
     private void Jump()
     {
-        if (Mathf.Abs(LinearVelocity.Dot(GetGravity().Normalized())) < 10f)
-            LinearVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GetGravity().Normalized()) - GetGravity().Normalized() * 10f;
+        if (Mathf.Abs(LinearVelocity.Dot(GravityDirection)) < 10f)
+            LinearVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GravityDirection) - GravityDirection * 10f;
         _jumpBuffer = 0f;
         _coyoteTime = 0f;
         _isGrounded = false;
@@ -386,7 +403,7 @@ public partial class Player : RigidBody3D
 
     Vector3 CameraRelativeFlatten(Vector3 input)
     {
-        var grav = -GetGravity().Normalized();
+        var grav = -GravityDirection;
         var camForward = -GetViewport().GetCamera3D().GlobalBasis.Z;
         var projectedOnPlane = MathUtil.ProjectOnPlane(camForward, grav);
         var quat = MathUtil.LookRotation(projectedOnPlane, grav);
@@ -417,7 +434,7 @@ public partial class Player : RigidBody3D
         _isRespawning = true;
         Freeze = true;
         _doInput = false;
-        _inputMovement = Vector3.Zero;
+        _inputMovementLocal = Vector3.Zero;
         // GameManager.Instance.screenFadeController.FadeToBlack(0.5f).setOnComplete(() =>
         // {
         GlobalPosition = _respawnPoint;
@@ -482,6 +499,11 @@ public partial class Player : RigidBody3D
         // }
         
         GD.Print($"No such checkpoint exists at index {index}.");
+    }
+
+    public void FlipGravity()
+    {
+        UseFlippedGravity = !UseFlippedGravity;
     }
 
     private void NoClip()

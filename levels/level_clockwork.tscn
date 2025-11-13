@@ -100,6 +100,9 @@ RotationSpeedMultiplier = 2
 transform = Transform3D(0.49999976, 0, -0.8660255, 0, 1, 0, 0.8660255, 0, 0.49999976, -24.347511, 10.89351, 68.483)
 RotationSpeedMultiplier = 2
 
+[node name="Gears_fbx_Gear2 (3)2" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
+transform = Transform3D(0.49999976, 0, -0.8660255, 0, 1, 0, 0.8660255, 0, 0.49999976, -18.718346, 24.393509, 65.233)
+
 [node name="Gears_fbx_Gear2 (7)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.25, -0.6064911, 45)
 RotationSpeedMultiplier = 2
@@ -111,7 +114,6 @@ RotationSpeedMultiplier = 2
 [node name="Gears_fbx_Gear2 (4)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(-0.5000001, 0.8660253, 0, 0, 0, -1, -0.8660253, -0.5000001, 0, -33.46532, 21.64351, 75.190506)
 RotationSpeedMultiplier = 2
-Reverse = true
 
 [node name="Gears_fbx_Gear2 (5)" parent="Scene Contents/Geometry" instance=ExtResource("2_naqm0")]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -15.11725, -0.6064911, 61.307217)

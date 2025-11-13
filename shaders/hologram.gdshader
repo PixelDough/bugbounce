@@ -7,6 +7,7 @@ uniform sampler2D baseMap : source_color;
 uniform float fadeScale = 1.0;
 uniform float yOffset = 0.0;
 uniform float brightness = 5.0;
+uniform vec4 tint : source_color = vec4(1.0);
 
 varying vec3 vertex_pos;
 
@@ -16,10 +17,10 @@ void vertex() {
 }
 
 void fragment() {
-	ALBEDO = (texture(baseMap, UV).rgb * COLOR.rgb) * brightness;
+	ALBEDO = (texture(baseMap, UV).rgb * COLOR.rgb * tint.rgb) * brightness;
 	
 	float distance_to_origin = vertex_pos.y - yOffset;
-	float alpha = clamp(1.0 - (distance_to_origin / fadeScale), 0.0, 1.0);
+	float alpha = clamp(1.0 - (distance_to_origin / fadeScale), 0.0, 1.0) * tint.a;
 	if (dither_transparent(alpha, FRAGCOORD.xy * 1.0) < 0.5) {
 		discard;
 	}
