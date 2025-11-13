@@ -450,7 +450,7 @@ public partial class Player : RigidBody3D
         }
         Freeze = false;
         _cameraTiltRoot.GlobalRotation = Vector3.Zero;
-    UseFlippedGravity    = false;
+        UseFlippedGravity    = false;
         //
         //     // LevelManager.Instance.LevelProgress.LoseCollectables();
         //     levelManager?.ResetLevelElements();
