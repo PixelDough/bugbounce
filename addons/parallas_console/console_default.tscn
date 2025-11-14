@@ -32,6 +32,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="ConsoleDefault" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
