@@ -50,12 +50,14 @@ public partial class Player : RigidBody3D
 
     [ExportGroup("Tilt Roots")]
     [Export] private Node3D _cameraTiltRoot;
-    [Export] private Node3D _cameraYawNode;
 
     [ExportGroup("Model Parts")]
     [Export] private Node3D _eyesRoot;
     private float _eyesTargetAngle = 0f;
     private float _eyesCurrentAngle = 0f;
+
+    [ExportGroup("Particles")]
+    [Export] private GpuParticles3D _particleDust;
 
     // [ExportGroup("Audio Event Emitters")] 
     // [Export] private FMODUnity.StudioEventEmitter bounceEventEmitter;
@@ -160,8 +162,22 @@ public partial class Player : RigidBody3D
                 Jump();
             }
         }
-        
-        // playerStuffManager.sandRollParticleSystem.transform.position = position - Vector3.up / 4;
+
+        var planarDirection = MathUtil.ProjectOnPlane(
+            -LinearVelocity,
+            -GravityDirection
+        );
+        if (planarDirection.LengthSquared() > 0)
+        {
+            _particleDust.GlobalBasis =
+                new Basis(
+                    MathUtil.LookRotation(
+                        planarDirection,
+                        -GravityDirection
+                    )
+                );
+            _particleDust.GlobalPosition = GlobalPosition + planarDirection.Normalized() * 0.15f + GravityDirection * 0.15f;
+        }
         // playerStuffManager.sandBurstParticleSystem.transform.position = position - Vector3.up / 4;
         
         // Important: Set this AFTER checking for a buffered jump, as isGrounded might have been set in OnCollisionEnter.
@@ -174,10 +190,11 @@ public partial class Player : RigidBody3D
         // ParticleSystem.EmissionModule emissionModule = playerStuffManager.sandRollParticleSystem.emission;
         if (!_isGrounded)
         {
-            // emissionModule.rateOverDistance = 0;
+            _particleDust.AmountRatio = 0f;
         }
         else
         {
+            _particleDust.AmountRatio = 1f;
             // emissionModule.rateOverDistance = LinearVelocity.magnitude / 2;
             // if (LinearVelocity.normalized.LengthSquared() > 0.001f)
             // {

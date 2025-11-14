@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dfx8cm1v7am6a"]
+[gd_scene load_steps=22 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
 [ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="6_qy032"]
 [ext_resource type="Script" uid="uid://d1flnedngqpy7" path="res://scripts/ThirdPersonCameraPlayerHandling.cs" id="7_6wjry"]
 [ext_resource type="Script" uid="uid://bo2evdbbwsm8l" path="res://scripts/ThirdPersonCameraCollision.cs" id="7_yj0s3"]
+[ext_resource type="Texture2D" uid="uid://dqv2vatj8i30c" path="res://textures/particles/Spr_Particle_ToonDust.png" id="10_an8on"]
+[ext_resource type="Script" uid="uid://cwtm563m4b3xn" path="res://scripts/EmitParticleOverDistance.cs" id="11_66g8t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nowa8"]
 radius = 0.25
@@ -25,7 +27,57 @@ size = Vector3(0.1, 0.1, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_lchlr"]
 radius = 0.1
 
-[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot")]
+[sub_resource type="Curve" id="Curve_66g8t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.01855895, 1), 0.0, 0.0, 0, 0, Vector2(0.78711796, 0.5489538), -1.5662769, -1.5662769, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_trv50"]
+curve = SubResource("Curve_66g8t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_blxb2"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.1
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, -0.5)
+spread = 15.0
+initial_velocity_min = 1.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, -4.905, 0)
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_trv50")
+anim_offset_max = 1.0
+turbulence_noise_strength = 0.01
+turbulence_influence_min = 0.020000001
+turbulence_influence_max = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmeke"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("10_an8on")
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+distance_fade_mode = 2
+distance_fade_min_distance = 100.0
+distance_fade_max_distance = 20.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_r0pp7"]
+material = SubResource("StandardMaterial3D_kmeke")
+size = Vector2(0.8, 0.8)
+
+[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot", "_particleDust")]
 collision_layer = 2
 physics_material_override = ExtResource("1_eoriv")
 continuous_cd = true
@@ -36,6 +88,7 @@ angular_damp = 0.75
 script = ExtResource("2_svkgc")
 _cameraTiltRoot = NodePath("Grav Tilt/Camera Tilt Root")
 _eyesRoot = NodePath("mesh_face")
+_particleDust = NodePath("particle_dust")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_nowa8")
@@ -102,3 +155,19 @@ fov = 100.0
 
 [node name="Blob Shadow" parent="." instance=ExtResource("5_6wjry")]
 Size = 0.5
+
+[node name="particle_dust" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+emitting = false
+amount = 100
+lifetime = 0.8
+one_shot = true
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_blxb2")
+draw_pass_1 = SubResource("QuadMesh_r0pp7")
+
+[node name="EmitParticleOverDistance" type="Node" parent="particle_dust"]
+script = ExtResource("11_66g8t")
+ParticlesPerUnit = 2.0
+metadata/_custom_type_script = "uid://cwtm563m4b3xn"
