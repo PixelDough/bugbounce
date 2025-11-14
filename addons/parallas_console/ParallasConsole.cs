@@ -169,11 +169,9 @@ public partial class ParallasConsole : Control
         for (var i = 0; i < methodParameters.Length; i++)
         {
             var methodParameter = methodParameters[i];
-            var parameterType = methodParameter.ParameterType;
+            var parameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
+                                methodParameter.ParameterType;
             var parameterDefaultValue = methodParameter.DefaultValue;
-
-            if (Nullable.GetUnderlyingType(parameterType) is var nullableType && nullableType is not null)
-                parameterType = nullableType;
 
             if (i < parameters.Length)
             {
@@ -195,6 +193,19 @@ public partial class ParallasConsole : Control
                     {
                         PrintError(
                             $"Invalid value provided for parameter \"{methodParameter.Name}\" (found \"{item}\", expected type {parameterType.Name})");
+                        return;
+                    }
+                }
+                else if (parameterType.IsEnum)
+                {
+                    if (Enum.TryParse(parameterType, item, out var enumVal))
+                    {
+                        parametersArray.Add(enumVal);
+                    }
+                    else
+                    {
+                        PrintError(
+                            $"Invalid enum value provided for parameter \"{methodParameter.Name}\" (found \"{item}\", expected type {parameterType.Name})");
                         return;
                     }
                 }
@@ -385,13 +396,16 @@ public partial class ParallasConsole : Control
                 var methodParameters = info.MethodInfo.GetParameters();
                 if (_wordIndex - 1 < methodParameters.Length)
                 {
-                    if (methodParameters[_wordIndex - 1].ParameterType == typeof(bool))
+                    var methodParameter = methodParameters[_wordIndex - 1];
+                    var methodParameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
+                                        methodParameter.ParameterType;
+                    if (methodParameterType == typeof(bool))
                     {
                         values.AddRange(["true", "false"]);
                     }
-                    if (methodParameters[_wordIndex - 1].ParameterType == typeof(bool?))
+                    if (methodParameterType.IsEnum)
                     {
-                        values.AddRange(["true", "false"]);
+                        values.AddRange(System.Enum.GetNames( methodParameterType ));
                     }
                 }
                 if (_wordIndex - 1 < info.Command.AutocompleteMethodNames.Length)
@@ -466,16 +480,12 @@ public partial class ParallasConsole : Control
         }
     }
 
-    public static string[] DebugDrawEnumValues() => System.Enum.GetNames( typeof( Viewport.DebugDrawEnum ) );
     [ConsoleCommand(
         "debug_draw",
-        AutocompleteMethodNames = [nameof(DebugDrawEnumValues)],
         CommandOutput = "Set DebugDraw on Viewport."
     )]
-    public void SetDebugDraw(string debugDrawEnumString)
+    public void SetDebugDraw(Viewport.DebugDrawEnum debugDrawMode)
     {
-        if (Enum.TryParse(typeof(Viewport.DebugDrawEnum), debugDrawEnumString, false, out var debugDraw) is false)
-            return;
-        GetViewport().SetDebugDraw((Viewport.DebugDrawEnum)debugDraw);
+        GetViewport().SetDebugDraw(debugDrawMode);
     }
 }
