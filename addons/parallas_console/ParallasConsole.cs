@@ -26,7 +26,7 @@ public partial class ParallasConsole : Control
 
     private float _offsetX = 0f;
     private int _wordIndex = int.MinValue;
-    private string[] _lastInputWords = [];
+    private string[] _words = [];
     private string[] _autoCompleteWords = [];
     private readonly List<SuggestionItem> _autoCompleteSuggestionItems = [];
     private int _autoCompleteIndex = 0;
@@ -80,7 +80,7 @@ public partial class ParallasConsole : Control
                 _showAutoComplete = true;
             else
             {
-                var lastWordLength = _lastInputWords.LastOrDefault("").Length;
+                var lastWordLength = _words.LastOrDefault("").Length;
                 if (char.IsWhiteSpace(_commandInput.Text.LastOrDefault(' '))) lastWordLength = 0;
                 var cleanedText = _commandInput.Text.Remove(_commandInput.Text.Length - lastWordLength, lastWordLength);
                 _commandInput.SetText(cleanedText);
@@ -318,8 +318,8 @@ public partial class ParallasConsole : Control
 
     private void TextChanged(string text)
     {
-        _lastInputWords = _commandInput.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        _showAutoComplete = !_lastInputWords.IsEmpty();
+        _words = _commandInput.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        _showAutoComplete = !_words.IsEmpty();
         RefreshAutoCompleteValues();
     }
 
@@ -334,7 +334,7 @@ public partial class ParallasConsole : Control
     private void ClearValues()
     {
         _wordIndex = int.MinValue;
-        _lastInputWords = [];
+        _words = [];
         _commandInput.Clear();
         _showAutoComplete = false;
         ClearAutoComplete();
@@ -356,9 +356,9 @@ public partial class ParallasConsole : Control
     {
         var charCounter = 0;
         int wordIndex = 0;
-        for (int i = 0; i < _lastInputWords.Length; i++)
+        for (int i = 0; i < _words.Length; i++)
         {
-            var word = _lastInputWords[i];
+            var word = _words[i];
             var newCharCounter = charCounter + word.Length + 1;
             if (newCharCounter > _commandInput.CaretColumn)
             {
@@ -369,7 +369,7 @@ public partial class ParallasConsole : Control
         }
 
         // the counting system is a bit weird. if we're on the last character show the next word position.
-        if (_commandInput.CaretColumn == charCounter) wordIndex = _lastInputWords.Length;
+        if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length;
         if (wordIndex != _wordIndex)
         {
             _autocompleteControl.GlobalPosition = _commandInput.GetCharacterPos(charCounter) + Vector2.Up * _autocompleteControl.Size.Y;
@@ -385,13 +385,13 @@ public partial class ParallasConsole : Control
 
         List<string> values = [];
 
-        if (_wordIndex == 0 || _lastInputWords.Length == 0)
+        if (_wordIndex == 0 || _words.Length == 0)
         {
             values.AddRange(ConsoleData.ConsoleCommands.Keys);
         }
         else
         {
-            if (ConsoleData.ConsoleCommands.TryGetValue(_lastInputWords[0], out var info))
+            if (ConsoleData.ConsoleCommands.TryGetValue(_words[0], out var info))
             {
                 var methodParameters = info.MethodInfo.GetParameters();
                 if (_wordIndex - 1 < methodParameters.Length)
@@ -416,8 +416,8 @@ public partial class ParallasConsole : Control
             }
         }
 
-        if (_wordIndex >= 0 && _wordIndex < _lastInputWords.Length)
-            values = values.Where(w => w.Contains(_lastInputWords[_wordIndex], StringComparison.InvariantCultureIgnoreCase)).ToList();
+        if (_wordIndex >= 0 && _wordIndex < _words.Length)
+            values = values.Where(w => w.Contains(_words[_wordIndex], StringComparison.InvariantCultureIgnoreCase)).ToList();
 
         values.Sort();
 
