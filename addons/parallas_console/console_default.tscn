@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn6wponjc8fa8"]
+[gd_scene load_steps=7 format=3 uid="uid://cn6wponjc8fa8"]
 
 [ext_resource type="Script" uid="uid://x0qyxr2vyj8u" path="res://addons/parallas_console/ParallasConsole.cs" id="1_cd4qq"]
 [ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
 [ext_resource type="Script" uid="uid://m8gh1c6i0id6" path="res://addons/parallas_console/CommandInput.cs" id="2_bf6pj"]
+[ext_resource type="PackedScene" uid="uid://cteoaei7o1ovj" path="res://addons/parallas_console/suggestion_item.tscn" id="4_q5l3k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4qq"]
 content_margin_left = 0.0
@@ -103,25 +104,20 @@ keep_editing_on_text_submit = true
 caret_blink = true
 script = ExtResource("2_bf6pj")
 
-[node name="autocomplete_control" type="Control" parent="."]
+[node name="autocomplete_control" type="BoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -300.0
-offset_right = 200.0
+offset_right = 298.0
 grow_vertical = 0
 mouse_filter = 2
 
 [node name="autocomplete_scroll" type="ScrollContainer" parent="autocomplete_control"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 mouse_filter = 2
 follow_focus = true
 horizontal_scroll_mode = 0
@@ -135,3 +131,6 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
+
+[node name="suggestion_item" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+layout_mode = 2

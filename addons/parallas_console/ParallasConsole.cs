@@ -383,11 +383,18 @@ public partial class ParallasConsole : Control
     {
         ClearAutoComplete();
 
-        List<string> values = [];
+        List<(string Name, string Description)> values = [];
 
         if (_wordIndex == 0 || _words.Length == 0)
         {
-            values.AddRange(ConsoleData.ConsoleCommands.Keys);
+            foreach ((ConsoleCommandAttribute Command, MethodInfo MethodInfo) commandsValue in ConsoleData.ConsoleCommands.Values)
+            {
+                values.Add(new()
+                {
+                    Name = commandsValue.Command.Name,
+                    Description = commandsValue.Command.Description
+                });
+            }
         }
         else
         {
@@ -401,34 +408,39 @@ public partial class ParallasConsole : Control
                                         methodParameter.ParameterType;
                     if (methodParameterType == typeof(bool))
                     {
-                        values.AddRange(["true", "false"]);
+                        values.AddRange([
+                            ("1", "true"),
+                            ("0", "false")
+                        ]);
                     }
                     if (methodParameterType.IsEnum)
                     {
-                        values.AddRange(System.Enum.GetNames( methodParameterType ));
+                        values.AddRange(System.Enum.GetNames(methodParameterType)
+                            .Select(n => new ValueTuple<string, string>(n, null)));
                     }
                 }
                 if (_wordIndex - 1 < info.Command.AutocompleteMethodNames.Length)
                 {
                     values.AddRange(GetAutocompleteValues(info.Command.AutocompleteMethodNames[_wordIndex - 1],
-                        info.MethodInfo));
+                        info.MethodInfo)
+                        .Select(n => new ValueTuple<string, string>(n, null)));
                 }
             }
         }
 
         if (_wordIndex >= 0 && _wordIndex < _words.Length)
-            values = values.Where(w => w.Contains(_words[_wordIndex], StringComparison.InvariantCultureIgnoreCase)).ToList();
+            values = values.Where(w => w.Name.Contains(_words[_wordIndex], StringComparison.InvariantCultureIgnoreCase)).ToList();
 
-        values.Sort();
+        values.Sort(((a, b) => String.Compare(a.Name, b.Name, StringComparison.InvariantCultureIgnoreCase)));
 
-        _autoCompleteWords = values.ToArray();
+        _autoCompleteWords = values.Select(v => v.Name).ToArray();
         for (var index = values.Count - 1; index >= 0; index--)
         {
             var value = values[index];
             var suggestionItem = _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
             if (index == _autoCompleteIndex)
                 suggestionItem.IsHighlighted = true;
-            suggestionItem.Label.Text = value;
+            suggestionItem.SetData(value.Name, value.Description);
             _autocompleteVbox.AddChild(suggestionItem);
             _autoCompleteSuggestionItems.Add(suggestionItem);
         }
@@ -482,6 +494,7 @@ public partial class ParallasConsole : Control
 
     [ConsoleCommand(
         "debug_draw",
+        Description = "Sets the DebugDraw mode on the main Viewport.",
         CommandOutput = "Set DebugDraw on Viewport."
     )]
     public void SetDebugDraw(Viewport.DebugDrawEnum debugDrawMode)
