@@ -11,7 +11,8 @@ public partial class DebugShow : Node
     [Export] public string VisName;
 
     public static readonly HashSet<string> VisNames = [];
-    public static string[] GetVisNames => VisNames.ToArray();
+
+    public static string[] GetVisNames() => VisNames.ToArray();
 
     public override void _Ready()
     {

@@ -12,13 +12,24 @@ public partial class ParallasConsole : Control
     public static ParallasConsole Instance { get; private set; }
 
     [Export(PropertyHint.InputName)] private String _inputToggle;
+    [Export(PropertyHint.InputName)] private String _inputAutoComplete;
 
     private readonly List<string> _historyStrings = [];
     private Control _consolePanel;
     private RichTextLabel _commandHistory;
-    private LineEdit _commandInput;
+    private CommandInput _commandInput;
+    private Control _autocompleteControl;
+    private ScrollContainer _autocompleteScroll;
+    private VBoxContainer _autocompleteVbox;
+
     private float _offsetX = 0f;
+    private int _wordIndex = int.MinValue;
+    private string[] _lastInputWords = [];
+    private bool _showAutoComplete = false;
     private Tween _tween;
+
+    private PackedScene _autocompleteSuggestionScene =
+        ResourceLoader.Load<PackedScene>("res://addons/parallas_console/suggestion_item.tscn");
 
     public bool IsOpen { get; private set; } = false;
 
@@ -32,10 +43,14 @@ public partial class ParallasConsole : Control
 
         _consolePanel = GetNode<Control>("%console_panel");
         _commandHistory = GetNode<RichTextLabel>("%command_history");
-        _commandInput = GetNode<LineEdit>("%command_input");
+        _commandInput = GetNode<CommandInput>("%command_input");
+        _autocompleteControl = GetNode<Control>("%autocomplete_control");
+        _autocompleteScroll = GetNode<ScrollContainer>("%autocomplete_scroll");
+        _autocompleteVbox = GetNode<VBoxContainer>("%autocomplete_vbox");
         _offsetX = -_consolePanel.Size.X;
         Position = Position with { X = _offsetX };
 
+        _commandInput.TextChanged += TextChanged;
         _commandInput.TextSubmitted += TextSubmitted;
 
         ConsoleData.FetchData();
@@ -51,6 +66,18 @@ public partial class ParallasConsole : Control
         {
             Toggle();
         }
+        if (Input.IsActionJustPressed(_inputAutoComplete))
+        {
+            if (!_showAutoComplete)
+                _showAutoComplete = true;
+            else
+            {
+
+            }
+        }
+
+        _autocompleteControl.Visible = _showAutoComplete;
+        RefreshAutoCompletePosition();
 
         // if (Input.MouseMode == Input.MouseModeEnum.Captured)
         // {
@@ -143,25 +170,39 @@ public partial class ParallasConsole : Control
         if (string.IsNullOrEmpty(autocompleteMethodName)) return [];
 
         var declaringType = forMethod.DeclaringType!;
-        if (declaringType.GetMethod(autocompleteMethodName) is not { } autocompleteMethod)
+        object result = null;
+        if (declaringType.GetField(autocompleteMethodName) is { } autocompleteField)
         {
-            PrintError($"Autocomplete method \"{autocompleteMethodName}\" not found.");
-            return [];
+            // is field
+            if (!autocompleteField.IsStatic)
+            {
+                PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
+                return [];
+            }
+            result = autocompleteField.GetValue(null);
         }
-        if (!autocompleteMethod.IsStatic)
+        else if (declaringType.GetMethod(autocompleteMethodName) is { } autocompleteMethod)
         {
-            PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
+            // is method
+            if (!autocompleteMethod.IsStatic)
+            {
+                PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
+                return [];
+            }
+            result = autocompleteMethod.Invoke(null, null);
+        }
+        else
+        {
+            // not found
+            PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
             return [];
         }
 
-        var result = autocompleteMethod.Invoke(null, null);
-        if (result is not string[] resultStrings)
-        {
-            PrintError($"Autocomplete method \"{autocompleteMethodName}\" did not return an array of strings.");
-            return [];
-        }
+        if (result is string[] resultStrings) return resultStrings;
 
-        return resultStrings;
+        // function does not return valid array of strings
+        PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
+        return [];
     }
 
     public void PrintText(string text)
@@ -182,18 +223,118 @@ public partial class ParallasConsole : Control
         PrintText($"[color=red]Error: {errorMessage}");
     }
 
-    [ConsoleCommand("dev_log_verbose", Description = "Sets whether to log console process outputs.")]
+    [ConsoleCommand(
+        "dev_log_verbose",
+        Description = "Sets whether to log console process outputs."
+    )]
     public void SetVerboseLogging(bool value)
     {
         ShowVerboseLogging = value;
         GD.Print($"verbose logging set to {value}.");
     }
 
+    private void TextChanged(string text)
+    {
+        _lastInputWords = _commandInput.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        _showAutoComplete = !_lastInputWords.IsEmpty();
+        RefreshAutoCompleteValues();
+    }
+
     private void TextSubmitted(string text)
     {
-        PrintText("");
+        _wordIndex = 0;
+        _lastInputWords = [];
         _commandInput.Clear();
+        _showAutoComplete = false;
+        PrintText("");
         PrintText($"[color=cyan]>{text}");
         CallCommand(text);
+    }
+
+    private void RefreshAutoCompletePosition()
+    {
+        var charCounter = 0;
+        int wordIndex = 0;
+        for (int i = 0; i < _lastInputWords.Length; i++)
+        {
+            var word = _lastInputWords[i];
+            var newCharCounter = charCounter + word.Length + 1;
+            if (newCharCounter > _commandInput.CaretColumn)
+            {
+                wordIndex = i;
+                break;
+            }
+            charCounter = newCharCounter;
+        }
+
+        // the counting system is a bit weird. if we're on the last character show the next word position.
+        if (_commandInput.CaretColumn == charCounter) wordIndex = _lastInputWords.Length;
+        if (wordIndex != _wordIndex)
+        {
+            _autocompleteControl.GlobalPosition = _commandInput.GetCharacterPos(charCounter) + Vector2.Up * _autocompleteControl.Size.Y;
+            _wordIndex = wordIndex;
+            RefreshAutoCompleteValues();
+            // _showAutoComplete = true;
+        }
+    }
+
+    private void RefreshAutoCompleteValues()
+    {
+        foreach (var child in _autocompleteVbox.GetChildren())
+        {
+            child.QueueFree();
+        }
+
+        List<string> values = [];
+
+        if (_wordIndex == 0)
+        {
+            values.AddRange(ConsoleData.ConsoleCommands.Keys);
+        }
+        else
+        {
+            if (ConsoleData.ConsoleCommands.TryGetValue(_lastInputWords[0], out var info))
+            {
+                var methodParameters = info.MethodInfo.GetParameters();
+                if (_wordIndex - 1 < methodParameters.Length)
+                {
+                    if (methodParameters[_wordIndex - 1].ParameterType == typeof(bool))
+                    {
+                        values.AddRange(["true", "false"]);
+                    }
+                }
+                if (_wordIndex - 1 < info.Command.AutocompleteMethodNames.Length)
+                {
+                    values.AddRange(GetAutocompleteValues(info.Command.AutocompleteMethodNames[_wordIndex - 1],
+                        info.MethodInfo));
+                }
+            }
+        }
+
+        if (_wordIndex < _lastInputWords.Length)
+            values = values.Where(w => w.Contains(_lastInputWords[_wordIndex])).ToList();
+
+        for (var index = values.Count - 1; index >= 0; index--)
+        {
+            var value = values[index];
+            var suggestionItem = _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
+            if (index == 0)
+                suggestionItem.IsHighlighted = true;
+            suggestionItem.Label.Text = value;
+            _autocompleteVbox.AddChild(suggestionItem);
+        }
+    }
+
+    public static string[] DebugDrawEnumValues() => System.Enum.GetNames( typeof( Viewport.DebugDrawEnum ) );
+    [ConsoleCommand(
+        "debug_draw",
+        AutocompleteMethodNames = [nameof(DebugDrawEnumValues)],
+        CommandOutput = "Set DebugDraw on Viewport."
+    )]
+    public void SetDebugDraw(string debugDrawEnumString)
+    {
+        if (Enum.TryParse(typeof(Viewport.DebugDrawEnum), debugDrawEnumString, false, out var debugDraw) is false)
+            return;
+        GetViewport().SetDebugDraw((Viewport.DebugDrawEnum)debugDraw);
     }
 }

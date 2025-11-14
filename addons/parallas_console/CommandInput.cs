@@ -30,4 +30,21 @@ public partial class CommandInput : LineEdit
         Text = cleanString;
         CaretColumn = caret - (text.Length - Text.Length);
     }
+
+    public Vector2 GetCaretPos()
+    {
+        return GetCharacterPos(CaretColumn);
+    }
+
+    public Vector2 GetCharacterPos(int index)
+    {
+        var leftMargin = GetThemeStylebox("normal").ContentMarginLeft;
+        var scrollOffset = Mathf.FloorToInt(GetScrollOffset());
+
+        var fontSize = GetThemeFontSize("font_size");
+        var stringSize = GetThemeFont("font").GetStringSize(Text[..index], fontSize: fontSize);
+
+        var startPos = GlobalPosition;
+        return startPos + Vector2.Right * (leftMargin + stringSize.X + scrollOffset);
+    }
 }

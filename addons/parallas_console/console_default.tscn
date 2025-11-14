@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn6wponjc8fa8"]
+[gd_scene load_steps=6 format=3 uid="uid://cn6wponjc8fa8"]
 
 [ext_resource type="Script" uid="uid://x0qyxr2vyj8u" path="res://addons/parallas_console/ParallasConsole.cs" id="1_cd4qq"]
 [ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
@@ -16,6 +16,20 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5l3k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [node name="ConsoleDefault" type="Control"]
 layout_mode = 3
 anchors_preset = 9
@@ -24,6 +38,7 @@ offset_right = 300.0
 grow_vertical = 2
 script = ExtResource("1_cd4qq")
 _inputToggle = "console_toggle"
+_inputAutoComplete = "console_autocomplete"
 metadata/_custom_type_script = "uid://x0qyxr2vyj8u"
 
 [node name="console_panel" type="MarginContainer" parent="."]
@@ -80,7 +95,41 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_a5bj4")
 theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_q5l3k")
 placeholder_text = "input command here"
 keep_editing_on_text_submit = true
 caret_blink = true
 script = ExtResource("2_bf6pj")
+
+[node name="autocomplete_control" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_right = 200.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="autocomplete_scroll" type="ScrollContainer" parent="autocomplete_control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="autocomplete_vbox" type="VBoxContainer" parent="autocomplete_control/autocomplete_scroll"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 2
