@@ -67,7 +67,7 @@ public partial class Player : RigidBody3D
     private Vector3 _respawnPoint = Vector3.Zero;
     private Vector3 _respawnForward = Vector3.Forward;
 
-    private int _noclip = 0;
+    private bool _noclip = false;
     
     private bool _isRespawning = false;
     private Vector3 _pauseLinearVelocity = Vector3.Zero;
@@ -224,17 +224,31 @@ public partial class Player : RigidBody3D
         Vector3 flattenedVelocity = MathUtil.ProjectOnPlane(LinearVelocity, -GravityDirection);
         if (flattenedVelocity.Normalized().AngleTo(_inputMovementLocal) > Mathf.Pi * 0.5f)
             reverseMultiplier = 2f;
-        if (_isGrounded)
-        {
 
-            Vector3 inputConvertedToTorque = MathUtil.AngleAxis(Mathf.Pi * 0.5f, -GravityDirection) * _inputMovementLocal;
-            ApplyTorque(
-                new Vector3(inputConvertedToTorque.X, inputConvertedToTorque.Y, inputConvertedToTorque.Z) *
-                (250f * reverseMultiplier * (float)delta));
+        if (!_noclip)
+        {
+            if (_isGrounded)
+            {
+
+                Vector3 inputConvertedToTorque =
+                    MathUtil.AngleAxis(Mathf.Pi * 0.5f, -GravityDirection) * _inputMovementLocal;
+                ApplyTorque(
+                    new Vector3(inputConvertedToTorque.X, inputConvertedToTorque.Y, inputConvertedToTorque.Z) *
+                    (250f * reverseMultiplier * (float)delta));
+            }
+            else
+            {
+                ApplyForce(_inputMovementLocal * (700 * reverseMultiplier * (float)delta));
+            }
         }
         else
         {
-            ApplyForce(_inputMovementLocal * (700 * reverseMultiplier * (float)delta));
+            var noclipMovement = _inputMovementLocal;
+            if (Input.IsActionPressed("noclip_up"))
+                noclipMovement -= GravityDirection;
+            if (Input.IsActionPressed("noclip_down"))
+                noclipMovement += GravityDirection;
+            GlobalTranslate(noclipMovement * 10f * (float)delta);
         }
 
         float projectedMagnitude = MathUtil.ProjectOnPlane(LinearVelocity, -GravityDirection).Length();
@@ -504,7 +518,7 @@ public partial class Player : RigidBody3D
         GD.Print($"No such checkpoint exists at index {index}.");
     }
 
-    [ConsoleCommand("player_flip_gravity")]
+    [ConsoleCommand("player_flip_gravity", Description = "Flip the player's gravity.")]
     public void FlipGravity()
     {
         UseFlippedGravity = !UseFlippedGravity;
@@ -512,14 +526,15 @@ public partial class Player : RigidBody3D
 
     private void NoClip()
     {
-        NoClip(_noclip == 1 ? 0 : 1);
+        NoClip(!_noclip);
     }
 
-    private void NoClip(int value)
+    [ConsoleCommand("noclip", Description = "Enables/Disables noclip for the player.")]
+    private void NoClip(bool value)
     {
         _noclip = value;
-        
-        Freeze = _noclip == 1;
+        Freeze = _noclip;
+        CollisionLayer = _noclip ? 0u : 2u;
     }
 
     private void SetRespawnPoint()
