@@ -26,10 +26,10 @@ public partial class DebugShow : Node
         AutocompleteMethodNames = [nameof(GetVisNames)],
         CommandOutput = "Toggled Debug Visibility."
     )]
-    public void ToggleVisibility(string name)
+    public void ToggleVisibility(string name, bool? state = null)
     {
         GD.Print($"{name} given to VisName: {VisName}");
         if (name != VisName) return;
-        TargetNode.Visible = !TargetNode.Visible;
+        TargetNode.Visible = state ?? !TargetNode.Visible;
     }
 }

@@ -13,7 +13,7 @@ public static class ConsoleData
     {
         var assembly = Assembly.GetExecutingAssembly();
         var allMethods = assembly.GetTypes()
-            .SelectMany(t => t.GetMethods());
+            .SelectMany(t => t.GetRuntimeMethods());
 
         foreach (var consoleCommandMethod in allMethods)
         {

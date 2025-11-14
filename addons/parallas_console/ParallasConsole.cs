@@ -91,23 +91,6 @@ public partial class ParallasConsole : Control
             }
         }
 
-        if (_autoCompleteSuggestionItems.Count > 0)
-        {
-            if (Input.IsActionJustPressed(_inputAutoCompleteNext))
-                _autoCompleteIndex++;
-            if (Input.IsActionJustPressed(_inputAutoCompletePrev))
-                _autoCompleteIndex--;
-            if (_autoCompleteIndex >= _autoCompleteSuggestionItems.Count) _autoCompleteIndex = 0;
-            if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
-
-            _autocompleteScroll.ScrollVertical = 10 * (_autoCompleteSuggestionItems.Count - _autoCompleteIndex - 1);
-
-            for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
-            {
-                _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
-            }
-        }
-
         _autocompleteControl.Visible = _showAutoComplete;
         RefreshAutoCompletePosition();
     }
@@ -158,23 +141,6 @@ public partial class ParallasConsole : Control
             return;
         }
 
-        var parameters = allWords[1..allWords.Length];
-        var parametersArray = new Array();
-
-        for (var i = 0; i < parameters.Length; i++)
-        {
-            var item = parameters[i];
-            if (item is null) return;
-            if (bool.TryParse(item, out var boolVal))
-            {
-                parametersArray.Add(boolVal);
-            }
-            else
-            {
-                parametersArray.AddRange(item);
-            }
-        }
-
         var commandName = allWords[0];
         if (!ConsoleData.ConsoleCommands.TryGetValue(commandName, out var commandMethodPair))
         {
@@ -184,16 +150,87 @@ public partial class ParallasConsole : Control
         var command = commandMethodPair.Command;
         var methodInfo = commandMethodPair.MethodInfo;
 
+        var parameters = allWords[1..allWords.Length];
+        var methodParameters = methodInfo.GetParameters();
+        int requiredCount = methodParameters.Count(p => !p.IsOptional);
+        var optionalParameters = methodParameters[requiredCount..];
+        if (parameters.Length < requiredCount)
+        {
+            PrintError($"Not enough parameters provided (found {parameters.Length}, expected {requiredCount}).");
+            return;
+        }
+        if (parameters.Length > methodParameters.Length)
+        {
+            PrintError($"Too many parameters provided (found {parameters.Length}, expected {methodParameters.Length}).");
+            return;
+        }
+
+        List<object> parametersArray = [];
+        for (var i = 0; i < methodParameters.Length; i++)
+        {
+            var methodParameter = methodParameters[i];
+            var parameterType = methodParameter.ParameterType;
+            var parameterDefaultValue = methodParameter.DefaultValue;
+
+            if (Nullable.GetUnderlyingType(parameterType) is var nullableType && nullableType is not null)
+                parameterType = nullableType;
+
+            if (i < parameters.Length)
+            {
+                var item = parameters[i];
+                if (item is null) return;
+
+                GD.Print(parameterType.Name);
+                if (parameterType == typeof(bool))
+                {
+                    if (bool.TryParse(item, out var boolVal))
+                    {
+                        parametersArray.Add(boolVal);
+                    }
+                    else if (item == "0" || item == "1")
+                    {
+                        parametersArray.Add(item == "1");
+                    }
+                    else
+                    {
+                        PrintError(
+                            $"Invalid value provided for parameter \"{methodParameter.Name}\" (found \"{item}\", expected type {parameterType.Name})");
+                        return;
+                    }
+                }
+                else
+                {
+                    parametersArray.Add(item);
+                }
+            }
+            else
+            {
+                parametersArray.Add(parameterDefaultValue);
+            }
+        }
+
+        var type = methodInfo.DeclaringType!;
         if (!methodInfo.IsStatic)
         {
-            var type = methodInfo.DeclaringType!;
             var childrenOfType = GetTree().Root.FindChildren("*", type.Name, true, false);
             PrintTextVerbose($"Found {childrenOfType.Count} node of type {type.Name}");
             foreach (var node in childrenOfType)
             {
                 PrintTextVerbose($"Calling method {methodInfo.Name} on node {node.Name}");
-                node.Callv(methodInfo.Name, parametersArray);
+                try
+                {
+                    methodInfo.Invoke(node, [..parametersArray]);
+                }
+                catch (Exception e)
+                {
+                    PrintError($"Error invoking function: {e}");
+                    GD.PushError(e);
+                }
             }
+        }
+        else
+        {
+            methodInfo.Invoke(null, [..parametersArray]);
         }
         PrintTextVerbose("Command successfully executed.");
         if (command.CommandOutput is not null)
@@ -352,6 +389,10 @@ public partial class ParallasConsole : Control
                     {
                         values.AddRange(["true", "false"]);
                     }
+                    if (methodParameters[_wordIndex - 1].ParameterType == typeof(bool?))
+                    {
+                        values.AddRange(["true", "false"]);
+                    }
                 }
                 if (_wordIndex - 1 < info.Command.AutocompleteMethodNames.Length)
                 {
@@ -383,12 +424,44 @@ public partial class ParallasConsole : Control
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
+
+        if (!IsOpen) return;
+
+        if (_autoCompleteSuggestionItems.Count > 0)
+        {
+            if (@event.IsActionPressed(_inputAutoCompleteNext, true))
+                _autoCompleteIndex++;
+            if (@event.IsActionPressed(_inputAutoCompletePrev, true))
+                _autoCompleteIndex--;
+
+            if (@event.IsEcho())
+            {
+                _autoCompleteIndex = Mathf.Clamp(_autoCompleteIndex, 0, _autoCompleteSuggestionItems.Count - 1);
+            }
+            else
+            {
+                if (_autoCompleteIndex >= _autoCompleteSuggestionItems.Count) _autoCompleteIndex = 0;
+                if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
+            }
+
+            _autocompleteScroll.ScrollVertical = 10 * (_autoCompleteSuggestionItems.Count - _autoCompleteIndex - 1);
+            for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
+            {
+                _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
+            }
+        }
+
         if (@event.IsAction(_inputAutoCompleteNext))
         {
             AcceptEvent();
         }
         if (@event.IsAction(_inputAutoCompletePrev))
         {
+            AcceptEvent();
+        }
+        if (@event.IsAction("ui_cancel") && _showAutoComplete)
+        {
+            _showAutoComplete = false;
             AcceptEvent();
         }
     }
