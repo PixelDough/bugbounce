@@ -306,14 +306,18 @@ public partial class ParallasConsole : Control
         PrintText($"[color=red]Error: {errorMessage}");
     }
 
-    [ConsoleCommand(
-        "dev_log_verbose",
-        Description = "Sets whether to log console process outputs."
-    )]
-    public void SetVerboseLogging(bool value)
+    public enum ConsoleLogLevel
     {
-        ShowVerboseLogging = value;
-        GD.Print($"verbose logging set to {value}.");
+        Normal,
+        Verbose
+    }
+    [ConsoleCommand(
+        "console_log_level",
+        Description = "Sets the logging level of the dev console's own output."
+    )]
+    public void SetConsoleLogLevel(ConsoleLogLevel consoleLogLevel)
+    {
+        ShowVerboseLogging = consoleLogLevel == ConsoleLogLevel.Verbose;
     }
 
     private void TextChanged(string text)
