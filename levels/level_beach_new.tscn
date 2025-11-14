@@ -1202,6 +1202,7 @@ rotation_order = 3
 
 [node name="Rotate" type="Node" parent="Level Geometry/Geo/Life Saver (8)"]
 script = ExtResource("18_ws47j")
+UsePhysics = true
 AngleDegrees = -15.0
 Space = 0
 metadata/_custom_type_script = "uid://pa1p4piks2ay"
