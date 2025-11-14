@@ -97,6 +97,7 @@ script = ExtResource("7_yj0s3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 top_level = true
+current = true
 fov = 100.0
 
 [node name="Blob Shadow" parent="." instance=ExtResource("5_6wjry")]

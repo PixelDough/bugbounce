@@ -38,7 +38,9 @@ offset_right = 300.0
 grow_vertical = 2
 script = ExtResource("1_cd4qq")
 _inputToggle = "console_toggle"
-_inputAutoComplete = "console_autocomplete"
+_inputAutoCompleteConfirm = "console_autocomplete_confirm"
+_inputAutoCompleteNext = "console_autocomplete_next"
+_inputAutoCompletePrev = "console_autocomplete_previous"
 metadata/_custom_type_script = "uid://x0qyxr2vyj8u"
 
 [node name="console_panel" type="MarginContainer" parent="."]
@@ -131,5 +133,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 0
 alignment = 2

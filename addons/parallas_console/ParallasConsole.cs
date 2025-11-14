@@ -12,7 +12,9 @@ public partial class ParallasConsole : Control
     public static ParallasConsole Instance { get; private set; }
 
     [Export(PropertyHint.InputName)] private String _inputToggle;
-    [Export(PropertyHint.InputName)] private String _inputAutoComplete;
+    [Export(PropertyHint.InputName)] private String _inputAutoCompleteConfirm;
+    [Export(PropertyHint.InputName)] private String _inputAutoCompleteNext;
+    [Export(PropertyHint.InputName)] private String _inputAutoCompletePrev;
 
     private readonly List<string> _historyStrings = [];
     private Control _consolePanel;
@@ -25,6 +27,9 @@ public partial class ParallasConsole : Control
     private float _offsetX = 0f;
     private int _wordIndex = int.MinValue;
     private string[] _lastInputWords = [];
+    private string[] _autoCompleteWords = [];
+    private readonly List<SuggestionItem> _autoCompleteSuggestionItems = [];
+    private int _autoCompleteIndex = 0;
     private bool _showAutoComplete = false;
     private Tween _tween;
 
@@ -66,30 +71,45 @@ public partial class ParallasConsole : Control
         {
             Toggle();
         }
-        if (Input.IsActionJustPressed(_inputAutoComplete))
+
+        if (!IsOpen) return;
+
+        if (Input.IsActionJustPressed(_inputAutoCompleteConfirm))
         {
             if (!_showAutoComplete)
                 _showAutoComplete = true;
             else
             {
+                var lastWordLength = _lastInputWords.LastOrDefault("").Length;
+                if (char.IsWhiteSpace(_commandInput.Text.LastOrDefault(' '))) lastWordLength = 0;
+                var cleanedText = _commandInput.Text.Remove(_commandInput.Text.Length - lastWordLength, lastWordLength);
+                _commandInput.SetText(cleanedText);
+                _commandInput.CaretColumn = cleanedText.Length;
+                _commandInput.InsertTextAtCaret($"{_autoCompleteWords[_autoCompleteIndex]} ");
+                ClearAutoComplete();
+                TextChanged(_commandInput.Text);
+            }
+        }
 
+        if (_autoCompleteSuggestionItems.Count > 0)
+        {
+            if (Input.IsActionJustPressed(_inputAutoCompleteNext))
+                _autoCompleteIndex++;
+            if (Input.IsActionJustPressed(_inputAutoCompletePrev))
+                _autoCompleteIndex--;
+            if (_autoCompleteIndex >= _autoCompleteSuggestionItems.Count) _autoCompleteIndex = 0;
+            if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
+
+            _autocompleteScroll.ScrollVertical = 10 * (_autoCompleteSuggestionItems.Count - _autoCompleteIndex - 1);
+
+            for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
+            {
+                _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
             }
         }
 
         _autocompleteControl.Visible = _showAutoComplete;
         RefreshAutoCompletePosition();
-
-        // if (Input.MouseMode == Input.MouseModeEnum.Captured)
-        // {
-        //     MouseFilter = MouseFilterEnum.Ignore;
-        //     FocusMode = FocusModeEnum.None;
-        //     _commandInput.ReleaseFocus();
-        // }
-        // else
-        // {
-        //     MouseFilter = MouseFilterEnum.Stop;
-        //     FocusMode = FocusModeEnum.All;
-        // }
     }
 
     public void Toggle()
@@ -123,6 +143,8 @@ public partial class ParallasConsole : Control
             .SetEase(Tween.EaseType.In)
             .SetTrans(Tween.TransitionType.Cubic);
 
+        ClearValues();
+
         _commandInput.ReleaseFocus();
     }
 
@@ -138,7 +160,20 @@ public partial class ParallasConsole : Control
 
         var parameters = allWords[1..allWords.Length];
         var parametersArray = new Array();
-        parametersArray.AddRange(parameters);
+
+        for (var i = 0; i < parameters.Length; i++)
+        {
+            var item = parameters[i];
+            if (item is null) return;
+            if (bool.TryParse(item, out var boolVal))
+            {
+                parametersArray.Add(boolVal);
+            }
+            else
+            {
+                parametersArray.AddRange(item);
+            }
+        }
 
         var commandName = allWords[0];
         if (!ConsoleData.ConsoleCommands.TryGetValue(commandName, out var commandMethodPair))
@@ -242,13 +277,31 @@ public partial class ParallasConsole : Control
 
     private void TextSubmitted(string text)
     {
-        _wordIndex = 0;
-        _lastInputWords = [];
-        _commandInput.Clear();
-        _showAutoComplete = false;
         PrintText("");
         PrintText($"[color=cyan]>{text}");
         CallCommand(text);
+        ClearValues();
+    }
+
+    private void ClearValues()
+    {
+        _wordIndex = int.MinValue;
+        _lastInputWords = [];
+        _commandInput.Clear();
+        _showAutoComplete = false;
+        ClearAutoComplete();
+        TextChanged("");
+    }
+
+    private void ClearAutoComplete()
+    {
+        foreach (var child in _autocompleteVbox.GetChildren())
+        {
+            child.QueueFree();
+        }
+        _autoCompleteWords = [];
+        _autoCompleteIndex = 0;
+        _autoCompleteSuggestionItems.Clear();
     }
 
     private void RefreshAutoCompletePosition()
@@ -280,14 +333,11 @@ public partial class ParallasConsole : Control
 
     private void RefreshAutoCompleteValues()
     {
-        foreach (var child in _autocompleteVbox.GetChildren())
-        {
-            child.QueueFree();
-        }
+        ClearAutoComplete();
 
         List<string> values = [];
 
-        if (_wordIndex == 0)
+        if (_wordIndex == 0 || _lastInputWords.Length == 0)
         {
             values.AddRange(ConsoleData.ConsoleCommands.Keys);
         }
@@ -311,17 +361,35 @@ public partial class ParallasConsole : Control
             }
         }
 
-        if (_wordIndex < _lastInputWords.Length)
-            values = values.Where(w => w.Contains(_lastInputWords[_wordIndex])).ToList();
+        if (_wordIndex >= 0 && _wordIndex < _lastInputWords.Length)
+            values = values.Where(w => w.Contains(_lastInputWords[_wordIndex], StringComparison.InvariantCultureIgnoreCase)).ToList();
 
+        values.Sort();
+
+        _autoCompleteWords = values.ToArray();
         for (var index = values.Count - 1; index >= 0; index--)
         {
             var value = values[index];
             var suggestionItem = _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
-            if (index == 0)
+            if (index == _autoCompleteIndex)
                 suggestionItem.IsHighlighted = true;
             suggestionItem.Label.Text = value;
             _autocompleteVbox.AddChild(suggestionItem);
+            _autoCompleteSuggestionItems.Add(suggestionItem);
+        }
+        _autoCompleteSuggestionItems.Reverse();
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        if (@event.IsAction(_inputAutoCompleteNext))
+        {
+            AcceptEvent();
+        }
+        if (@event.IsAction(_inputAutoCompletePrev))
+        {
+            AcceptEvent();
         }
     }
 

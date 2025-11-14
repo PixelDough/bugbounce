@@ -28,6 +28,7 @@ public partial class SuggestionItem : PanelContainer
 
     private void UpdateVisual()
     {
+        if (!IsInstanceValid(this)) return;
         Label.AddThemeColorOverride("font_color", IsHighlighted ? FontColorHighlighted : FontColorBase);
         AddThemeStyleboxOverride("panel", IsHighlighted ? StyleBoxHighlighted : StyleBoxBase);
     }

@@ -4,6 +4,7 @@ using Godot;
 using Parallas;
 using Parallas.Console;
 
+[GlobalClass]
 public partial class Player : RigidBody3D
 {
     [Signal] public delegate void OnDeathEventHandler();
@@ -503,6 +504,7 @@ public partial class Player : RigidBody3D
         GD.Print($"No such checkpoint exists at index {index}.");
     }
 
+    [ConsoleCommand("player_flip_gravity")]
     public void FlipGravity()
     {
         UseFlippedGravity = !UseFlippedGravity;
