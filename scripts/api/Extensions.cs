@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Godot.Collections;
 
 namespace Parallas;
 
@@ -36,4 +37,18 @@ public static class Extensions
             Vector3.Axis.Z => Vector3.Forward,
             _ => throw new ArgumentOutOfRangeException()
         };
+
+    public static Array<Node> GetAllChildren(this Node node)
+    {
+        Array<Node> array =
+        [
+            node
+        ];
+        foreach (var child in node.GetChildren())
+        {
+            array.AddRange(GetAllChildren(child));
+        }
+
+        return array;
+    }
 }
