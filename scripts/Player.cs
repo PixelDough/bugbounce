@@ -118,7 +118,6 @@ public partial class Player : RigidBody3D
     {
         base._Process(delta);
         HandleMovementInput();
-        // HandleNoclipMovement(delta);
 
         // windFastEventEmitter.EventInstance.setParameterByName("AirSpeed", LinearVelocity.magnitude / 30f);
         
@@ -192,8 +191,8 @@ public partial class Player : RigidBody3D
 
         // _cameraTiltRoot.GlobalRotation = MathUtil.ExpDecay(_cameraTiltRoot.Quaternion,
             // Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovementLocal.Z * 5f), 0f, Mathf.DegToRad(_inputMovementLocal.X * 5f))), 3f, (float)delta).GetEuler();
-        var tiltQuaternion = Quaternion.FromEuler(new(Mathf.DegToRad(-_inputMovement.Y * 5f), 0f,
-            Mathf.DegToRad(_inputMovement.X * 5f))).Normalized();
+        var tiltQuaternion = Quaternion.FromEuler(new(Mathf.DegToRad(_inputMovement.Y * 15f), 0f,
+            Mathf.DegToRad(-_inputMovement.X * 5f))).Normalized();
         Basis tiltBasis = new Basis(tiltQuaternion);
         _cameraTiltRoot.Basis = MathUtil.ExpDecay(_cameraTiltRoot.Basis, tiltBasis, 3f, (float)delta);
 
@@ -276,7 +275,7 @@ public partial class Player : RigidBody3D
                 var pointNormal = moveAndCollide.GetNormal(i);
                 float velTowardsNormal = -LinearVelocity.Dot(pointNormal);
 
-                if (pointNormal.AngleTo(-GravityDirection.Normalized()) < 15f)
+                if (pointNormal.AngleTo(-GravityDirection.Normalized()) < Mathf.DegToRad(15f))
                 {
                     // if (LinearVelocity.Project(state.TotalGravity).LengthSquared() > 2)
                         // playerStuffManager.sandBurstParticleSystem.Play();
@@ -393,17 +392,6 @@ public partial class Player : RigidBody3D
         }
     }
 
-    private void HandleNoclipMovement(double delta)
-    {
-        // if (!GameManager.DoPlayerMovement || GameManager.Instance.quantumConsole.IsActive || _noclip == 0) return;
-
-        _inputMovementLocal.Y +=
-            (Input.IsKeyPressed(Key.Space) ? 1 : 0) +
-            (Input.IsKeyPressed(Key.Shift) ? -1 : 0);
-        
-        GlobalPosition += _inputMovementLocal * (20f * (float)delta);
-    }
-
     private void Jump()
     {
         if (Mathf.Abs(LinearVelocity.Dot(GravityDirection)) < 10f)
@@ -444,6 +432,7 @@ public partial class Player : RigidBody3D
         Respawn();
     }
 
+    [ConsoleCommand("player_respawn", Description = "Forces the player to respawn.")]
     public void Respawn()
     {
         if (_isRespawning) return;

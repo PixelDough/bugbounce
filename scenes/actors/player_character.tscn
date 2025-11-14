@@ -74,7 +74,7 @@ mesh = SubResource("BoxMesh_an8on")
 [node name="DebugShow" type="Node" parent="Grav Tilt/Camera Tilt Root/MeshInstance3D" node_paths=PackedStringArray("TargetNode")]
 script = ExtResource("5_lchlr")
 TargetNode = NodePath("..")
-VisName = "player"
+VisName = "camera_up_axis"
 metadata/_custom_type_script = "uid://qe0kupoqatlv"
 
 [node name="ThirdPersonCameraBehavior" type="Node" parent="." node_paths=PackedStringArray("Camera3D", "Target", "TargetTilt")]
