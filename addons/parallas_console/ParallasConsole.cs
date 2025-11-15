@@ -438,9 +438,10 @@ public partial class ParallasConsole : Control
                     Name = commandsValue.Command.Name,
                     Description = commandsValue.Command.Description
                 });
-                _autocompleteTooltip.Visible = true;
-                _autocompleteTooltip.SetData("command - the command you want to run");
             }
+
+            _autocompleteTooltip.Visible = true;
+            _autocompleteTooltip.SetData("command - the command you want to run");
         }
         else
         {
@@ -462,6 +463,7 @@ public partial class ParallasConsole : Control
                         tooltipDescriptions.Add("optional");
                     if (methodParameter.HasDefaultValue)
                         tooltipDescriptions.Add($"default = {methodParameter.DefaultValue ?? "null"}");
+                    _autocompleteTooltip.Visible = true;
                     _autocompleteTooltip.SetData(methodParameter.Name, String.Join(", ", tooltipDescriptions));
 
                     if (methodParameterType == typeof(bool))
@@ -476,6 +478,10 @@ public partial class ParallasConsole : Control
                         values.AddRange(System.Enum.GetNames(methodParameterType)
                             .Select(n => new ValueTuple<string, string>(n, null)));
                     }
+                }
+                else
+                {
+                    _autocompleteTooltip.Visible = false;
                 }
                 if (_wordIndex - 1 < info.Command.AutocompleteMethodNames.Length)
                 {
