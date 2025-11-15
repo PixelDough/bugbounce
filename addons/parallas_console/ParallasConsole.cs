@@ -417,7 +417,8 @@ public partial class ParallasConsole : Control
 
         yOffset = Mathf.Min(yOffset, _autocompleteScroll.Size.Y);
         if (_autocompleteTooltip.Visible)
-            yOffset += _autocompleteTooltip.Size.Y;
+            yOffset += _autocompleteTooltip.GetHeight();
+        GD.Print(_autocompleteTooltip.GetHeight());
         _autocompleteControl.PivotOffset = Vector2.Zero;
         _autocompleteControl.GlobalPosition = cursorPos + Vector2.Up * yOffset;
         _autocompleteControl.PivotOffset = Vector2.Down * yOffset;
@@ -439,9 +440,6 @@ public partial class ParallasConsole : Control
                     Description = commandsValue.Command.Description
                 });
             }
-
-            _autocompleteTooltip.Visible = true;
-            _autocompleteTooltip.SetData("command - the command you want to run");
         }
         else
         {
@@ -453,8 +451,21 @@ public partial class ParallasConsole : Control
                     var methodParameter = methodParameters[_wordIndex - 1];
                     var methodParameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
                                         methodParameter.ParameterType;
-
+                    var methodParameterConsoleInfo = methodParameter.GetCustomAttribute<ConsoleParamInfoAttribute>();
+                    string tooltipName = methodParameter.Name;
                     List<string> tooltipDescriptions = [];
+
+                    if (methodParameterConsoleInfo is not null)
+                    {
+                        values.AddRange(GetAutocompleteValues(methodParameterConsoleInfo.AutocompleteMemberName,
+                                info.MethodInfo)
+                            .Select(n => new ValueTuple<string, string>(n, null)));
+                        if (methodParameterConsoleInfo.Description is { } description)
+                            tooltipDescriptions.Add(description);
+                        if (methodParameterConsoleInfo.Name is { } name)
+                            tooltipName = name;
+                    }
+
                     if (Nullable.GetUnderlyingType(methodParameter.ParameterType) is { } parameterType)
                         tooltipDescriptions.Add($"type: {parameterType.Name}");
                     else
@@ -464,7 +475,7 @@ public partial class ParallasConsole : Control
                     if (methodParameter.HasDefaultValue)
                         tooltipDescriptions.Add($"default = {methodParameter.DefaultValue ?? "null"}");
                     _autocompleteTooltip.Visible = true;
-                    _autocompleteTooltip.SetData(methodParameter.Name, String.Join(", ", tooltipDescriptions));
+                    _autocompleteTooltip.SetData(tooltipName, String.Join("\n  ", tooltipDescriptions));
 
                     if (methodParameterType == typeof(bool))
                     {
@@ -482,12 +493,6 @@ public partial class ParallasConsole : Control
                 else
                 {
                     _autocompleteTooltip.Visible = false;
-                }
-                if (_wordIndex - 1 < info.Command.AutocompleteMethodNames.Length)
-                {
-                    values.AddRange(GetAutocompleteValues(info.Command.AutocompleteMethodNames[_wordIndex - 1],
-                        info.MethodInfo)
-                        .Select(n => new ValueTuple<string, string>(n, null)));
                 }
             }
         }

@@ -35,6 +35,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_hprwm")
 theme_override_font_sizes/font_size = 10
@@ -44,6 +45,7 @@ text = "test"
 modulate = Color(1, 1, 1, 0.5568628)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("1_hprwm")
 theme_override_font_sizes/font_size = 10
-text = "- description this is a very long description"
+text = ": description this is a very long description"

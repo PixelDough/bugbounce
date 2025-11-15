@@ -32,7 +32,7 @@ public partial class SuggestionItem : PanelContainer
         Label.Text = name;
 
         DescriptionLabel.Visible = !String.IsNullOrEmpty(description);
-        DescriptionLabel.Text = $"- {description ?? ""}";
+        DescriptionLabel.Text = $": {description ?? ""}";
     }
 
     private void UpdateVisual()
@@ -42,5 +42,19 @@ public partial class SuggestionItem : PanelContainer
         Label.AddThemeColorOverride("font_color", textColor);
         DescriptionLabel.AddThemeColorOverride("font_color", textColor);
         AddThemeStyleboxOverride("panel", IsHighlighted ? StyleBoxHighlighted : StyleBoxBase);
+    }
+
+    public float GetHeight()
+    {
+        var font = GetThemeFont("font");
+        var nameHeight = font.GetMultilineStringSize(
+            Label.Text,
+            fontSize: Label.GetThemeFontSize("font_size")
+        ).Y;
+        var descHeight = font.GetMultilineStringSize(
+            DescriptionLabel.Text,
+            fontSize: DescriptionLabel.GetThemeFontSize("font_size")
+        ).Y;
+        return Mathf.Max(nameHeight, descHeight);
     }
 }

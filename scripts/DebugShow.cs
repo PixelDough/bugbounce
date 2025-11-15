@@ -23,10 +23,12 @@ public partial class DebugShow : Node
     [ConsoleCommand(
         name: "debug_vis",
         Description = "Toggles the visibility of a specific debug node.",
-        AutocompleteMethodNames = [nameof(GetVisNames)],
         CommandOutput = "Toggled Debug Visibility."
     )]
-    public void ToggleVisibility(string name, bool? state = null)
+    public void ToggleVisibility(
+        [ConsoleParamInfo(AutocompleteMemberName = nameof(GetVisNames), Description = "the visname of the desired debug visualization.")] string name,
+        bool? state = null
+    )
     {
         GD.Print($"{name} given to VisName: {VisName}");
         if (name != VisName) return;
