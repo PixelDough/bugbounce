@@ -23,6 +23,7 @@ public partial class ParallasConsole : Control
     private Control _autocompleteControl;
     private ScrollContainer _autocompleteScroll;
     private VBoxContainer _autocompleteVbox;
+    private SuggestionItem _autocompleteTooltip;
 
     private float _offsetX = 0f;
     private int _wordIndex = int.MinValue;
@@ -52,6 +53,7 @@ public partial class ParallasConsole : Control
         _autocompleteControl = GetNode<Control>("%autocomplete_control");
         _autocompleteScroll = GetNode<ScrollContainer>("%autocomplete_scroll");
         _autocompleteVbox = GetNode<VBoxContainer>("%autocomplete_vbox");
+        _autocompleteTooltip = GetNode<SuggestionItem>("%autocomplete_tooltip");
         _offsetX = -_consolePanel.Size.X;
         Position = Position with { X = _offsetX };
 
@@ -77,7 +79,10 @@ public partial class ParallasConsole : Control
         if (Input.IsActionJustPressed(_inputAutoCompleteConfirm))
         {
             if (!_showAutoComplete)
+            {
+                RefreshAutoComplete();
                 _showAutoComplete = true;
+            }
             else
             {
                 var lastWordLength = _words.LastOrDefault("").Length;
@@ -91,8 +96,20 @@ public partial class ParallasConsole : Control
             }
         }
 
-        _autocompleteControl.Visible = _showAutoComplete;
-        RefreshAutoCompletePosition();
+        _autocompleteControl.Modulate = _autocompleteControl.Modulate with
+        {
+            A = MathUtil.ExpDecay(_autocompleteControl.Modulate.A,
+                _showAutoComplete ? 1f : 0f, 50f, (float)delta)
+        };
+        _autocompleteControl.Scale = _autocompleteControl.Scale with
+        {
+            Y = MathUtil.ExpDecay(
+                _autocompleteControl.Scale.Y,
+                _showAutoComplete ? 1f : 0f,
+                40f,
+                (float)delta
+            )
+        };
     }
 
     public void Toggle()
@@ -325,7 +342,7 @@ public partial class ParallasConsole : Control
     {
         _words = _commandInput.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         _showAutoComplete = !_words.IsEmpty();
-        RefreshAutoCompleteValues();
+        RefreshAutoComplete();
     }
 
     private void TextSubmitted(string text)
@@ -357,7 +374,7 @@ public partial class ParallasConsole : Control
         _autoCompleteSuggestionItems.Clear();
     }
 
-    private void RefreshAutoCompletePosition()
+    private void RefreshAutoComplete()
     {
         var charCounter = 0;
         int wordIndex = 0;
@@ -375,13 +392,27 @@ public partial class ParallasConsole : Control
 
         // the counting system is a bit weird. if we're on the last character show the next word position.
         if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length;
-        if (wordIndex != _wordIndex)
+        if (_wordIndex != wordIndex)
         {
-            _autocompleteControl.GlobalPosition = _commandInput.GetCharacterPos(charCounter) + Vector2.Up * _autocompleteControl.Size.Y;
             _wordIndex = wordIndex;
-            RefreshAutoCompleteValues();
-            // _showAutoComplete = true;
+            _autocompleteControl.Scale = _autocompleteControl.Scale with { Y = 0 };
         }
+
+        RefreshAutoCompleteValues();
+
+        var cursorPos = _commandInput.GetCharacterPos(charCounter);
+        float yOffset = 0f;
+        foreach (var autoCompleteSuggestionItem in _autoCompleteSuggestionItems)
+        {
+            yOffset += autoCompleteSuggestionItem.Size.Y;
+        }
+
+        yOffset = Mathf.Min(yOffset, _autocompleteScroll.Size.Y);
+        if (_autocompleteTooltip.Visible)
+            yOffset += _autocompleteTooltip.Size.Y;
+        _autocompleteControl.PivotOffset = Vector2.Zero;
+        _autocompleteControl.GlobalPosition = cursorPos + Vector2.Up * yOffset;
+        _autocompleteControl.PivotOffset = Vector2.Down * yOffset;
     }
 
     private void RefreshAutoCompleteValues()
@@ -399,6 +430,8 @@ public partial class ParallasConsole : Control
                     Name = commandsValue.Command.Name,
                     Description = commandsValue.Command.Description
                 });
+                _autocompleteTooltip.Visible = true;
+                _autocompleteTooltip.SetData("command - the command you want to run");
             }
         }
         else
@@ -411,6 +444,18 @@ public partial class ParallasConsole : Control
                     var methodParameter = methodParameters[_wordIndex - 1];
                     var methodParameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
                                         methodParameter.ParameterType;
+
+                    List<string> tooltipDescriptions = [];
+                    if (Nullable.GetUnderlyingType(methodParameter.ParameterType) is { } parameterType)
+                        tooltipDescriptions.Add($"type: {parameterType.Name}");
+                    else
+                        tooltipDescriptions.Add($"type: {methodParameter.ParameterType.Name}");
+                    if (methodParameter.IsOptional)
+                        tooltipDescriptions.Add("optional");
+                    if (methodParameter.HasDefaultValue)
+                        tooltipDescriptions.Add($"default = {methodParameter.DefaultValue ?? "null"}");
+                    _autocompleteTooltip.SetData(methodParameter.Name, String.Join(", ", tooltipDescriptions));
+
                     if (methodParameterType == typeof(bool))
                     {
                         values.AddRange([

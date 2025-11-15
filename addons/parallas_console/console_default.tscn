@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn6wponjc8fa8"]
+[gd_scene load_steps=8 format=3 uid="uid://cn6wponjc8fa8"]
 
 [ext_resource type="Script" uid="uid://x0qyxr2vyj8u" path="res://addons/parallas_console/ParallasConsole.cs" id="1_cd4qq"]
 [ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
@@ -30,6 +30,9 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63uej"]
+bg_color = Color(0.36, 0.36, 0.36, 1)
 
 [node name="ConsoleDefault" type="Control"]
 process_mode = 3
@@ -105,33 +108,46 @@ keep_editing_on_text_submit = true
 caret_blink = true
 script = ExtResource("2_bf6pj")
 
-[node name="autocomplete_control" type="BoxContainer" parent="."]
+[node name="autocomplete_control" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -300.0
-offset_right = 298.0
-grow_vertical = 0
+layout_mode = 0
+offset_right = 608.0
+offset_bottom = 318.0
 mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="autocomplete_tooltip" parent="autocomplete_control" instance=ExtResource("4_q5l3k")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+FontColorBase = Color(0.99, 0.99, 0.99, 1)
+StyleBoxBase = SubResource("StyleBoxFlat_63uej")
 
 [node name="autocomplete_scroll" type="ScrollContainer" parent="autocomplete_control"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_filter = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="autocomplete_vbox" type="VBoxContainer" parent="autocomplete_control/autocomplete_scroll"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
 [node name="suggestion_item" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+layout_mode = 2
+
+[node name="suggestion_item2" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+layout_mode = 2
+
+[node name="suggestion_item3" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+layout_mode = 2
+
+[node name="suggestion_item4" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
 layout_mode = 2
