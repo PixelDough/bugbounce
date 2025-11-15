@@ -439,7 +439,7 @@ public partial class ParallasConsole : Control
         values.Sort(((a, b) => String.Compare(a.Name, b.Name, StringComparison.InvariantCultureIgnoreCase)));
 
         _autoCompleteWords = values.Select(v => v.Name).ToArray();
-        for (var index = values.Count - 1; index >= 0; index--)
+        for (var index = 0; index < values.Count; index++)
         {
             var value = values[index];
             var suggestionItem = _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
@@ -449,7 +449,6 @@ public partial class ParallasConsole : Control
             _autocompleteVbox.AddChild(suggestionItem);
             _autoCompleteSuggestionItems.Add(suggestionItem);
         }
-        _autoCompleteSuggestionItems.Reverse();
     }
 
     public override void _Input(InputEvent @event)
@@ -461,9 +460,9 @@ public partial class ParallasConsole : Control
         if (_autoCompleteSuggestionItems.Count > 0)
         {
             if (@event.IsActionPressed(_inputAutoCompleteNext, true))
-                _autoCompleteIndex++;
-            if (@event.IsActionPressed(_inputAutoCompletePrev, true))
                 _autoCompleteIndex--;
+            if (@event.IsActionPressed(_inputAutoCompletePrev, true))
+                _autoCompleteIndex++;
 
             if (@event.IsEcho())
             {
@@ -475,7 +474,10 @@ public partial class ParallasConsole : Control
                 if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
             }
 
-            _autocompleteScroll.ScrollVertical = 10 * (_autoCompleteSuggestionItems.Count - _autoCompleteIndex - 1);
+            // _autocompleteScroll.scroll
+            var suggestionHeight = _autoCompleteSuggestionItems[0].Size.Y;
+            var halfOffset = Mathf.FloorToInt((_autocompleteScroll.Size.Y / suggestionHeight) * 0.5f);
+            _autocompleteScroll.ScrollVertical = Mathf.FloorToInt(suggestionHeight * (_autoCompleteIndex - halfOffset));
             for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
             {
                 _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
