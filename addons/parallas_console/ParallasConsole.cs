@@ -112,6 +112,54 @@ public partial class ParallasConsole : Control
         };
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+
+        if (!IsOpen) return;
+
+        if (_autoCompleteSuggestionItems.Count > 0)
+        {
+            if (@event.IsActionPressed(_inputAutoCompleteNext, true))
+                _autoCompleteIndex--;
+            if (@event.IsActionPressed(_inputAutoCompletePrev, true))
+                _autoCompleteIndex++;
+
+            if (@event.IsEcho())
+            {
+                _autoCompleteIndex = Mathf.Clamp(_autoCompleteIndex, 0, _autoCompleteSuggestionItems.Count - 1);
+            }
+            else
+            {
+                if (_autoCompleteIndex >= _autoCompleteSuggestionItems.Count) _autoCompleteIndex = 0;
+                if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
+            }
+
+            // _autocompleteScroll.scroll
+            var suggestionHeight = _autoCompleteSuggestionItems[0].Size.Y;
+            var halfOffset = Mathf.FloorToInt((_autocompleteScroll.Size.Y / suggestionHeight) * 0.5f);
+            _autocompleteScroll.ScrollVertical = Mathf.FloorToInt(suggestionHeight * (_autoCompleteIndex - halfOffset));
+            for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
+            {
+                _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
+            }
+        }
+
+        if (@event.IsAction(_inputAutoCompleteNext))
+        {
+            AcceptEvent();
+        }
+        if (@event.IsAction(_inputAutoCompletePrev))
+        {
+            AcceptEvent();
+        }
+        if (@event.IsAction("ui_cancel") && _showAutoComplete)
+        {
+            _showAutoComplete = false;
+            AcceptEvent();
+        }
+    }
+
     public void Toggle()
     {
         if (IsOpen)
@@ -266,46 +314,6 @@ public partial class ParallasConsole : Control
             PrintText(command.CommandOutput);
     }
 
-    public string[] GetAutocompleteValues(string autocompleteMethodName, MethodInfo forMethod)
-    {
-        if (string.IsNullOrEmpty(autocompleteMethodName)) return [];
-
-        var declaringType = forMethod.DeclaringType!;
-        object result = null;
-        if (declaringType.GetField(autocompleteMethodName) is { } autocompleteField)
-        {
-            // is field
-            if (!autocompleteField.IsStatic)
-            {
-                PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
-                return [];
-            }
-            result = autocompleteField.GetValue(null);
-        }
-        else if (declaringType.GetMethod(autocompleteMethodName) is { } autocompleteMethod)
-        {
-            // is method
-            if (!autocompleteMethod.IsStatic)
-            {
-                PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
-                return [];
-            }
-            result = autocompleteMethod.Invoke(null, null);
-        }
-        else
-        {
-            // not found
-            PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
-            return [];
-        }
-
-        if (result is string[] resultStrings) return resultStrings;
-
-        // function does not return valid array of strings
-        PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
-        return [];
-    }
-
     public void PrintText(string text)
     {
         _historyStrings.Add($"[color=white]{text}");
@@ -355,7 +363,7 @@ public partial class ParallasConsole : Control
 
     private void ClearValues()
     {
-        _wordIndex = int.MinValue;
+        SetCurrentWordIndex(int.MinValue);
         _words = [];
         _commandInput.Clear();
         _showAutoComplete = false;
@@ -394,7 +402,7 @@ public partial class ParallasConsole : Control
         if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length;
         if (_wordIndex != wordIndex)
         {
-            _wordIndex = wordIndex;
+            SetCurrentWordIndex(wordIndex);
             _autocompleteControl.Scale = _autocompleteControl.Scale with { Y = 0 };
         }
 
@@ -496,52 +504,53 @@ public partial class ParallasConsole : Control
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public string[] GetAutocompleteValues(string autocompleteMethodName, MethodInfo forMethod)
     {
-        base._Input(@event);
+        if (string.IsNullOrEmpty(autocompleteMethodName)) return [];
 
-        if (!IsOpen) return;
-
-        if (_autoCompleteSuggestionItems.Count > 0)
+        var declaringType = forMethod.DeclaringType!;
+        object result = null;
+        if (declaringType.GetField(autocompleteMethodName) is { } autocompleteField)
         {
-            if (@event.IsActionPressed(_inputAutoCompleteNext, true))
-                _autoCompleteIndex--;
-            if (@event.IsActionPressed(_inputAutoCompletePrev, true))
-                _autoCompleteIndex++;
-
-            if (@event.IsEcho())
+            // is field
+            if (!autocompleteField.IsStatic)
             {
-                _autoCompleteIndex = Mathf.Clamp(_autoCompleteIndex, 0, _autoCompleteSuggestionItems.Count - 1);
+                PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
+                return [];
             }
-            else
+            result = autocompleteField.GetValue(null);
+        }
+        else if (declaringType.GetMethod(autocompleteMethodName) is { } autocompleteMethod)
+        {
+            // is method
+            if (!autocompleteMethod.IsStatic)
             {
-                if (_autoCompleteIndex >= _autoCompleteSuggestionItems.Count) _autoCompleteIndex = 0;
-                if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
+                PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
+                return [];
             }
-
-            // _autocompleteScroll.scroll
-            var suggestionHeight = _autoCompleteSuggestionItems[0].Size.Y;
-            var halfOffset = Mathf.FloorToInt((_autocompleteScroll.Size.Y / suggestionHeight) * 0.5f);
-            _autocompleteScroll.ScrollVertical = Mathf.FloorToInt(suggestionHeight * (_autoCompleteIndex - halfOffset));
-            for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
-            {
-                _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
-            }
+            result = autocompleteMethod.Invoke(null, null);
+        }
+        else
+        {
+            // not found
+            PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
+            return [];
         }
 
-        if (@event.IsAction(_inputAutoCompleteNext))
+        if (result is string[] resultStrings) return resultStrings;
+
+        // function does not return valid array of strings
+        PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
+        return [];
+    }
+
+    private void SetCurrentWordIndex(int index)
+    {
+        _wordIndex = index;
+        _autocompleteControl.Scale = _autocompleteControl.Scale with
         {
-            AcceptEvent();
-        }
-        if (@event.IsAction(_inputAutoCompletePrev))
-        {
-            AcceptEvent();
-        }
-        if (@event.IsAction("ui_cancel") && _showAutoComplete)
-        {
-            _showAutoComplete = false;
-            AcceptEvent();
-        }
+            Y = 0
+        };
     }
 
     [ConsoleCommand(
