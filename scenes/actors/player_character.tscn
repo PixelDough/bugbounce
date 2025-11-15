@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dfx8cm1v7am6a"]
+[gd_scene load_steps=23 format=3 uid="uid://dfx8cm1v7am6a"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cprkhq5h41qb6" path="res://physics_materials/Player Physics.phymat" id="1_eoriv"]
 [ext_resource type="ArrayMesh" uid="uid://bjddb2rdjnkeu" path="res://models/player/meshes/millie_base_body.res" id="2_eoriv"]
 [ext_resource type="Script" uid="uid://igu8nh3k1x1x" path="res://scripts/Player.cs" id="2_svkgc"]
 [ext_resource type="ArrayMesh" uid="uid://dk4os4fwya1eg" path="res://models/player/meshes/millie_base_face.res" id="3_sr6cr"]
+[ext_resource type="Script" uid="uid://ciqdudepga6b3" path="res://scripts/BallRollForward.cs" id="4_blxb2"]
 [ext_resource type="PackedScene" uid="uid://dijpq2md73pvi" path="res://scenes/common/blob_shadow.tscn" id="5_6wjry"]
 [ext_resource type="Script" uid="uid://qe0kupoqatlv" path="res://scripts/DebugShow.cs" id="5_lchlr"]
 [ext_resource type="Script" uid="uid://bhh2yk2k0pvjb" path="res://scripts/ThirdPersonCameraBehavior.cs" id="6_qy032"]
@@ -77,7 +78,7 @@ distance_fade_max_distance = 20.0
 material = SubResource("StandardMaterial3D_kmeke")
 size = Vector2(0.8, 0.8)
 
-[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot", "_particleDust")]
+[node name="PlayerCharacter" type="RigidBody3D" node_paths=PackedStringArray("_cameraTiltRoot", "_eyesRoot", "_meshRoot", "_ballRollForward", "_particleDust")]
 collision_layer = 2
 physics_material_override = ExtResource("1_eoriv")
 continuous_cd = true
@@ -88,15 +89,30 @@ angular_damp = 0.75
 script = ExtResource("2_svkgc")
 _cameraTiltRoot = NodePath("Grav Tilt/Camera Tilt Root")
 _eyesRoot = NodePath("mesh_face")
+_meshRoot = NodePath("body_root")
+_ballRollForward = NodePath("body_root/ball_roll_forward")
 _particleDust = NodePath("particle_dust")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_nowa8")
 debug_color = Color(0, 0.99, 0.19800004, 1)
 
-[node name="mesh_body" type="MeshInstance3D" parent="."]
+[node name="body_mover" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../body_root")
+update_rotation = false
+update_scale = false
+
+[node name="body_root" type="Node3D" parent="."]
+top_level = true
+
+[node name="mesh_body" type="MeshInstance3D" parent="body_root"]
 layers = 2
 mesh = ExtResource("2_eoriv")
+skeleton = NodePath("../..")
+
+[node name="ball_roll_forward" type="Node" parent="body_root" node_paths=PackedStringArray("_mesh")]
+script = ExtResource("4_blxb2")
+_mesh = NodePath("../mesh_body")
 
 [node name="mesh_face" type="MeshInstance3D" parent="."]
 layers = 2

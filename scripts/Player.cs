@@ -53,6 +53,8 @@ public partial class Player : RigidBody3D
 
     [ExportGroup("Model Parts")]
     [Export] private Node3D _eyesRoot;
+    [Export] private Node3D _meshRoot;
+    [Export] private BallRollForward _ballRollForward;
     private float _eyesTargetAngle = 0f;
     private float _eyesCurrentAngle = 0f;
 
@@ -163,21 +165,33 @@ public partial class Player : RigidBody3D
             }
         }
 
-        var planarDirection = MathUtil.ProjectOnPlane(
-            -LinearVelocity,
+        var planarVelocity = MathUtil.ProjectOnPlane(
+            LinearVelocity,
             -GravityDirection
         );
-        if (planarDirection.LengthSquared() > 0)
+        if (planarVelocity.LengthSquared() > 0)
         {
             _particleDust.GlobalBasis =
                 new Basis(
                     MathUtil.LookRotation(
-                        planarDirection,
+                        -planarVelocity,
                         -GravityDirection
                     )
                 );
-            _particleDust.GlobalPosition = GlobalPosition + planarDirection.Normalized() * 0.15f + GravityDirection * 0.15f;
+            _particleDust.GlobalPosition = GlobalPosition + -planarVelocity.Normalized() * 0.15f + GravityDirection * 0.15f;
         }
+
+        var targetDirection = new Basis(-GravityDirection, _eyesTargetAngle);
+        _meshRoot.GlobalBasis = MathUtil.ExpDecay(_meshRoot.GlobalBasis, targetDirection, 2f, (float)delta);
+        var planarAngularVelocity = MathUtil.ProjectOnPlane(
+            AngularVelocity,
+            -GetGravity().Normalized()
+        );
+        var backwardsMultiplier =
+            Mathf.Sign((planarVelocity * new Vector3(-1, 1, 1)).Normalized().Dot(Vector3.Back * targetDirection));
+        _ballRollForward.RotateSpeed =
+            planarAngularVelocity.Length() * (_inputMovement.LengthSquared() > 0.001f ? 1f : backwardsMultiplier);
+
         // playerStuffManager.sandBurstParticleSystem.transform.position = position - Vector3.up / 4;
         
         // Important: Set this AFTER checking for a buffered jump, as isGrounded might have been set in OnCollisionEnter.
