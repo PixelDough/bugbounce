@@ -418,7 +418,6 @@ public partial class ParallasConsole : Control
         yOffset = Mathf.Min(yOffset, _autocompleteScroll.Size.Y);
         if (_autocompleteTooltip.Visible)
             yOffset += _autocompleteTooltip.GetHeight();
-        GD.Print(_autocompleteTooltip.GetHeight());
         _autocompleteControl.PivotOffset = Vector2.Zero;
         _autocompleteControl.GlobalPosition = cursorPos + Vector2.Up * yOffset;
         _autocompleteControl.PivotOffset = Vector2.Down * yOffset;
@@ -428,7 +427,7 @@ public partial class ParallasConsole : Control
     {
         ClearAutoComplete();
 
-        List<(string Name, string Description)> values = [];
+        List<SuggestionItem.SuggestionData> values = [];
 
         if (_wordIndex == 0 || _words.Length == 0)
         {
@@ -437,9 +436,11 @@ public partial class ParallasConsole : Control
                 values.Add(new()
                 {
                     Name = commandsValue.Command.Name,
-                    Description = commandsValue.Command.Description
+                    Value = commandsValue.Command.Description
                 });
             }
+
+            _autocompleteTooltip.Visible = false;
         }
         else
         {
@@ -452,42 +453,42 @@ public partial class ParallasConsole : Control
                     var methodParameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
                                         methodParameter.ParameterType;
                     var methodParameterConsoleInfo = methodParameter.GetCustomAttribute<ConsoleParamInfoAttribute>();
-                    string tooltipName = methodParameter.Name;
-                    List<string> tooltipDescriptions = [];
+                    List<SuggestionItem.SuggestionData> tooltipData =
+                    [
+                        new("param", methodParameter.Name)
+                    ];
 
                     if (methodParameterConsoleInfo is not null)
                     {
                         values.AddRange(GetAutocompleteValues(methodParameterConsoleInfo.AutocompleteMemberName,
                                 info.MethodInfo)
-                            .Select(n => new ValueTuple<string, string>(n, null)));
-                        if (methodParameterConsoleInfo.Description is { } description)
-                            tooltipDescriptions.Add(description);
+                            .Select(n => new SuggestionItem.SuggestionData(n, "")));
                         if (methodParameterConsoleInfo.Name is { } name)
-                            tooltipName = name;
+                            tooltipData[0] = tooltipData[0] with { Value = name };
+                        if (methodParameterConsoleInfo.Description is { } description)
+                            tooltipData.Add(new("desc", description));
                     }
 
                     if (Nullable.GetUnderlyingType(methodParameter.ParameterType) is { } parameterType)
-                        tooltipDescriptions.Add($"type: {parameterType.Name}");
+                        tooltipData.Add(new("type", $"{parameterType.Name}?"));
                     else
-                        tooltipDescriptions.Add($"type: {methodParameter.ParameterType.Name}");
-                    if (methodParameter.IsOptional)
-                        tooltipDescriptions.Add("optional");
-                    if (methodParameter.HasDefaultValue)
-                        tooltipDescriptions.Add($"default = {methodParameter.DefaultValue ?? "null"}");
+                        tooltipData.Add(new("type", methodParameter.ParameterType.Name));
+                    if (methodParameter.HasDefaultValue && methodParameter.DefaultValue is { } defaultValue)
+                        tooltipData.Add(new("default", defaultValue.ToString() ?? "null"));
                     _autocompleteTooltip.Visible = true;
-                    _autocompleteTooltip.SetData(tooltipName, String.Join("\n  ", tooltipDescriptions));
+                    _autocompleteTooltip.SetData([..tooltipData]);
 
                     if (methodParameterType == typeof(bool))
                     {
                         values.AddRange([
-                            ("1", "true"),
-                            ("0", "false")
+                            new("1", "true"),
+                            new("0", "false")
                         ]);
                     }
                     if (methodParameterType.IsEnum)
                     {
                         values.AddRange(System.Enum.GetNames(methodParameterType)
-                            .Select(n => new ValueTuple<string, string>(n, null)));
+                            .Select(n => new SuggestionItem.SuggestionData(n, null)));
                     }
                 }
                 else
@@ -509,7 +510,7 @@ public partial class ParallasConsole : Control
             var suggestionItem = _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
             if (index == _autoCompleteIndex)
                 suggestionItem.IsHighlighted = true;
-            suggestionItem.SetData(value.Name, value.Description);
+            suggestionItem.SetData([value]);
             _autocompleteVbox.AddChild(suggestionItem);
             _autoCompleteSuggestionItems.Add(suggestionItem);
         }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class SuggestionItem : PanelContainer
 {
@@ -9,6 +10,10 @@ public partial class SuggestionItem : PanelContainer
     [Export] public Color FontColorHighlighted = Colors.Yellow;
     [Export] public StyleBox StyleBoxBase;
     [Export] public StyleBox StyleBoxHighlighted;
+
+    private SuggestionData[] _suggestionDatas = [];
+    private List<Label> _nameLabels = [];
+    private List<Label> _valueLabels = [];
 
     private bool _isHighlighted = false;
     public bool IsHighlighted
@@ -27,12 +32,49 @@ public partial class SuggestionItem : PanelContainer
         UpdateVisual();
     }
 
-    public void SetData(string name, string description = null)
+    public void SetData(SuggestionData[] suggestionDatas)
     {
-        Label.Text = name;
+        for (var index = 1; index < _nameLabels.Count; index++)
+        {
+            var nameLabel = _nameLabels[index];
+            nameLabel.QueueFree();
+        }
+        for (var index = 1; index < _valueLabels.Count; index++)
+        {
+            var valueLabel = _valueLabels[index];
+            valueLabel.QueueFree();
+        }
 
-        DescriptionLabel.Visible = !String.IsNullOrEmpty(description);
-        DescriptionLabel.Text = $": {description ?? ""}";
+        _nameLabels.Clear();
+        _valueLabels.Clear();
+
+        _suggestionDatas = suggestionDatas;
+
+        GD.Print($"suggestions: {suggestionDatas.Length}");
+
+        for (var i = 0; i < suggestionDatas.Length; i++)
+        {
+            var suggestion = suggestionDatas[i];
+            // if (String.IsNullOrEmpty(suggestion.Name)) continue;
+            // if (String.IsNullOrEmpty(suggestion.Value)) continue;
+
+            var nameLabel = Label;
+            var valueLabel = DescriptionLabel;
+            if (i > 0)
+            {
+                nameLabel = (Label)Label.Duplicate();
+                valueLabel = (Label)DescriptionLabel.Duplicate();
+
+                Label.GetParent().AddChild(nameLabel);
+                DescriptionLabel.GetParent().AddChild(valueLabel);
+            }
+
+            nameLabel.Text = suggestion.Name;
+            valueLabel.Text = suggestion.Value;
+
+            _nameLabels.Add(nameLabel);
+            _valueLabels.Add(valueLabel);
+        }
     }
 
     private void UpdateVisual()
@@ -46,15 +88,22 @@ public partial class SuggestionItem : PanelContainer
 
     public float GetHeight()
     {
-        var font = GetThemeFont("font");
-        var nameHeight = font.GetMultilineStringSize(
-            Label.Text,
-            fontSize: Label.GetThemeFontSize("font_size")
-        ).Y;
-        var descHeight = font.GetMultilineStringSize(
-            DescriptionLabel.Text,
-            fontSize: DescriptionLabel.GetThemeFontSize("font_size")
-        ).Y;
-        return Mathf.Max(nameHeight, descHeight);
+        var height = 0f;
+        Font font = null;
+        foreach (var valueLabel in _valueLabels)
+        {
+            font ??= valueLabel.GetThemeFont("font");
+            height += font.GetMultilineStringSize(
+                valueLabel.Text,
+                fontSize: valueLabel.GetThemeFontSize("font_size")
+            ).Y;
+        }
+        return height;
+    }
+
+    public struct SuggestionData(string name, string value)
+    {
+        public string Name { get; set; } = name;
+        public string Value { get; set; } = value;
     }
 }

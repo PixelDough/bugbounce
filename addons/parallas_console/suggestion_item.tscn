@@ -24,28 +24,31 @@ bg_color = Color(1, 1, 1, 1)
 [node name="suggestion_item" type="PanelContainer" node_paths=PackedStringArray("Label", "DescriptionLabel")]
 theme_override_styles/panel = SubResource("StyleBoxFlat_a86sh")
 script = ExtResource("1_a86sh")
-Label = NodePath("HBoxContainer/Label")
-DescriptionLabel = NodePath("HBoxContainer/Label Description")
+Label = NodePath("HBoxContainer/name")
+DescriptionLabel = NodePath("HBoxContainer/name-value")
 FontColorHighlighted = Color(0, 0, 1, 1)
 StyleBoxBase = SubResource("StyleBoxFlat_p287u")
 StyleBoxHighlighted = SubResource("StyleBoxFlat_sfnlm")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="GridContainer" parent="."]
 layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 0
+columns = 2
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="name" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_hprwm")
 theme_override_font_sizes/font_size = 10
-text = "test"
+text = "name"
 
-[node name="Label Description" type="Label" parent="HBoxContainer"]
+[node name="name-value" type="Label" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.5568628)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("1_hprwm")
 theme_override_font_sizes/font_size = 10
-text = ": description this is a very long description"
+text = "name-value"
