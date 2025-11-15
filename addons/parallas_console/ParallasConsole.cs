@@ -127,6 +127,7 @@ public partial class ParallasConsole : Control
             .SetTrans(Tween.TransitionType.Cubic);
 
         ClearValues();
+        ClearAutoComplete();
 
         _commandInput.ReleaseFocus();
     }
