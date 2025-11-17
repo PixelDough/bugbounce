@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,7 +31,7 @@ public partial class ParallasConsole : Control
 
     private float _offsetX = 0f;
     private int _wordIndex = int.MinValue;
-    private string[] _words = [""];
+    private CommandWord[] _words = [new CommandWord()];
     private string[] _autoCompleteWords = [];
     private readonly List<SuggestionItem> _autoCompleteSuggestionItems = [];
     private int _autoCompleteIndex = 0;
@@ -88,17 +89,17 @@ public partial class ParallasConsole : Control
             }
             else
             {
-                var lastWordLength = _words[_wordIndex].Length;
+                var lastWord = _words[_wordIndex];
                 // if (char.IsWhiteSpace(_commandInput.Text.LastOrDefault(' '))) lastWordLength = 0;
-                var cleanedText = _commandInput.Text.Remove(_commandInput.Text.Length - lastWordLength, lastWordLength);
+                var cleanedText = _commandInput.Text.Remove(lastWord.StartIndex, lastWord.Length);
                 _commandInput.SetText(cleanedText);
-                _commandInput.CaretColumn = cleanedText.Length;
+                _commandInput.CaretColumn = lastWord.StartIndex;
                 var newString = _autoCompleteWords[_autoCompleteIndex];
                 if (newString.Contains(' '))
                 {
                     newString = $@"""{newString}""";
                 }
-                _commandInput.InsertTextAtCaret($"{newString} ");
+                _commandInput.InsertTextAtCaret(newString);
                 ClearAutoComplete();
                 TextChanged(_commandInput.Text);
             }
@@ -166,6 +167,15 @@ public partial class ParallasConsole : Control
             _showAutoComplete = false;
             AcceptEvent();
         }
+
+        if (@event.IsAction("ui_left") && @event.IsPressed())
+        {
+            CallDeferred(MethodName.RefreshAutoComplete);
+        }
+        if (@event.IsAction("ui_right") && @event.IsPressed())
+        {
+            CallDeferred(MethodName.RefreshAutoComplete);
+        }
     }
 
     public void Toggle()
@@ -208,11 +218,11 @@ public partial class ParallasConsole : Control
 
     public void CallCommand(string commandString)
     {
-        string[] allWords =
+        CommandWord[] allWords =
         [
             ..CommandInput.SplitCommandString(commandString)
-                .Where(s => !String.IsNullOrEmpty(s))
-                .Select(s => s.Trim('"'))
+                .Where(w => !w.IsNullOrEmpty())
+                .Select(w => w.Trim('"'))
         ];
 
         // var allWords = commandString.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
@@ -224,9 +234,9 @@ public partial class ParallasConsole : Control
         }
 
         var commandName = allWords[0];
-        if (!ConsoleData.ConsoleCommands.TryGetValue(commandName, out var commandMethodPair))
+        if (!ConsoleData.ConsoleCommands.TryGetValue(commandName.Value, out var commandMethodPair))
         {
-            PrintError($"Invalid command provided: \"{commandName}\"");
+            PrintError($"Invalid command provided: \"{commandName.Value}\"");
             return;
         }
         var command = commandMethodPair.Command;
@@ -247,7 +257,7 @@ public partial class ParallasConsole : Control
             return;
         }
 
-        List<object> parametersArray = [];
+        ArrayList parametersArray = [];
         for (var i = 0; i < methodParameters.Length; i++)
         {
             var methodParameter = methodParameters[i];
@@ -258,42 +268,41 @@ public partial class ParallasConsole : Control
             if (i < parameters.Length)
             {
                 var item = parameters[i];
-                if (item is null) return;
+                if (item.Value is null) return;
 
-                GD.Print(parameterType.Name);
                 if (parameterType == typeof(bool))
                 {
-                    if (bool.TryParse(item, out var boolVal))
+                    if (bool.TryParse(item.Value, out var boolVal))
                     {
                         parametersArray.Add(boolVal);
                     }
-                    else if (item == "0" || item == "1")
+                    else if (item.Value is "0" or "1")
                     {
-                        parametersArray.Add(item == "1");
+                        parametersArray.Add(item.Value == "1");
                     }
                     else
                     {
                         PrintError(
-                            $"Invalid value provided for parameter \"{methodParameter.Name}\" (found \"{item}\", expected type {parameterType.Name})");
+                            $"Invalid value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
                         return;
                     }
                 }
                 else if (parameterType.IsEnum)
                 {
-                    if (Enum.TryParse(parameterType, item, out var enumVal))
+                    if (Enum.TryParse(parameterType, item.Value, out var enumVal))
                     {
                         parametersArray.Add(enumVal);
                     }
                     else
                     {
                         PrintError(
-                            $"Invalid enum value provided for parameter \"{methodParameter.Name}\" (found \"{item}\", expected type {parameterType.Name})");
+                            $"Invalid enum value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
                         return;
                     }
                 }
                 else
                 {
-                    parametersArray.Add(item);
+                    parametersArray.Add(item.Value);
                 }
             }
             else
@@ -365,7 +374,7 @@ public partial class ParallasConsole : Control
     private void TextChanged(string text)
     {
         _words = _commandInput.SplitCommandString();
-        _showAutoComplete = !_words.IsEmpty();
+        _showAutoComplete = _commandInput.Text.Length > 0;
         RefreshAutoComplete();
     }
 
@@ -400,23 +409,32 @@ public partial class ParallasConsole : Control
 
     private void RefreshAutoComplete()
     {
-        GD.Print(String.Join(',', _words) + ']');
-        var charCounter = 0;
+        GD.Print(String.Join(',', _words.Select(w => w.Value)) + ']');
+        // var charCounter = 0;
+        // int wordIndex = 0;
+        // for (int i = 0; i < _words.Length; i++)
+        // {
+        //     var word = _words[i];
+        //     var newCharCounter = charCounter + word.Length + 1;
+        //     if (newCharCounter > _commandInput.CaretColumn)
+        //     {
+        //         wordIndex = i;
+        //         break;
+        //     }
+        //     charCounter = newCharCounter;
+        // }
+
+        // the counting system is a bit weird. if we're on the last character show the next word position.
+        // if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length - 1;
+
         int wordIndex = 0;
         for (int i = 0; i < _words.Length; i++)
         {
-            var word = _words[i];
-            var newCharCounter = charCounter + word.Length + 1;
-            if (newCharCounter > _commandInput.CaretColumn)
-            {
-                wordIndex = i;
-                break;
-            }
-            charCounter = newCharCounter;
+            if (_words[i].StartIndex > _commandInput.CaretColumn) break;
+            wordIndex = i;
         }
+        GD.Print($"current word index: {wordIndex}");
 
-        // the counting system is a bit weird. if we're on the last character show the next word position.
-        if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length - 1;
         if (_wordIndex != wordIndex)
         {
             SetCurrentWordIndex(wordIndex);
@@ -424,7 +442,8 @@ public partial class ParallasConsole : Control
 
         RefreshAutoCompleteValues();
 
-        var cursorPos = _commandInput.GetCharacterPos(charCounter);
+        var cursorPos =
+            _commandInput.GetCharacterPos(Mathf.Min(_words[wordIndex].StartIndex, _commandInput.Text.Length));
         float yOffset = 0f;
         foreach (var autoCompleteSuggestionItem in _autoCompleteSuggestionItems)
         {
@@ -460,7 +479,7 @@ public partial class ParallasConsole : Control
         }
         else
         {
-            if (ConsoleData.ConsoleCommands.TryGetValue(_words[0], out var info))
+            if (ConsoleData.ConsoleCommands.TryGetValue(_words[0].Value, out var info))
             {
                 var methodParameters = info.MethodInfo.GetParameters();
                 if (_wordIndex - 1 < methodParameters.Length)
@@ -514,7 +533,7 @@ public partial class ParallasConsole : Control
         }
 
         if (_wordIndex >= 0 && _wordIndex < _words.Length)
-            values = values.Where(w => w.Name.Contains(_words[_wordIndex].Trim('"', ' '), StringComparison.InvariantCultureIgnoreCase)).ToList();
+            values = values.Where(w => w.Name.Contains(_words[_wordIndex].Trim('"', ' ').Value, StringComparison.InvariantCultureIgnoreCase)).ToList();
 
         values.Sort(((a, b) => String.Compare(a.Name, b.Name, StringComparison.InvariantCultureIgnoreCase)));
 

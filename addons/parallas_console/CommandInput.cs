@@ -51,15 +51,16 @@ public partial class CommandInput : LineEdit
         return startPos + Vector2.Right * (leftMargin + stringSize.X + scrollOffset);
     }
 
-    public string[] SplitCommandString() => SplitCommandString(Text);
+    public CommandWord[] SplitCommandString() => SplitCommandString(Text);
 
-    public static string[] SplitCommandString(string text)
+    public static CommandWord[] SplitCommandString(string text)
     {
-        if (String.IsNullOrEmpty(text)) return [""];
+        if (String.IsNullOrEmpty(text)) return [new CommandWord()];
 
-        List<string> allWords = [];
+        List<CommandWord> allWords = [];
         StringBuilder substringBuilder = new StringBuilder();
         bool isInString = false;
+        int wordStartIndex = 0;
         for (var index = 0; index < text.Length; index++)
         {
             var c = text[index];
@@ -73,16 +74,17 @@ public partial class CommandInput : LineEdit
                     }
 
                     if (substringBuilder.ToString().Trim().Length > 0)
-                        allWords.Add(substringBuilder.ToString());
+                        allWords.Add(new(substringBuilder.ToString(), wordStartIndex, substringBuilder.Length));
                     substringBuilder.Clear();
 
                     if (!isInString) // starting a substring
                     {
                         substringBuilder.Append('"');
+                        wordStartIndex = index;
 
                         if (index == text.Length - 1)
                         {
-                            allWords.Add(substringBuilder.ToString());
+                            allWords.Add(new CommandWord(substringBuilder.ToString(), wordStartIndex, substringBuilder.Length));
                             substringBuilder.Clear();
                         }
                     }
@@ -91,14 +93,16 @@ public partial class CommandInput : LineEdit
                     continue;
                 }
                 case ' ' when !isInString:
-                    if (text[index - 1] is not '"' && substringBuilder.ToString().Length > 0)
+                    if (index > 0 && text[index - 1] is not '"')
                     {
-                        allWords.Add(substringBuilder.ToString().Trim());
+                        var newString = substringBuilder.ToString().Trim();
+                        allWords.Add(new(newString, wordStartIndex, newString.Length));
                         substringBuilder.Clear();
                     }
+                    wordStartIndex = index + 1;
                     if (index == text.Length - 1)
                     {
-                        allWords.Add("");
+                        allWords.Add(new CommandWord("", wordStartIndex, 0));
                     }
                     continue;
             }
@@ -106,7 +110,7 @@ public partial class CommandInput : LineEdit
             if (index == text.Length - 1)
             {
                 substringBuilder.Append(c);
-                allWords.Add(substringBuilder.ToString());
+                allWords.Add(new(substringBuilder.ToString(), wordStartIndex, substringBuilder.Length));
                 substringBuilder.Clear();
                 continue;
             }
@@ -118,5 +122,25 @@ public partial class CommandInput : LineEdit
         var allWordsFiltered = allWords;
 
         return [..allWordsFiltered];
+    }
+}
+
+public readonly record struct CommandWord(string Value, int StartIndex, int Length)
+{
+    public CommandWord() : this("", 0, 0) { }
+
+    public Range Range => StartIndex..(StartIndex + Length);
+
+    public bool IsNullOrEmpty() => String.IsNullOrEmpty(Value);
+    public CommandWord Trim()
+    {
+        var newString = Value?.Trim();
+        return this with { Value = newString, Length = newString?.Length ?? 0 };
+    }
+
+    public CommandWord Trim(params char[] characters)
+    {
+        var newString = Value?.Trim(characters);
+        return this with { Value = newString, Length = newString?.Length ?? 0 };
     }
 }
