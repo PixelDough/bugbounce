@@ -463,8 +463,7 @@ public partial class ParallasConsole : Control
                     if (methodParameterConsoleInfo is not null)
                     {
                         values.AddRange(GetAutocompleteValues(methodParameterConsoleInfo.AutocompleteMemberName,
-                                info.MethodInfo)
-                            .Select(n => new SuggestionItem.SuggestionData(n, "")));
+                                info.MethodInfo));
                         if (methodParameterConsoleInfo.Name is { } name)
                             tooltipData[0] = tooltipData[0] with { Value = name };
                         if (methodParameterConsoleInfo.Description is { } description)
@@ -518,7 +517,7 @@ public partial class ParallasConsole : Control
         }
     }
 
-    public string[] GetAutocompleteValues(string autocompleteMethodName, MethodInfo forMethod)
+    public SuggestionItem.SuggestionData[] GetAutocompleteValues(string autocompleteMethodName, MethodInfo forMethod)
     {
         if (string.IsNullOrEmpty(autocompleteMethodName)) return [];
 
@@ -555,11 +554,17 @@ public partial class ParallasConsole : Control
             return [];
         }
 
-        if (result is string[] resultStrings) return resultStrings;
-
-        // function does not return valid array of strings
-        PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
-        return [];
+        switch (result)
+        {
+            case SuggestionItem.SuggestionData[] resultData:
+                return resultData;
+            case string[] resultStrings:
+                return [..resultStrings.Select(s => new SuggestionItem.SuggestionData(s, null))];
+            default:
+                // function does not return valid array of strings
+                PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
+                return [];
+        }
     }
 
     private void SetCurrentWordIndex(int index)
@@ -581,8 +586,8 @@ public partial class ParallasConsole : Control
         GetViewport().SetDebugDraw(debugDrawMode);
     }
 
-    public static readonly string[] AllScenePathsValue = [..GetFilePathsByExtension("res://", "tscn", true)];
-    public static string[] AllScenePaths() => [..AllScenePathsValue];
+    public static readonly SuggestionItem.SuggestionData[] AllScenePathsValue = [..GetFilePathsByExtension("res://", "tscn", true)];
+    public static SuggestionItem.SuggestionData[] AllScenePaths() => [..AllScenePathsValue];
     [ConsoleCommand(
         "change_scene"
     )]
@@ -591,7 +596,7 @@ public partial class ParallasConsole : Control
         GetTree().ChangeSceneToFile(scenePath);
     }
 
-    public static Array<string> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true)
+    public static List<SuggestionItem.SuggestionData> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true)
     {
         var dir = DirAccess.Open(directoryPath);
         if (dir.ListDirBegin() != Error.Ok)
@@ -600,19 +605,19 @@ public partial class ParallasConsole : Control
             return [];
         }
 
-        Array<string> filePaths = [];
+        List<SuggestionItem.SuggestionData> filePaths = [];
         var thisFileName = dir.GetNext();
         while (!String.IsNullOrEmpty(thisFileName))
         {
             if (dir.CurrentIsDir() && recursive)
             {
                 var thisDirPath = dir.GetCurrentDir() + "/" + thisFileName;
-                filePaths += GetFilePathsByExtension(thisDirPath, extension, recursive);
+                filePaths.AddRange(GetFilePathsByExtension(thisDirPath, extension, recursive));
             }
             else if (thisFileName.GetExtension() == extension)
             {
                 var thisFilePath = dir.GetCurrentDir() + "/" + thisFileName;
-                filePaths.Add(thisFilePath);
+                filePaths.Add(new SuggestionItem.SuggestionData(thisFilePath, thisFileName));
             }
             thisFileName = dir.GetNext();
         }
