@@ -586,7 +586,7 @@ public partial class ParallasConsole : Control
         GetViewport().SetDebugDraw(debugDrawMode);
     }
 
-    public static readonly SuggestionItem.SuggestionData[] AllScenePathsValue = [..GetFilePathsByExtension("res://", "tscn", true)];
+    public static readonly SuggestionItem.SuggestionData[] AllScenePathsValue = [..GetFilePathsByExtension("res://", "tscn", true, ["res:///addons"])];
     public static SuggestionItem.SuggestionData[] AllScenePaths() => [..AllScenePathsValue];
     [ConsoleCommand(
         "change_scene"
@@ -596,8 +596,9 @@ public partial class ParallasConsole : Control
         GetTree().ChangeSceneToFile(scenePath);
     }
 
-    public static List<SuggestionItem.SuggestionData> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true)
+    public static List<SuggestionItem.SuggestionData> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true, string[] ignoringDirectories = null)
     {
+        ignoringDirectories ??= [];
         var dir = DirAccess.Open(directoryPath);
         if (dir.ListDirBegin() != Error.Ok)
         {
@@ -609,15 +610,15 @@ public partial class ParallasConsole : Control
         var thisFileName = dir.GetNext();
         while (!String.IsNullOrEmpty(thisFileName))
         {
-            if (dir.CurrentIsDir() && recursive)
+            if (dir.CurrentIsDir() && recursive && !ignoringDirectories.Contains(dir.GetCurrentDir()))
             {
                 var thisDirPath = dir.GetCurrentDir() + "/" + thisFileName;
-                filePaths.AddRange(GetFilePathsByExtension(thisDirPath, extension, recursive));
+                filePaths.AddRange(GetFilePathsByExtension(thisDirPath, extension, recursive, ignoringDirectories));
             }
             else if (thisFileName.GetExtension() == extension)
             {
                 var thisFilePath = dir.GetCurrentDir() + "/" + thisFileName;
-                filePaths.Add(new SuggestionItem.SuggestionData(thisFilePath, thisFileName));
+                filePaths.Add(new SuggestionItem.SuggestionData(thisFilePath.TrimPrefix("res:///"), thisFileName));
             }
             thisFileName = dir.GetNext();
         }
