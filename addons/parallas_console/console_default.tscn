@@ -110,6 +110,7 @@ script = ExtResource("2_bf6pj")
 
 [node name="autocomplete_control" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 0
 offset_right = 608.0
 offset_bottom = 318.0

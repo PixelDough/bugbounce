@@ -1,8 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using Godot.Collections;
 using Array = Godot.Collections.Array;
 
 namespace Parallas.Console;
@@ -542,6 +544,10 @@ public partial class ParallasConsole : Control
             }
             result = autocompleteMethod.Invoke(null, null);
         }
+        else if (declaringType.GetProperty(autocompleteMethodName) is { } autocompleteProperty)
+        {
+            result = autocompleteProperty.GetValue(null);
+        }
         else
         {
             // not found
@@ -573,5 +579,44 @@ public partial class ParallasConsole : Control
     public void SetDebugDraw(Viewport.DebugDrawEnum debugDrawMode)
     {
         GetViewport().SetDebugDraw(debugDrawMode);
+    }
+
+    public static readonly string[] AllScenePathsValue = [..GetFilePathsByExtension("res://", "tscn", true)];
+    public static string[] AllScenePaths() => [..AllScenePathsValue];
+    [ConsoleCommand(
+        "change_scene"
+    )]
+    public void ChangeScene([ConsoleParamInfo(AutocompleteMemberName = nameof(AllScenePaths))] string scenePath)
+    {
+        GetTree().ChangeSceneToFile(scenePath);
+    }
+
+    public static Array<string> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true)
+    {
+        var dir = DirAccess.Open(directoryPath);
+        if (dir.ListDirBegin() != Error.Ok)
+        {
+            GD.PrintErr($"Could not list contents of: {directoryPath}");
+            return [];
+        }
+
+        Array<string> filePaths = [];
+        var thisFileName = dir.GetNext();
+        while (!String.IsNullOrEmpty(thisFileName))
+        {
+            if (dir.CurrentIsDir() && recursive)
+            {
+                var thisDirPath = dir.GetCurrentDir() + "/" + thisFileName;
+                filePaths += GetFilePathsByExtension(thisDirPath, extension, recursive);
+            }
+            else if (thisFileName.GetExtension() == extension)
+            {
+                var thisFilePath = dir.GetCurrentDir() + "/" + thisFileName;
+                filePaths.Add(thisFilePath);
+            }
+            thisFileName = dir.GetNext();
+        }
+
+        return filePaths;
     }
 }

@@ -50,8 +50,6 @@ public partial class SuggestionItem : PanelContainer
 
         _suggestionDatas = suggestionDatas;
 
-        GD.Print($"suggestions: {suggestionDatas.Length}");
-
         for (var i = 0; i < suggestionDatas.Length; i++)
         {
             var suggestion = suggestionDatas[i];
