@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Range = System.Range;
 
 public partial class CommandInput : LineEdit
 {
@@ -54,6 +55,8 @@ public partial class CommandInput : LineEdit
 
     public static string[] SplitCommandString(string text)
     {
+        if (String.IsNullOrEmpty(text)) return [""];
+
         List<string> allWords = [];
         StringBuilder substringBuilder = new StringBuilder();
         bool isInString = false;
@@ -66,24 +69,37 @@ public partial class CommandInput : LineEdit
                 {
                     if (isInString) // finishing a substring
                     {
-                        substringBuilder.Append(c);
+                        substringBuilder.Append('"');
                     }
 
-                    if (substringBuilder.Length > 0)
+                    if (substringBuilder.ToString().Trim().Length > 0)
                         allWords.Add(substringBuilder.ToString());
                     substringBuilder.Clear();
 
                     if (!isInString) // starting a substring
                     {
-                        substringBuilder.Append(c);
+                        substringBuilder.Append('"');
+
+                        if (index == text.Length - 1)
+                        {
+                            allWords.Add(substringBuilder.ToString());
+                            substringBuilder.Clear();
+                        }
                     }
 
                     isInString = !isInString;
                     continue;
                 }
                 case ' ' when !isInString:
-                    allWords.Add(substringBuilder.ToString());
-                    substringBuilder.Clear();
+                    if (text[index - 1] is not '"' && substringBuilder.ToString().Length > 0)
+                    {
+                        allWords.Add(substringBuilder.ToString().Trim());
+                        substringBuilder.Clear();
+                    }
+                    if (index == text.Length - 1)
+                    {
+                        allWords.Add("");
+                    }
                     continue;
             }
 
@@ -98,7 +114,8 @@ public partial class CommandInput : LineEdit
             substringBuilder.Append(c);
         }
 
-        var allWordsFiltered = allWords.Where(s => !String.IsNullOrEmpty(s)).ToArray();
+        // var allWordsFiltered = allWords.Where(s => !String.IsNullOrEmpty(s)).ToArray();
+        var allWordsFiltered = allWords;
 
         return [..allWordsFiltered];
     }

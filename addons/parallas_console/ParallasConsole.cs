@@ -30,7 +30,7 @@ public partial class ParallasConsole : Control
 
     private float _offsetX = 0f;
     private int _wordIndex = int.MinValue;
-    private string[] _words = [];
+    private string[] _words = [""];
     private string[] _autoCompleteWords = [];
     private readonly List<SuggestionItem> _autoCompleteSuggestionItems = [];
     private int _autoCompleteIndex = 0;
@@ -88,8 +88,8 @@ public partial class ParallasConsole : Control
             }
             else
             {
-                var lastWordLength = _words.LastOrDefault("").Length;
-                if (char.IsWhiteSpace(_commandInput.Text.LastOrDefault(' '))) lastWordLength = 0;
+                var lastWordLength = _words[_wordIndex].Length;
+                // if (char.IsWhiteSpace(_commandInput.Text.LastOrDefault(' '))) lastWordLength = 0;
                 var cleanedText = _commandInput.Text.Remove(_commandInput.Text.Length - lastWordLength, lastWordLength);
                 _commandInput.SetText(cleanedText);
                 _commandInput.CaretColumn = cleanedText.Length;
@@ -201,13 +201,19 @@ public partial class ParallasConsole : Control
 
         ClearValues();
         ClearAutoComplete();
+        _showAutoComplete = false;
 
         _commandInput.ReleaseFocus();
     }
 
     public void CallCommand(string commandString)
     {
-        string[] allWords = [..CommandInput.SplitCommandString(commandString).Select(s => s.Trim('"'))];
+        string[] allWords =
+        [
+            ..CommandInput.SplitCommandString(commandString)
+                .Where(s => !String.IsNullOrEmpty(s))
+                .Select(s => s.Trim('"'))
+        ];
 
         // var allWords = commandString.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
@@ -394,6 +400,7 @@ public partial class ParallasConsole : Control
 
     private void RefreshAutoComplete()
     {
+        GD.Print(String.Join(',', _words) + ']');
         var charCounter = 0;
         int wordIndex = 0;
         for (int i = 0; i < _words.Length; i++)
@@ -409,11 +416,10 @@ public partial class ParallasConsole : Control
         }
 
         // the counting system is a bit weird. if we're on the last character show the next word position.
-        if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length;
+        if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length - 1;
         if (_wordIndex != wordIndex)
         {
             SetCurrentWordIndex(wordIndex);
-            _autocompleteControl.Scale = _autocompleteControl.Scale with { Y = 0 };
         }
 
         RefreshAutoCompleteValues();
@@ -508,7 +514,7 @@ public partial class ParallasConsole : Control
         }
 
         if (_wordIndex >= 0 && _wordIndex < _words.Length)
-            values = values.Where(w => w.Name.Contains(_words[_wordIndex].Trim('"'), StringComparison.InvariantCultureIgnoreCase)).ToList();
+            values = values.Where(w => w.Name.Contains(_words[_wordIndex].Trim('"', ' '), StringComparison.InvariantCultureIgnoreCase)).ToList();
 
         values.Sort(((a, b) => String.Compare(a.Name, b.Name, StringComparison.InvariantCultureIgnoreCase)));
 
