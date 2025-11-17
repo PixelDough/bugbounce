@@ -17,6 +17,7 @@ config/icon="uid://kfjnryfy3osr"
 [autoload]
 
 parallas_console="*res://addons/parallas_console/console_default.tscn"
+default_cam="*res://scenes/common/default_cam.tscn"
 
 [display]
 
