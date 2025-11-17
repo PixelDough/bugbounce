@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Godot.Collections;
 using Array = Godot.Collections.Array;
 
@@ -92,7 +93,12 @@ public partial class ParallasConsole : Control
                 var cleanedText = _commandInput.Text.Remove(_commandInput.Text.Length - lastWordLength, lastWordLength);
                 _commandInput.SetText(cleanedText);
                 _commandInput.CaretColumn = cleanedText.Length;
-                _commandInput.InsertTextAtCaret($"{_autoCompleteWords[_autoCompleteIndex]} ");
+                var newString = _autoCompleteWords[_autoCompleteIndex];
+                if (newString.Contains(' '))
+                {
+                    newString = $@"""{newString}""";
+                }
+                _commandInput.InsertTextAtCaret($"{newString} ");
                 ClearAutoComplete();
                 TextChanged(_commandInput.Text);
             }
@@ -201,7 +207,9 @@ public partial class ParallasConsole : Control
 
     public void CallCommand(string commandString)
     {
-        var allWords = commandString.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        string[] allWords = [..CommandInput.SplitCommandString(commandString).Select(s => s.Trim('"'))];
+
+        // var allWords = commandString.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
         if (allWords.Length <= 0)
         {
@@ -212,7 +220,7 @@ public partial class ParallasConsole : Control
         var commandName = allWords[0];
         if (!ConsoleData.ConsoleCommands.TryGetValue(commandName, out var commandMethodPair))
         {
-            PrintError("Invalid command provided.");
+            PrintError($"Invalid command provided: \"{commandName}\"");
             return;
         }
         var command = commandMethodPair.Command;
@@ -350,7 +358,7 @@ public partial class ParallasConsole : Control
 
     private void TextChanged(string text)
     {
-        _words = _commandInput.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        _words = _commandInput.SplitCommandString();
         _showAutoComplete = !_words.IsEmpty();
         RefreshAutoComplete();
     }
@@ -500,7 +508,7 @@ public partial class ParallasConsole : Control
         }
 
         if (_wordIndex >= 0 && _wordIndex < _words.Length)
-            values = values.Where(w => w.Name.Contains(_words[_wordIndex], StringComparison.InvariantCultureIgnoreCase)).ToList();
+            values = values.Where(w => w.Name.Contains(_words[_wordIndex].Trim('"'), StringComparison.InvariantCultureIgnoreCase)).ToList();
 
         values.Sort(((a, b) => String.Compare(a.Name, b.Name, StringComparison.InvariantCultureIgnoreCase)));
 
