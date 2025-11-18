@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cn6wponjc8fa8"]
+[gd_scene load_steps=9 format=3 uid="uid://cn6wponjc8fa8"]
 
 [ext_resource type="Script" uid="uid://mvqkcdhlev1w" path="res://addons/parallas_commandable/CommandableConsole.cs" id="1_cd4qq"]
 [ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_commandable/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
 [ext_resource type="Script" uid="uid://m8gh1c6i0id6" path="res://addons/parallas_commandable/CommandInput.cs" id="2_bf6pj"]
 [ext_resource type="PackedScene" uid="uid://cteoaei7o1ovj" path="res://addons/parallas_commandable/suggestion_item.tscn" id="4_q5l3k"]
+[ext_resource type="Script" uid="uid://cvda83f1m2qfm" path="res://addons/parallas_commandable/AutoComplete.cs" id="4_xm7yy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4qq"]
 content_margin_left = 0.0
@@ -37,7 +38,7 @@ bg_color = Color(0.36, 0.36, 0.36, 1)
 [node name="ConsoleDefault" type="CanvasLayer"]
 layer = 2147483647
 
-[node name="ConsoleDefault" type="Control" parent="."]
+[node name="ConsoleDefault" type="Control" parent="." node_paths=PackedStringArray("_autoComplete")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 9
@@ -46,9 +47,7 @@ offset_right = 300.0
 grow_vertical = 2
 script = ExtResource("1_cd4qq")
 _inputToggle = "console_toggle"
-_inputAutoCompleteConfirm = "console_autocomplete_confirm"
-_inputAutoCompleteNext = "console_autocomplete_next"
-_inputAutoCompletePrev = "console_autocomplete_previous"
+_autoComplete = NodePath("autocomplete_control")
 
 [node name="console_panel" type="MarginContainer" parent="ConsoleDefault"]
 unique_name_in_owner = true
@@ -110,7 +109,7 @@ keep_editing_on_text_submit = true
 caret_blink = true
 script = ExtResource("2_bf6pj")
 
-[node name="autocomplete_control" type="VBoxContainer" parent="ConsoleDefault"]
+[node name="autocomplete_control" type="VBoxContainer" parent="ConsoleDefault" node_paths=PackedStringArray("_commandInput")]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 0
@@ -118,6 +117,11 @@ offset_right = 608.0
 offset_bottom = 318.0
 mouse_filter = 2
 theme_override_constants/separation = 0
+script = ExtResource("4_xm7yy")
+_commandInput = NodePath("../console_panel/VBoxContainer/Message Box/command_input")
+_inputAutoCompleteConfirm = "console_autocomplete_confirm"
+_inputAutoCompleteNext = "console_autocomplete_next"
+_inputAutoCompletePrev = "console_autocomplete_previous"
 
 [node name="autocomplete_tooltip" parent="ConsoleDefault/autocomplete_control" instance=ExtResource("4_q5l3k")]
 unique_name_in_owner = true

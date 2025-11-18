@@ -32,12 +32,13 @@ project/assembly_name="bugbounce"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/meshtext/plugin.cfg", "res://addons/parallas_commandable/plugin.cfg", "res://addons/unidot_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/meshtext/plugin.cfg", "res://addons/parallas_commandable/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://Assets/": "gray",
+"res://addons/": "gray",
 "res://levels/": "blue",
 "res://models/": "gray",
 "res://scenes/": "yellow",

@@ -8,7 +8,13 @@ using Range = System.Range;
 namespace Parallas.Commandable;
 public partial class CommandInput : LineEdit
 {
+    [Signal] public delegate void WordIndexChangedEventHandler(int wordIndex);
+
     private RegEx _validCharacters = new RegEx();
+
+    public int WordIndex = int.MinValue;
+    public CommandWord[] Words = [new CommandWord()];
+
     public override void _Ready()
     {
         base._Ready();
@@ -33,6 +39,25 @@ public partial class CommandInput : LineEdit
         var oldLength = text.Length;
         Text = cleanString;
         CaretColumn = caret - (text.Length - Text.Length);
+
+        Refresh();
+    }
+
+    public void Refresh()
+    {
+        Words = SplitCommandString();
+
+        int wordIndex = 0;
+        for (int i = 0; i < Words.Length; i++)
+        {
+            if (Words[i].StartIndex > CaretColumn) break;
+            wordIndex = i;
+        }
+
+        if (WordIndex != wordIndex)
+        {
+            SetWordIndex(wordIndex);
+        }
     }
 
     public Vector2 GetCaretPos()
@@ -124,6 +149,21 @@ public partial class CommandInput : LineEdit
 
         return [..allWordsFiltered];
     }
+
+    public void ClearValues()
+    {
+        Words = [new CommandWord()];
+        WordIndex = int.MinValue;
+    }
+
+    private void SetWordIndex(int wordIndex)
+    {
+        WordIndex = wordIndex;
+        EmitSignalWordIndexChanged(wordIndex);
+    }
+
+    public CommandWord GetWordAtIndex(int index) => Words[index];
+    public CommandWord GetCurrentWord() => GetWordAtIndex(WordIndex);
 }
 
 public readonly record struct CommandWord(string Value, int StartIndex, int Length)

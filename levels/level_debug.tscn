@@ -75,7 +75,7 @@ radius = 50.0
 [sub_resource type="BoxMesh" id="BoxMesh_4so8i"]
 size = Vector3(1, 100, 1)
 
-[node name="RootNode3D" type="Node3D"]
+[node name="level_debug" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_somws")
