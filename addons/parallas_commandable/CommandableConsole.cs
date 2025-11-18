@@ -1,13 +1,8 @@
 using Godot;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using Godot.Collections;
-using Array = Godot.Collections.Array;
 
 namespace Parallas.Commandable;
 [GlobalClass]
@@ -64,9 +59,6 @@ public partial class CommandableConsole : Control
         _commandInput.TextChanged += TextChanged;
         _commandInput.TextSubmitted += TextSubmitted;
 
-        GetTree().Root.ChildEnteredTree += NodeEnterScene;
-        GetTree().Root.ChildExitingTree += NodeExitScene;
-
         ConsoleData.FetchData();
     }
 
@@ -110,12 +102,12 @@ public partial class CommandableConsole : Control
 
         _autocompleteControl.Modulate = _autocompleteControl.Modulate with
         {
-            A = MathUtil.ExpDecay(_autocompleteControl.Modulate.A,
+            A = ExpDecay(_autocompleteControl.Modulate.A,
                 _showAutoComplete ? 1f : 0f, 50f, (float)delta)
         };
         _autocompleteControl.Scale = _autocompleteControl.Scale with
         {
-            Y = MathUtil.ExpDecay(
+            Y = ExpDecay(
                 _autocompleteControl.Scale.Y,
                 _showAutoComplete ? 1f : 0f,
                 40f,
@@ -179,16 +171,6 @@ public partial class CommandableConsole : Control
         {
             CallDeferred(MethodName.RefreshAutoComplete);
         }
-    }
-
-    private void NodeEnterScene(Node node)
-    {
-        GD.Print(node.GetPath());
-    }
-
-    private void NodeExitScene(Node node)
-    {
-
     }
 
     public void Toggle()
@@ -744,5 +726,10 @@ public partial class CommandableConsole : Control
     {
         var splits = instance.Split(',').Select(float.Parse).ToArray();
         return splits;
+    }
+
+    private static float ExpDecay(float a, float b, float decay, float dt)
+    {
+        return b + (a - b) * MathF.Exp(-decay * dt);
     }
 }
