@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Range = System.Range;
 
+namespace Parallas.Commandable;
 public partial class CommandInput : LineEdit
 {
     private RegEx _validCharacters = new RegEx();

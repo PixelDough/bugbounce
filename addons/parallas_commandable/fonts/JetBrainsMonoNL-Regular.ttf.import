@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cdegfp5olw17n"
-path="res://.godot/imported/JetBrainsMonoNL-Regular.ttf-44e35a71d7ae873ac29c09982cddc097.fontdata"
+path="res://.godot/imported/JetBrainsMonoNL-Regular.ttf-3d522509dfabf17bb4d4c059c2a0b8ac.fontdata"
 
 [deps]
 
-source_file="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf"
-dest_files=["res://.godot/imported/JetBrainsMonoNL-Regular.ttf-44e35a71d7ae873ac29c09982cddc097.fontdata"]
+source_file="res://addons/parallas_commandable/fonts/JetBrainsMonoNL-Regular.ttf"
+dest_files=["res://.godot/imported/JetBrainsMonoNL-Regular.ttf-3d522509dfabf17bb4d4c059c2a0b8ac.fontdata"]
 
 [params]
 

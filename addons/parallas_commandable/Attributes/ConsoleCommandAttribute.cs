@@ -1,6 +1,6 @@
 using System;
 
-namespace Parallas.Console;
+namespace Parallas.Commandable;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class ConsoleCommandAttribute(string name) : Attribute

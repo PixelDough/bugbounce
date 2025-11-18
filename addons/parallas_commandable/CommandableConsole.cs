@@ -9,11 +9,11 @@ using System.Text;
 using Godot.Collections;
 using Array = Godot.Collections.Array;
 
-namespace Parallas.Console;
+namespace Parallas.Commandable;
 [GlobalClass]
-public partial class ParallasConsole : Control
+public partial class CommandableConsole : Control
 {
-    public static ParallasConsole Instance { get; private set; }
+    public static CommandableConsole Instance { get; private set; }
 
     [Export(PropertyHint.InputName)] private String _inputToggle;
     [Export(PropertyHint.InputName)] private String _inputAutoCompleteConfirm;
@@ -39,7 +39,7 @@ public partial class ParallasConsole : Control
     private Tween _tween;
 
     private PackedScene _autocompleteSuggestionScene =
-        ResourceLoader.Load<PackedScene>("res://addons/parallas_console/suggestion_item.tscn");
+        ResourceLoader.Load<PackedScene>("res://addons/parallas_commandable/suggestion_item.tscn");
 
     public bool IsOpen { get; private set; } = false;
 
@@ -63,6 +63,9 @@ public partial class ParallasConsole : Control
 
         _commandInput.TextChanged += TextChanged;
         _commandInput.TextSubmitted += TextSubmitted;
+
+        GetTree().Root.ChildEnteredTree += NodeEnterScene;
+        GetTree().Root.ChildExitingTree += NodeExitScene;
 
         ConsoleData.FetchData();
     }
@@ -176,6 +179,16 @@ public partial class ParallasConsole : Control
         {
             CallDeferred(MethodName.RefreshAutoComplete);
         }
+    }
+
+    private void NodeEnterScene(Node node)
+    {
+        GD.Print(node.GetPath());
+    }
+
+    private void NodeExitScene(Node node)
+    {
+
     }
 
     public void Toggle()
@@ -361,6 +374,11 @@ public partial class ParallasConsole : Control
         var type = methodInfo.DeclaringType!;
         if (!methodInfo.IsStatic)
         {
+            if (methodInfo.DeclaringType!.GetCustomAttribute<GlobalClassAttribute>() is not { })
+            {
+                PrintError($"The [GlobalClass] attribute is required for non-static commands to be run on nodes of type \"{methodInfo.DeclaringType.FullName}\".");
+                return;
+            }
             var childrenOfType = GetTree().Root.FindChildren("*", type.Name, true, false);
             PrintTextVerbose($"Found {childrenOfType.Count} node of type {type.Name}");
             foreach (var node in childrenOfType)
@@ -402,6 +420,7 @@ public partial class ParallasConsole : Control
     public void PrintError(string errorMessage)
     {
         PrintText($"[color=red]Error: {errorMessage}");
+        GD.PushError(errorMessage);
     }
 
     public enum ConsoleLogLevel
@@ -462,7 +481,6 @@ public partial class ParallasConsole : Control
             if (_words[i].StartIndex > _commandInput.CaretColumn) break;
             wordIndex = i;
         }
-        GD.Print($"current word index: {wordIndex}");
 
         if (_wordIndex != wordIndex)
         {

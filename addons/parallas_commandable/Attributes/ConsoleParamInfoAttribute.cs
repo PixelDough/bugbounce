@@ -1,6 +1,6 @@
 using System;
 
-namespace Parallas.Console;
+namespace Parallas.Commandable;
 
 [AttributeUsage(AttributeTargets.Parameter)]
 public class ConsoleParamInfoAttribute : Attribute

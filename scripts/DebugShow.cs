@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Parallas.Console;
+using Parallas.Commandable;
 
 [GlobalClass]
 public partial class DebugShow : Node

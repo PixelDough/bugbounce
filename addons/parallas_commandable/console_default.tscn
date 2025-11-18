@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cn6wponjc8fa8"]
 
-[ext_resource type="Script" uid="uid://x0qyxr2vyj8u" path="res://addons/parallas_console/ParallasConsole.cs" id="1_cd4qq"]
-[ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
-[ext_resource type="Script" uid="uid://m8gh1c6i0id6" path="res://addons/parallas_console/CommandInput.cs" id="2_bf6pj"]
-[ext_resource type="PackedScene" uid="uid://cteoaei7o1ovj" path="res://addons/parallas_console/suggestion_item.tscn" id="4_q5l3k"]
+[ext_resource type="Script" uid="uid://mvqkcdhlev1w" path="res://addons/parallas_commandable/CommandableConsole.cs" id="1_cd4qq"]
+[ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_commandable/fonts/JetBrainsMonoNL-Regular.ttf" id="2_a5bj4"]
+[ext_resource type="Script" uid="uid://m8gh1c6i0id6" path="res://addons/parallas_commandable/CommandInput.cs" id="2_bf6pj"]
+[ext_resource type="PackedScene" uid="uid://cteoaei7o1ovj" path="res://addons/parallas_commandable/suggestion_item.tscn" id="4_q5l3k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd4qq"]
 content_margin_left = 0.0

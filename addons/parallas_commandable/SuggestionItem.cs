@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace Parallas.Commandable;
 public partial class SuggestionItem : PanelContainer
 {
     [Export] public Label Label;

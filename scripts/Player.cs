@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Godot;
 using Parallas;
-using Parallas.Console;
+using Parallas.Commandable;
 
 [GlobalClass]
 public partial class Player : RigidBody3D

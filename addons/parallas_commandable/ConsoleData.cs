@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Godot;
 
-namespace Parallas.Console;
+namespace Parallas.Commandable;
 
 public static class ConsoleData
 {

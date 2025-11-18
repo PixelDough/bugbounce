@@ -2,20 +2,20 @@
 using Godot;
 using System;
 
-namespace Parallas.Console;
+namespace Parallas.Commandable;
 [Tool]
 public partial class Plugin : EditorPlugin
 {
 	public override void _EnablePlugin()
 	{
 		base._EnablePlugin();
-		AddAutoloadSingleton("parallas_console", "res://addons/parallas_console/console_default.tscn");
+		AddAutoloadSingleton("parallas_commandable_console", "res://addons/parallas_commandable/console_default.tscn");
 	}
 
 	public override void _DisablePlugin()
 	{
 		base._DisablePlugin();
-		RemoveAutoloadSingleton("parallas_console");
+		RemoveAutoloadSingleton("parallas_commandable_console");
 	}
 
 	public override void _EnterTree()

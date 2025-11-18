@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cteoaei7o1ovj"]
 
-[ext_resource type="Script" uid="uid://by653fyprctp" path="res://addons/parallas_console/SuggestionItem.cs" id="1_a86sh"]
-[ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_console/fonts/JetBrainsMonoNL-Regular.ttf" id="1_hprwm"]
+[ext_resource type="Script" uid="uid://by653fyprctp" path="res://addons/parallas_commandable/SuggestionItem.cs" id="1_a86sh"]
+[ext_resource type="FontFile" uid="uid://cdegfp5olw17n" path="res://addons/parallas_commandable/fonts/JetBrainsMonoNL-Regular.ttf" id="1_hprwm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a86sh"]
 content_margin_left = 0.0

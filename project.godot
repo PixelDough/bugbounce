@@ -16,8 +16,8 @@ config/icon="uid://kfjnryfy3osr"
 
 [autoload]
 
-parallas_console="*res://addons/parallas_console/console_default.tscn"
 default_cam="*res://scenes/common/default_cam.tscn"
+parallas_commandable_console="*res://addons/parallas_commandable/console_default.tscn"
 
 [display]
 
@@ -32,7 +32,7 @@ project/assembly_name="bugbounce"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/meshtext/plugin.cfg", "res://addons/parallas_console/plugin.cfg", "res://addons/unidot_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/meshtext/plugin.cfg", "res://addons/parallas_commandable/plugin.cfg", "res://addons/unidot_importer/plugin.cfg")
 
 [file_customization]
 
