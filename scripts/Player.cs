@@ -564,9 +564,8 @@ public partial class Player : RigidBody3D
     }
 
     [ConsoleCommand("go_to_checkpoint")]
-    private void GoToCheckpoint([NodePathType(typeof(Checkpoint))] NodePath checkpointPath)
+    private void GoToCheckpoint(Checkpoint checkpoint)
     {
-        var checkpoint = GetNode<Checkpoint>(checkpointPath);
         checkpoint.SetAsPlayerRespawn(this);
         CallDeferred("Kill");
     }
@@ -578,8 +577,8 @@ public partial class Player : RigidBody3D
     }
 
     [ConsoleCommand("tp_node")]
-    private void Teleport([NodePathType(typeof(Node3D))] NodePath nodePath)
+    private void Teleport(Node3D node3d)
     {
-        Teleport(GetNode<Node3D>(nodePath).GlobalPosition);
+        Teleport(node3d.GlobalPosition);
     }
 }

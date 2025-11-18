@@ -340,6 +340,10 @@ public partial class CommandableConsole : Control
                     }
                     parametersArray.Add(new Vector4(floats[0], floats[1], floats[2], floats[3]));
                 }
+                else if (parameterType.IsAssignableTo(typeof(Node)))
+                {
+                    parametersArray.Add(GetNode(item.Value));
+                }
                 else if (parameterType == typeof(NodePath))
                 {
                     parametersArray.Add(new NodePath(item.Value));
@@ -540,10 +544,10 @@ public partial class CommandableConsole : Control
                         tooltipData.Add(new("type", methodParameter.ParameterType.Name));
                     if (methodParameter.HasDefaultValue && methodParameter.DefaultValue is { } defaultValue)
                         tooltipData.Add(new("default", defaultValue.ToString() ?? "null"));
-                    NodePathTypeAttribute nodePathType = methodParameter.GetCustomAttribute<NodePathTypeAttribute>();
+                    var nodePathType = methodParameter.GetCustomAttribute<NodePathTypeAttribute>();
                     if (nodePathType is not null)
                     {
-                        tooltipData.Add(new("node type", nodePathType.Type.FullName));
+                        tooltipData.Add(new("node type", nodePathType.Type.FullName!));
                     }
                     _autocompleteTooltip.Visible = true;
                     _autocompleteTooltip.SetData([..tooltipData]);
@@ -560,17 +564,17 @@ public partial class CommandableConsole : Control
                         values.AddRange(System.Enum.GetNames(methodParameterType)
                             .Select(n => new SuggestionItem.SuggestionData(n, null)));
                     }
+                    else if (methodParameterType.IsAssignableTo(typeof(Node)))
+                    {
+                        var allPaths = GetAllChildren(
+                            GetTree().Root,
+                            methodParameterType
+                        ).Select(n => new SuggestionItem.SuggestionData(n.GetPath().ToString(), null));
+                        values.AddRange(allPaths);
+                    }
                     else if (methodParameterType == typeof(NodePath))
                     {
-                        var allChildren = GetAllChildren(GetTree().Root);
-                        if (nodePathType is not null)
-                        {
-                            allChildren =
-                            [
-                                ..allChildren.Where(
-                                    n => n.GetType().IsAssignableTo(nodePathType.Type))
-                            ];
-                        }
+                        var allChildren = GetAllChildren(GetTree().Root, nodePathType?.Type);
                         var allPaths = allChildren.Select(c =>
                             new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
                         values.AddRange(allPaths);
@@ -680,6 +684,12 @@ public partial class CommandableConsole : Control
         GetTree().ChangeSceneToFile(scenePath);
     }
 
+    [ConsoleCommand("collision_shapes")]
+    public void ToggleVisibleCollisionShapes()
+    {
+        GetTree().SetDebugCollisionsHint(true);
+    }
+
     public static List<SuggestionItem.SuggestionData> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true, string[] ignoringDirectories = null)
     {
         ignoringDirectories ??= [];
@@ -710,7 +720,7 @@ public partial class CommandableConsole : Control
         return filePaths;
     }
 
-    private static List<Node> GetAllChildren(Node node)
+    private static List<Node> GetAllChildren(Node node, Type type = null)
     {
         List<Node> array =
         [
@@ -719,6 +729,15 @@ public partial class CommandableConsole : Control
         foreach (var child in node.GetChildren())
         {
             array.AddRange(GetAllChildren(child));
+        }
+
+        if (type is not null)
+        {
+            array =
+            [
+                ..array.Where(
+                    n => n.GetType().IsAssignableTo(type))
+            ];
         }
 
         return array;
