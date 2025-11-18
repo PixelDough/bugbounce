@@ -27,10 +27,6 @@ public partial class CheckpointTrigger : Node
         GetTree().CallGroup("checkpoints", "HideFlag");
         _checkpoint.ShowFlag();
         _checkpoint.Shake(velocity);
-        player.SetRespawnPoint(
-            _checkpoint.RespawnPointNode.GlobalPosition,
-            -_checkpoint.RespawnPointNode.GlobalBasis.Z,
-            _checkpoint.CheckpointId
-        );
+        _checkpoint.SetAsPlayerRespawn(player);
     }
 }

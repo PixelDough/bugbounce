@@ -174,12 +174,12 @@ public partial class Player : RigidBody3D
             _particleDust.GlobalBasis =
                 new Basis(
                     MathUtil.LookRotation(
-                        -planarVelocity,
+                        -planarVelocity.Normalized(),
                         -GravityDirection
                     )
                 );
-            _particleDust.GlobalPosition = GlobalPosition + -planarVelocity.Normalized() * 0.15f + GravityDirection * 0.15f;
         }
+        _particleDust.GlobalPosition = GlobalPosition + -planarVelocity.Normalized() * 0.15f + GravityDirection * 0.15f;
 
         var targetDirection = new Basis(-GravityDirection, _eyesTargetAngle);
         _meshRoot.GlobalBasis = MathUtil.ExpDecay(_meshRoot.GlobalBasis, targetDirection, 2f, (float)delta);
@@ -561,5 +561,25 @@ public partial class Player : RigidBody3D
     {
         // _respawnPoint = position;
         // _respawnForward = forward;
+    }
+
+    [ConsoleCommand("go_to_checkpoint")]
+    private void GoToCheckpoint([NodePathType(typeof(Checkpoint))] NodePath checkpointPath)
+    {
+        var checkpoint = GetNode<Checkpoint>(checkpointPath);
+        checkpoint.SetAsPlayerRespawn(this);
+        CallDeferred("Kill");
+    }
+
+    [ConsoleCommand("tp")]
+    private void Teleport(Vector3 globalPos)
+    {
+        GlobalPosition = globalPos;
+    }
+
+    [ConsoleCommand("tp_node")]
+    private void Teleport([NodePathType(typeof(Node3D))] NodePath nodePath)
+    {
+        Teleport(GetNode<Node3D>(nodePath).GlobalPosition);
     }
 }

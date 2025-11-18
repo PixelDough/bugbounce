@@ -257,7 +257,7 @@ public partial class ParallasConsole : Control
             return;
         }
 
-        ArrayList parametersArray = [];
+        List<object> parametersArray = [];
         for (var i = 0; i < methodParameters.Length; i++)
         {
             var methodParameter = methodParameters[i];
@@ -299,6 +299,53 @@ public partial class ParallasConsole : Control
                             $"Invalid enum value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
                         return;
                     }
+                }
+                else if (parameterType == typeof(float))
+                {
+                    if (!float.TryParse(item.Value, out var floatValue))
+                    {
+                        PrintError(
+                            $"Expected float (found \"{item.Value}\")");
+                        return;
+                    }
+                    parametersArray.Add(floatValue);
+                }
+                else if (parameterType == typeof(Vector3))
+                {
+                    var floats = SplitFloats(item.Value);
+                    if (floats.Length != 3)
+                    {
+                        PrintError(
+                            $"Incorrect number of scalars in Vector (expected 3, found {floats.Length})");
+                        return;
+                    }
+                    parametersArray.Add(new Vector3(floats[0], floats[1], floats[2]));
+                }
+                else if (parameterType == typeof(Vector2))
+                {
+                    var floats = SplitFloats(item.Value);
+                    if (floats.Length != 2)
+                    {
+                        PrintError(
+                            $"Incorrect number of scalars in Vector (expected 2, found {floats.Length})");
+                        return;
+                    }
+                    parametersArray.Add(new Vector2(floats[0], floats[1]));
+                }
+                else if (parameterType == typeof(Vector4))
+                {
+                    var floats = SplitFloats(item.Value);
+                    if (floats.Length != 4)
+                    {
+                        PrintError(
+                            $"Incorrect number of scalars in Vector (expected 4, found {floats.Length})");
+                        return;
+                    }
+                    parametersArray.Add(new Vector4(floats[0], floats[1], floats[2], floats[3]));
+                }
+                else if (parameterType == typeof(NodePath))
+                {
+                    parametersArray.Add(new NodePath(item.Value));
                 }
                 else
                 {
@@ -409,24 +456,6 @@ public partial class ParallasConsole : Control
 
     private void RefreshAutoComplete()
     {
-        GD.Print(String.Join(',', _words.Select(w => w.Value)) + ']');
-        // var charCounter = 0;
-        // int wordIndex = 0;
-        // for (int i = 0; i < _words.Length; i++)
-        // {
-        //     var word = _words[i];
-        //     var newCharCounter = charCounter + word.Length + 1;
-        //     if (newCharCounter > _commandInput.CaretColumn)
-        //     {
-        //         wordIndex = i;
-        //         break;
-        //     }
-        //     charCounter = newCharCounter;
-        // }
-
-        // the counting system is a bit weird. if we're on the last character show the next word position.
-        // if (_commandInput.CaretColumn == charCounter) wordIndex = _words.Length - 1;
-
         int wordIndex = 0;
         for (int i = 0; i < _words.Length; i++)
         {
@@ -509,6 +538,11 @@ public partial class ParallasConsole : Control
                         tooltipData.Add(new("type", methodParameter.ParameterType.Name));
                     if (methodParameter.HasDefaultValue && methodParameter.DefaultValue is { } defaultValue)
                         tooltipData.Add(new("default", defaultValue.ToString() ?? "null"));
+                    NodePathTypeAttribute nodePathType = methodParameter.GetCustomAttribute<NodePathTypeAttribute>();
+                    if (nodePathType is not null)
+                    {
+                        tooltipData.Add(new("node type", nodePathType.Type.FullName));
+                    }
                     _autocompleteTooltip.Visible = true;
                     _autocompleteTooltip.SetData([..tooltipData]);
 
@@ -519,10 +553,25 @@ public partial class ParallasConsole : Control
                             new("0", "false")
                         ]);
                     }
-                    if (methodParameterType.IsEnum)
+                    else if (methodParameterType.IsEnum)
                     {
                         values.AddRange(System.Enum.GetNames(methodParameterType)
                             .Select(n => new SuggestionItem.SuggestionData(n, null)));
+                    }
+                    else if (methodParameterType == typeof(NodePath))
+                    {
+                        var allChildren = GetAllChildren(GetTree().Root);
+                        if (nodePathType is not null)
+                        {
+                            allChildren =
+                            [
+                                ..allChildren.Where(
+                                    n => n.GetType().IsAssignableTo(nodePathType.Type))
+                            ];
+                        }
+                        var allPaths = allChildren.Select(c =>
+                            new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
+                        values.AddRange(allPaths);
                     }
                 }
                 else
@@ -657,5 +706,25 @@ public partial class ParallasConsole : Control
         }
 
         return filePaths;
+    }
+
+    private static List<Node> GetAllChildren(Node node)
+    {
+        List<Node> array =
+        [
+            node
+        ];
+        foreach (var child in node.GetChildren())
+        {
+            array.AddRange(GetAllChildren(child));
+        }
+
+        return array;
+    }
+
+    private static float[] SplitFloats(string instance)
+    {
+        var splits = instance.Split(',').Select(float.Parse).ToArray();
+        return splits;
     }
 }

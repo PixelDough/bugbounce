@@ -105,4 +105,13 @@ public partial class Checkpoint : Node3D
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
     }
+
+    public void SetAsPlayerRespawn(Player player)
+    {
+        player.SetRespawnPoint(
+            RespawnPointNode.GlobalPosition,
+            -RespawnPointNode.GlobalBasis.Z,
+            CheckpointId
+        );
+    }
 }
