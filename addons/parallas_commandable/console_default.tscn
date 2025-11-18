@@ -34,7 +34,10 @@ corner_detail = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63uej"]
 bg_color = Color(0.36, 0.36, 0.36, 1)
 
-[node name="ConsoleDefault" type="Control"]
+[node name="ConsoleDefault" type="CanvasLayer"]
+layer = 2147483647
+
+[node name="ConsoleDefault" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 9
@@ -46,9 +49,8 @@ _inputToggle = "console_toggle"
 _inputAutoCompleteConfirm = "console_autocomplete_confirm"
 _inputAutoCompleteNext = "console_autocomplete_next"
 _inputAutoCompletePrev = "console_autocomplete_previous"
-metadata/_custom_type_script = "uid://x0qyxr2vyj8u"
 
-[node name="console_panel" type="MarginContainer" parent="."]
+[node name="console_panel" type="MarginContainer" parent="ConsoleDefault"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -61,17 +63,17 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="console_panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConsoleDefault/console_panel"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="History" type="Panel" parent="console_panel/VBoxContainer"]
+[node name="History" type="Panel" parent="ConsoleDefault/console_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_cd4qq")
 
-[node name="command_history" type="RichTextLabel" parent="console_panel/VBoxContainer/History"]
+[node name="command_history" type="RichTextLabel" parent="ConsoleDefault/console_panel/VBoxContainer/History"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 1
@@ -94,10 +96,10 @@ scroll_following = true
 vertical_alignment = 2
 selection_enabled = true
 
-[node name="Message Box" type="PanelContainer" parent="console_panel/VBoxContainer"]
+[node name="Message Box" type="PanelContainer" parent="ConsoleDefault/console_panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="command_input" type="LineEdit" parent="console_panel/VBoxContainer/Message Box"]
+[node name="command_input" type="LineEdit" parent="ConsoleDefault/console_panel/VBoxContainer/Message Box"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_a5bj4")
@@ -108,7 +110,7 @@ keep_editing_on_text_submit = true
 caret_blink = true
 script = ExtResource("2_bf6pj")
 
-[node name="autocomplete_control" type="VBoxContainer" parent="."]
+[node name="autocomplete_control" type="VBoxContainer" parent="ConsoleDefault"]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 0
@@ -117,14 +119,14 @@ offset_bottom = 318.0
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="autocomplete_tooltip" parent="autocomplete_control" instance=ExtResource("4_q5l3k")]
+[node name="autocomplete_tooltip" parent="ConsoleDefault/autocomplete_control" instance=ExtResource("4_q5l3k")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 FontColorBase = Color(0.99, 0.99, 0.99, 1)
 StyleBoxBase = SubResource("StyleBoxFlat_63uej")
 
-[node name="autocomplete_scroll" type="ScrollContainer" parent="autocomplete_control"]
+[node name="autocomplete_scroll" type="ScrollContainer" parent="ConsoleDefault/autocomplete_control"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
@@ -133,7 +135,7 @@ mouse_filter = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="autocomplete_vbox" type="VBoxContainer" parent="autocomplete_control/autocomplete_scroll"]
+[node name="autocomplete_vbox" type="VBoxContainer" parent="ConsoleDefault/autocomplete_control/autocomplete_scroll"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -141,14 +143,14 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="suggestion_item" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+[node name="suggestion_item" parent="ConsoleDefault/autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
 layout_mode = 2
 
-[node name="suggestion_item2" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+[node name="suggestion_item2" parent="ConsoleDefault/autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
 layout_mode = 2
 
-[node name="suggestion_item3" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+[node name="suggestion_item3" parent="ConsoleDefault/autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
 layout_mode = 2
 
-[node name="suggestion_item4" parent="autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
+[node name="suggestion_item4" parent="ConsoleDefault/autocomplete_control/autocomplete_scroll/autocomplete_vbox" instance=ExtResource("4_q5l3k")]
 layout_mode = 2

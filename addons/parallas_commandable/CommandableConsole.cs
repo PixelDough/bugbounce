@@ -59,6 +59,8 @@ public partial class CommandableConsole : Control
         _commandInput.TextChanged += TextChanged;
         _commandInput.TextSubmitted += TextSubmitted;
 
+        GetCanvasLayerNode()?.SetLayer(int.MaxValue);
+
         ConsoleData.FetchData();
     }
 
