@@ -105,7 +105,6 @@ public partial class AutoComplete : Control
                 if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
             }
 
-            // _autocompleteScroll.scroll
             var suggestionHeight = _autoCompleteSuggestionItems[0].Size.Y;
             var halfOffset = Mathf.FloorToInt((_autocompleteScroll.Size.Y / suggestionHeight) * 0.5f);
             _autocompleteScroll.ScrollVertical = Mathf.FloorToInt(suggestionHeight * (_autoCompleteIndex - halfOffset));
@@ -239,33 +238,7 @@ public partial class AutoComplete : Control
                     _autocompleteTooltip.Visible = true;
                     _autocompleteTooltip.SetData([..tooltipData]);
 
-                    if (methodParameterType == typeof(bool))
-                    {
-                        values.AddRange([
-                            new("1", "true"),
-                            new("0", "false")
-                        ]);
-                    }
-                    else if (methodParameterType.IsEnum)
-                    {
-                        values.AddRange(System.Enum.GetNames(methodParameterType)
-                            .Select(n => new SuggestionItem.SuggestionData(n, null)));
-                    }
-                    else if (methodParameterType.IsAssignableTo(typeof(Node)))
-                    {
-                        var allPaths = CommandableUtils.GetAllChildren(
-                            GetTree().Root,
-                            methodParameterType
-                        ).Select(n => new SuggestionItem.SuggestionData(n.GetPath().ToString(), null));
-                        values.AddRange(allPaths);
-                    }
-                    else if (methodParameterType == typeof(NodePath))
-                    {
-                        var allChildren = CommandableUtils.GetAllChildren(GetTree().Root, nodePathType?.Type);
-                        var allPaths = allChildren.Select(c =>
-                            new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
-                        values.AddRange(allPaths);
-                    }
+                    values.AddRange(CommandableUtils.GetSuggestionsFromMember(methodParameter));
                 }
                 else
                 {
@@ -298,34 +271,46 @@ public partial class AutoComplete : Control
 
         var declaringType = forMethod.DeclaringType!;
         object result = null;
-        if (declaringType.GetField(autocompleteMethodName) is { } autocompleteField)
+        var bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        if (declaringType.GetField(autocompleteMethodName, bindingFlags) is { } autocompleteField)
         {
             // is field
             if (!autocompleteField.IsStatic)
             {
-                CommandableConsole.Instance.PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
+                CommandableConsole.PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
                 return [];
             }
             result = autocompleteField.GetValue(null);
         }
-        else if (declaringType.GetMethod(autocompleteMethodName) is { } autocompleteMethod)
+        else if (declaringType.GetMethod(autocompleteMethodName, bindingFlags) is { } autocompleteMethod)
         {
             // is method
             if (!autocompleteMethod.IsStatic)
             {
-                CommandableConsole.Instance.PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
+                CommandableConsole.PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
                 return [];
             }
             result = autocompleteMethod.Invoke(null, null);
         }
-        else if (declaringType.GetProperty(autocompleteMethodName) is { } autocompleteProperty)
+        else if (declaringType.GetProperty(autocompleteMethodName, bindingFlags) is { } autocompleteProperty)
         {
+            // is property (with getter)
+            if(autocompleteProperty.GetMethod is not {} getter)
+            {
+                CommandableConsole.PrintError($"Autocomplete property \"{autocompleteMethodName}\" has no getter.");
+                return [];
+            }
+            if(!getter.IsStatic)
+            {
+                CommandableConsole.PrintError($"Autocomplete property \"{autocompleteMethodName}\" is not static.");
+                return [];
+            }
             result = autocompleteProperty.GetValue(null);
         }
         else
         {
             // not found
-            CommandableConsole.Instance.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
+            CommandableConsole.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
             return [];
         }
 
@@ -337,7 +322,7 @@ public partial class AutoComplete : Control
                 return [..resultStrings.Select(s => new SuggestionItem.SuggestionData(s, null))];
             default:
                 // function does not return valid array of strings
-                CommandableConsole.Instance.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
+                CommandableConsole.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
                 return [];
         }
     }

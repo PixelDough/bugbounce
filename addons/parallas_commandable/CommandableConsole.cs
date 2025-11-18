@@ -103,8 +103,6 @@ public partial class CommandableConsole : Control
                 .Select(w => w.Trim('"'))
         ];
 
-        // var allWords = commandString.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-
         if (allWords.Length <= 0)
         {
             PrintError("No command provided.");
@@ -139,100 +137,15 @@ public partial class CommandableConsole : Control
         for (var i = 0; i < methodParameters.Length; i++)
         {
             var methodParameter = methodParameters[i];
-            var parameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
-                                methodParameter.ParameterType;
             var parameterDefaultValue = methodParameter.DefaultValue;
 
             if (i < parameters.Length)
             {
                 var item = parameters[i];
-                if (item.Value is null) return;
-
-                if (parameterType == typeof(bool))
-                {
-                    if (bool.TryParse(item.Value, out var boolVal))
-                    {
-                        parametersArray.Add(boolVal);
-                    }
-                    else if (item.Value is "0" or "1")
-                    {
-                        parametersArray.Add(item.Value == "1");
-                    }
-                    else
-                    {
-                        PrintError(
-                            $"Invalid value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
-                        return;
-                    }
-                }
-                else if (parameterType.IsEnum)
-                {
-                    if (Enum.TryParse(parameterType, item.Value, out var enumVal))
-                    {
-                        parametersArray.Add(enumVal);
-                    }
-                    else
-                    {
-                        PrintError(
-                            $"Invalid enum value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
-                        return;
-                    }
-                }
-                else if (parameterType == typeof(float))
-                {
-                    if (!float.TryParse(item.Value, out var floatValue))
-                    {
-                        PrintError(
-                            $"Expected float (found \"{item.Value}\")");
-                        return;
-                    }
-                    parametersArray.Add(floatValue);
-                }
-                else if (parameterType == typeof(Vector3))
-                {
-                    var floats = CommandableUtils.SplitFloats(item.Value);
-                    if (floats.Length != 3)
-                    {
-                        PrintError(
-                            $"Incorrect number of scalars in Vector (expected 3, found {floats.Length})");
-                        return;
-                    }
-                    parametersArray.Add(new Vector3(floats[0], floats[1], floats[2]));
-                }
-                else if (parameterType == typeof(Vector2))
-                {
-                    var floats = CommandableUtils.SplitFloats(item.Value);
-                    if (floats.Length != 2)
-                    {
-                        PrintError(
-                            $"Incorrect number of scalars in Vector (expected 2, found {floats.Length})");
-                        return;
-                    }
-                    parametersArray.Add(new Vector2(floats[0], floats[1]));
-                }
-                else if (parameterType == typeof(Vector4))
-                {
-                    var floats = CommandableUtils.SplitFloats(item.Value);
-                    if (floats.Length != 4)
-                    {
-                        PrintError(
-                            $"Incorrect number of scalars in Vector (expected 4, found {floats.Length})");
-                        return;
-                    }
-                    parametersArray.Add(new Vector4(floats[0], floats[1], floats[2], floats[3]));
-                }
-                else if (parameterType.IsAssignableTo(typeof(Node)))
-                {
-                    parametersArray.Add(GetNode(item.Value));
-                }
-                else if (parameterType == typeof(NodePath))
-                {
-                    parametersArray.Add(new NodePath(item.Value));
-                }
+                if (CommandableUtils.TryGetParamValueFromString(item, methodParameter, out var newValue))
+                    parametersArray.Add(newValue);
                 else
-                {
-                    parametersArray.Add(item.Value);
-                }
+                    return;
             }
             else
             {
@@ -248,7 +161,7 @@ public partial class CommandableConsole : Control
                 PrintError($"The [GlobalClass] attribute is required for non-static commands to be run on nodes of type \"{methodInfo.DeclaringType.FullName}\".");
                 return;
             }
-            var childrenOfType = GetTree().Root.FindChildren("*", type.Name, true, false);
+            var childrenOfType = CommandableUtils.GetAllChildren(GetTree().Root, methodInfo.DeclaringType);
             PrintTextVerbose($"Found {childrenOfType.Count} node of type {type.Name}");
             foreach (var node in childrenOfType)
             {
@@ -273,20 +186,20 @@ public partial class CommandableConsole : Control
             PrintText(command.CommandOutput);
     }
 
-    public void PrintText(string text)
+    public static void PrintText(string text)
     {
-        _historyStrings.Add($"[color=white]{text}");
-        _commandHistory.Text = String.Join('\n', _historyStrings);
+        Instance._historyStrings.Add($"[color=white]{text}");
+        Instance._commandHistory.Text = String.Join('\n', Instance._historyStrings);
         GD.Print(text);
     }
 
-    public void PrintTextVerbose(string text)
+    public static void PrintTextVerbose(string text)
     {
-        if (!ShowVerboseLogging) return;
+        if (!Instance.ShowVerboseLogging) return;
         PrintText($"[color=gray]{text}");
     }
 
-    public void PrintError(string errorMessage)
+    public static void PrintError(string errorMessage)
     {
         PrintText($"[color=red]Error: {errorMessage}");
         GD.PushError(errorMessage);
