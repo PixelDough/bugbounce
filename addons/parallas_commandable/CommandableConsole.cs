@@ -221,6 +221,7 @@ public partial class CommandableConsole : Control
 
     private void TextChanged(string text)
     {
+        _commandInput.Refresh();
         _autoComplete.Refresh();
         _autoComplete.SetIsOpen(_commandInput.Text.Length > 0);
     }

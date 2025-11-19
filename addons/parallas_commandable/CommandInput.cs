@@ -12,6 +12,8 @@ public partial class CommandInput : LineEdit
 
     private RegEx _validCharacters = new RegEx();
 
+    private int _lastCaretColumn = int.MinValue;
+
     public int WordIndex = int.MinValue;
     public CommandWord[] Words = [new CommandWord()];
 
@@ -31,6 +33,19 @@ public partial class CommandInput : LineEdit
         ;
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (!Visible) return;
+
+        if (_lastCaretColumn != CaretColumn)
+        {
+            _lastCaretColumn = CaretColumn;
+            Refresh();
+        }
+    }
+
     private void OnTextChanged(string text)
     {
         var caret = CaretColumn;
@@ -47,13 +62,7 @@ public partial class CommandInput : LineEdit
     {
         Words = SplitCommandString();
 
-        int wordIndex = 0;
-        for (int i = 0; i < Words.Length; i++)
-        {
-            if (Words[i].StartIndex > CaretColumn) break;
-            wordIndex = i;
-        }
-
+        int wordIndex = GetWordIndex(CaretColumn);
         if (WordIndex != wordIndex)
         {
             SetWordIndex(wordIndex);
@@ -162,6 +171,17 @@ public partial class CommandInput : LineEdit
         EmitSignalWordIndexChanged(wordIndex);
     }
 
+    public int GetWordIndex(int charIndex)
+    {
+        int wordIndex = 0;
+        for (int i = 0; i < Words.Length; i++)
+        {
+            if (Words[i].StartIndex > charIndex) break;
+            wordIndex = i;
+        }
+
+        return wordIndex;
+    }
     public CommandWord GetWordAtIndex(int index) => Words[index];
     public CommandWord GetCurrentWord() => GetWordAtIndex(WordIndex);
 }

@@ -29,11 +29,17 @@ public partial class AutoComplete : Control
     {
         base._Ready();
 
-        _commandInput.WordIndexChanged += _ => Reanimate();
+        _commandInput.WordIndexChanged += _ =>
+        {
+            Refresh();
+            Reanimate();
+        };
 
         _autocompleteScroll = GetNode<ScrollContainer>("%autocomplete_scroll");
         _autocompleteVbox = GetNode<VBoxContainer>("%autocomplete_vbox");
         _autocompleteTooltip = GetNode<SuggestionItem>("%autocomplete_tooltip");
+
+        Clear();
     }
 
     public override void _Process(double delta)
@@ -105,12 +111,16 @@ public partial class AutoComplete : Control
                 if (_autoCompleteIndex < 0) _autoCompleteIndex = _autoCompleteSuggestionItems.Count - 1;
             }
 
-            var suggestionHeight = _autoCompleteSuggestionItems[0].Size.Y;
-            var halfOffset = Mathf.FloorToInt((_autocompleteScroll.Size.Y / suggestionHeight) * 0.5f);
-            _autocompleteScroll.ScrollVertical = Mathf.FloorToInt(suggestionHeight * (_autoCompleteIndex - halfOffset));
-            for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
+            if (@event.IsAction(_inputAutoCompleteNext) || @event.IsAction(_inputAutoCompletePrev))
             {
-                _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
+                var suggestionHeight = _autoCompleteSuggestionItems[0].Size.Y;
+                var halfOffset = Mathf.FloorToInt((_autocompleteScroll.Size.Y / suggestionHeight) * 0.5f);
+                _autocompleteScroll.ScrollVertical =
+                    Mathf.FloorToInt(suggestionHeight * (_autoCompleteIndex - halfOffset));
+                for (var i = 0; i < _autoCompleteSuggestionItems.Count; i++)
+                {
+                    _autoCompleteSuggestionItems[i].IsHighlighted = i == _autoCompleteIndex;
+                }
             }
         }
 
@@ -126,15 +136,6 @@ public partial class AutoComplete : Control
         {
             Close();
             AcceptEvent();
-        }
-
-        if (@event.IsAction("ui_left") && @event.IsPressed())
-        {
-            CallDeferred(MethodName.Refresh);
-        }
-        if (@event.IsAction("ui_right") && @event.IsPressed())
-        {
-            CallDeferred(MethodName.Refresh);
         }
     }
 
@@ -160,7 +161,6 @@ public partial class AutoComplete : Control
 
     public void Refresh()
     {
-        _commandInput.Refresh();
         RefreshAutoCompleteValues();
 
         var cursorPos =
@@ -181,7 +181,10 @@ public partial class AutoComplete : Control
 
     private void RefreshAutoCompleteValues()
     {
-        Clear();
+        _autoCompleteWords = [];
+        if (_autoCompleteSuggestionItems.Count > _autoCompleteIndex)
+            _autoCompleteSuggestionItems[_autoCompleteIndex].IsHighlighted = false;
+        _autoCompleteIndex = 0;
 
         List<SuggestionItem.SuggestionData> values = [];
 
@@ -251,15 +254,33 @@ public partial class AutoComplete : Control
         values.Sort(((a, b) => String.Compare(a.Name, b.Name, StringComparison.InvariantCultureIgnoreCase)));
 
         _autoCompleteWords = values.Select(v => v.Name).ToArray();
+
+        if (values.Count < _autoCompleteSuggestionItems.Count)
+        {
+            for (int i = _autoCompleteSuggestionItems.Count - 1; i > values.Count - 1; i--)
+            {
+                _autoCompleteSuggestionItems[i].QueueFree();
+                _autoCompleteSuggestionItems.RemoveAt(i);
+            }
+        }
+
+        var countBefore = _autoCompleteSuggestionItems.Count;
         for (var index = 0; index < values.Count; index++)
         {
             var value = values[index];
-            var suggestionItem = _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
+            bool alreadyExists = index < countBefore;
+            var suggestionItem = alreadyExists
+                ? _autoCompleteSuggestionItems[index]
+                : _autocompleteSuggestionScene.Instantiate<SuggestionItem>();
             if (index == _autoCompleteIndex)
                 suggestionItem.IsHighlighted = true;
+            suggestionItem.Index = index;
             suggestionItem.SetData([value]);
-            _autocompleteVbox.AddChild(suggestionItem);
-            _autoCompleteSuggestionItems.Add(suggestionItem);
+            if (!alreadyExists)
+            {
+                _autocompleteVbox.AddChild(suggestionItem);
+                _autoCompleteSuggestionItems.Add(suggestionItem);
+            }
         }
     }
 

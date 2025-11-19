@@ -16,25 +16,29 @@ public partial class SuggestionItem : PanelContainer
     private List<Label> _nameLabels = [];
     private List<Label> _valueLabels = [];
 
+    public int Index = 0;
+
     private bool _isHighlighted = false;
     public bool IsHighlighted
     {
         get => _isHighlighted;
         set
         {
+            if (_isHighlighted == value) return;
             _isHighlighted = value;
             UpdateVisual();
         }
     }
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
-        base._Ready();
+        base._EnterTree();
         UpdateVisual();
     }
 
     public void SetData(SuggestionData[] suggestionDatas)
     {
+        if (!IsInstanceValid(this)) return;
         for (var index = 1; index < _nameLabels.Count; index++)
         {
             var nameLabel = _nameLabels[index];
@@ -54,8 +58,6 @@ public partial class SuggestionItem : PanelContainer
         for (var i = 0; i < suggestionDatas.Length; i++)
         {
             var suggestion = suggestionDatas[i];
-            // if (String.IsNullOrEmpty(suggestion.Name)) continue;
-            // if (String.IsNullOrEmpty(suggestion.Value)) continue;
 
             var nameLabel = Label;
             var valueLabel = DescriptionLabel;
@@ -83,6 +85,7 @@ public partial class SuggestionItem : PanelContainer
         Label.AddThemeColorOverride("font_color", textColor);
         DescriptionLabel.AddThemeColorOverride("font_color", textColor);
         AddThemeStyleboxOverride("panel", IsHighlighted ? StyleBoxHighlighted : StyleBoxBase);
+        SelfModulate = Colors.White.Lerp(Colors.Black, Index % 2 * (IsHighlighted ? 0f : 0.1f));
     }
 
     public float GetHeight()
