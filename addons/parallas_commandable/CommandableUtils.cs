@@ -17,120 +17,13 @@ public static class CommandableUtils
             return true;
         }
 
-        var parameterType = Nullable.GetUnderlyingType(methodParameter.ParameterType) ??
-                            methodParameter.ParameterType;
-
-        // Nullable (if null)
-        if (Nullable.GetUnderlyingType(methodParameter.ParameterType) is not null && item.Value is null or "" or "null")
+        foreach (var parser in ParserRegistry.Parsers)
         {
-            obj = null;
-            return true;
-        }
-
-        // Bool
-        if (parameterType == typeof(bool))
-        {
-            if (bool.TryParse(item.Value, out var boolVal))
+            if (parser.MatchesType.Invoke(methodParameter) && parser.TryParse.Invoke(item.Value, methodParameter, out var result))
             {
-                obj = boolVal;
+                obj = result;
                 return true;
             }
-            if (item.Value is "0" or "1")
-            {
-                obj = item.Value == "1";
-                return true;
-            }
-
-            CommandableConsole.PrintError(
-                $"Invalid value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
-            return false;
-        }
-
-        // Enum
-        if (parameterType.IsEnum)
-        {
-            if (Enum.TryParse(parameterType, item.Value, out var enumVal))
-            {
-                obj = enumVal;
-                return true;
-            }
-
-            CommandableConsole.PrintError(
-                $"Invalid enum value provided for parameter \"{methodParameter.Name}\" (found \"{item.Value}\", expected type {parameterType.Name})");
-            return true;
-        }
-
-        // Float
-        if (parameterType == typeof(float))
-        {
-            if (!float.TryParse(item.Value, out var floatValue))
-            {
-                CommandableConsole.PrintError(
-                    $"Expected float (found \"{item.Value}\")");
-                return false;
-            }
-
-            obj = floatValue;
-            return true;
-        }
-
-        // Vector3
-        if (parameterType == typeof(Vector3))
-        {
-            var floats = CommandableUtils.SplitFloats(item.Value);
-            if (floats.Length != 3)
-            {
-                CommandableConsole.PrintError(
-                    $"Incorrect number of scalars in Vector (expected 3, found {floats.Length})");
-                return false;
-            }
-
-            obj = new Vector3(floats[0], floats[1], floats[2]);
-            return true;
-        }
-
-        // Vector2
-        if (parameterType == typeof(Vector2))
-        {
-            var floats = CommandableUtils.SplitFloats(item.Value);
-            if (floats.Length != 2)
-            {
-                CommandableConsole.PrintError(
-                    $"Incorrect number of scalars in Vector (expected 2, found {floats.Length})");
-                return false;
-            }
-
-            obj = new Vector2(floats[0], floats[1]);
-            return true;
-        }
-
-        // Vector4
-        if (parameterType == typeof(Vector4))
-        {
-            var floats = CommandableUtils.SplitFloats(item.Value);
-            if (floats.Length != 4)
-            {
-                CommandableConsole.PrintError(
-                    $"Incorrect number of scalars in Vector (expected 4, found {floats.Length})");
-                return false;
-            }
-
-            obj = new Vector4(floats[0], floats[1], floats[2], floats[3]);
-            return true;
-        }
-
-        // Node
-        if (parameterType.IsAssignableTo(typeof(Node)))
-        {
-            obj = CommandableConsole.Instance.GetNode(item.Value);
-            return true;
-        }
-
-        // NodePath
-        if (parameterType.IsAssignableTo(typeof(NodePath)))
-        {
-            obj = new NodePath(item.Value);
-            return true;
         }
 
         // String (default)
@@ -140,51 +33,84 @@ public static class CommandableUtils
 
     public static SuggestionItem.SuggestionData[] GetSuggestionsFromMember(ParameterInfo parameterInfo)
     {
-        var methodParameterType = Nullable.GetUnderlyingType(parameterInfo.ParameterType) ?? parameterInfo.ParameterType;
         List<SuggestionItem.SuggestionData> values = [];
 
-        if (Nullable.GetUnderlyingType(parameterInfo.ParameterType) is not null)
+        foreach (var parameterParser in ParserRegistry.Parsers)
         {
-            values.Add(new SuggestionItem.SuggestionData("null", null));
+            if (parameterParser.MatchesType.Invoke(parameterInfo) && parameterParser.TrySuggest.Invoke(parameterInfo, out var results))
+            {
+                values.AddRange(results);
+            }
         }
 
-        // Bool
-        if (methodParameterType == typeof(bool))
+        if (parameterInfo.GetCustomAttribute<ConsoleParamInfoAttribute>() is { } consoleParamInfoAttribute)
         {
-            values.AddRange([
-                new("1", "true"),
-                new("0", "false")
-            ]);
-        }
-
-        // Enum
-        if (methodParameterType.IsEnum)
-        {
-            values.AddRange(Enum.GetNames(methodParameterType)
-                .Select(n => new SuggestionItem.SuggestionData(n, null)));
-        }
-
-        // Node
-        if (methodParameterType.IsAssignableTo(typeof(Node)))
-        {
-            var allPaths = CommandableUtils.GetAllChildren(
-                CommandableConsole.Instance.GetTree().Root,
-                methodParameterType
-            ).Select(n => new SuggestionItem.SuggestionData(n.GetPath().ToString(), null));
-            values.AddRange(allPaths);
-        }
-
-        // NodePath
-        if (methodParameterType == typeof(NodePath))
-        {
-            var nodePathType = parameterInfo.GetCustomAttribute<NodePathTypeAttribute>();
-            var allChildren = CommandableUtils.GetAllChildren(CommandableConsole.Instance.GetTree().Root, nodePathType?.Type);
-            var allPaths = allChildren.Select(c =>
-                new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
-            values.AddRange(allPaths);
+            values.AddRange(GetAutocompleteValues(consoleParamInfoAttribute.AutocompleteMemberName,
+                parameterInfo.Member.DeclaringType!));
         }
 
         return [..values];
+    }
+
+    public static SuggestionItem.SuggestionData[] GetAutocompleteValues(string autocompleteMethodName, Type declaringType)
+    {
+        if (string.IsNullOrEmpty(autocompleteMethodName)) return [];
+
+        object result = null;
+        var bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        if (declaringType.GetField(autocompleteMethodName, bindingFlags) is { } autocompleteField)
+        {
+            // is field
+            if (!autocompleteField.IsStatic)
+            {
+                CommandableConsole.PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
+                return [];
+            }
+            result = autocompleteField.GetValue(null);
+        }
+        else if (declaringType.GetMethod(autocompleteMethodName, bindingFlags) is { } autocompleteMethod)
+        {
+            // is method
+            if (!autocompleteMethod.IsStatic)
+            {
+                CommandableConsole.PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
+                return [];
+            }
+            result = autocompleteMethod.Invoke(null, null);
+        }
+        else if (declaringType.GetProperty(autocompleteMethodName, bindingFlags) is { } autocompleteProperty)
+        {
+            // is property (with getter)
+            if(autocompleteProperty.GetMethod is not {} getter)
+            {
+                CommandableConsole.PrintError($"Autocomplete property \"{autocompleteMethodName}\" has no getter.");
+                return [];
+            }
+            if(!getter.IsStatic)
+            {
+                CommandableConsole.PrintError($"Autocomplete property \"{autocompleteMethodName}\" is not static.");
+                return [];
+            }
+            result = autocompleteProperty.GetValue(null);
+        }
+        else
+        {
+            // not found
+            CommandableConsole.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
+            return [];
+        }
+
+        switch (result)
+        {
+            case SuggestionItem.SuggestionData[] resultData:
+                return resultData;
+            case string[] resultStrings:
+                return [..resultStrings.Select(s => new SuggestionItem.SuggestionData(s, null))];
+            default:
+                // function does not return valid array of strings
+                CommandableConsole.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
+                return [];
+        }
     }
 
     public static List<Node> GetAllChildren(Node node, Type type = null)

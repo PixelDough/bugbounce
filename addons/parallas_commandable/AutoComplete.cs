@@ -216,8 +216,6 @@ public partial class AutoComplete : Control
 
                     if (methodParameterConsoleInfo is not null)
                     {
-                        values.AddRange(GetAutocompleteValues(methodParameterConsoleInfo.AutocompleteMemberName,
-                                info.MethodInfo));
                         if (methodParameterConsoleInfo.Name is { } name)
                             tooltipData[0] = tooltipData[0] with { Value = name };
                         if (methodParameterConsoleInfo.Description is { } description)
@@ -262,68 +260,6 @@ public partial class AutoComplete : Control
             suggestionItem.SetData([value]);
             _autocompleteVbox.AddChild(suggestionItem);
             _autoCompleteSuggestionItems.Add(suggestionItem);
-        }
-    }
-
-    public SuggestionItem.SuggestionData[] GetAutocompleteValues(string autocompleteMethodName, MethodInfo forMethod)
-    {
-        if (string.IsNullOrEmpty(autocompleteMethodName)) return [];
-
-        var declaringType = forMethod.DeclaringType!;
-        object result = null;
-        var bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-        if (declaringType.GetField(autocompleteMethodName, bindingFlags) is { } autocompleteField)
-        {
-            // is field
-            if (!autocompleteField.IsStatic)
-            {
-                CommandableConsole.PrintError($"Autocomplete field \"{autocompleteMethodName}\" is not static.");
-                return [];
-            }
-            result = autocompleteField.GetValue(null);
-        }
-        else if (declaringType.GetMethod(autocompleteMethodName, bindingFlags) is { } autocompleteMethod)
-        {
-            // is method
-            if (!autocompleteMethod.IsStatic)
-            {
-                CommandableConsole.PrintError($"Autocomplete method \"{autocompleteMethodName}\" is not static.");
-                return [];
-            }
-            result = autocompleteMethod.Invoke(null, null);
-        }
-        else if (declaringType.GetProperty(autocompleteMethodName, bindingFlags) is { } autocompleteProperty)
-        {
-            // is property (with getter)
-            if(autocompleteProperty.GetMethod is not {} getter)
-            {
-                CommandableConsole.PrintError($"Autocomplete property \"{autocompleteMethodName}\" has no getter.");
-                return [];
-            }
-            if(!getter.IsStatic)
-            {
-                CommandableConsole.PrintError($"Autocomplete property \"{autocompleteMethodName}\" is not static.");
-                return [];
-            }
-            result = autocompleteProperty.GetValue(null);
-        }
-        else
-        {
-            // not found
-            CommandableConsole.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" not found.");
-            return [];
-        }
-
-        switch (result)
-        {
-            case SuggestionItem.SuggestionData[] resultData:
-                return resultData;
-            case string[] resultStrings:
-                return [..resultStrings.Select(s => new SuggestionItem.SuggestionData(s, null))];
-            default:
-                // function does not return valid array of strings
-                CommandableConsole.PrintError($"Autocomplete method/field \"{autocompleteMethodName}\" did not return an array of strings.");
-                return [];
         }
     }
 
