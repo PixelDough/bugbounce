@@ -8,6 +8,14 @@ namespace Parallas.Commandable;
 
 public static class ParserRegistry
 {
+    private static FileFilterAttribute _basicScenesFilter = new FileFilterAttribute()
+    {
+        Directory = "res://",
+        AllowedExtensions = ["tscn", "scn"],
+        Recursive = true,
+        IgnoreDirectories = ["res:///addons"]
+    };
+
     public static readonly List<ParameterParser> Parsers =
     [
         new() // Nullable
@@ -183,6 +191,49 @@ public static class ParserRegistry
                     new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
                 result = [..allPaths];
                 return true;
+            }
+        },
+        new() // PackedScene
+        {
+            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(PackedScene)),
+            TryParse = (string value, ParameterInfo info, out object result) =>
+            {
+                result = GD.Load<PackedScene>(value);
+                return result is not null;
+            },
+            TrySuggest = (ParameterInfo info, out SuggestionItem.SuggestionData[] result) =>
+            {
+                if (info.GetCustomAttribute<FileFilterAttribute>() is { } fileFilter)
+                {
+                    result = CommandableUtils.GetFilePathsByExtension(fileFilter);
+                }
+                else
+                {
+                    result = CommandableUtils.GetFilePathsByExtension(_basicScenesFilter);
+                }
+                return true;
+            }
+        },
+        new() // String (file path)
+        {
+            MatchesType = info =>
+                info.GetParameterTypeNullable().IsAssignableTo(typeof(string)) &&
+                info.GetCustomAttribute<FileFilterAttribute>() is not null,
+            TryParse = (string value, ParameterInfo info, out object result) =>
+            {
+                result = value;
+                return value is not null;
+            },
+            TrySuggest = (ParameterInfo info, out SuggestionItem.SuggestionData[] result) =>
+            {
+                if (info.GetCustomAttribute<FileFilterAttribute>() is { } fileFilter)
+                {
+                    result = CommandableUtils.GetFilePathsByExtension(fileFilter);
+                    return true;
+                }
+
+                result = [];
+                return false;
             }
         }
     ];

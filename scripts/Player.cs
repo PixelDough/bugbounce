@@ -463,7 +463,7 @@ public partial class Player : RigidBody3D
         Respawn();
     }
 
-    [ConsoleCommand("player_respawn", Description = "Forces the player to respawn.")]
+    [ConsoleCommand("player.respawn", Description = "Forces the player to respawn.")]
     public void Respawn()
     {
         if (_isRespawning) return;
@@ -538,7 +538,7 @@ public partial class Player : RigidBody3D
         GD.Print($"No such checkpoint exists at index {index}.");
     }
 
-    [ConsoleCommand("player_flip_gravity", Description = "Flip the player's gravity.")]
+    [ConsoleCommand("player.flip_gravity", Description = "Flip the player's gravity.")]
     public void FlipGravity()
     {
         UseFlippedGravity = !UseFlippedGravity;
@@ -549,7 +549,7 @@ public partial class Player : RigidBody3D
         NoClip(!_noclip);
     }
 
-    [ConsoleCommand("noclip", Description = "Enables/Disables noclip for the player.")]
+    [ConsoleCommand("player.noclip", Description = "Enables/Disables noclip for the player.")]
     private void NoClip(bool value)
     {
         _noclip = value;
@@ -563,20 +563,20 @@ public partial class Player : RigidBody3D
         // _respawnForward = forward;
     }
 
-    [ConsoleCommand("go_to_checkpoint")]
+    [ConsoleCommand("player.tp_checkpoint", Description = "Teleports the player to a checkpoint.")]
     private void GoToCheckpoint(Checkpoint checkpoint)
     {
         checkpoint.SetAsPlayerRespawn(this);
         CallDeferred("Kill");
     }
 
-    [ConsoleCommand("tp")]
+    [ConsoleCommand("player.tp", Description = "Teleports the player to a global position (comma separated, no spaces).")]
     private void Teleport(Vector3 globalPos)
     {
         GlobalPosition = globalPos;
     }
 
-    [ConsoleCommand("tp_node")]
+    [ConsoleCommand("player.tp_node", Description = "Teleports the player to a Node3D in the current scene.")]
     private void Teleport(Node3D node3d)
     {
         Teleport(node3d.GlobalPosition);

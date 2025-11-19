@@ -136,7 +136,13 @@ public static class CommandableUtils
         return array;
     }
 
-    public static List<SuggestionItem.SuggestionData> GetFilePathsByExtension(string directoryPath, string extension, bool recursive = true, string[] ignoringDirectories = null)
+    public static SuggestionItem.SuggestionData[] GetFilePathsByExtension(FileFilterAttribute filterAttribute)
+    {
+        return GetFilePathsByExtension(filterAttribute.Directory, filterAttribute.AllowedExtensions,
+            filterAttribute.Recursive, filterAttribute.IgnoreDirectories);
+    }
+
+    public static SuggestionItem.SuggestionData[] GetFilePathsByExtension(string directoryPath, string[] allowedExtensions, bool recursive = true, string[] ignoringDirectories = null)
     {
         ignoringDirectories ??= [];
         var dir = DirAccess.Open(directoryPath);
@@ -153,9 +159,9 @@ public static class CommandableUtils
             if (dir.CurrentIsDir() && recursive && !ignoringDirectories.Contains(dir.GetCurrentDir()))
             {
                 var thisDirPath = dir.GetCurrentDir() + "/" + thisFileName;
-                filePaths.AddRange(GetFilePathsByExtension(thisDirPath, extension, recursive, ignoringDirectories));
+                filePaths.AddRange(GetFilePathsByExtension(thisDirPath, allowedExtensions, recursive, ignoringDirectories));
             }
-            else if (thisFileName.GetExtension() == extension)
+            else if (allowedExtensions.Contains(thisFileName.GetExtension()))
             {
                 var thisFilePath = dir.GetCurrentDir() + "/" + thisFileName;
                 filePaths.Add(new SuggestionItem.SuggestionData(thisFilePath.TrimPrefix("res:///"), thisFileName));
@@ -163,7 +169,7 @@ public static class CommandableUtils
             thisFileName = dir.GetNext();
         }
 
-        return filePaths;
+        return [..filePaths];
     }
 
     public static float[] SplitFloats(string instance)

@@ -211,7 +211,7 @@ public partial class CommandableConsole : Control
         Verbose
     }
     [ConsoleCommand(
-        "console_log_level",
+        "console.set_log_level",
         Description = "Sets the logging level of the dev console's own output."
     )]
     public void SetConsoleLogLevel(ConsoleLogLevel consoleLogLevel)
@@ -241,7 +241,7 @@ public partial class CommandableConsole : Control
     }
 
     [ConsoleCommand(
-        "debug_draw",
+        "godot.set_debug_draw",
         Description = "Sets the DebugDraw mode on the main Viewport.",
         CommandOutput = "Set DebugDraw on Viewport."
     )]
@@ -250,19 +250,21 @@ public partial class CommandableConsole : Control
         GetViewport().SetDebugDraw(debugDrawMode);
     }
 
-    public static readonly SuggestionItem.SuggestionData[] AllScenePathsValue = [..CommandableUtils.GetFilePathsByExtension("res://", "tscn", true, ["res:///addons"])];
-    public static SuggestionItem.SuggestionData[] AllScenePaths() => [..AllScenePathsValue];
     [ConsoleCommand(
-        "change_scene"
+        "godot.change_scene",
+        Description = "Changes the running scene to a new instance of the given PackedScene."
     )]
-    public void ChangeScene([ConsoleParamInfo(AutocompleteMemberName = nameof(AllScenePaths))] string scenePath)
+    public void ChangeScene([FileFilter(AllowedExtensions = ["tscn"], IgnoreDirectories = ["res:///addons"])] PackedScene scene)
     {
-        GetTree().ChangeSceneToFile(scenePath);
+        GetTree().ChangeSceneToPacked(scene);
     }
 
-    [ConsoleCommand("collision_shapes")]
-    public void ToggleVisibleCollisionShapes()
+    [ConsoleCommand(
+        "godot.set_debug_collisions",
+        Description = "Sets the visibility of collision shapes."
+    )]
+    public void ToggleVisibleCollisionShapes(bool? state = null)
     {
-        GetTree().SetDebugCollisionsHint(true);
+        GetTree().SetDebugCollisionsHint(state ?? !GetTree().DebugCollisionsHint);
     }
 }

@@ -21,7 +21,7 @@ public partial class DebugShow : Node
     }
 
     [ConsoleCommand(
-        name: "debug_vis",
+        name: "bugbounce.debug_vis",
         Description = "Toggles the visibility of a specific debug node.",
         CommandOutput = "Toggled Debug Visibility."
     )]
