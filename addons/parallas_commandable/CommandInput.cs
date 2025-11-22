@@ -20,7 +20,7 @@ public partial class CommandInput : LineEdit
     public override void _Ready()
     {
         base._Ready();
-        _validCharacters.Compile(@"[a-zA-Z0-9\\/""'\(\)\[\]_., -]+");
+        _validCharacters.Compile(@"[a-zA-Z0-9\\/""'\(\)\[\]#_., -]+");
         TextChanged += OnTextChanged;
 
         FocusNeighborLeft =

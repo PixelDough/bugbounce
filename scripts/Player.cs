@@ -581,4 +581,10 @@ public partial class Player : RigidBody3D
     {
         Teleport(node3d.GlobalPosition);
     }
+
+    [ConsoleCommand("player.set_color", Description = "Sets the color for the given player.")]
+    private void ChangeColor(Player playerNode, Color color)
+    {
+        CommandableConsole.PrintText($"Color for player \"{playerNode.Name}\" set to {color.ToString()}");
+    }
 }

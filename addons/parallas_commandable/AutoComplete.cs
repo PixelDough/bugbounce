@@ -231,7 +231,7 @@ public partial class AutoComplete : Control
                         tooltipData.Add(new("type", methodParameter.ParameterType.Name));
                     if (methodParameter.HasDefaultValue && methodParameter.DefaultValue is { } defaultValue)
                         tooltipData.Add(new("default", defaultValue.ToString() ?? "null"));
-                    var nodePathType = methodParameter.GetCustomAttribute<NodePathTypeAttribute>();
+                    var nodePathType = methodParameter.GetCustomAttribute<NodeFilterAttribute>();
                     if (nodePathType is not null)
                     {
                         tooltipData.Add(new("node type", nodePathType.Type.FullName!));

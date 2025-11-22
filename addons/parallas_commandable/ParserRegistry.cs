@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +16,8 @@ public static class ParserRegistry
         Recursive = true,
         IgnoreDirectories = ["res:///addons"]
     };
+
+    private static BindingFlags _bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
     public static readonly List<ParameterParser> Parsers =
     [
@@ -34,7 +37,7 @@ public static class ParserRegistry
         },
         new() // Bool
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableFrom(typeof(bool)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableFrom(typeof(bool)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 result = false;
@@ -65,7 +68,7 @@ public static class ParserRegistry
         },
         new() // Enum
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsEnum,
+            MatchesType = info => info.GetUnderlyingType().IsEnum,
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 if (Enum.TryParse(info.ParameterType, value, out var enumVal))
@@ -86,9 +89,26 @@ public static class ParserRegistry
                 return true;
             }
         },
+        new() // Int
+        {
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(int)),
+            TryParse = (string value, ParameterInfo info, out object result) =>
+            {
+                if (int.TryParse(value, out var intValue))
+                {
+                    result = intValue;
+                    return true;
+                }
+
+                CommandableConsole.PrintError(
+                    $"Expected int (found \"{value}\")");
+                result = null;
+                return false;
+            }
+        },
         new() // Float
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(float)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(float)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 if (float.TryParse(value, out var floatValue))
@@ -105,7 +125,7 @@ public static class ParserRegistry
         },
         new() // Vector2
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(Vector2)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(Vector2)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 var floats = CommandableUtils.SplitFloats(value);
@@ -123,7 +143,7 @@ public static class ParserRegistry
         },
         new() // Vector3
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(Vector3)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(Vector3)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 var floats = CommandableUtils.SplitFloats(value);
@@ -141,7 +161,7 @@ public static class ParserRegistry
         },
         new() // Vector4
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(Vector4)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(Vector4)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 var floats = CommandableUtils.SplitFloats(value);
@@ -157,9 +177,47 @@ public static class ParserRegistry
                 return false;
             }
         },
+        new() // Color
+        {
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(Color)),
+            TryParse = (string value, ParameterInfo info, out object result) =>
+            {
+                if (value.StartsWith('#'))
+                {
+                    result = new Color(value);
+                    return true;
+                }
+
+                var t = typeof(Colors);
+                var namedColors = t.GetField("NamedColors", _bindingFlags)!.GetValue(null)! as FrozenDictionary<string, Color>;
+                if (namedColors!.TryGetValue(value.ToUpper(), out var color))
+                {
+                    result = color;
+                    return true;
+                }
+
+                CommandableConsole.PrintError("Invalid string color provided. Please use a color name or hex code.");
+                result = null;
+                return false;
+            },
+            TrySuggest = (ParameterInfo info, out SuggestionItem.SuggestionData[] result) =>
+            {
+                var t = typeof(Colors);
+                var names = t.GetProperties(_bindingFlags);
+                result = [..names
+                    .Select(n =>
+                        new SuggestionItem.SuggestionData(
+                            n.Name,
+                            $"#{((Color)n.GetValue(null)!).ToHtml()}"
+                        )
+                    )
+                ];
+                return true;
+            }
+        },
         new() // Node
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(Node)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(Node)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 result = CommandableConsole.Instance.GetNode(value);
@@ -167,17 +225,28 @@ public static class ParserRegistry
             },
             TrySuggest = (ParameterInfo info, out SuggestionItem.SuggestionData[] result) =>
             {
-                var allPaths = CommandableUtils.GetAllChildren(
-                    CommandableConsole.Instance.GetTree().Root,
-                    info.ParameterType
-                ).Select(n => new SuggestionItem.SuggestionData(n.GetPath().ToString(), null));
+                var nodeFilter = info.GetCustomAttribute<NodeFilterAttribute>();
+                List<Node> nodes = [];
+                if (nodeFilter?.Group is { } group)
+                {
+                    var allInGroup = CommandableConsole.Instance.GetTree().GetNodesInGroup(group);
+                    allInGroup = [..allInGroup.Where(n => n.GetUnderlyingType().IsAssignableTo(info.ParameterType))];
+                    nodes.AddRange(allInGroup);
+                }
+                else
+                {
+                    var allChildren = CommandableUtils.GetAllChildren(CommandableConsole.Instance.GetTree().Root, info.ParameterType);
+                    nodes.AddRange(allChildren);
+                }
+                var allPaths = nodes.Select(c =>
+                    new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
                 result = [..allPaths];
                 return true;
             }
         },
         new() // NodePath
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(NodePath)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(NodePath)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 result = new NodePath(value);
@@ -185,9 +254,21 @@ public static class ParserRegistry
             },
             TrySuggest = (ParameterInfo info, out SuggestionItem.SuggestionData[] result) =>
             {
-                var nodePathType = info.GetCustomAttribute<NodePathTypeAttribute>();
-                var allChildren = CommandableUtils.GetAllChildren(CommandableConsole.Instance.GetTree().Root, nodePathType?.Type);
-                var allPaths = allChildren.Select(c =>
+                var nodeFilter = info.GetCustomAttribute<NodeFilterAttribute>();
+                List<Node> nodes = [];
+                if (nodeFilter?.Group is var group)
+                {
+                    var allInGroup = CommandableConsole.Instance.GetTree().GetNodesInGroup(group);
+                    if (nodeFilter?.Type is var typeFilter)
+                        allInGroup = [..allInGroup.Where(n => n.GetUnderlyingType().IsAssignableTo(typeFilter))];
+                    nodes.AddRange(allInGroup);
+                }
+                else
+                {
+                    var allChildren = CommandableUtils.GetAllChildren(CommandableConsole.Instance.GetTree().Root, nodeFilter?.Type);
+                    nodes.AddRange(allChildren);
+                }
+                var allPaths = nodes.Select(c =>
                     new SuggestionItem.SuggestionData(c.GetPath().ToString(), null));
                 result = [..allPaths];
                 return true;
@@ -195,7 +276,7 @@ public static class ParserRegistry
         },
         new() // PackedScene
         {
-            MatchesType = info => info.GetParameterTypeNullable().IsAssignableTo(typeof(PackedScene)),
+            MatchesType = info => info.GetUnderlyingType().IsAssignableTo(typeof(PackedScene)),
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
                 result = GD.Load<PackedScene>(value);
@@ -217,7 +298,7 @@ public static class ParserRegistry
         new() // String (file path)
         {
             MatchesType = info =>
-                info.GetParameterTypeNullable().IsAssignableTo(typeof(string)) &&
+                info.GetUnderlyingType().IsAssignableTo(typeof(string)) &&
                 info.GetCustomAttribute<FileFilterAttribute>() is not null,
             TryParse = (string value, ParameterInfo info, out object result) =>
             {
@@ -238,8 +319,19 @@ public static class ParserRegistry
         }
     ];
 
-    public static Type GetParameterTypeNullable(this ParameterInfo info)
+    public static Type GetUnderlyingType(this Type type)
     {
-        return Nullable.GetUnderlyingType(info.ParameterType) ?? info.ParameterType;
+        return Nullable.GetUnderlyingType(type) ?? type;
+    }
+
+    public static Type GetUnderlyingType(this ParameterInfo info)
+    {
+        return info.ParameterType.GetUnderlyingType();
+    }
+
+    public static Type GetUnderlyingType(this Node node)
+    {
+        var type = node.GetType();
+        return type.GetUnderlyingType();
     }
 }

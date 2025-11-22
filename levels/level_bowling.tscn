@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0dxny8jexjm8"]
+[gd_scene load_steps=20 format=3 uid="uid://0dxny8jexjm8"]
 
 [ext_resource type="PackedScene" uid="uid://dmwix1mg7unhy" path="res://scenes/skyboxes/skybox_space_01.tscn" id="1_um6pw"]
 [ext_resource type="CompressedTexture3D" uid="uid://b5xgvubwlkwvv" path="res://addons/AmplifyColor/LUT/Base/Cold_L.png" id="2_hbfp3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://drc0bt4bycrtc" path="res://scenes/props/bowling/bowling_island_02.tscn" id="9_ey43s"]
 [ext_resource type="PackedScene" uid="uid://cnrrfredcpd6f" path="res://scenes/props/bowling/bowling_ball.tscn" id="13_drhmw"]
 [ext_resource type="Script" uid="uid://bchbwe0886hnb" path="res://scripts/DeathZone.cs" id="13_um6pw"]
+[ext_resource type="PackedScene" uid="uid://dfx8cm1v7am6a" path="res://scenes/actors/player_character.tscn" id="14_csbwt"]
 [ext_resource type="PackedScene" uid="uid://b7p5n1dh5i5ex" path="res://scenes/props/bowling/bowling_pin_red.tscn" id="14_n4jqo"]
 [ext_resource type="PackedScene" uid="uid://biv7it6d5bdkb" path="res://scenes/props/bowling/bowling_pin_white.tscn" id="15_x8365"]
 [ext_resource type="PackedScene" uid="uid://ceq75vmx2nuey" path="res://scenes/props/bowling/bowling_island_03.tscn" id="16_bfwhg"]
@@ -48,7 +49,6 @@ radius = 0.50000006
 environment = SubResource("Environment_yhb0f")
 
 [node name="skybox_space_01" parent="." instance=ExtResource("1_um6pw")]
-process_priority = 2147483647
 
 [node name="Ball Return Feature" parent="." instance=ExtResource("2_pqaur")]
 transform = Transform3D(-1.0352621, 0, -3.863707, 0, 4, 0, 3.863707, 0, -1.0352621, 142, 43.75, 154.25)
@@ -408,3 +408,6 @@ metadata/_custom_type_script = "uid://bchbwe0886hnb"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.692772, 0)
 shape = SubResource("WorldBoundaryShape3D_hbfp3")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("14_csbwt")]
+transform = Transform3D(0.16855824, 0, -0.9856917, 0, 1, 0, 0.9856917, 0, 0.16855824, 20.106646, 14.2536, -28.751835)
